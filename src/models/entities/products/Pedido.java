@@ -62,7 +62,7 @@ public class Pedido {
 
 //	Adicionar produto à lista de produtos
 
-	public float adicionarProduto(Produto produto, Item item) {
+	public float adicionarItem(Produto produto, Item item) {
 
 		// Produto é diferente de item, deveria aqui adicionar ao valor total o valor de
 		// produto

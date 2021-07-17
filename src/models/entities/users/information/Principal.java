@@ -16,10 +16,15 @@ public class Principal {
 		Localidade localidade1 = new Localidade("Estados Unidos", "Florida", "Talahasse", "America do Norte",
 				endereco1);
 
+		try {
+		
 		Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 22);
 		Produto produto2 = new Produto("Peito de Frango", "Este produto é muito gostoso, compre ele", Tipo.AVE, 16);
 		Produto produto3 = new Produto("Costeleta", "Este produto é muito gostoso, compre ele", Tipo.OVINO, 30);
-
+		}
+		catch(Exception e) {
+			e.getMessage();
+		}
 		Contato contato4 = new Contato("emailzinho4@gmail.com", "2435-4242");
 
 		Fornecedor fornecedor1 = new Fornecedor("Somos uma empresa fundamentada e vendemos carne", "111.222.333.21",
@@ -40,6 +45,8 @@ public class Principal {
 
 		// como funciona o item?
 		Item item1 = new Item();
+		
+		
 
 //		------------------------------------------	
 //		Cliente cliente1 = new Cliente("Carlos", "155.555.224-22", "21/02/2000", "Rua dos bobos", "3332-1584",
