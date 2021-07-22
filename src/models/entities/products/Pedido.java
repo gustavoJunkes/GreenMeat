@@ -7,12 +7,18 @@ import models.entities.users.Cliente;
 
 public class Pedido {
 
+	
+	// valor do item = produto * quantidade
+	// valor do pedido = soma dos itens
+	
 	private Status status;
 	private Cliente cliente; // dono da lista de compras
 	private List<Item> itens;
 	private int numeroPedido; // id pedido
 	private LocalDate dataEntrega;
-	private float valorTotal;
+	private float valorTotal; // valor do pedido
+	
+	//////////////////////////
 	
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
@@ -60,22 +66,6 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-//	Adicionar produto à lista de produtos
-
-	public float adicionarItem(Produto produto, Item item) {
-
-		// Produto é diferente de item, deveria aqui adicionar ao valor total o valor de
-		// produto
-		setValorTotal(getValorTotal() + produto.getPreco());
-
-		itens.add(item); // adicionando um "item" à lista de itens
-
-		return getValorTotal();
-	}
-
-	public void removerProdutoDaLista() {
-
-	}
 
 	public List<Item> getItens() {
 		return itens;
@@ -85,4 +75,26 @@ public class Pedido {
 		this.itens = itens;
 	}
 
+
+//	Adicionar produto à lista de produtos
+// item = produto * quantidade
+	public float adicionarItem( Item item) {
+
+		// Produto é diferente de item, deveria aqui adicionar ao valor total o valor de
+		// produto
+		
+//		setValorTotal(getValorTotal() + produto.getPreco());
+
+		itens.add(item); // adicionando um "item" à lista de itens
+
+		return getValorTotal();
+	}
+	
+//	Aqui ele remove um item da Lista  (Pedido, neste caso)
+	
+	public void removerItemDaLista(Item item) {
+
+		itens.remove(item);
+	}
+	
 }

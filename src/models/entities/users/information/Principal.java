@@ -34,7 +34,7 @@ public class Principal {
 		Contato contato2 = new Contato("emailzinho2@gmail.com", "4354-5233");
 		Contato contato3 = new Contato("emailzinho3@gmail.com", "2544-3534");
 
-		Cliente cliente1 = new Cliente("Carlos", "111.332.786-12", LocalDate.of(16, 2, 2000), localidade1, "2222-3245",
+		Cliente cliente1 = new Cliente("Carlos", "111.332.786-12", LocalDate.of(12, 5, 1993), localidade1, "2222-3245",
 				"MeuLogin2", "MinhaSenha2 ", contato1);
 		Cliente cliente2 = new Cliente("José", "154.342.123-64", LocalDate.of(12, 5, 1993), localidade1, "3422-3546",
 				"MeuLogin3", "MinhaSenha3 ", contato2);
@@ -47,7 +47,7 @@ public class Principal {
 		Item item1 = new Item();
 		
 		
-
+System.out.println(item1.getValorTotal() );
 //		------------------------------------------	
 //		Cliente cliente1 = new Cliente("Carlos", "155.555.224-22", "21/02/2000", "Rua dos bobos", "3332-1584",
 //				"login", "senha", "Carlinhos@gmail.com" );
