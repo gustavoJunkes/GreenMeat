@@ -1,4 +1,4 @@
-package models.entities.products;
+package model.entities.products;
 
 public enum Tipo {
 

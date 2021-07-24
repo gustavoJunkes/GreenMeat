@@ -1,16 +1,15 @@
-package models.entities.users;
+package model.entities.users;
 
-import models.entities.users.information.Contato;
-import models.entities.users.information.Localidade;
+import model.entities.users.information.Contato;
+import model.entities.users.information.Localidade;
 
 public class Fornecedor extends Usuario {
 
 	private String razãoSocial;
-	
 	private String CNPJ;
 
-	public Fornecedor(String razãoSocial, String CNPJ, Localidade localidade, String login,
-			String senha, Contato contato) {
+	public Fornecedor(String razãoSocial, String CNPJ, Localidade localidade, String login, String senha,
+			Contato contato) {
 		super(localidade, login, senha, contato);
 		setRazãoSocial(razãoSocial);
 		setCNPJ(CNPJ);

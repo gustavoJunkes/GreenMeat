@@ -1,9 +1,9 @@
-package models.entities.users;
+package model.entities.users;
 
 import java.time.LocalDate;
 
-import models.entities.users.information.Contato;
-import models.entities.users.information.Localidade;
+import model.entities.users.information.Contato;
+import model.entities.users.information.Localidade;
 
 public class Cliente extends Usuario {
 

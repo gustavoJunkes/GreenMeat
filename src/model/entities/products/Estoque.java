@@ -1,4 +1,4 @@
-package models.entities.products;
+package model.entities.products;
 
 import java.util.List;
 

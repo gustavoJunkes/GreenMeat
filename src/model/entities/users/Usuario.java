@@ -1,8 +1,8 @@
-package models.entities.users;
+package model.entities.users;
 
-import models.entities.users.information.Contato;
-import models.entities.users.information.Localidade;
-import models.entities.users.information.NivelAcesso;
+import model.entities.users.information.Contato;
+import model.entities.users.information.Localidade;
+import model.entities.users.information.NivelAcesso;
 
 public class Usuario {
 

@@ -1,8 +1,8 @@
-package models.entities.users;
+package model.entities.users;
 
 import java.time.LocalDate;
 
-import models.entities.users.information.Contato;
+import model.entities.users.information.Contato;
 
 public class Funcionario {
 

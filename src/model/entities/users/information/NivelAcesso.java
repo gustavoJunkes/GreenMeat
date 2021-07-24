@@ -1,4 +1,4 @@
-package models.entities.users.information;
+package model.entities.users.information;
 
 public enum NivelAcesso {
 
