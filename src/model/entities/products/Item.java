@@ -4,9 +4,8 @@ import model.entities.users.Fornecedor;
 
 public class Item {
 
-	
 	// criar variavel para identificar o item
-	
+
 	private Produto produto;
 	private float quantidade; // em kg, por isso float.
 	private Fornecedor fornecedor;
@@ -14,17 +13,8 @@ public class Item {
 								// partir do preço de um produto * quantidade
 
 	public Item(Produto produto, Fornecedor fornecedor, float quantidade) {
-		try {
-			setProduto(produto);
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		
-		try {
+		setProduto(produto);
 		setFornecedor(fornecedor);
-		}catch(Exception e) {
-			
-		}
 		setQuantidade(quantidade);
 		setValorTotal(produto.getPreco() * getQuantidade());
 	}
@@ -51,6 +41,7 @@ public class Item {
 		return fornecedor.getRazãoSocial();
 	}
 
+	
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}

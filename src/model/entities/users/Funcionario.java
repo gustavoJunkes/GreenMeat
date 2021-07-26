@@ -3,8 +3,9 @@ package model.entities.users;
 import java.time.LocalDate;
 
 import model.entities.users.information.Contato;
+import model.entities.users.information.Localidade;
 
-public class Funcionario {
+public class Funcionario extends Usuario {
 
 	private String nome;
 	private String funcao;
@@ -12,20 +13,16 @@ public class Funcionario {
 	private LocalDate dataNascimento;
 	private Contato contato;
 
-	public Funcionario(String nome, String funcao, String carteiraDeTrabalho, LocalDate dataNascimento) {
-
+	
+//	Ao criar funcionario criar tambem seu login e senha
+	
+	public Funcionario(String nome, String funcao, String CPF, LocalDate dataNascimento, Localidade localidade, String login,
+			String senha, Contato contato) {
+		super(localidade, login, senha, contato);
 		setNome(nome);
 		setFuncao(funcao);
-		setCPF(carteiraDeTrabalho);
+		setCPF(CPF);
 		setDataNascimento(dataNascimento);
-	}
-
-	public void mostrar() {
-
-		System.out.println("Nome do funcionario: " + getNome());
-		System.out.println("Função do funcionario: " + getFuncao());
-		System.out.println("CPF do funcionario: " + getCPF());
-		System.out.println("Data de nascimento do funcionario: " + getDataNascimento());
 	}
 
 	public String getNome() {

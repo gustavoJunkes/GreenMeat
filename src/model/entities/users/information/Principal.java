@@ -28,8 +28,14 @@ public class Principal {
 //		
 		Contato contato4 = new Contato("emailzinho4@gmail.com", "2435-4242");
 //
-		Fornecedor fornecedor1 = new Fornecedor("Somos uma empresa fundamentada e vendemos carne", "111.222.333.21",
+		Fornecedor fornecedor1 = new Fornecedor("Ecomeat", "Somos uma empresa fundamentada e vendemos carne", "111.222.333.21",
 				localidade1, "MeuLogin1", "MinhaSenhaSecreta", contato4);
+		
+		System.out.println(fornecedor1.getCNPJ());
+		System.out.println(fornecedor1.getLogin());
+		System.out.println(fornecedor1.getSenha());
+		System.out.println(fornecedor1.getNomeFantasia());
+		
 //
 		Contato contato1 = new Contato("emailzinho1@gmail.com", "2294-2344");
 //		Contato contato2 = new Contato("emailzinho2@gmail.com", "4354-5233");
@@ -60,7 +66,8 @@ public class Principal {
 		
 		
 		
-		System.out.println("O valor total do item " + item1.getNomeProduto() +  " do fornecedor " + item1.getFornecedor() +  " de " + item1.getQuantidade()+ " unidades"  + " é " + item1.getValorTotal() );
+		System.out.println("O valor total do item " + item1.getNomeProduto() +  " do fornecedor " + item1.getFornecedor() + 
+				" de " + item1.getQuantidade()+ " unidades"  + " é " + item1.getValorTotal() );
 		System.out.println(item1.getNomeProduto());
 		System.out.println(item1.getQuantidade());
 

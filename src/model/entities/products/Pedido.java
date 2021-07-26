@@ -11,6 +11,7 @@ public class Pedido {
 	// valor do item = produto * quantidade
 	// valor do pedido = soma dos itens
 
+//	Precisa de um novo atributo em Status, como ENTREGUE, ou A_CAMINHO, por exemplo?
 //	Precisa de método para finalizar pedido
 
 	private String idPedido;

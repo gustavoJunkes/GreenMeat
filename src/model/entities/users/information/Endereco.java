@@ -33,8 +33,8 @@ public class Endereco {
 	public int getCEP() {
 		return CEP;
 	}
-	public void setCEP(int cEP) {
-		CEP = cEP;
+	public void setCEP(int 	CEP) {
+		CEP = CEP;
 	}
 	public String getComplemento() {
 		return complemento;

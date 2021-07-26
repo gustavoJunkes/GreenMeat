@@ -2,6 +2,8 @@ package model.entities.products;
 
 import java.util.List;
 
+import model.entities.users.Fornecedor;
+
 public class Estoque {
 
 	
@@ -16,7 +18,11 @@ public class Estoque {
 		this.itens = itens;
 	}
 	
+	// para aumentar a quantidade de um item em estoque deve-se acessar diretamente esse item, por exemplo item1.setQuantidade(quantidade);
 	
+	public void adicionarAoEstoque(Item item) {
+		itens.add(item);
+	}
 	
 	
 }

@@ -6,15 +6,25 @@ import model.entities.users.information.Localidade;
 public class Fornecedor extends Usuario {
 
 //	 precisa de algum atributo para identificar o fornecedor
-	
+
+	private String nomeFantasia;
 	private String razãoSocial;
 	private String CNPJ;
 
-	public Fornecedor(String razãoSocial, String CNPJ, Localidade localidade, String login, String senha,
+	public Fornecedor(String nomeFantasia, String razãoSocial, String CNPJ, Localidade localidade, String login, String senha,
 			Contato contato) {
 		super(localidade, login, senha, contato);
+		setNomeFantasia(nomeFantasia);
 		setRazãoSocial(razãoSocial);
 		setCNPJ(CNPJ);
+	}
+
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getRazãoSocial() {

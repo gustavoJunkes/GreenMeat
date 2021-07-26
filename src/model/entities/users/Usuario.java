@@ -1,5 +1,7 @@
 package model.entities.users;
 
+import java.time.LocalDate;
+
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 import model.entities.users.information.NivelAcesso;
@@ -11,15 +13,20 @@ public class Usuario {
 	private String senha;
 	private NivelAcesso nivelDeAcesso;
 	private Contato contato;
-
+	private LocalDate dataCadastro;
+	
+	
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
+
+	
 
 	public Usuario(Localidade endereco, String login, String senha, Contato contato) {
 		setEndereco(endereco);
 		setLogin(login);
 		setSenha(senha);
 		setContato(contato);
+		setDataCadastro(LocalDate.now());
 	}
 
 	public Localidade getEndereco() {
@@ -66,4 +73,13 @@ public class Usuario {
 		this.contato = contato;
 	}
 
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	
+	
 }
