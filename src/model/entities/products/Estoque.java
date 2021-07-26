@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Estoque {
 
-//             Criar aqui uma lista de items
 	
 	private List <Item> itens;
-
+//	este método retorna apenas um endereço de memória
+	
 	public List <Item> getItens() {
 		return itens;
 	}

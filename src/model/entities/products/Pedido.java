@@ -26,7 +26,7 @@ public class Pedido {
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
 		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
-		setStatus(Status.EM_ABERTO);
+		setStatus(status.EM_ABERTO);
 		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
 
 	}
