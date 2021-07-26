@@ -4,6 +4,9 @@ import model.entities.users.Fornecedor;
 
 public class Item {
 
+	
+	// criar variavel para identificar o item
+	
 	private Produto produto;
 	private float quantidade; // em kg, por isso float.
 	private Fornecedor fornecedor;

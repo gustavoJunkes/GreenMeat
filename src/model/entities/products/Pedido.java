@@ -1,6 +1,7 @@
 package model.entities.products;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.entities.users.Cliente;
@@ -10,9 +11,12 @@ public class Pedido {
 	// valor do item = produto * quantidade
 	// valor do pedido = soma dos itens
 
+//	Precisa de método para finalizar pedido
+
+	private String idPedido;
 	private Status status;
 	private Cliente cliente; // dono da lista de compras
-	private List<Item> itens;
+	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
 	private int numeroPedido; // id pedido
 	private LocalDate dataEntrega;
 	private float valorTotal; // valor do pedido
@@ -21,9 +25,18 @@ public class Pedido {
 
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
-		setCliente(cliente);
+		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
 		setStatus(Status.EM_ABERTO);
+		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
 
+	}
+
+	public String getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(String idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public Status getStatus() {
@@ -66,6 +79,8 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
+	// este método retorna apenas um endereço de memoria
+
 	public List<Item> getItens() {
 		return itens;
 	}
@@ -75,7 +90,7 @@ public class Pedido {
 	}
 
 //	Adicionar produto à lista de produtos
-// item = produto * quantidade
+// item.preco = produto * quantidade
 
 	public void adicionarItem(Item item) {
 
@@ -90,6 +105,10 @@ public class Pedido {
 
 		itens.remove(item);
 		setValorTotal(getValorTotal() - item.getValorTotal());
+	}
+
+	public void finalizarPedido(String idPedido) {
+		setStatus(status.FINALIZADO);
 	}
 
 }

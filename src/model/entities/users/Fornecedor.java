@@ -5,6 +5,8 @@ import model.entities.users.information.Localidade;
 
 public class Fornecedor extends Usuario {
 
+//	 precisa de algum atributo para identificar o fornecedor
+	
 	private String razãoSocial;
 	private String CNPJ;
 

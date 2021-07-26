@@ -60,11 +60,15 @@ public class Principal {
 		
 		
 		
-		System.out.println(item1.getValorTotal());
+		System.out.println("O valor total do item " + item1.getNomeProduto() +  " do fornecedor " + item1.getFornecedor() +  " de " + item1.getQuantidade()+ " unidades"  + " é " + item1.getValorTotal() );
 		System.out.println(item1.getNomeProduto());
 		System.out.println(item1.getQuantidade());
 
 		System.out.println(item1.getFornecedor());
+		
+		System.out.println(pedido1.getNumeroPedido());
+		System.out.println(pedido1.getValorTotal());
+		System.out.println(pedido1.getItens());
 
 //		------------------------------------------	
 //		Cliente cliente1 = new Cliente("Carlos", "155.555.224-22", "21/02/2000", "Rua dos bobos", "3332-1584",
