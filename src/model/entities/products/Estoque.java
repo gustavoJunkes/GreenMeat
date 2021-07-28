@@ -1,3 +1,7 @@
+
+
+// Estoque coment feito do pc israel
+
 package model.entities.products;
 
 import java.util.List;
