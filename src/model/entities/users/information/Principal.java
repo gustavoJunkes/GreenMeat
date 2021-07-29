@@ -37,58 +37,7 @@ public class Principal {
 		System.out.println(fornecedor1.getNomeFantasia());
 		
 //
-		Contato contato1 = new Contato("emailzinho1@gmail.com", "2294-2344");
-//		Contato contato2 = new Contato("emailzinho2@gmail.com", "4354-5233");
-//		Contato contato3 = new Contato("emailzinho3@gmail.com", "2544-3534");
-
-		Cliente cliente1 = new Cliente("Carlos", "111.332.786-12", LocalDate.of(1992, 1, 5), localidade1, "2222-3245",
-				"MeuLogin2", "MinhaSenha2 ", contato1);
-//		Cliente cliente2 = new Cliente("José", "154.342.123-64", LocalDate.of(12, 5, 1993), localidade1, "3422-3546",
-//				"MeuLogin3", "MinhaSenha3 ", contato2);
-//		Cliente cliente3 = new Cliente("Marta", "100.655.448-21", LocalDate.of(22, 7, 1983), localidade1, "3222-6448",
-//				"MeuLogin4", "MinhaSenha4 ", contato3);
-
-		// pedido, item e contato
-
-		// como funciona o item?
-		Item item1 = new Item(produto1, fornecedor1, 2);
-		Item item2 = new Item(produto2, fornecedor1, 3);
-
-		Pedido pedido1 = new Pedido(cliente1);
 		
-		pedido1.adicionarItem(item1);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		System.out.println("O valor total do item " + item1.getNomeProduto() +  " do fornecedor " + item1.getFornecedor() + 
-				" de " + item1.getQuantidade()+ " unidades"  + " é " + item1.getValorTotal() );
-		System.out.println(item1.getNomeProduto());
-		System.out.println(item1.getQuantidade());
-
-		System.out.println(item1.getFornecedor());
-		
-		System.out.println(pedido1.getNumeroPedido());
-		System.out.println(pedido1.getValorTotal());
-		System.out.println(pedido1.getItens());
-
-//		------------------------------------------	
-//		Cliente cliente1 = new Cliente("Carlos", "155.555.224-22", "21/02/2000", "Rua dos bobos", "3332-1584",
-//				"login", "senha", "Carlinhos@gmail.com" );
-//		
-//		
-//		ListaDeCompras lista1 = new ListaDeCompras( cliente1);
-//		
-//		lista1.adicionarProduto(produto1);
-//		
-//		System.out.println(lista1.getValorTotal());
-//		System.out.println(lista1.getQuantidadeDeProdutos());
-//		System.out.println(lista1.getCliente());
 	}
 
 }
