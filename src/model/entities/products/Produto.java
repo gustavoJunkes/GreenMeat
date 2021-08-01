@@ -2,6 +2,8 @@ package model.entities.products;
 
 import java.time.LocalDate;
 
+import model.exceptions.InvalidFieldException;
+
 public class Produto {
 
 	private String nome;
@@ -10,20 +12,29 @@ public class Produto {
 	private float precoVenda;
 	private LocalDate dataValidade;
 	private Tipo tipoCarne;
-	private float preco; // preço em item ou em produto?
+	private float preco; // preco é um atributo repetido
 
-	public Produto(String nome, String descricao, Tipo tipoCarne, float preco) {
+//	Falta adicionar atributos precoCusto e PrecoVenda no construtor
+	public Produto(String nome, String descricao, Tipo tipoCarne, float preco)  throws InvalidFieldException{
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
 		setPreco(preco);
 	}
 
+//	Tratamento de exceções básico nos métodos de acesso, apenas uma exceção criada, a InvalidFieldException
+//	Exceção genérica para campos invalidos
+//	Essa exceção está tratando simplesmente de verificar se os campos estão vazios
+//	Precisa de mais verificações
+	
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+
+	public void setNome(String nome) throws InvalidFieldException {
+		if (nome.isEmpty())
+			throw new InvalidFieldException("Campo nulo");
 		this.nome = nome;
 	}
 
@@ -31,7 +42,10 @@ public class Produto {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(String descricao) throws InvalidFieldException {
+
+		if (descricao.isEmpty())
+			throw new InvalidFieldException("Campo nulo");
 		this.descricao = descricao;
 	}
 
@@ -39,7 +53,10 @@ public class Produto {
 		return precoCusto;
 	}
 
-	public void setPrecoCusto(float precoCusto) {
+	public void setPrecoCusto(float precoCusto) throws InvalidFieldException {
+		if (precoCusto == 0)
+			throw new InvalidFieldException("Campo nulo ou menor que 1");
+
 		this.precoCusto = precoCusto;
 	}
 
@@ -47,15 +64,22 @@ public class Produto {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(float precoVenda) {
+	public void setPrecoVenda(float precoVenda) throws InvalidFieldException {
+		if (precoVenda == 0)
+			throw new InvalidFieldException("Campo nulo ou menor que 1");
+
 		this.precoVenda = precoVenda;
 	}
 
-	public LocalDate getDataValidade() {
+	public LocalDate getDataValidade(){
 		return dataValidade;
 	}
 
-	public void setDataValidade(LocalDate dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) throws InvalidFieldException{
+//		Aqui ele verifica se a data de validade inserida é antes da data atual, evitando que se cadastre um produto vencido
+		if(dataValidade.isBefore(LocalDate.now()))
+			throw new InvalidFieldException("Data inválida");
+		
 		this.dataValidade = dataValidade;
 	}
 
