@@ -12,7 +12,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private NivelAcesso nivelDeAcesso;
-	private Contato contato;
+	private Contato contato;     	// Contato aparece na classe Usuário e Funcionario          
 	private LocalDate dataCadastro;
 	
 	

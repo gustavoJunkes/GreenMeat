@@ -2,6 +2,10 @@ package model.entities.users.information;
 
 public class Localidade {
 
+	
+//	Estes atributos dizem respeito a base de dados ainda não implemenntada
+//	Não fazer alterações nessa classe
+	 
 	private String pais;
 	private String estado;
 	private String provincia;

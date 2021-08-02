@@ -1,5 +1,7 @@
 package model.entities.users.information;
 
+import model.exceptions.InvalidFieldException;
+
 public class Contato {
 
 	private String email;
@@ -7,7 +9,7 @@ public class Contato {
 
 //	private String 
 	
-	public Contato(String email, String telefone) {
+	public Contato(String email, String telefone) throws InvalidFieldException {
 		setEmail(email);
 		setTelefone(telefone);
 	}
@@ -16,7 +18,9 @@ public class Contato {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) throws InvalidFieldException {
+		if (email.isBlank() || email.isEmpty())
+			throw new InvalidFieldException("Campo nulo");
 		this.email = email;
 	}
 
@@ -24,7 +28,9 @@ public class Contato {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
+	public void setTelefone(String telefone) throws InvalidFieldException {
+		if (telefone.isBlank() || telefone.isEmpty())
+			throw new InvalidFieldException("Campo nulo");
 		this.telefone = telefone;
 	}
 

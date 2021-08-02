@@ -8,9 +8,10 @@ import model.entities.products.Produto;
 import model.entities.products.Tipo;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
+import model.exceptions.InvalidFieldException;
 
 public class Principal {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidFieldException {
 
 		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");
 
