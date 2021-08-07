@@ -29,6 +29,8 @@ public class Usuario {
 		setDataCadastro(LocalDate.now());
 	}
 
+
+	
 	public Localidade getEndereco() {
 		return endereco;
 	}
