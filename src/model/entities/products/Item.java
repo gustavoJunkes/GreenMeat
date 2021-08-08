@@ -38,7 +38,7 @@ public class Item {
 	}
 
 	public String getFornecedor() {
-		return fornecedor.getRazãoSocial();
+		return fornecedor.getRazaoSocial();
 	}
 
 	
