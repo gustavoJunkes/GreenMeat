@@ -9,7 +9,7 @@ import model.entities.users.information.NivelAcesso;
 public class Usuario {
 
 	private Localidade endereco;
-	private String login;
+	private String login; // nao vai login
 	private String senha;
 	private NivelAcesso nivelDeAcesso;
 	private Contato contato;     	// Contato aparece na classe Usuário e Funcionario          
