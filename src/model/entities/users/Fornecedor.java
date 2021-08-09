@@ -1,49 +1,26 @@
 package model.entities.users;
 
+import java.util.List;
+
+import model.entities.products.Produto;
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 
-public class Fornecedor extends Usuario {
+public class Fornecedor extends PessoaJuridica {
 
-//	 precisa de algum atributo para identificar o fornecedor
+	private List<Produto> Produtos; // Quais Produtos ele fornece
 
-	private String nomeFantasia;
-	private String razãoSocial;
-	private String CNPJ;
-
-	public Fornecedor(String nomeFantasia, String razãoSocial, String CNPJ, Localidade localidade, String login, String senha,
-			Contato contato) {
-		super(localidade, login, senha, contato);
-		setNomeFantasia(nomeFantasia);
-		setRazãoSocial(razãoSocial);
-		setCNPJ(CNPJ);
+	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
+			Contato contato, String CNPJ) {
+		super(endereco, login, senha, contato, CNPJ, razaoSocial, nomeFantasia);
 	}
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
+	public List<Produto> getProdutos() {
+		return Produtos;
 	}
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
-
-	public String getRazãoSocial() {
-		return razãoSocial;
-	}
-
-	public void setRazãoSocial(String razãoSocial) {
-
-		this.razãoSocial = razãoSocial;
-
-	}
-
-	public String getCNPJ() {
-		return CNPJ;
-	}
-
-	public void setCNPJ(String CNPJ) {
-
-		this.CNPJ = CNPJ;
+	public void setProdutos(List<Produto> produtos) {
+		Produtos = produtos;
 	}
 
 }

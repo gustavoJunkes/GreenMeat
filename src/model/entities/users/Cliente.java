@@ -4,45 +4,20 @@ import java.time.LocalDate;
 
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
+import model.exceptions.InvalidFieldException;
 
-public class Cliente extends Usuario {
+public class Cliente extends PessoaFisica {
 
-	private String nome;
-	private String cpf;
-	private LocalDate dataDeNascimento;
-
-	public Cliente(String nome, String cpf, LocalDate dataDeNascimento, Localidade localidade, String telefone,
-			String login, String senha, Contato contato) {
-		super(localidade, login, senha, contato);
-
-		setNome(nome);
-		setCpf(cpf);
-		setDataDeNascimento(dataDeNascimento);
-
+	public Cliente(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
+			String CPF, LocalDate dataDeNascimento) {
+		super(endereco, login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
+		// TODO Auto-generated constructor stub
 	}
 
-	public String getNome() {
-		return nome;
-	}
+//	Cliente (ainda?) não possui nenhum atributo
+//	criar uma função para validar cpf	
+// Falta validar cpf // cpf é um atributo repetido na classe Funcionario e Cliente
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public LocalDate getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-
-	public void setDataDeNascimento(LocalDate dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-
+	
 }
+

@@ -4,33 +4,24 @@ import java.time.LocalDate;
 
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
+import model.exceptions.InvalidFieldException;
 
-public class Funcionario extends Usuario {
-
-	private String nome;
-	private String funcao;
-	private String CPF;
-	private LocalDate dataNascimento;
-	private Contato contato;
+public class Funcionario extends PessoaFisica {
 
 	
+
+	
+
+	private String funcao;
+	private String cargo;
+
 //	Ao criar funcionario criar tambem seu login e senha
 	
-	public Funcionario(String nome, String funcao, String CPF, LocalDate dataNascimento, Localidade localidade, String login,
-			String senha, Contato contato) {
-		super(localidade, login, senha, contato);
-		setNome(nome);
+	public Funcionario(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
+			String CPF, LocalDate dataDeNascimento) {
+		super(endereco, login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
 		setFuncao(funcao);
-		setCPF(CPF);
-		setDataNascimento(dataNascimento);
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+		setCargo(cargo);
 	}
 
 	public String getFuncao() {
@@ -41,28 +32,12 @@ public class Funcionario extends Usuario {
 		this.funcao = funcao;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCargo() {
+		return cargo;
 	}
 
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento2) {
-		this.dataNascimento = dataNascimento2;
-	}
-
-	public Contato getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		this.contato = contato;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 }
