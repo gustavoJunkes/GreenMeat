@@ -2,6 +2,12 @@ package model.entities.products;
 
 public enum Status {
 
-	EM_ABERTO, FINALIZADO, CANCELADO;
+	PEDIDO_EM_ABERTO, 
+	PAGAMENTO_APROVADO, 
+	PEDIDO_RECEBIDO,
+	PEDIDO_CANCELADO,
+	PEDIDO_ENVIADO,
+	PEDIDO_ENTREGUE,
+	
 	
 }
