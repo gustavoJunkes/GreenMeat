@@ -27,7 +27,7 @@ public class Pedido {
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
 		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
-		setStatus(status.EM_ABERTO);
+		setStatus(status.PEDIDO_EM_ABERTO);
 		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
 
 	}
@@ -109,7 +109,7 @@ public class Pedido {
 	}
 
 	public void finalizarPedido(String idPedido) {
-		setStatus(status.FINALIZADO);
+		setStatus(status.PEDIDO_FINALIZADO);
 	}
 
 }
