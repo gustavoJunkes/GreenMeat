@@ -3,7 +3,7 @@
 // Estoque coment feito do pc israel
 
 package model.entities.products;
-
+// teste
 import java.util.List;
 
 import model.entities.users.Fornecedor;
