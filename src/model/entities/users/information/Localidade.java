@@ -1,5 +1,8 @@
 package model.entities.users.information;
 
+import model.exception.users.information.CountryInvalidException;
+import model.exception.users.information.EmailInvalidException;
+
 public class Localidade {
 
 	
@@ -12,7 +15,7 @@ public class Localidade {
 	private String continente;
 	private Endereco endereco;
 
-	public Localidade(String pais, String estado, String provincia, String continente, Endereco endereco) {
+	public Localidade(String pais, String estado, String provincia, String continente, Endereco endereco) throws CountryInvalidException{
 		setPais(pais);
 		setEstado(estado);
 		setProvincia(provincia);
@@ -24,10 +27,12 @@ public class Localidade {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(String pais) throws CountryInvalidException {
+		if (pais.isBlank() || pais.isEmpty())
+			throw new CountryInvalidException("Campo nulo");
 		this.pais = pais;
+	
 	}
-
 	public String getEstado() {
 		return estado;
 	}

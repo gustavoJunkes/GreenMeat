@@ -2,6 +2,7 @@ package model.entities.products;
 
 import java.time.LocalDate;
 
+import model.exception.products.ExpirationDateInvalidException;
 import model.exceptions.InvalidFieldException;
 
 public class Produto {
@@ -15,7 +16,7 @@ public class Produto {
 	private float preco; // preco é um atributo repetido
 
 //	Falta adicionar atributos precoCusto e PrecoVenda no construtor
-	public Produto(String nome, String descricao, Tipo tipoCarne, float preco)  throws InvalidFieldException{
+	public Produto(String nome, String descricao, Tipo tipoCarne, float preco)  throws InvalidFieldException, ExpirationDateInvalidException{
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
@@ -75,10 +76,10 @@ public class Produto {
 		return dataValidade;
 	}
 
-	public void setDataValidade(LocalDate dataValidade) throws InvalidFieldException{
+	public void setDataValidade(LocalDate dataValidade) throws ExpirationDateInvalidException{
 //		Aqui ele verifica se a data de validade inserida é antes da data atual, evitando que se cadastre um produto vencido
 		if(dataValidade.isBefore(LocalDate.now()))
-			throw new InvalidFieldException("Data inválida");
+			throw new ExpirationDateInvalidException("Data inválida");
 		
 		this.dataValidade = dataValidade;
 	}
