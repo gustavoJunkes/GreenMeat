@@ -16,7 +16,7 @@ public class Item {
 		setProduto(produto);
 		setFornecedor(fornecedor);
 		setQuantidade(quantidade);
-		setValorTotal(produto.getPreco() * getQuantidade());
+		setValorTotal(calculaValorTotal());
 	}
 
 	public String getNomeProduto() { // alterar ao fazer alteção no atributo produto
@@ -41,7 +41,6 @@ public class Item {
 		return fornecedor.getRazaoSocial();
 	}
 
-	
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
@@ -54,4 +53,7 @@ public class Item {
 		this.valorTotal = valorTotal;
 	}
 
+	public float calculaValorTotal() {
+		return this.produto.getPrecoVenda();
+	}
 }

@@ -1,12 +1,6 @@
-// Comentário para teste do pc Gustavo
-// comentario
-// Estoque coment feito do pc israel
-// 
 package model.entities.products;
-// teste
-import java.util.List;
 
-import model.entities.users.Fornecedor;
+import java.util.List;
 
 public class Estoque {
 
@@ -29,4 +23,3 @@ public class Estoque {
 	}
 
 }
-////////////////kfgv	wwjkçegvfkjdb

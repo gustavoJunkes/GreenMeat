@@ -13,14 +13,13 @@ public class Produto {
 	private float precoVenda;
 	private LocalDate dataValidade;
 	private Tipo tipoCarne;
-	private float preco; // preco é um atributo repetido
+
 
 //	Falta adicionar atributos precoCusto e PrecoVenda no construtor
-	public Produto(String nome, String descricao, Tipo tipoCarne, float preco)  throws InvalidFieldException, ExpirationDateInvalidException{
+	public Produto(String nome, String descricao, Tipo tipoCarne)  throws InvalidFieldException, ExpirationDateInvalidException{
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
-		setPreco(preco);
 	}
 
 //	Tratamento de exceções básico nos métodos de acesso, apenas uma exceção criada, a InvalidFieldException
@@ -92,11 +91,5 @@ public class Produto {
 		this.tipoCarne = tipoCarne;
 	}
 
-	public float getPreco() {
-		return preco;
-	}
-
-	public void setPreco(float preco) {
-		this.preco = preco;
-	}
+	
 }

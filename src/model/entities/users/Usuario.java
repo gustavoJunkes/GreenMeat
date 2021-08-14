@@ -29,20 +29,6 @@ public class Usuario {
 		setDataCadastro(LocalDate.now());
 	}
 
-
-	
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
-
-
 	public Localidade getEndereco() {
 		return endereco;
 	}
