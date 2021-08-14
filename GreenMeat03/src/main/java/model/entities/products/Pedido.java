@@ -18,7 +18,7 @@ public class Pedido {
 	private Status status;
 	private Cliente cliente; // dono da lista de compras
 	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
-	private int numeroPedido; // id pedido
+	private int numeroPedido; // id pedido // codigo alfanumerico
 	private LocalDate dataEntrega;
 	private float valorTotal; // valor do pedido
 
@@ -112,4 +112,14 @@ public class Pedido {
 		setStatus(status.PEDIDO_FINALIZADO);
 	}
 
+	
+//	O método a seguir calcula o valor total de um pedido somando o valor total de cada item
+	
+	public float calcularValorTotalPedido() {
+		int soma = 0;
+		for (int i = 0; i < itens.size(); i++) {
+			soma += itens.get(i).calculaValorTotal();
+		}
+		return soma;
+	}
 }
