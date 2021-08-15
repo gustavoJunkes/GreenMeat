@@ -14,7 +14,7 @@ public class Usuario {
 	private NivelAcesso nivelDeAcesso;
 	private Contato contato;     	// Contato aparece na classe Usuário e Funcionario          
 	private LocalDate dataCadastro;
-	private String sobrenome;
+//	private String sobrenome;
 	
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
