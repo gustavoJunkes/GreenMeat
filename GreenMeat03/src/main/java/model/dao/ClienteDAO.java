@@ -30,7 +30,7 @@ public interface ClienteDAO {
 	 * 
 	 * void inserirContatoCliente(Contato contato);
 	 */
-	
+
 	void atualizarLocalidadeCliente(Localidade localidade);
 
 	void atualizarTelefoneCliente(String telefone);
