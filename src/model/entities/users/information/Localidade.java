@@ -1,5 +1,12 @@
 package model.entities.users.information;
 
+<<<<<<< Updated upstream
+=======
+import model.exception.users.information.CityInvalidException;
+import model.exception.users.information.CountryInvalidException;
+import model.exception.users.information.InvalidAddressException;
+
+>>>>>>> Stashed changes
 public class Localidade {
 
 	private String pais;
@@ -8,7 +15,11 @@ public class Localidade {
 	private String continente;
 	private Endereco endereco;
 
+<<<<<<< Updated upstream
 	public Localidade(String pais, String estado, String provincia, String continente, Endereco endereco) {
+=======
+	public Localidade(String pais, String estado, String provincia, String continente, Endereco endereco) throws CountryInvalidException, CityInvalidException, InvalidAddressException{
+>>>>>>> Stashed changes
 		setPais(pais);
 		setEstado(estado);
 		setProvincia(provincia);
@@ -36,7 +47,9 @@ public class Localidade {
 		return provincia;
 	}
 
-	public void setProvincia(String provincia) {
+	public void setProvincia(String provincia) throws CityInvalidException {
+		if (pais.isBlank() || pais.isEmpty())
+			throw new CityInvalidException("Campo nulo");
 		this.provincia = provincia;
 	}
 
@@ -52,7 +65,9 @@ public class Localidade {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(Endereco endereco) throws InvalidAddressException {
+		if (pais.isBlank() || pais.isEmpty())
+			throw new InvalidAddressException("Campo nulo");
 		this.endereco = endereco;
 	}
 
