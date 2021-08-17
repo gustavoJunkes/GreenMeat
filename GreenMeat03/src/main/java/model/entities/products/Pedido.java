@@ -1,12 +1,21 @@
 package model.entities.products;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import model.entities.users.Cliente;
 
-public class Pedido {
+@Entity
+@Table(name = "Pedido")
+public class Pedido implements Serializable{
 
 	// valor do item = produto * quantidade
 	// valor do pedido = soma dos itens
@@ -14,13 +23,30 @@ public class Pedido {
 //	Precisa de um novo atributo em Status, como ENTREGUE, ou A_CAMINHO, por exemplo?
 //	Precisa de método para finalizar pedido
 
-	private String idPedido;
-	private Status status;
-	private Cliente cliente; // dono da lista de compras
-	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
-	private int numeroPedido; // id pedido // codigo alfanumerico
-	private LocalDate dataEntrega;
+	
+	@Id
+	@Column(nome = id_pedido)
+	private long id;
+	
+	@Column(nome = valor_total)
 	private float valorTotal; // valor do pedido
+	  
+	@Colunm( nome = data_entrega)
+	private LocalDate dataEntrega;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColunm(name = status)
+	private Status status;
+	
+	
+	private Cliente cliente; // dono da lista de compras
+	
+	@ManyToMany(mappedBy = "itens")
+	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
+	
+	
+	
 
 	//////////////////////////
 
