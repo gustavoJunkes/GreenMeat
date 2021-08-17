@@ -20,7 +20,7 @@ public class Contato {
 	}
 
 	public void setEmail(String email) throws EmailInvalidException {
-		if (email.isBlank() || email.isEmpty())
+		if (email.isEmpty())
 			throw new EmailInvalidException("Campo nulo");
 		this.email = email;
 	}
@@ -30,7 +30,7 @@ public class Contato {
 	}
 
 	public void setTelefone(String telefone) throws PhoneNumberInvalidException {
-		if (telefone.isBlank() || telefone.isEmpty())
+		if (telefone.isEmpty())
 			throw new PhoneNumberInvalidException("Campo nulo");
 		this.telefone = telefone;
 	}

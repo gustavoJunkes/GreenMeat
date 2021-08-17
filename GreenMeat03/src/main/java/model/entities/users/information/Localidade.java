@@ -1,7 +1,6 @@
 package model.entities.users.information;
 
 import model.exception.users.information.CountryInvalidException;
-import model.exception.users.information.EmailInvalidException;
 
 public class Localidade {
 

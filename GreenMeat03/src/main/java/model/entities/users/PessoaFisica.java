@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Entity;
-
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 
 @Entity
 @Table(name = "pessoafisica")
-public class PessoaFisica extends Usuario implements Serializable {
+public class PessoaFisica extends Usuario{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,9 +38,6 @@ public class PessoaFisica extends Usuario implements Serializable {
 	@Column(name = "dataNascimento_pessoaFisica")
 	private LocalDate dataDeNascimento;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
 	
 	
 	public PessoaFisica() {
