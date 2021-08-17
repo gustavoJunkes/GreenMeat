@@ -1,20 +1,51 @@
 package model.entities.users;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Entity;
 
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 
-public class PessoaFisica extends Usuario {
+@Entity
+@Table(name = "pessoafisica")
+public class PessoaFisica extends Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_pessoafisica")
 	private Long id;
+	
+	@Column(name = "primeironome_pessoafisica")
 	private String nome;
+	
+	@Column(name = "sobrenome_pessoafisica")
 	private String sobrenome;
+	
+	@Column(name = "CPF_pessoafisica")
 	private String CPF;
+	
+	@Column(name = "dataNascimento_pessoaFisica")
 	private LocalDate dataDeNascimento;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+	
+	
 	public PessoaFisica() {
-		usuario();
+		super();
 	}
 	
 	public PessoaFisica(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
