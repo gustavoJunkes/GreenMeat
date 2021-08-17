@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import model.entities.users.information.Contato;
@@ -30,10 +32,16 @@ public abstract class Usuario implements Serializable {
 	// um usuario possui diversas localidades, relação de N pra N
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Localidade> enderecos;
+	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
+	private List<Localidade> localidades;
+
+	@Column(name = "login_usuario")
 	private String login; // nao vai login
+
+	@Column(name = "senha_usuario")
 	private String senha;
-	private NivelAcesso nivelDeAcesso;
+
+	
 	private Contato contato; // Contato aparece na classe Usuário e Funcionario
 	private LocalDate dataCadastro;
 	private String sobrenome;
@@ -45,22 +53,21 @@ public abstract class Usuario implements Serializable {
 
 	}
 
-	public Usuario(Localidade endereco, String login, String senha, Contato contato) {
-		setEndereco(endereco);
+	public Usuario(/*Localidade endereco,*/ String login, String senha, Contato contato) {
+//		setEndereco(endereco);
 		setLogin(login);
 		setSenha(senha);
 		setContato(contato);
 		setDataCadastro(LocalDate.now());
 	}
 
-	public Localidade getEndereco() {
-		return endereco;
+	public List<Localidade> getEndereco() {
+		return localidades;
 	}
 
-	public void setEndereco(Localidade endereco) {
+	public void setEndereco(List<Localidade> localidades) {
 
-		this.endereco = endereco;
-
+		this.localidades = localidades;
 	}
 
 	public String getLogin() {
@@ -81,13 +88,6 @@ public abstract class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public NivelAcesso getNivelDeAcesso() {
-		return nivelDeAcesso;
-	}
-
-	public void setNivelDeAcesso(NivelAcesso nivelDeAcesso) {
-		this.nivelDeAcesso = nivelDeAcesso;
-	}
 
 	public Contato getContato() {
 		return contato;
