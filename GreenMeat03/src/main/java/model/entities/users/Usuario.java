@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,10 +16,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
-import model.entities.users.information.NivelAcesso;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -41,10 +43,17 @@ public abstract class Usuario implements Serializable {
 	@Column(name = "senha_usuario")
 	private String senha;
 
+	// Dizendo que um usuario pode ter varios contatos e que um contato pode pertencer apenas a um usuario
+	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 	
-	private Contato contato; // Contato aparece na classe Usuário e Funcionario
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Contato> contatos; 
+	
+	
+	@Column(name = "datacastro_usuario")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private LocalDate dataCadastro;
-	private String sobrenome;
+	
 
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
@@ -53,11 +62,11 @@ public abstract class Usuario implements Serializable {
 
 	}
 
-	public Usuario(/*Localidade endereco,*/ String login, String senha, Contato contato) {
+	public Usuario(/*Localidade endereco,*/ String login, String senha /*Contato contato*/) {
 //		setEndereco(endereco);
 		setLogin(login);
 		setSenha(senha);
-		setContato(contato);
+//		setContato(contato);
 		setDataCadastro(LocalDate.now());
 	}
 
@@ -89,13 +98,6 @@ public abstract class Usuario implements Serializable {
 	}
 
 
-	public Contato getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
 
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
@@ -103,6 +105,30 @@ public abstract class Usuario implements Serializable {
 
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Localidade> getLocalidades() {
+		return localidades;
+	}
+
+	public void setLocalidades(List<Localidade> localidades) {
+		this.localidades = localidades;
+	}
+
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
 	}
 
 }
