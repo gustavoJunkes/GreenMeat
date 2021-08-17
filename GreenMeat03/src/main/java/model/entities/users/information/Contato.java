@@ -1,5 +1,6 @@
 package model.entities.users.information;
 
+
 import model.exception.users.information.EmailInvalidException;
 import model.exception.users.information.PhoneNumberInvalidException;
 
