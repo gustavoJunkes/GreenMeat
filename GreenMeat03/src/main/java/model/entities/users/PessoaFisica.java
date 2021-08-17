@@ -7,12 +7,17 @@ import model.entities.users.information.Localidade;
 
 public class PessoaFisica extends Usuario {
 
+	private Long id;
 	private String nome;
 	private String sobrenome;
 	private String CPF;
 	private LocalDate dataDeNascimento;
 
-	public PessoaFisica(Localidade endereco, String login, String senha, Contato contato,String nome, String sobrenome,
+	public PessoaFisica() {
+		usuario();
+	}
+	
+	public PessoaFisica(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
 		super(endereco, login, senha, contato);
 		setNome(nome);
@@ -20,6 +25,14 @@ public class PessoaFisica extends Usuario {
 		setCPF(CPF);
 		setDataDeNascimento(dataDeNascimento);
 		// TODO Auto-generated constructor stub
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

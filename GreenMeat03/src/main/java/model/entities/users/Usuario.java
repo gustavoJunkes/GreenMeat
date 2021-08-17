@@ -19,7 +19,9 @@ public class Usuario {
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
 
-	
+	public Usuario() {
+		
+	}
 
 	public Usuario(Localidade endereco, String login, String senha, Contato contato) {
 		setEndereco(endereco);
