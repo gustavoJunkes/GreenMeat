@@ -22,7 +22,7 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="id")
+	@Column(name="id_produto")
 	private Long id;
 	
 	@Column(name = "nome",length = 25, nullable=false,unique=false)               
@@ -46,7 +46,7 @@ public class Produto implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_item")
-	private Produto produto;
+	private Item item;
 
 	public Produto() {}
 
