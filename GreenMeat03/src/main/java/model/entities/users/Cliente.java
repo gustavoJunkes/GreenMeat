@@ -10,7 +10,7 @@ public class Cliente extends PessoaFisica {
 
 	public Cliente(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
-		super(endereco, login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
+		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
 		// TODO Auto-generated constructor stub
 	}
 
