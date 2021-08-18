@@ -1,18 +1,54 @@
 package model.entities.products;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
 
 import model.exception.products.ExpirationDateInvalidException;
 import model.exceptions.InvalidFieldException;
 
-public class Produto {
+@Entity
+@Table(name = "produto")
+public class Produto implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name = "nome",length = 25, nullable=false,unique=false)               
 	private String nome;
+	
+	@Column(name = "descricao",length = 45, nullable=false,unique=false)
 	private String descricao;
+	
+	@Column(name="precoCusto", length = 25, nullable=false,unique=false)
 	private float precoCusto;
+	
+	@Column(name = "precoVenda",length = 25, nullable=false,unique=false)
 	private float precoVenda;
+	
+	@Column(name = "dataValidade" ,length = 25, nullable=false,unique=false)
 	private LocalDate dataValidade;
+	
+	@Column(name = "tipoCarne",length = 25, nullable=false,unique=false)
 	private Tipo tipoCarne;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "id_item")
+	private Produto produto;
+
+	public Produto() {}
 
 
 //	Falta adicionar atributos precoCusto e PrecoVenda no construtor
