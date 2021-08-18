@@ -18,35 +18,33 @@ import model.entities.users.information.Localidade;
 
 @Entity
 @Table(name = "pessoafisica")
-public class PessoaFisica extends Usuario{
+public class PessoaFisica extends Usuario {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_pessoafisica")
 	private Long id;
-	
+
 	@Column(name = "primeironome_pessoafisica")
 	private String nome;
-	
+
 	@Column(name = "sobrenome_pessoafisica")
 	private String sobrenome;
-	
+
 	@Column(name = "CPF_pessoafisica")
 	private String CPF;
-	
+
 	@Column(name = "dataNascimento_pessoaFisica")
 	private LocalDate dataDeNascimento;
 
-	
-	
 	public PessoaFisica() {
 		super();
 	}
-	
-	public PessoaFisica(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
+
+	public PessoaFisica(/*Localidade endereco,*/ String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
-		super(endereco, login, senha, contato);
+		super(login, senha);
 		setNome(nome);
 		setSobrenome(sobrenome);
 		setCPF(CPF);

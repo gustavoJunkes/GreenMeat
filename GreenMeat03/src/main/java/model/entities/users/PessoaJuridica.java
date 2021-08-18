@@ -31,9 +31,9 @@ public class PessoaJuridica extends Usuario {
 	
 	public PessoaJuridica() {}
 	
-	public PessoaJuridica(Localidade endereco, String login, String senha, Contato contato, String CNPJ,
+	public PessoaJuridica(/*Localidade endereco,*/ String login, String senha, Contato contato, String CNPJ,
 			String razaoSocial, String nomeFantasia) {
-		super(endereco, login, senha, contato);
+		super(login, senha);
 		setCNPJ(CNPJ);
 		setRazaoSocial(razaoSocial);
 		setNomeFantasia(nomeFantasia);
