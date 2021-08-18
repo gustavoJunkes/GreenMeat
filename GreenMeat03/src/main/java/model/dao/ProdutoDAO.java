@@ -10,7 +10,7 @@ public interface ProdutoDAO {
 
 	void deletarProduto(Produto produto);
 
-	void atualizarNome(Produto produto, String novoNome);
+	void atualizarProduto(Produto produto);
 
 	void atualizarDescricao(Produto produto, String novaDescricao);
 
