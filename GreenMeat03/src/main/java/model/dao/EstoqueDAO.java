@@ -11,7 +11,7 @@ public interface EstoqueDAO {
 	
 	void deletarEstoque(Estoque estoque);
 	
-	void atualizarItens(List<Item>itens);
+	void atualizarEstoque(Estoque estoque);
 	
 	List<Estoque>recuperarEstoque();
 }
