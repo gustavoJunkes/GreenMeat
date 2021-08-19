@@ -12,11 +12,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import model.entities.users.Funcionario;
+import model.entities.users.PessoaJuridica;
 
-public class FuncionarioDAOImpl implements FuncionarioDAO {
+public class PessoaJuridicaDAOImpl implements PessoaJuridicaDAO {
 
-	public void inserirFuncionario(Funcionario funcionario) {
+	public void inserirPessoaJuridica(PessoaJuridica pessoaJuridica) {
 
 		Session sessao = null;
 
@@ -25,7 +25,41 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(funcionario);
+			sessao.save(pessoaJuridica);
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+	}
+	
+	
+	
+	
+
+	public void deletarPessoaJuridica(PessoaJuridica pessoaJuridica) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.delete(pessoaJuridica);
 
 			sessao.getTransaction().commit();
 
@@ -45,38 +79,9 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 		}
 
 	}
-
-	public void deletarFuncionario(Funcionario funcionario) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.delete(funcionario);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-
-	public void atualizarFuncionario(Funcionario funcionario) {
+	
+	
+	public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
 
 		Session sessao = null;
 
@@ -85,7 +90,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(funcionario);
+			sessao.update(pessoaJuridica);
 
 			sessao.getTransaction().commit();
 
@@ -104,11 +109,13 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 			}
 		}
 	}
+	
+	
 
-	public List<Funcionario> recuperarFuncionarios() {
+	public List<PessoaJuridica> recuperarPessoasJuridicas() {
 
 		Session sessao = null;
-		List<Funcionario> funcionarios = null;
+		List<PessoaJuridica> pessoasJuridicas = null;
 
 		try {
 
@@ -117,12 +124,12 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Funcionario> criteria = construtor.createQuery(Funcionario.class);
-			Root<Funcionario> raizFuncionario = criteria.from(Funcionario.class);
+			CriteriaQuery<PessoaJuridica> criteria = construtor.createQuery(PessoaJuridica.class);
+			Root<PessoaJuridica> raizPessoaJuridica = criteria.from(PessoaJuridica.class);
 
-			criteria.select(raizFuncionario);
+			criteria.select(raizPessoaJuridica);
 
-			funcionarios = sessao.createQuery(criteria).getResultList();
+			pessoasJuridicas = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -141,27 +148,26 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 			}
 		}
 
-		return funcionarios;
+		return pessoasJuridicas;
 
 	}
-
+	
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
 
+		configuracao.addAnnotatedClass(model.entities.users.PessoaJuridica.class);
 		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
 		configuracao.addAnnotatedClass(model.entities.users.Usuario.class);
 		configuracao.addAnnotatedClass(model.entities.users.PessoaFisica.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
-		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
-				.build();
+		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
 
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
 
 	}
-
 }
