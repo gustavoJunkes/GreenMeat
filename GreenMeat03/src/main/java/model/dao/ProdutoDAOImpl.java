@@ -12,11 +12,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import model.entities.users.Fornecedor;
+import model.entities.products.Produto;
 
-public class FornecedorDAOImpl implements FornecedorDAO {
+public class ProdutoDAOImpl implements ProdutoDAO {
 
-	public void inserirFornecedor(Fornecedor fornecedor) {
+	public void inserirProduto(Produto produto) {
 
 		Session sessao = null;
 
@@ -25,7 +25,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(fornecedor);
+			sessao.save(produto);
 
 			sessao.getTransaction().commit();
 
@@ -46,7 +46,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 
 	}
 
-	public void deletarFornecedor(Fornecedor fornecedor) {
+	public void deletarProduto(Produto produto) {
 
 		Session sessao = null;
 
@@ -55,7 +55,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(fornecedor);
+			sessao.delete(produto);
 
 			sessao.getTransaction().commit();
 
@@ -76,7 +76,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 
 	}
 
-	public void atualizarFornecedor(Fornecedor fornecedor) {
+	public void atualizarProduto(Produto produto) {
 
 		Session sessao = null;
 
@@ -85,7 +85,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(fornecedor);
+			sessao.update(produto);
 
 			sessao.getTransaction().commit();
 
@@ -105,10 +105,10 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 		}
 	}
 
-	public List<Fornecedor> recuperarFornecedores() {
+	public List<Produto> recuperarProdutos() {
 
 		Session sessao = null;
-		List<Fornecedor> fornecedores = null;
+		List<Produto> produtos = null;
 
 		try {
 
@@ -117,12 +117,12 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Fornecedor> criteria = construtor.createQuery(Fornecedor.class);
-			Root<Fornecedor> raizFornecedor = criteria.from(Fornecedor.class);
+			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
+			Root<Produto> raizProduto = criteria.from(Produto.class);
 
-			criteria.select(raizFornecedor);
+			criteria.select(raizProduto);
 
-			fornecedores = sessao.createQuery(criteria).getResultList();
+			produtos = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -141,7 +141,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			}
 		}
 
-		return fornecedores;
+		return produtos;
 
 	}
 
@@ -149,6 +149,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 
 		Configuration configuracao = new Configuration();
 
+		configuracao.addAnnotatedClass(model.entities.products.Produto.class);
 		configuracao.addAnnotatedClass(model.entities.users.Fornecedor.class);
 		configuracao.addAnnotatedClass(model.entities.users.PessoaJuridica.class);
 		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
