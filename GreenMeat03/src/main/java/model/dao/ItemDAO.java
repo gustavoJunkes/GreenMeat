@@ -3,18 +3,15 @@ package model.dao;
 import java.util.List;
 
 import model.entities.products.Item;
-import model.entities.products.Produto;
 
 public interface ItemDAO {
-	void soma(Item item); // Diz respeito ao valor total do item
+//	void soma(Item item); // Diz respeito ao valor total do item
 
-	void inserirItem(Produto produto, float quantidade);
+	void inserirItem(Item item);
 	
-	void pegarProduto(Item item, Produto produto);
+	void deletarItem(Item item);
 
-	void pegarPreco(Item item);
-
-	void alterarQuantidade(Item item, float novaQuantidade);
-
-	List<Item> mostrarItem();
+	void atualizarItem(Item item);
+		
+	List<Item> recuperarItens();
 }
