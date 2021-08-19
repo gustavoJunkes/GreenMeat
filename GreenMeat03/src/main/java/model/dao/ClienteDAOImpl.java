@@ -12,46 +12,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.users.Cliente;
 
-import model.entities.users.Usuario;
+public class ClienteDAOImpl implements ClienteDAO {
 
-public class UsuarioDAOImpl implements UsuarioDAO {
-
-	public void inserirUsuario(Usuario usuario) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.save(usuario);
-			
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-	
-	
-	
-	
-
-	public void deletarUsuario(Usuario usuario) {
+	public void inserirCliente(Cliente cliente) {
 
 		Session sessao = null;
 
@@ -60,7 +25,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(usuario);
+			sessao.save(cliente);
 
 			sessao.getTransaction().commit();
 
@@ -80,9 +45,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 
 	}
-	
-	
-	public void atualizarUsuario(Usuario usuario) {
+
+	public void deletarCliente(Cliente cliente) {
 
 		Session sessao = null;
 
@@ -91,7 +55,37 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(usuario);
+			sessao.delete(cliente);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+	}
+
+	public void atualizarCliente(Cliente cliente) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(cliente);
 
 			sessao.getTransaction().commit();
 
@@ -110,13 +104,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 	}
-	
-	
 
-	public List<Usuario> recuperarUsuarios() {
+	public List<Cliente> recuperarClientes() {
 
 		Session sessao = null;
-		List<Usuario> usuarios = null;
+		List<Cliente> clientes = null;
 
 		try {
 
@@ -125,12 +117,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<Cliente> criteria = construtor.createQuery(Cliente.class);
+			Root<Cliente> raizCliente = criteria.from(Cliente.class);
 
-			criteria.select(raizUsuario);
+			criteria.select(raizCliente);
 
-			usuarios = sessao.createQuery(criteria).getResultList();
+			clientes = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -149,20 +141,22 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 
-		return usuarios;
+		return clientes;
 
 	}
-	
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
 
+		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
 		configuracao.addAnnotatedClass(model.entities.users.Usuario.class);
-		// FALTA ADICIONAR OUTRAS CLASSES MAPEADAS
+		configuracao.addAnnotatedClass(model.entities.users.PessoaFisica.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
-		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
+		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
+				.build();
 
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 

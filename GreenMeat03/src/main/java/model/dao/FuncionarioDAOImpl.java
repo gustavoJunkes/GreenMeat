@@ -12,46 +12,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.users.Cliente;
+import model.entities.users.Funcionario;
 
-import model.entities.users.Usuario;
+public class FuncionarioDAOImpl implements FuncionarioDAO {
 
-public class UsuarioDAOImpl implements UsuarioDAO {
-
-	public void inserirUsuario(Usuario usuario) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.save(usuario);
-			
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-	
-	
-	
-	
-
-	public void deletarUsuario(Usuario usuario) {
+	public void inserirFuncionario(Funcionario funcionario) {
 
 		Session sessao = null;
 
@@ -60,7 +26,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(usuario);
+			sessao.save(funcionario);
 
 			sessao.getTransaction().commit();
 
@@ -80,9 +46,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 
 	}
-	
-	
-	public void atualizarUsuario(Usuario usuario) {
+
+	public void deletarFuncionario(Funcionario funcionario) {
 
 		Session sessao = null;
 
@@ -91,7 +56,37 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(usuario);
+			sessao.delete(funcionario);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+	}
+
+	public void atualizarFuncionario(Funcionario funcionario) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(funcionario);
 
 			sessao.getTransaction().commit();
 
@@ -110,13 +105,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 	}
-	
-	
 
-	public List<Usuario> recuperarUsuarios() {
+	public List<Funcionario> recuperarFuncionarios() {
 
 		Session sessao = null;
-		List<Usuario> usuarios = null;
+		List<Funcionario> funcionarios = null;
 
 		try {
 
@@ -125,12 +118,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<Funcionario> criteria = construtor.createQuery(Funcionario.class);
+			Root<Funcionario> raizFuncionario = criteria.from(Funcionario.class);
 
-			criteria.select(raizUsuario);
+			criteria.select(raizFuncionario);
 
-			usuarios = sessao.createQuery(criteria).getResultList();
+			funcionarios = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -149,24 +142,27 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 
-		return usuarios;
+		return funcionarios;
 
 	}
-	
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
 
+		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
 		configuracao.addAnnotatedClass(model.entities.users.Usuario.class);
-		// FALTA ADICIONAR OUTRAS CLASSES MAPEADAS
+		configuracao.addAnnotatedClass(model.entities.users.PessoaFisica.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
-		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
+		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
+				.build();
 
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
 
 	}
+
 }

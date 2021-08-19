@@ -13,35 +13,9 @@ public interface ClienteDAO {
 
 	void deletarCliente(Cliente cliente);
 
-	/*
-	 * void inserirNomeCliente(String novoNome);
-	 * 
-	 * void inserirCpfCliente(String novoCpf);
-	 * 
-	 * void inserirDataNascimentoCliente(LocalDate dataDeNascimento);
-	 * 
-	 * void inserirLocalidadeCliente(Localidade localidade);
-	 * 
-	 * void inserirTelefoneCliente(String telefone);
-	 * 
-	 * void inserirLoginCliente(String login);
-	 * 
-	 * void inserirSenhaCliente(String senha);
-	 * 
-	 * void inserirContatoCliente(Contato contato);
-	 */
+	void atualizarCliente(Cliente cliente);
 
-	void atualizarLocalidadeCliente(Localidade localidade);
+	List<Cliente> recuperarClientes();
 
-	void atualizarTelefoneCliente(String telefone);
-
-	void atualizarLoginCliente(String login);
-
-	void atualizarSenhaCliente(String senha);
-
-	void atualizarContatoCliente(Contato contato);
-
-	List<Cliente> recuperarClientesOrdemCrescente();
-
-	List<Cliente> recuperarClientesOrdemDecrescente();
+//	List<Cliente> recuperarClientesOrdemDecrescente();
 }
