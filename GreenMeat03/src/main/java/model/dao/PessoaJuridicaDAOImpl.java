@@ -12,12 +12,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.users.PessoaJuridica;
 
-import model.entities.users.Usuario;
+public class PessoaJuridicaDAOImpl implements PessoaJuridicaDAO {
 
-public class UsuarioDAOImpl implements UsuarioDAO {
-
-	public void inserirUsuario(Usuario usuario) {
+	public void inserirPessoaJuridica(PessoaJuridica pessoaJuridica) {
 
 		Session sessao = null;
 
@@ -26,7 +25,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(usuario);
+			sessao.save(pessoaJuridica);
 			
 			sessao.getTransaction().commit();
 
@@ -51,7 +50,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	
 
-	public void deletarUsuario(Usuario usuario) {
+	public void deletarPessoaJuridica(PessoaJuridica pessoaJuridica) {
 
 		Session sessao = null;
 
@@ -60,7 +59,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(usuario);
+			sessao.delete(pessoaJuridica);
 
 			sessao.getTransaction().commit();
 
@@ -82,7 +81,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 	
 	
-	public void atualizarUsuario(Usuario usuario) {
+	public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
 
 		Session sessao = null;
 
@@ -91,7 +90,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(usuario);
+			sessao.update(pessoaJuridica);
 
 			sessao.getTransaction().commit();
 
@@ -113,10 +112,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	
 
-	public List<Usuario> recuperarUsuarios() {
+	public List<PessoaJuridica> recuperarPessoasJuridicas() {
 
 		Session sessao = null;
-		List<Usuario> usuarios = null;
+		List<PessoaJuridica> pessoasJuridicas = null;
 
 		try {
 
@@ -125,12 +124,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<PessoaJuridica> criteria = construtor.createQuery(PessoaJuridica.class);
+			Root<PessoaJuridica> raizPessoaJuridica = criteria.from(PessoaJuridica.class);
 
-			criteria.select(raizUsuario);
+			criteria.select(raizPessoaJuridica);
 
-			usuarios = sessao.createQuery(criteria).getResultList();
+			pessoasJuridicas = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -149,7 +148,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 
-		return usuarios;
+		return pessoasJuridicas;
 
 	}
 	
@@ -157,8 +156,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		Configuration configuracao = new Configuration();
 
+		configuracao.addAnnotatedClass(model.entities.users.PessoaJuridica.class);
+		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
 		configuracao.addAnnotatedClass(model.entities.users.Usuario.class);
-		// FALTA ADICIONAR OUTRAS CLASSES MAPEADAS
+		configuracao.addAnnotatedClass(model.entities.users.PessoaFisica.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 

@@ -11,11 +11,7 @@ public interface PessoaJuridicaDAO {
 
 	void deletarPessoaJuridica(PessoaJuridica pj);
 
-	void atualizarCNPJ(PessoaJuridica pj, String novoCPJ);
-
-	void atualizarRazaoSocial(PessoaJuridica pj, String novaRazaoSocial);
-
-	void atualizarNomeFantasia(PessoaJuridica pj, String novoNomeFantasia);
+	void atualizarPessoaJuridica(PessoaJuridica pj);
 	
-	List <PessoaJuridica>recuperarPessoaJuridica();
+	List <PessoaJuridica>recuperarPessoasJuridicas();
 }

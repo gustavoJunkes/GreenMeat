@@ -10,7 +10,7 @@ public interface FuncionarioDAO {
 
 	void inserirFuncionario(Funcionario funcionario);
 
-//	void deletarFuncionario(Funcionario funcionario);
+	void deletarFuncionario(Funcionario funcionario);
 //
 //	void inserirNomeFuncionario(String nome);
 //
@@ -24,18 +24,8 @@ public interface FuncionarioDAO {
 //
 //	void inserirCarteiraDeTrabalho(String carteiraTrabalho);
 
-	void atualizarNomeFuncionario(String nome);
+	void atualizarFuncionario(Funcionario funcionario);
 
-	void atualizarCpfFuncionario(String cpf);
-
-	void atualizarDataDeNascimentoDoFuncionario(LocalDate dataDeNascimento);
-
-	void atualizarContatoDoFuncionario(Contato contato);
-
-	void atualizarFuncao(String funcao);
-
-	void atualizarCarteiraDeTrabalho(String carteiraTrabalho);
-
-	List<Funcionario> recuperarFuncionario();
+	List<Funcionario> recuperarFuncionarios();
 
 }
