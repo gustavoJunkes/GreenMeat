@@ -1,15 +1,10 @@
 package model.exception.users.information;
 
 public class EmailInvalidException extends Exception {
-	
-	
-	public EmailInvalidException(String message) {
-		super(message);
+
+	public EmailInvalidException(String mensagem) {
+		super(mensagem);
+		
 	}
 	
-
-	public String toString() {
-		return "Email não existe";
-	}
-
 }
