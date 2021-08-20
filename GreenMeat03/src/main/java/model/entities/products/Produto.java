@@ -25,22 +25,22 @@ public class Produto implements Serializable{
 	@Column(name="id_produto")
 	private Long id;
 	
-	@Column(name = "nome",length = 25, nullable=false,unique=false)               
+	@Column(name = "nome",length = 25, nullable = false, unique = false)               
 	private String nome;
 	
-	@Column(name = "descricao",length = 45, nullable=false,unique=false)
+	@Column(name = "descricao",length = 45, nullable = false, unique = false)
 	private String descricao;
 	
-	@Column(name="precoCusto", length = 25, nullable=false,unique=false)
+	@Column(name="precoCusto", length = 25, nullable = false,unique = false)
 	private float precoCusto;
 	
-	@Column(name = "precoVenda",length = 25, nullable=false,unique=false)
+	@Column(name = "precoVenda",length = 25, nullable = false,unique = false)
 	private float precoVenda;
 	
-	@Column(name = "dataValidade" ,length = 25, nullable=false,unique=false)
+	@Column(name = "dataValidade" ,length = 25, nullable = false,unique = false)
 	private LocalDate dataValidade;
 	
-	@Column(name = "tipoCarne",length = 25, nullable=false,unique=false)
+	@Column(name = "tipoCarne",length = 25, nullable = false, unique = false)
 	private Tipo tipoCarne;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
