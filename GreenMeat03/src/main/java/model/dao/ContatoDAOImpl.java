@@ -13,10 +13,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import model.entities.products.Estoque;
+import model.entities.users.information.Contato;
 
-public class EstoqueDAOImpl implements EstoqueDAO{
+public class ContatoDAOImpl implements ContatoDAO{
 
-	public void inserirEstoque(Estoque estoque) {
+	public void inserirContato(Contato contato) {
 
 		Session sessao = null;
 
@@ -25,7 +26,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(estoque);
+			sessao.save(contato);
 
 			sessao.getTransaction().commit();
 
@@ -46,7 +47,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 
 	}
 
-	public void deletarEstoque(Estoque estoque) {
+	public void deletarContato(Contato contato) {
 
 		Session sessao = null;
 
@@ -55,7 +56,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(estoque);
+			sessao.delete(contato);
 
 			sessao.getTransaction().commit();
 
@@ -76,7 +77,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 
 	}
 
-	public void atualizarEstoque(Estoque estoque) {
+	public void atualizarContato(Contato contato) {
 
 		Session sessao = null;
 
@@ -85,7 +86,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(estoque);
+			sessao.update(contato);
 
 			sessao.getTransaction().commit();
 
@@ -105,10 +106,10 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 		}
 	}
 
-	public List<Estoque> recuperarEstoque() {
+	public List<Contato> recuperarContatos() {
 
 		Session sessao = null;
-		List<Estoque> estoques = null;
+		List<Contato> contatos = null;
 
 		try {
 
@@ -117,12 +118,12 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Estoque> criteria = construtor.createQuery(Estoque.class);
-			Root<Estoque> raizEstoque = criteria.from(Estoque.class);
+			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
 
-			criteria.select(raizEstoque);
+			criteria.select(raizContato);
 
-			estoques = sessao.createQuery(criteria).getResultList();
+			contatos = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -141,7 +142,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 			}
 		}
 
-		return estoques;
+		return contatos;
 
 	}
 
@@ -149,6 +150,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 
 		Configuration configuracao = new Configuration();
 		
+		configuracao.addAnnotatedClass(model.entities.users.information.Contato.class);
 		configuracao.addAnnotatedClass(model.entities.products.Estoque.class);
 		configuracao.addAnnotatedClass(model.entities.products.Pedido.class);
 		configuracao.addAnnotatedClass(model.entities.products.Item.class);
@@ -173,5 +175,6 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 	
 	
 
+	
 	
 }
