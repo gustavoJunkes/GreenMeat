@@ -31,8 +31,6 @@ public class Item implements Serializable {
 	@Column(name = "quantidade")
 	private float quantidade; // em kg, por isso float.
 
-	@Column(name = "fornecedor")
-	private Fornecedor fornecedor;
 
 	@Column(name = "valorTotal")
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a

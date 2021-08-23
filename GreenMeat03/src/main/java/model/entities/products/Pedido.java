@@ -39,8 +39,11 @@ public class Pedido extends Usuario {
 	private Long id;
 	
 	
+	
 	 private Status status; 
 	
+	 
+	 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente; // dono da lista de compras
