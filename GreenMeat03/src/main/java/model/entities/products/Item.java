@@ -1,8 +1,12 @@
 package model.entities.products;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,30 +17,26 @@ import model.entities.users.Fornecedor;
 
 @Entity
 @Table(name = "item")
-public class Item implements serializable {
+public class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	// criar variavel para identificar o item
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_item")
 	private Long id;
 
-	@Column(name = "produto")
-	private Produto produto;
-
-	@Column(name = "quantidade")
+	@Column(name = "quantidade", nullable = false, unique = false)
 	private float quantidade; // em kg, por isso float.
 
-	@Column(name = "fornecedor")
-	private Fornecedor fornecedor;
-
-	@Column(name = "valorTotal")
+	
+	@Column(name = "valorTotal", nullable = false, unique = false)
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a
 								// partir do preço de um produto * quantidade
 
-	@oneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_item")
 	private Produto produto;
@@ -46,7 +46,6 @@ public class Item implements serializable {
 
 	public Item(Produto produto, Fornecedor fornecedor, float quantidade) {
 		setProduto(produto);
-		setFornecedor(fornecedor);
 		setQuantidade(quantidade);
 		setValorTotal(calculaValorTotal());
 	}
@@ -59,22 +58,12 @@ public class Item implements serializable {
 		this.produto = produto;
 	}
 
-////////////////////////////
 	public float getQuantidade() {
 		return quantidade;
 	}
 
-/////////////////////////////
 	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public String getFornecedor() {
-		return fornecedor.getRazaoSocial();
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
 	}
 
 	public float getValorTotal() {

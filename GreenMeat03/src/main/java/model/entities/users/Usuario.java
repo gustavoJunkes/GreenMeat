@@ -2,6 +2,7 @@ package model.entities.users;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,7 +39,7 @@ public abstract class Usuario implements Serializable {
 	private List<Localidade> localidades;
 
 	@Column(name = "login_usuario")
-	private String login; // nao vai login
+	private String login;
 
 	@Column(name = "senha_usuario")
 	private String senha;
@@ -47,7 +48,7 @@ public abstract class Usuario implements Serializable {
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Contato> contatos; 
+	private List<Contato> contatos = new ArrayList<Contato>(); 
 	
 	
 	@Column(name = "datacastro_usuario")

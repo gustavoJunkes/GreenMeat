@@ -4,41 +4,74 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import model.entities.users.Cliente;
+import model.entities.users.Usuario;
 
-public class Pedido {
+@Entity
+@Table(name = "pedido")
+public class Pedido extends Usuario {
+	private static final long serialVersionUID = 1L;
+	
+	
+	/* 	
+	  	valor do item = produto * quantidade
+	 	valor do pedido = soma dos itens
 
-	// valor do item = produto * quantidade
-	// valor do pedido = soma dos itens
-
-//	Precisa de um novo atributo em Status, como ENTREGUE, ou A_CAMINHO, por exemplo?
-//	Precisa de método para finalizar pedido
-
-	private String idPedido;
-	private Status status;
+		Precisa de um novo atributo em Status, como ENTREGUE, ou A_CAMINHO, por exemplo?
+		Precisa de método para finalizar pedido
+	*/
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_pedido")
+	private Long id;
+	
+	
+	
+	 private Status status; 
+	
+	 
+	 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente; // dono da lista de compras
-	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
-	private int numeroPedido; // id pedido // codigo alfanumerico
+	
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Item> itens = new ArrayList<Item>();
+	
+	
+	@Column(name = "data_entrega", nullable = false, unique = false)
 	private LocalDate dataEntrega;
-	private float valorTotal; // valor do pedido
 
-	//////////////////////////
+	
+	@Column(name = "valor_total_pedido", nullable = false, unique = false)
+	private float valorTotal; // soma do valor total de todos os itens do pedido
+
 
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
 		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
-		setStatus(status.PEDIDO_EM_ABERTO);
+		setStatus(Status.PEDIDO_EM_ABERTO);
 		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
 
 	}
 
-	public String getIdPedido() {
-		return idPedido;
-	}
 
-	public void setIdPedido(String idPedido) {
-		this.idPedido = idPedido;
-	}
 
 	public Status getStatus() {
 		return status;
@@ -56,13 +89,6 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public int getNumeroPedido() {
-		return numeroPedido;
-	}
-
-	public void setNumeroPedido(int numeroPedido) {
-		this.numeroPedido = numeroPedido;
-	}
 
 	public LocalDate getDataEntrega() {
 		return dataEntrega;
@@ -109,7 +135,7 @@ public class Pedido {
 	}
 
 	public void finalizarPedido(String idPedido) {
-		setStatus(status.PEDIDO_FINALIZADO);
+		setStatus(Status.PEDIDO_FINALIZADO);
 	}
 
 	
