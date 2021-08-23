@@ -1,16 +1,36 @@
 package model.entities.users.information;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
 
 import model.entities.users.Usuario;
 import model.exception.users.information.EmailInvalidException;
 import model.exception.users.information.PhoneNumberInvalidException;
 
-public class Contato {
+@Entity
+@Table(name = "contato")
+public class Contato implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_contato")
+	private Long id;
+
+	@Column(name = "email", length = 50, nullable = false, unique = true)
 	private String email;
+	
+	
+	@Column(name = "telefone", length = 15, nullable = false, unique = true)
 	private String telefone;
 
 	

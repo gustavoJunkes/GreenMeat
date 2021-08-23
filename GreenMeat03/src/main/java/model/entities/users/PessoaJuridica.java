@@ -8,15 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import model.entities.users.information.Contato;
-import model.entities.users.information.Localidade;
 
 
 @Entity
 @Table(name = "pessoajuridica")
 public class PessoaJuridica extends Usuario {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pessoa_juridica")
 	private Long id;
 	
 	@Column(name = "CNPJ_pessoajuridica")
@@ -44,7 +49,7 @@ public class PessoaJuridica extends Usuario {
 	}
 
 	public void setCNPJ(String CNPJ) {
-		CNPJ = CNPJ;
+		this.CNPJ = CNPJ;
 	}
 
 	public String getRazaoSocial() {

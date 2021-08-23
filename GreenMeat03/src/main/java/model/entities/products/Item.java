@@ -5,9 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ public class Item implements Serializable {
 	// criar variavel para identificar o item
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item")
 	private Long id;
 
@@ -67,9 +69,9 @@ public class Item implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public String getFornecedor() {
+	/* public String getFornecedor() {
 		return fornecedor.getRazaoSocial();
-	}
+	}*/
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;

@@ -1,20 +1,15 @@
 package model.entities.users;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import model.entities.users.information.Contato;
-import model.entities.users.information.Localidade;
 
 @Entity
 @Table(name = "pessoafisica")
@@ -23,7 +18,7 @@ public class PessoaFisica extends Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_pessoafisica")
+	@Column(name = "id_pessoa_fisica")
 	private Long id;
 
 	@Column(name = "primeironome_pessoafisica")

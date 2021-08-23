@@ -17,8 +17,15 @@ import model.entities.users.information.Localidade;
 @Table(name = "funcionario")
 public class Funcionario extends PessoaFisica {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_funcionario")
+	private Long id;
 	
 	@Column(name = "funcao_funcionario")
 	private String funcao;
@@ -32,7 +39,7 @@ public class Funcionario extends PessoaFisica {
 	
 	public Funcionario(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
-		super(endereco, login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
+		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
 		setFuncao(funcao);
 		setCargo(cargo);
 	}
