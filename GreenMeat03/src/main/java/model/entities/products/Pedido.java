@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,7 +35,7 @@ public class Pedido extends Usuario {
 	*/
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_pedido")
 	private Long id;
 	
@@ -45,6 +46,7 @@ public class Pedido extends Usuario {
 	 
 	 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente; // dono da lista de compras
 	

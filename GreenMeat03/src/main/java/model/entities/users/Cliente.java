@@ -1,15 +1,20 @@
 package model.entities.users;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import model.entities.products.Pedido;
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
-import model.exceptions.InvalidFieldException;
 
 public class Cliente extends PessoaFisica {
 
@@ -19,9 +24,15 @@ public class Cliente extends PessoaFisica {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_cliente")
 	private Long id;
+	
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Pedido> Pedidos = new ArrayList<Pedido>();
+	
+    /* adicionar lista de pedidos */
 
 	public Cliente(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {

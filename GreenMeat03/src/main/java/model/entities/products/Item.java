@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.entities.users.Fornecedor;
@@ -24,19 +24,19 @@ public class Item implements Serializable {
 	// criar variavel para identificar o item
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_item")
 	private Long id;
 
-	@Column(name = "quantidade")
+	@Column(name = "quantidade", nullable = false, unique = false)
 	private float quantidade; // em kg, por isso float.
 
-
-	@Column(name = "valorTotal")
+	
+	@Column(name = "valorTotal", nullable = false, unique = false)
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a
 								// partir do preço de um produto * quantidade
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_item")
 	private Produto produto;
@@ -46,7 +46,6 @@ public class Item implements Serializable {
 
 	public Item(Produto produto, Fornecedor fornecedor, float quantidade) {
 		setProduto(produto);
-		setFornecedor(fornecedor);
 		setQuantidade(quantidade);
 		setValorTotal(calculaValorTotal());
 	}
@@ -65,14 +64,6 @@ public class Item implements Serializable {
 
 	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	/* public String getFornecedor() {
-		return fornecedor.getRazaoSocial();
-	}*/
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
 	}
 
 	public float getValorTotal() {

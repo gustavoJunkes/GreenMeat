@@ -21,16 +21,16 @@ public class PessoaFisica extends Usuario {
 	@Column(name = "id_pessoa_fisica")
 	private Long id;
 
-	@Column(name = "primeironome_pessoafisica")
+	@Column(name = "primeironome_pessoafisica", length = 15, nullable = false, unique = false)
 	private String nome;
 
-	@Column(name = "sobrenome_pessoafisica")
+	@Column(name = "sobrenome_pessoafisica", length = 20, nullable = false, unique = false)
 	private String sobrenome;
 
-	@Column(name = "CPF_pessoafisica")
+	@Column(name = "CPF_pessoafisica", nullable = false, unique = true)
 	private String CPF;
 
-	@Column(name = "dataNascimento_pessoaFisica")
+	@Column(name = "dataNascimento_pessoaFisica", nullable = false, unique = false)
 	private LocalDate dataDeNascimento;
 
 	public PessoaFisica() {

@@ -23,14 +23,14 @@ public class Funcionario extends PessoaFisica {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_funcionario")
 	private Long id;
 	
-	@Column(name = "funcao_funcionario")
+	@Column(name = "funcao_funcionario", length = 15, nullable = false, unique = false)
 	private String funcao;
 
-	@Column(name = "cargo_funcionario")
+	@Column(name = "cargo_funcionario", length = 15, nullable = false, unique = false)
 	private String cargo;
 
 //	Ao criar funcionario criar tambem seu login e senha

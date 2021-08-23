@@ -24,7 +24,7 @@ public class Fornecedor extends Usuario {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_fornecedor")
 	private Long id;
 	

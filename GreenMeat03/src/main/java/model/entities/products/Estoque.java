@@ -19,6 +19,8 @@ public class Estoque implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
+	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Estoque> itens = new ArrayList<Estoque>();
 

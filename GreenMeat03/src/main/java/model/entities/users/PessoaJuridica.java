@@ -15,22 +15,22 @@ import model.entities.users.information.Contato;
 public class PessoaJuridica extends Usuario {
 
 	/**
-	 * 
+	 * @Column(name = "logradouro_endereco", )
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_pessoa_juridica")
 	private Long id;
 	
-	@Column(name = "CNPJ_pessoajuridica")
+	@Column(name = "CNPJ_pessoajuridica", length = 14, nullable = false, unique = true)
 	private String CNPJ;
 
-	@Column(name = "razaosocial_pessoajuridica")
+	@Column(name = "razaosocial_pessoajuridica", length = 25, nullable = false, unique = false)
 	private String razaoSocial;
 	
-	@Column(name = "nomefantasia_pessoajuridica")
+	@Column(name = "nomefantasia_pessoajuridica", length = 25, nullable = false, unique = false)
 	private String nomeFantasia;
 
 	
