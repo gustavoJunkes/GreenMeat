@@ -28,20 +28,24 @@ public class Fornecedor extends Usuario {
 	@Column(name = "id_fornecedor")
 	private Long id;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Produto> Produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Produto> Produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
 			Contato contato, String CNPJ) {
 		super(login, senha);
 	}
 
-	public List<Produto> getProdutos() {
-		return Produtos;
+	public Fornecedor() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		Produtos = produtos;
-	}
+//	public List<Produto> getProdutos() {
+//		return Produtos;
+//	}
+//
+//	public void setProdutos(List<Produto> produtos) {
+//		Produtos = produtos;
+//	}
 
 }

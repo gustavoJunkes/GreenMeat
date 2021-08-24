@@ -5,14 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import model.entities.users.information.Contato;
 
-
 @Entity
 @Table(name = "pessoajuridica")
-public class PessoaJuridica extends Usuario {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class PessoaJuridica extends Usuario {
 
 	/**
 	 * @Column(name = "logradouro_endereco", )
@@ -23,20 +25,20 @@ public class PessoaJuridica extends Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_pessoa_juridica")
 	private Long id;
-	
-	@Column(name = "CNPJ_pessoajuridica", length = 14, nullable = false, unique = true)
+
+	@Column(name = "CNPJ_pessoajuridica", length = 14)
 	private String CNPJ;
 
-	@Column(name = "razaosocial_pessoajuridica", length = 25, nullable = false, unique = false)
+	@Column(name = "razaosocial_pessoajuridica", length = 25)
 	private String razaoSocial;
-	
-	@Column(name = "nomefantasia_pessoajuridica", length = 25, nullable = false, unique = false)
+
+	@Column(name = "nomefantasia_pessoajuridica", length = 25)
 	private String nomeFantasia;
 
-	
-	public PessoaJuridica() {}
-	
-	public PessoaJuridica(/*Localidade endereco,*/ String login, String senha, Contato contato, String CNPJ,
+	public PessoaJuridica() {
+	}
+
+	public PessoaJuridica(/* Localidade endereco, */ String login, String senha, Contato contato, String CNPJ,
 			String razaoSocial, String nomeFantasia) {
 		super(login, senha);
 		setCNPJ(CNPJ);

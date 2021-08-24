@@ -46,9 +46,10 @@ public class Endereco implements Serializable {
 	private String complemento;
 	
 	
-	@ManyToMany(mappedBy = "enderecos")
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-	
+//	Falta fazer referencia a enderecos em cliente
+//	@ManyToMany(mappedBy = "enderecos")        
+//	private List<Cliente> clientes = new ArrayList<Cliente>();
+//	
 
 	public Endereco(String tipoDaVia, String nomeDaRua, String logradouro, short numero, int CEP, String complemento) throws InvalidFieldException {
 		/*setTipoDaVia(tipoDaVia);
@@ -92,7 +93,7 @@ public class Endereco implements Serializable {
 	}
 
 	public void setComplemento(String complemento) throws InvalidFieldException {
-		if (complemento.isBlank() || complemento.isEmpty())
+		if (complemento.isEmpty())
 			throw new InvalidFieldException("Campo nulo");
 		this.complemento = complemento;
 	}

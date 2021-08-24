@@ -1,21 +1,27 @@
 package model.entities.users.information;
 
-import java.time.LocalDate;
-
-import model.entities.products.Item;
-import model.entities.products.Pedido;
-import model.entities.products.Produto;
-import model.entities.products.Tipo;
+import model.dao.cliente.ClienteDAO;
+import model.dao.cliente.ClienteDAOImpl;
+import model.dao.fornecedor.FornecedorDAO;
+import model.dao.fornecedor.FornecedorDAOImpl;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
-import model.exceptions.InvalidFieldException;
 
 public class Principal {
 	public static void main(String[] args) {
 
 		System.out.println("Hello World");
+		ClienteDAO clienteDAO = new ClienteDAOImpl();
+		Cliente cliente = new Cliente();
+		String nome = "Ricardo";
+		cliente.setNome(nome);
+		clienteDAO.inserirCliente(cliente);
+		
+		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
+		Fornecedor fornecedor = new Fornecedor();
 		
 		
+
 //		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");
 //
 //		Localidade localidade1 = new Localidade("Estados Unidos", "Florida", "Talahasse", "America do Norte",
@@ -40,9 +46,9 @@ public class Principal {
 //		System.out.println(fornecedor1.getLogin());
 //		System.out.println(fornecedor1.getSenha());
 //		System.out.println(fornecedor1.getNomeFantasia());
-		
+
 //
-		
+
 	}
 
 }

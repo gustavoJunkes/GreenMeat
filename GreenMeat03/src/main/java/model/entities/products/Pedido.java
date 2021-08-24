@@ -41,7 +41,7 @@ public class Pedido extends Usuario {
 	
 	
 	
-	 private Status status; 
+//	 private Status status; 
 	
 	 
 	 
@@ -51,8 +51,8 @@ public class Pedido extends Usuario {
 	private Cliente cliente; // dono da lista de compras
 	
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Item> itens = new ArrayList<Item>();
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Item> itens = new ArrayList<Item>();
 	
 	
 	@Column(name = "data_entrega", nullable = false, unique = false)
@@ -66,20 +66,20 @@ public class Pedido extends Usuario {
 	public Pedido(Cliente cliente) {
 		setValorTotal(0);
 		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
-		setStatus(Status.PEDIDO_EM_ABERTO);
-		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
+//		setStatus(Status.PEDIDO_EM_ABERTO);
+//		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
 
 	}
 
 
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+//	public Status getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(Status status) {
+//		this.status = status;
+//	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -108,44 +108,44 @@ public class Pedido extends Usuario {
 
 	// este método retorna apenas um endereço de memoria
 
-	public List<Item> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<Item> itens) {
-		this.itens = itens;
-	}
+//	public List<Item> getItens() {
+//		return itens;
+//	}
+//
+//	public void setItens(List<Item> itens) {
+//		this.itens = itens;
+//	}
 
 //	Adicionar produto à lista de produtos
 // item.preco = produto * quantidade
 
-	public void adicionarItem(Item item) {
-
-		setValorTotal(getValorTotal() + item.getValorTotal());
-
-		itens.add(item); // adicionando um "item" à lista de itens
-	}
+//	public void adicionarItem(Item item) {
+//
+//		setValorTotal(getValorTotal() + item.getValorTotal());
+//
+//		itens.add(item); // adicionando um "item" à lista de itens
+//	}
 
 //	Aqui ele remove um item da Lista  (Pedido, neste caso)
 
-	public void removerItemDaLista(Item item) {
+//	public void removerItemDaLista(Item item) {
+//
+//		itens.remove(item);
+//		setValorTotal(getValorTotal() - item.getValorTotal());
+//	}
 
-		itens.remove(item);
-		setValorTotal(getValorTotal() - item.getValorTotal());
-	}
-
-	public void finalizarPedido(String idPedido) {
-		setStatus(Status.PEDIDO_FINALIZADO);
-	}
+//	public void finalizarPedido(String idPedido) {
+//		setStatus(Status.PEDIDO_FINALIZADO);
+//	}
 
 	
 //	O método a seguir calcula o valor total de um pedido somando o valor total de cada item
 	
-	public float calcularValorTotalPedido() {
-		int soma = 0;
-		for (int i = 0; i < itens.size(); i++) {
-			soma += itens.get(i).calculaValorTotal();
-		}
-		return soma;
-	}
+//	public float calcularValorTotalPedido() {
+//		int soma = 0;
+//		for (int i = 0; i < itens.size(); i++) {
+//			soma += itens.get(i).calculaValorTotal();
+//		}
+//		return soma;
+//	}
 }

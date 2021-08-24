@@ -148,19 +148,20 @@ public class LocalidadeDAOImpl implements LocalidadeDAO{
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
-		
-		configuracao.addAnnotatedClass(model.entities.users.information.Localidade.class);
-		configuracao.addAnnotatedClass(model.entities.users.information.Endereco.class);
-		configuracao.addAnnotatedClass(model.entities.users.information.Contato.class);
-		configuracao.addAnnotatedClass(model.entities.products.Estoque.class);
-		configuracao.addAnnotatedClass(model.entities.products.Pedido.class);
-		configuracao.addAnnotatedClass(model.entities.products.Item.class);
-		configuracao.addAnnotatedClass(model.entities.products.Produto.class);
-		configuracao.addAnnotatedClass(model.entities.users.Fornecedor.class);
-		configuracao.addAnnotatedClass(model.entities.users.PessoaJuridica.class);
+
 		configuracao.addAnnotatedClass(model.entities.users.Cliente.class);
 		configuracao.addAnnotatedClass(model.entities.users.Usuario.class);
 		configuracao.addAnnotatedClass(model.entities.users.PessoaFisica.class);
+		configuracao.addAnnotatedClass(model.entities.users.Fornecedor.class);
+		configuracao.addAnnotatedClass(model.entities.users.Funcionario.class);
+		configuracao.addAnnotatedClass(model.entities.users.PessoaJuridica.class);
+		configuracao.addAnnotatedClass(model.entities.users.information.Contato.class);
+		configuracao.addAnnotatedClass(model.entities.users.information.Endereco.class);
+		configuracao.addAnnotatedClass(model.entities.users.information.Localidade.class);
+		configuracao.addAnnotatedClass(model.entities.products.Estoque.class);
+		configuracao.addAnnotatedClass(model.entities.products.Item.class);
+		configuracao.addAnnotatedClass(model.entities.products.Pedido.class);
+		configuracao.addAnnotatedClass(model.entities.products.Produto.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
