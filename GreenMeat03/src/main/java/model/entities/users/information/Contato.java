@@ -26,18 +26,20 @@ public class Contato implements Serializable {
 	@Column(name = "id_contato")
 	private Long id;
 
-	@Column(name = "email", length = 50, nullable = false, unique = true)
+	@Column(name = "email")
 	private String email;
 	
 	
-	@Column(name = "telefone", length = 15, nullable = false, unique = true)
+	@Column(name = "telefone")
 	private String telefone;
 
 	
-	@Column(name = "usuario")
-	@MapsId
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	
+//	Há um erro aqui
+//	@Column(name = "usuario")
+//	@MapsId
+//	@JoinColumn(name = "id_usuario")
+//	private Usuario usuario;
 	
 //	private String 
 	
@@ -67,12 +69,12 @@ public class Contato implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 
 }

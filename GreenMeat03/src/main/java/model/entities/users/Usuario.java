@@ -24,7 +24,7 @@ import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,9 +34,9 @@ public abstract class Usuario implements Serializable {
 
 	// um usuario possui diversas localidades, relação de N pra N
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
-	private List<Localidade> localidades;
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
+//	private List<Localidade> localidades;
 
 	@Column(name = "login_usuario")
 	private String login;
@@ -47,13 +47,12 @@ public abstract class Usuario implements Serializable {
 	// Dizendo que um usuario pode ter varios contatos e que um contato pode pertencer apenas a um usuario
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Contato> contatos = new ArrayList<Contato>(); 
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+//	private List<Contato> contatos = new ArrayList<Contato>(); 
+//	
 	
-	
-	@Column(name = "datacastro_usuario")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private LocalDate dataCadastro;
+//	@Column(name = "datacastro_usuario")
+//	private LocalDate dataCadastro;
 	
 
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
@@ -68,17 +67,17 @@ public abstract class Usuario implements Serializable {
 		setLogin(login);
 		setSenha(senha);
 //		setContato(contato);
-		setDataCadastro(LocalDate.now());
+//		setDataCadastro(LocalDate.now());
 	}
 
-	public List<Localidade> getEndereco() {
-		return localidades;
-	}
-
-	public void setEndereco(List<Localidade> localidades) {
-
-		this.localidades = localidades;
-	}
+//	public List<Localidade> getEndereco() {
+//		return localidades;
+//	}
+//
+//	public void setEndereco(List<Localidade> localidades) {
+//
+//		this.localidades = localidades;
+//	}
 
 	public String getLogin() {
 		return login;
@@ -100,13 +99,13 @@ public abstract class Usuario implements Serializable {
 
 
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
+//	public LocalDate getDataCadastro() {
+//		return dataCadastro;
+//	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
+//	public void setDataCadastro(LocalDate dataCadastro) {
+//		this.dataCadastro = dataCadastro;
+//	}
 
 	public Long getId() {
 		return id;
@@ -116,20 +115,20 @@ public abstract class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public List<Localidade> getLocalidades() {
-		return localidades;
-	}
+//	public List<Localidade> getLocalidades() {
+//		return localidades;
+//	}
+//
+//	public void setLocalidades(List<Localidade> localidades) {
+//		this.localidades = localidades;
+//	}
 
-	public void setLocalidades(List<Localidade> localidades) {
-		this.localidades = localidades;
-	}
-
-	public List<Contato> getContatos() {
-		return contatos;
-	}
-
-	public void setContatos(List<Contato> contatos) {
-		this.contatos = contatos;
-	}
+//	public List<Contato> getContatos() {
+//		return contatos;
+//	}
+//
+//	public void setContatos(List<Contato> contatos) {
+//		this.contatos = contatos;
+//	}
 
 }

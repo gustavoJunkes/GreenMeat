@@ -63,7 +63,7 @@ public class Localidade extends PessoaFisica {
 	}
 
 	public void setPais(String pais) throws CountryInvalidException {
-		if (pais.isBlank() || pais.isEmpty())
+		if (pais.isEmpty())
 			throw new CountryInvalidException("Campo nulo");
 		this.pais = pais;
 	

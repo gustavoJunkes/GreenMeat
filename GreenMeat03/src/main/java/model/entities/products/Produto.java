@@ -2,6 +2,7 @@ package model.entities.products;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_produto")
 	private Long id;
 	
@@ -49,7 +50,7 @@ public class Produto implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_item")
-	private Item item;
+	private List<Item> item;
 
 	public Produto() {}
 
