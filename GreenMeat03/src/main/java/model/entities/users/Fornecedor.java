@@ -19,7 +19,7 @@ import model.entities.users.information.Localidade;
 
 @Entity
 @Table(name = "fornecedor")
-public class Fornecedor extends Usuario {
+public class Fornecedor extends PessoaJuridica {
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -33,8 +33,15 @@ public class Fornecedor extends Usuario {
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
 			Contato contato, String CNPJ) {
-		super(login, senha);
+		super( login, senha, contato, CNPJ,
+				razaoSocial, nomeFantasia);
 	}
+	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
+			 String CNPJ) {
+		super( login, senha,  CNPJ,
+				razaoSocial, nomeFantasia);
+	}
+
 
 	public Fornecedor() {
 		// TODO Auto-generated constructor stub

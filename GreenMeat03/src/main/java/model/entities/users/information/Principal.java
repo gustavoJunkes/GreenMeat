@@ -4,8 +4,11 @@ import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
 import model.dao.fornecedor.FornecedorDAO;
 import model.dao.fornecedor.FornecedorDAOImpl;
+import model.dao.funcionario.FuncionarioDAO;
+import model.dao.funcionario.FuncionarioDAOImpl;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
+import model.entities.users.Funcionario;
 
 public class Principal {
 	public static void main(String[] args) {
@@ -19,6 +22,25 @@ public class Principal {
 		
 		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
 		Fornecedor fornecedor = new Fornecedor();
+		
+		String nomeFantasia = "Bull Freal";
+		String razaoSocial = "Somos uma empresa com ideais...";
+		String cnpj = "453.546.456.344";
+					
+		fornecedor.setNomeFantasia(nomeFantasia);
+		fornecedor.setRazaoSocial(razaoSocial);
+		fornecedor.setCNPJ(cnpj);
+		
+		fornecedorDAO.inserirFornecedor(fornecedor);
+		
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
+		
+		Funcionario funcionario = new Funcionario("MeuLogin03", "MinhaSenhaSecreta", "Claudio", "Alberto", "123.435.235-54",
+				"Estagiario", "Adicionar Produtos");
+		
+		funcionarioDAO.inserirFuncionario(funcionario);
+		
+		
 		
 		
 
