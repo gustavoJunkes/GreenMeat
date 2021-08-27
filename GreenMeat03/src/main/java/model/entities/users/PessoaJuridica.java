@@ -21,24 +21,32 @@ public abstract class PessoaJuridica extends Usuario {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_pessoa_juridica")
-	private Long id;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id_pessoa_juridica")
+//	private Long id;
 
-	@Column(name = "CNPJ_pessoajuridica", length = 14)
+	@Column(name = "CNPJ")
 	private String CNPJ;
 
-	@Column(name = "razaosocial_pessoajuridica", length = 25)
+	@Column(name = "razaosocial_pessoajuridica")
 	private String razaoSocial;
 
-	@Column(name = "nomefantasia_pessoajuridica", length = 25)
+	@Column(name = "nomefantasia_pessoajuridica")
 	private String nomeFantasia;
 
 	public PessoaJuridica() {
 	}
 
 	public PessoaJuridica(/* Localidade endereco, */ String login, String senha, Contato contato, String CNPJ,
+			String razaoSocial, String nomeFantasia) {
+		super(login, senha);
+		setCNPJ(CNPJ);
+		setRazaoSocial(razaoSocial);
+		setNomeFantasia(nomeFantasia);
+	}
+	
+	public PessoaJuridica(/* Localidade endereco, */ String login, String senha, String CNPJ,
 			String razaoSocial, String nomeFantasia) {
 		super(login, senha);
 		setCNPJ(CNPJ);

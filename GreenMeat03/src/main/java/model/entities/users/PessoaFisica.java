@@ -58,6 +58,13 @@ public abstract class PessoaFisica extends Usuario {
 //		this.id = id;
 //	}
 
+	public PessoaFisica(String login, String senha, String nome, String sobrenome, String CPF) {
+		super(login, senha );
+		setNome(nome);
+		setSobrenome(sobrenome);
+		setCPF(CPF);
+	}
+
 	public String getNome() {
 		return nome;
 	}

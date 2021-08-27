@@ -35,9 +35,16 @@ public class Pedido extends Usuario {
 	*/
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private Long id;
+	
+	
+	@Column
+	@OneToMany(mappedBy = "pedido")
+	private List<Item>itens = new ArrayList<Item>();
+	
+	
 	
 	
 	

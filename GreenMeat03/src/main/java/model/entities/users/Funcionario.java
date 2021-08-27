@@ -22,15 +22,15 @@ public class Funcionario extends PessoaFisica {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_funcionario")
-	private Long id;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id_funcionario")
+//	private Long id;
 	
-	@Column(name = "funcao_funcionario", length = 15, nullable = false, unique = false)
+	@Column(name = "funcao_funcionario")
 	private String funcao;
 
-	@Column(name = "cargo_funcionario", length = 15, nullable = false, unique = false)
+	@Column(name = "cargo_funcionario")
 	private String cargo;
 
 //	Ao criar funcionario criar tambem seu login e senha
@@ -44,6 +44,14 @@ public class Funcionario extends PessoaFisica {
 		setCargo(cargo);
 	}
 
+	public Funcionario( String login, String senha, String nome, String sobrenome,
+			String CPF, String cargo, String funcao) {
+		super(login, senha, nome, sobrenome, CPF);
+		setFuncao(funcao);
+		setCargo(cargo);
+	}
+
+	
 	public String getFuncao() {
 		return funcao;
 	}
