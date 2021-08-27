@@ -38,15 +38,13 @@ public class Item implements Serializable {
 								// partir do preço de um produto * quantidade
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId
-	@JoinColumn(name = "id_item")
 	private Produto produto;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "pedido")
-//	@ForeignKey(name = "pedido")
-	private Pedido pedido;
+//	@ManyToOne
+//	@JoinColumn(name = "id_pedido")
+////	@ForeignKey(name = "pedido")
+//	private Pedido pedido;
 		
 
 	public Item() {

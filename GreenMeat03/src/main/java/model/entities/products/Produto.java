@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,10 +48,8 @@ public class Produto implements Serializable {
 	@Column(name = "tipoCarne", length = 25, nullable = false, unique = false)
 	private Tipo tipoCarne;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@MapsId
-	@JoinColumn(name = "id_item")
-	private List<Item> item;
+//	@OneToMany(mappedBy = "produto"	)
+//	private List<Item> itens;
 
 	public Produto() {
 	}

@@ -70,10 +70,10 @@ public class Principal {
 
 		////////////////////CADASTRO PRODUTO///////////////////////////
 		
-		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-		Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 22, 30);
-
-		produtoDAO.inserirProduto(produto1);
+	//		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+	//		Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 22, 30);
+	//
+	//		produtoDAO.inserirProduto(produto1);
 		
 		
 

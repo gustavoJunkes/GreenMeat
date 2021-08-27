@@ -41,7 +41,7 @@ public class Pedido extends Usuario {
 	
 	
 	@Column
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "id")
 	private List<Item>itens = new ArrayList<Item>();
 	
 	
