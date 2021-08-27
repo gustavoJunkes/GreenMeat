@@ -1,46 +1,79 @@
 package model.entities.users.information;
 
+import model.dao.produto.ProdutoDAO;
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
 import model.dao.fornecedor.FornecedorDAO;
 import model.dao.fornecedor.FornecedorDAOImpl;
 import model.dao.funcionario.FuncionarioDAO;
 import model.dao.funcionario.FuncionarioDAOImpl;
+import model.dao.produto.ProdutoDAOImpl;
+import model.entities.products.Produto;
+import model.entities.products.Tipo;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
 import model.entities.users.Funcionario;
+import model.exceptions.InvalidFieldException;
 
 public class Principal {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidFieldException {
 
 		System.out.println("Hello World");
+		
+		
+		////////////////////CADASTRO CLIENTE///////////////////////////
+		
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente = new Cliente();
-		String nome = "Ricardo";
+		String nome = "Louro";
+		String sobrenome = "Jose";
+		String login = "LJoseLog";
+		String senha = "senhasecreta";
+		String CPF = "179.554.871-91";
+		
 		cliente.setNome(nome);
+		cliente.setCPF(CPF);
+		cliente.setLogin(login);
+		cliente.setSenha(senha);
+		cliente.setSobrenome(sobrenome);
+//		cliente.setId((long) 2);
+		
 		clienteDAO.inserirCliente(cliente);
+		
+//		clienteDAO.atualizarCliente(cliente);
+
+		////////////////////CADASTRO FORNECEDOR///////////////////////////
+
 		
 		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
 		Fornecedor fornecedor = new Fornecedor();
 		
-		String nomeFantasia = "Bull Freal";
-		String razaoSocial = "Somos uma empresa com ideais...";
-		String cnpj = "453.546.456.344";
+		String nomeFantasia = "Tog Carniefero";
+		String razaoSocial = "Mas di cinquentia anius siervino tu familia";
+		String cnpj = "176.767.456.354";
 					
 		fornecedor.setNomeFantasia(nomeFantasia);
 		fornecedor.setRazaoSocial(razaoSocial);
 		fornecedor.setCNPJ(cnpj);
 		
 		fornecedorDAO.inserirFornecedor(fornecedor);
+
+		////////////////////CADASTRO FUNCIONARIO///////////////////////////
 		
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
 		
-		Funcionario funcionario = new Funcionario("MeuLogin03", "MinhaSenhaSecreta", "Claudio", "Alberto", "123.435.235-54",
+		Funcionario funcionario = new Funcionario("MeuLogin04", "MinhaSenhaSecretaMesmo", "Júlia", "Menegildo", "123.134.521-98",
 				"Estagiario", "Adicionar Produtos");
 		
 		funcionarioDAO.inserirFuncionario(funcionario);
 		
+
+		////////////////////CADASTRO PRODUTO///////////////////////////
 		
+		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+		Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 22, 30);
+
+		produtoDAO.inserirProduto(produto1);
 		
 		
 

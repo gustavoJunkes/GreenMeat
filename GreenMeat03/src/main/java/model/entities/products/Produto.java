@@ -20,43 +20,53 @@ import model.exceptions.InvalidFieldException;
 
 @Entity
 @Table(name = "produto")
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_produto")
+	@Column(name = "id_produto")
 	private Long id;
-	
-	@Column(name = "nome",length = 25, nullable = false, unique = false)               
+
+	@Column(name = "nome", length = 25, nullable = false, unique = false)
 	private String nome;
-	
-	@Column(name = "descricao",length = 45, nullable = false, unique = false)
+
+	@Column(name = "descricao", length = 45, nullable = false, unique = false)
 	private String descricao;
-	
-	@Column(name="precoCusto", nullable = false,unique = false)
+
+	@Column(name = "precoCusto", nullable = false, unique = false)
 	private float precoCusto;
-	
-	@Column(name = "precoVenda", nullable = false,unique = false)
+
+	@Column(name = "precoVenda", nullable = false, unique = false)
 	private float precoVenda;
-	
-	@Column(name = "dataValidade" , nullable = false,unique = false)
+
+	@Column(name = "dataValidade")
 	private LocalDate dataValidade;
-	
-	@Column(name = "tipoCarne",length = 25, nullable = false, unique = false)
+
+	@Column(name = "tipoCarne", length = 25, nullable = false, unique = false)
 	private Tipo tipoCarne;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_item")
 	private List<Item> item;
 
-	public Produto() {}
+	public Produto() {
+	}
 
+	public Produto(String nome, String descricao, Tipo tipoCarne, float precoCusto, float precoVenda)
+			throws InvalidFieldException {
+		setNome(nome);
+		setDescricao(descricao);
+		setTipoCarne(tipoCarne);
+		setPrecoCusto(precoCusto);
+		setPrecoVenda(precoVenda);
+	}
 
 //	Falta adicionar atributos precoCusto e PrecoVenda no construtor
-	public Produto(String nome, String descricao, Tipo tipoCarne)  throws InvalidFieldException, ExpirationDateInvalidException{
+	public Produto(String nome, String descricao, Tipo tipoCarne)
+			throws InvalidFieldException, ExpirationDateInvalidException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
@@ -66,11 +76,10 @@ public class Produto implements Serializable{
 //	Exceção genérica para campos invalidos
 //	Essa exceção está tratando simplesmente de verificar se os campos estão vazios
 //	Precisa de mais verificações
-	
+
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) throws InvalidFieldException {
 		if (nome.isEmpty())
@@ -111,15 +120,15 @@ public class Produto implements Serializable{
 		this.precoVenda = precoVenda;
 	}
 
-	public LocalDate getDataValidade(){
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(LocalDate dataValidade) throws ExpirationDateInvalidException{
+	public void setDataValidade(LocalDate dataValidade) throws ExpirationDateInvalidException {
 //		Aqui ele verifica se a data de validade inserida é antes da data atual, evitando que se cadastre um produto vencido
-		if(dataValidade.isBefore(LocalDate.now()))
+		if (dataValidade.isBefore(LocalDate.now()))
 			throw new ExpirationDateInvalidException("Data inválida");
-		
+
 		this.dataValidade = dataValidade;
 	}
 
@@ -131,5 +140,4 @@ public class Produto implements Serializable{
 		this.tipoCarne = tipoCarne;
 	}
 
-	
 }

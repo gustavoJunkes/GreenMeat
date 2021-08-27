@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +41,13 @@ public class Item implements Serializable {
 	@MapsId
 	@JoinColumn(name = "id_item")
 	private Produto produto;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "pedido")
+//	@ForeignKey(name = "pedido")
+	private Pedido pedido;
+		
 
 	public Item() {
 	}
