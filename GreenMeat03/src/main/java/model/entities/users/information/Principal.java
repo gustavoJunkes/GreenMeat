@@ -40,13 +40,25 @@ public class Principal {
 		Produto produto4 = new Produto();
 		
 		produto4.setNome("Calabresa");
+		produto4.setDescricao("Coisa boa");
+		produto4.setPrecoCusto(12);
+		produto4.setPrecoVenda(25);
 		fornecedor3.setNomeFantasia("Carne nova");
 		
-		produto4.setFornecedor(fornecedor3);
-		fornecedor3.getProdutos().add(produto3);
-		
 		produtoDAO.inserirProduto(produto4);
+		
 		fornecedorDAO.inserirFornecedor(fornecedor3);
+		
+		produto4.setFornecedor(fornecedor3);
+		
+		produtoDAO.atualizarProduto(produto4);
+		
+		fornecedor3.getProdutos().add(produto4);
+		
+		fornecedorDAO.atualizarFornecedor(fornecedor3);
+		
+		
+		
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
 /*

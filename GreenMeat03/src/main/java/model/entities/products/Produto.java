@@ -29,16 +29,16 @@ public class Produto implements Serializable {
 	@Column(name = "id_produto")
 	private Long id;
 
-	@Column(name = "nome", length = 50, nullable = false, unique = false)
+	@Column(name = "nome", length = 50)
 	private String nome;
 
-	@Column(name = "descricao", length = 100, nullable = false, unique = false)
+	@Column(name = "descricao", length = 100)
 	private String descricao;
 
-	@Column(name = "precoCusto", nullable = false, unique = false)
+	@Column(name = "precoCusto")
 	private float precoCusto;
 
-	@Column(name = "precoVenda", nullable = false, unique = false)
+	@Column(name = "precoVenda")
 	private float precoVenda;
 
 	@Column(name = "dataValidade")
