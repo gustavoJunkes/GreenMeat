@@ -1,18 +1,12 @@
 package model.entities.users.information;
 
+import model.dao.item.ItemDAO;
+import model.dao.item.ItemDAOImpl;
 import model.dao.produto.ProdutoDAO;
-import model.dao.cliente.ClienteDAO;
-import model.dao.cliente.ClienteDAOImpl;
-import model.dao.fornecedor.FornecedorDAO;
-import model.dao.fornecedor.FornecedorDAOImpl;
-import model.dao.funcionario.FuncionarioDAO;
-import model.dao.funcionario.FuncionarioDAOImpl;
 import model.dao.produto.ProdutoDAOImpl;
+import model.entities.products.Item;
 import model.entities.products.Produto;
 import model.entities.products.Tipo;
-import model.entities.users.Cliente;
-import model.entities.users.Fornecedor;
-import model.entities.users.Funcionario;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
@@ -22,6 +16,7 @@ public class Principal {
 		
 		
 		////////////////////CADASTRO CLIENTE///////////////////////////
+/*
 		
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente = new Cliente();
@@ -66,15 +61,23 @@ public class Principal {
 				"Estagiario", "Adicionar Produtos");
 		
 		funcionarioDAO.inserirFuncionario(funcionario);
-		
+	*/	
 
 		////////////////////CADASTRO PRODUTO///////////////////////////
 		
-	//		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-	//		Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 22, 30);
-	//
-	//		produtoDAO.inserirProduto(produto1);
+			ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+//			Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele",
+//					Tipo.BOVINO, 22, 30);
 		
+		Produto produto2 = new Produto("Frango", "Carne saudável e de qualidade",
+				Tipo.AVE, 13, 21);
+		
+			produtoDAO.inserirProduto(produto2);
+		
+		ItemDAO itemDAO = new ItemDAOImpl();
+		Item item = new Item(produto2, 10);
+		
+		itemDAO.inserirItem(item);
 		
 
 //		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");

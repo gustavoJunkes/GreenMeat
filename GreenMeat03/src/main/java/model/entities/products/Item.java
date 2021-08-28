@@ -50,7 +50,7 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(Produto produto, Fornecedor fornecedor, float quantidade) {
+	public Item(Produto produto, float quantidade) {
 		setProduto(produto);
 		setQuantidade(quantidade);
 		setValorTotal(calculaValorTotal());
@@ -81,6 +81,6 @@ public class Item implements Serializable {
 	}
 
 	public float calculaValorTotal() {
-		return this.produto.getPrecoVenda();
+		return this.produto.getPrecoVenda() * quantidade;
 	}
 }

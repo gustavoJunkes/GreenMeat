@@ -22,7 +22,7 @@ import model.entities.users.Usuario;
 
 @Entity
 @Table(name = "pedido")
-public class Pedido extends Usuario {
+public class Pedido {
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -40,10 +40,10 @@ public class Pedido extends Usuario {
 	private Long id;
 	
 	
-	@Column
-	@OneToMany(mappedBy = "id")
-	private List<Item>itens = new ArrayList<Item>();
-	
+//	@Column
+//	@OneToMany(mappedBy = "id")
+//	private List<Item>itens = new ArrayList<Item>();
+//	
 	
 	
 	
