@@ -1,12 +1,22 @@
 package model.entities.users.information;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.dao.cliente.ClienteDAO;
+import model.dao.cliente.ClienteDAOImpl;
 import model.dao.item.ItemDAO;
 import model.dao.item.ItemDAOImpl;
+import model.dao.pedido.PedidoDAOImpl;
+import model.dao.pedido.PedidoDAO;
 import model.dao.produto.ProdutoDAO;
 import model.dao.produto.ProdutoDAOImpl;
 import model.entities.products.Item;
+import model.entities.products.Pedido;
 import model.entities.products.Produto;
 import model.entities.products.Tipo;
+import model.entities.users.Cliente;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
@@ -16,30 +26,30 @@ public class Principal {
 		
 		
 		////////////////////CADASTRO CLIENTE///////////////////////////
-/*
+
 		
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente = new Cliente();
-		String nome = "Louro";
-		String sobrenome = "Jose";
-		String login = "LJoseLog";
+		String nome = "Jonas";
+		String sobrenome = "Abelardo";
+		String login = "JoAbLog";
 		String senha = "senhasecreta";
-		String CPF = "179.554.871-91";
+		String CPF = "121.234.377-32";
 		
 		cliente.setNome(nome);
 		cliente.setCPF(CPF);
 		cliente.setLogin(login);
 		cliente.setSenha(senha);
 		cliente.setSobrenome(sobrenome);
-//		cliente.setId((long) 2);
+		cliente.setId((long) 1);
 		
-		clienteDAO.inserirCliente(cliente);
+//		clienteDAO.inserirCliente(cliente);
 		
-//		clienteDAO.atualizarCliente(cliente);
+		clienteDAO.atualizarCliente(cliente);
 
 		////////////////////CADASTRO FORNECEDOR///////////////////////////
 
-		
+		/*	
 		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
 		Fornecedor fornecedor = new Fornecedor();
 		
@@ -65,19 +75,32 @@ public class Principal {
 
 		////////////////////CADASTRO PRODUTO///////////////////////////
 		
+		
 			ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-//			Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele",
-//					Tipo.BOVINO, 22, 30);
+			Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele",
+					Tipo.BOVINO, 22, 30);
 		
 		Produto produto2 = new Produto("Frango", "Carne saudável e de qualidade",
 				Tipo.AVE, 13, 21);
 		
+			produtoDAO.inserirProduto(produto1);
 			produtoDAO.inserirProduto(produto2);
 		
 		ItemDAO itemDAO = new ItemDAOImpl();
-		Item item = new Item(produto2, 10);
+		Item item1 = new Item(produto2, 10);
+		Item item2 = new Item(produto1, 5);
 		
-		itemDAO.inserirItem(item);
+		itemDAO.inserirItem(item1);
+		itemDAO.inserirItem(item2);
+		
+		PedidoDAO pedidoDAO = new PedidoDAOImpl();
+		List<Item>itens = new ArrayList<Item>();
+		itens.add(item1);
+		itens.add(item2);
+		
+		Pedido pedido = new Pedido(cliente, itens);
+		
+		pedidoDAO.inserirPedido(pedido);
 		
 
 //		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");
