@@ -1,6 +1,5 @@
 package model.entities.users.information;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +22,9 @@ public class Principal {
 	public static void main(String[] args) throws InvalidFieldException {
 
 		System.out.println("Hello World");
-		
-		
-		////////////////////CADASTRO CLIENTE///////////////////////////
 
-		
+		//////////////////// CADASTRO CLIENTE///////////////////////////
+
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente = new Cliente();
 		String nome = "Jonas";
@@ -35,73 +32,80 @@ public class Principal {
 		String login = "JoAbLog";
 		String senha = "senhasecreta";
 		String CPF = "121.234.377-32";
-		
+
 		cliente.setNome(nome);
 		cliente.setCPF(CPF);
 		cliente.setLogin(login);
 		cliente.setSenha(senha);
 		cliente.setSobrenome(sobrenome);
-		cliente.setId((long) 1);
-		
-//		clienteDAO.inserirCliente(cliente);
-		
-		clienteDAO.atualizarCliente(cliente);
+//		cliente.setId((long) 1);
 
-		////////////////////CADASTRO FORNECEDOR///////////////////////////
+		clienteDAO.inserirCliente(cliente);
 
-		/*	
-		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
-		Fornecedor fornecedor = new Fornecedor();
-		
-		String nomeFantasia = "Tog Carniefero";
-		String razaoSocial = "Mas di cinquentia anius siervino tu familia";
-		String cnpj = "176.767.456.354";
-					
-		fornecedor.setNomeFantasia(nomeFantasia);
-		fornecedor.setRazaoSocial(razaoSocial);
-		fornecedor.setCNPJ(cnpj);
-		
-		fornecedorDAO.inserirFornecedor(fornecedor);
+		List<Cliente> clientes = clienteDAO.recuperarClientes();
 
-		////////////////////CADASTRO FUNCIONARIO///////////////////////////
-		
-		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
-		
-		Funcionario funcionario = new Funcionario("MeuLogin04", "MinhaSenhaSecretaMesmo", "Júlia", "Menegildo", "123.134.521-98",
-				"Estagiario", "Adicionar Produtos");
-		
-		funcionarioDAO.inserirFuncionario(funcionario);
-	*/	
+		for (int i = 0; i < clientes.size(); i++) {
+			System.out.println("Cliente: " + clientes.get(i).getNome());
+			System.out.println("ID:" + clientes.get(i).getId());
+			System.out.println(" ");
 
-		////////////////////CADASTRO PRODUTO///////////////////////////
+		}
 		
 		
-			ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-			Produto produto1 = new Produto("Picanha", "Este produto é muito gostoso, compre ele",
-					Tipo.BOVINO, 22, 30);
 		
-		Produto produto2 = new Produto("Frango", "Carne saudável e de qualidade",
-				Tipo.AVE, 13, 21);
+
+//		clienteDAO.atualizarCliente(cliente);
+
+		//////////////////// CADASTRO FORNECEDOR///////////////////////////
+
+		/*
+		 * FornecedorDAO fornecedorDAO = new FornecedorDAOImpl(); Fornecedor fornecedor
+		 * = new Fornecedor();
+		 * 
+		 * String nomeFantasia = "Tog Carniefero"; String razaoSocial =
+		 * "Mas di cinquentia anius siervino tu familia"; String cnpj =
+		 * "176.767.456.354";
+		 * 
+		 * fornecedor.setNomeFantasia(nomeFantasia);
+		 * fornecedor.setRazaoSocial(razaoSocial); fornecedor.setCNPJ(cnpj);
+		 * 
+		 * fornecedorDAO.inserirFornecedor(fornecedor);
+		 * 
+		 * ////////////////////CADASTRO FUNCIONARIO///////////////////////////
+		 * 
+		 * FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
+		 * 
+		 * Funcionario funcionario = new Funcionario("MeuLogin04",
+		 * "MinhaSenhaSecretaMesmo", "Júlia", "Menegildo", "123.134.521-98",
+		 * "Estagiario", "Adicionar Produtos");
+		 * 
+		 * funcionarioDAO.inserirFuncionario(funcionario);
+		 * 
+		 */
+		//////////////////// CADASTRO PRODUTO///////////////////////////
+				  
+		  ProdutoDAO produtoDAO = new ProdutoDAOImpl(); Produto produto1 = new
+		  Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO,
+		  22, 30);
+		  
+		  Produto produto2 = new Produto("Frango", "Carne saudável e de qualidade",
+		  Tipo.AVE, 13, 21);
+		  
+		  produtoDAO.inserirProduto(produto1); produtoDAO.inserirProduto(produto2);
+		  
+		  ItemDAO itemDAO = new ItemDAOImpl(); Item item1 = new Item(produto2, 10);
+		  Item item2 = new Item(produto1, 5);
+		  
+		  itemDAO.inserirItem(item1); itemDAO.inserirItem(item2);
+		  
+		  PedidoDAO pedidoDAO = new PedidoDAOImpl(); List<Item>itens = new
+		  ArrayList<Item>(); itens.add(item1); itens.add(item2);
+		  
+		 Pedido pedido = new Pedido(cliente, itens);
+		 
+		 pedidoDAO.inserirPedido(pedido);
 		
-			produtoDAO.inserirProduto(produto1);
-			produtoDAO.inserirProduto(produto2);
-		
-		ItemDAO itemDAO = new ItemDAOImpl();
-		Item item1 = new Item(produto2, 10);
-		Item item2 = new Item(produto1, 5);
-		
-		itemDAO.inserirItem(item1);
-		itemDAO.inserirItem(item2);
-		
-		PedidoDAO pedidoDAO = new PedidoDAOImpl();
-		List<Item>itens = new ArrayList<Item>();
-		itens.add(item1);
-		itens.add(item2);
-		
-		Pedido pedido = new Pedido(cliente, itens);
-		
-		pedidoDAO.inserirPedido(pedido);
-		
+//		clienteDAO.recuperarClientes();
 
 //		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");
 //

@@ -22,8 +22,6 @@ public class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	// criar variavel para identificar o item
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_item")
@@ -32,20 +30,12 @@ public class Item implements Serializable {
 	@Column(name = "quantidade", nullable = false, unique = false)
 	private float quantidade; // em kg, por isso float.
 
-	
 	@Column(name = "valorTotal", nullable = false, unique = false)
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a
 								// partir do preço de um produto * quantidade
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
-	
-	
-//	@ManyToOne
-//	@JoinColumn(name = "id_pedido")
-////	@ForeignKey(name = "pedido")
-//	private Pedido pedido;
-		
 
 	public Item() {
 	}
@@ -56,8 +46,16 @@ public class Item implements Serializable {
 		setValorTotal(calculaValorTotal());
 	}
 
-	public String getNomeProduto() { // alterar ao fazer alteção no atributo produto
-		return produto.getNome();
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setProduto(Produto produto) {

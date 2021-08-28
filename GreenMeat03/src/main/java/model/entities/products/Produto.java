@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,10 +32,10 @@ public class Produto implements Serializable {
 	@Column(name = "id_produto")
 	private Long id;
 
-	@Column(name = "nome", length = 25, nullable = false, unique = false)
+	@Column(name = "nome", length = 50, nullable = false, unique = false)
 	private String nome;
 
-	@Column(name = "descricao", length = 45, nullable = false, unique = false)
+	@Column(name = "descricao", length = 100, nullable = false, unique = false)
 	private String descricao;
 
 	@Column(name = "precoCusto", nullable = false, unique = false)
@@ -45,11 +47,8 @@ public class Produto implements Serializable {
 	@Column(name = "dataValidade")
 	private LocalDate dataValidade;
 
-	@Column(name = "tipoCarne", length = 25, nullable = false, unique = false)
+	@Enumerated(EnumType.STRING)
 	private Tipo tipoCarne;
-
-//	@OneToMany(mappedBy = "produto"	)
-//	private List<Item> itens;
 
 	public Produto() {
 	}
@@ -63,7 +62,6 @@ public class Produto implements Serializable {
 		setPrecoVenda(precoVenda);
 	}
 
-//	Falta adicionar atributos precoCusto e PrecoVenda no construtor
 	public Produto(String nome, String descricao, Tipo tipoCarne)
 			throws InvalidFieldException, ExpirationDateInvalidException {
 		setNome(nome);
@@ -71,10 +69,13 @@ public class Produto implements Serializable {
 		setTipoCarne(tipoCarne);
 	}
 
-//	Tratamento de exceções básico nos métodos de acesso, apenas uma exceção criada, a InvalidFieldException
-//	Exceção genérica para campos invalidos
-//	Essa exceção está tratando simplesmente de verificar se os campos estão vazios
-//	Precisa de mais verificações
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -113,8 +114,8 @@ public class Produto implements Serializable {
 	}
 
 	public void setPrecoVenda(float precoVenda) throws InvalidFieldException {
-		if (precoVenda == 0)
-			throw new InvalidFieldException("Campo nulo ou menor que 1");
+		if (precoVenda <= 0)
+			throw new InvalidFieldException("Valor inválido");
 
 		this.precoVenda = precoVenda;
 	}
@@ -124,7 +125,6 @@ public class Produto implements Serializable {
 	}
 
 	public void setDataValidade(LocalDate dataValidade) throws ExpirationDateInvalidException {
-//		Aqui ele verifica se a data de validade inserida é antes da data atual, evitando que se cadastre um produto vencido
 		if (dataValidade.isBefore(LocalDate.now()))
 			throw new ExpirationDateInvalidException("Data inválida");
 

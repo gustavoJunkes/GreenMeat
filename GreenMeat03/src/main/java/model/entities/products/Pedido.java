@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,16 +32,14 @@ public class Pedido {
 	@Column(name = "id_pedido")
 	private Long id;
 
-//	@Column
-//	@OneToMany(mappedBy = "id")
-//	private List<Item>itens = new ArrayList<Item>();
-
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Item> itens = new ArrayList<Item>();
-
+	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente; // dono da lista de compras
 
 	@Column(name = "data_entrega")
@@ -49,8 +49,8 @@ public class Pedido {
 	private float valorTotal; // soma do valor total de todos os itens do pedido
 
 	public Pedido(Cliente cliente) {
-		setValorTotal(0);
-		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
+		setValorTotal(calcularValorTotalPedido());
+		setCliente(cliente); // um cliente pode ter mais de um pedido aberto? (ao mesmo tempo)
 		setStatus(Status.PEDIDO_EM_ABERTO);
 	}
 
