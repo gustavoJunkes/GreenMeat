@@ -2,22 +2,19 @@ package model.entities.products;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import model.entities.users.Fornecedor;
 import model.exception.products.ExpirationDateInvalidException;
 import model.exceptions.InvalidFieldException;
 
@@ -47,13 +44,18 @@ public class Produto implements Serializable {
 	@Column(name = "dataValidade")
 	private LocalDate dataValidade;
 
+	@ManyToOne
+	@JoinColumn(name = "id_fornecedor")
+	private Fornecedor fornecedor;
+
 	@Enumerated(EnumType.STRING)
 	private Tipo tipoCarne;
 
 	public Produto() {
 	}
 
-	public Produto(String nome, String descricao, Tipo tipoCarne, float precoCusto, float precoVenda)
+	public Produto(String nome, String descricao, Tipo tipoCarne, float precoCusto, float precoVenda, 
+		Fornecedor fornecedor)
 			throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
@@ -139,4 +141,14 @@ public class Produto implements Serializable {
 		this.tipoCarne = tipoCarne;
 	}
 
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	
 }

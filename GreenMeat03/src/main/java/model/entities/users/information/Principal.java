@@ -3,12 +3,15 @@ package model.entities.users.information;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.dao.fornecedor.*;
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
+import model.dao.fornecedor.FornecedorDAOImpl;
+import model.dao.funcionario.*;
 import model.dao.item.ItemDAO;
 import model.dao.item.ItemDAOImpl;
-import model.dao.pedido.PedidoDAOImpl;
 import model.dao.pedido.PedidoDAO;
+import model.dao.pedido.PedidoDAOImpl;
 import model.dao.produto.ProdutoDAO;
 import model.dao.produto.ProdutoDAOImpl;
 import model.entities.products.Item;
@@ -16,15 +19,37 @@ import model.entities.products.Pedido;
 import model.entities.products.Produto;
 import model.entities.products.Tipo;
 import model.entities.users.Cliente;
+import model.entities.users.Fornecedor;
+import model.entities.users.Funcionario;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
 	public static void main(String[] args) throws InvalidFieldException {
 
 		System.out.println("Hello World");
+		
+		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
+		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+		
+		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", 
+				"loginBrasa", "Senhabemforte", "123.356.411-42");
+		Produto produto3 = new Produto("Lombo", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 15, 28,
+				new Fornecedor("Saude é nosso lema", "GreenHealth International", "LoginNovo", "13362pp", "321.254.724-54"));
+		
+		Fornecedor fornecedor3 = new Fornecedor();
+		Produto produto4 = new Produto();
+		
+		produto4.setNome("Calabresa");
+		fornecedor3.setNomeFantasia("Carne nova");
+		
+		produto4.setFornecedor(fornecedor3);
+		fornecedor3.getProdutos().add(produto3);
+		
+		produtoDAO.inserirProduto(produto4);
+		fornecedorDAO.inserirFornecedor(fornecedor3);
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
-
+/*
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente = new Cliente();
 		String nome = "Jonas";
@@ -50,61 +75,76 @@ public class Principal {
 			System.out.println(" ");
 
 		}
-		
-		
-		
 
 //		clienteDAO.atualizarCliente(cliente);
 
 		//////////////////// CADASTRO FORNECEDOR///////////////////////////
 
-		/*
-		 * FornecedorDAO fornecedorDAO = new FornecedorDAOImpl(); Fornecedor fornecedor
-		 * = new Fornecedor();
-		 * 
-		 * String nomeFantasia = "Tog Carniefero"; String razaoSocial =
-		 * "Mas di cinquentia anius siervino tu familia"; String cnpj =
-		 * "176.767.456.354";
-		 * 
-		 * fornecedor.setNomeFantasia(nomeFantasia);
-		 * fornecedor.setRazaoSocial(razaoSocial); fornecedor.setCNPJ(cnpj);
-		 * 
-		 * fornecedorDAO.inserirFornecedor(fornecedor);
-		 * 
-		 * ////////////////////CADASTRO FUNCIONARIO///////////////////////////
-		 * 
-		 * FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
-		 * 
-		 * Funcionario funcionario = new Funcionario("MeuLogin04",
-		 * "MinhaSenhaSecretaMesmo", "Júlia", "Menegildo", "123.134.521-98",
-		 * "Estagiario", "Adicionar Produtos");
-		 * 
-		 * funcionarioDAO.inserirFuncionario(funcionario);
-		 * 
-		 */
+		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
+		Fornecedor fornecedor = new Fornecedor();
+
+		String nomeFantasia = "Tog Carniefero";
+		String razaoSocial = "Mas di cinquentia anius siervino tu familia";
+		String cnpj = "176.767.456.354";
+
+		fornecedor.setNomeFantasia(nomeFantasia);
+		fornecedor.setRazaoSocial(razaoSocial);
+		fornecedor.setCNPJ(cnpj);
+
+		fornecedorDAO.inserirFornecedor(fornecedor);
+
+		//////////////////// CADASTRO FUNCIONARIO///////////////////////////
+
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
+
+		Funcionario funcionario = new Funcionario("MeuLogin04", "MinhaSenhaSecretaMesmo", "Júlia", "Menegildo",
+				"123.134.521-98", "Estagiario", "Adicionar Produtos");
+
+		funcionarioDAO.inserirFuncionario(funcionario);
+
 		//////////////////// CADASTRO PRODUTO///////////////////////////
-				  
-		  ProdutoDAO produtoDAO = new ProdutoDAOImpl(); Produto produto1 = new
-		  Produto("Picanha", "Este produto é muito gostoso, compre ele", Tipo.BOVINO,
-		  22, 30);
-		  
-		  Produto produto2 = new Produto("Frango", "Carne saudável e de qualidade",
-		  Tipo.AVE, 13, 21);
-		  
-		  produtoDAO.inserirProduto(produto1); produtoDAO.inserirProduto(produto2);
-		  
-		  ItemDAO itemDAO = new ItemDAOImpl(); Item item1 = new Item(produto2, 10);
-		  Item item2 = new Item(produto1, 5);
-		  
-		  itemDAO.inserirItem(item1); itemDAO.inserirItem(item2);
-		  
-		  PedidoDAO pedidoDAO = new PedidoDAOImpl(); List<Item>itens = new
-		  ArrayList<Item>(); itens.add(item1); itens.add(item2);
-		  
-		 Pedido pedido = new Pedido(cliente, itens);
-		 
-		 pedidoDAO.inserirPedido(pedido);
+
+		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+
+		Produto produto1 = new Produto("Lombo", "Este produto é muito gostoso, compre ele", Tipo.BOVINO, 15, 28,
+				fornecedor);
+
+		Produto produto2 = new Produto("peito de frango", "Carne saudável e de qualidade", Tipo.AVE, 10, 18,
+				fornecedor);
 		
+		List<Produto> produtos = new ArrayList<Produto>();
+		produtos.add(produto1);
+		produtos.add(produto2);
+
+		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", 
+				"loginBrasa", "Senhabemforte", "123.356.411-42");
+
+		produtoDAO.inserirProduto(produto1);
+		produtoDAO.inserirProduto(produto2);
+		fornecedorDAO.inserirFornecedor(fornecedor1);
+
+		
+
+//		fornecedorDAO.atualizarFornecedor(fornecedor);
+
+		produtoDAO.atualizarProduto(produto1);
+
+		ItemDAO itemDAO = new ItemDAOImpl();
+		Item item1 = new Item(produto2, 10);
+		Item item2 = new Item(produto1, 5);
+
+		itemDAO.inserirItem(item1);
+		itemDAO.inserirItem(item2);
+
+		PedidoDAO pedidoDAO = new PedidoDAOImpl();
+		List<Item> itens = new ArrayList<Item>();
+		itens.add(item1);
+		itens.add(item2);
+
+		Pedido pedido = new Pedido(cliente, itens);
+
+		pedidoDAO.inserirPedido(pedido);
+*/
 //		clienteDAO.recuperarClientes();
 
 //		Endereco endereco1 = new Endereco("Rua", "Rua Primeiro de Janeiro", "logradouro", 18, 93234123, "Casa");

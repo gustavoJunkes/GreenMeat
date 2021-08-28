@@ -25,21 +25,11 @@ import model.entities.users.information.Localidade;
 @Entity
 @Table(name = "cliente")
 public class Cliente extends PessoaFisica {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "id_cliente")
-//	private Long id;
-//	
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	
 	private List<Pedido> Pedidos = new ArrayList<Pedido>();
+
 	
     /* adicionar lista de pedidos */
 
