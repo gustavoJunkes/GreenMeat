@@ -12,7 +12,7 @@ public class Fornecedor extends PessoaJuridica {
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
 			Contato contato, String CNPJ) {
-		super(endereco, login, senha, contato, CNPJ, razaoSocial, nomeFantasia);
+		super(login, senha, contato, CNPJ, razaoSocial, nomeFantasia);
 	}
 
 	public List<Produto> getProdutos() {

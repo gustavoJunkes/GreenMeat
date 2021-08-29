@@ -32,7 +32,7 @@ public class Funcionario extends PessoaFisica {
 	
 	public Funcionario(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
-		super(endereco, login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
+		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
 		setFuncao(funcao);
 		setCargo(cargo);
 	}

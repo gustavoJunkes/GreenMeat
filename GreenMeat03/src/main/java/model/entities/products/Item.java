@@ -1,19 +1,21 @@
 package model.entities.products;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.entities.users.Fornecedor;
 
 @Entity
 @Table(name = "item")
-public class Item implements serializable {
+public class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,8 +25,8 @@ public class Item implements serializable {
 	@Column(name = "id_item")
 	private Long id;
 
-	@Column(name = "produto")
-	private Produto produto;
+//	@Column(name = "produto") Porque isso?
+//	private Produto produto;
 
 	@Column(name = "quantidade")
 	private float quantidade; // em kg, por isso float.
@@ -36,9 +38,9 @@ public class Item implements serializable {
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a
 								// partir do preço de um produto * quantidade
 
-	@oneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@MapsId
-	@JoinColumn(name = "id_item")
+	@JoinColumn(name = "id_produto")
 	private Produto produto;
 
 	public Item() {
