@@ -1,9 +1,12 @@
 package model.entities.users.information;
 
+import model.dao.cliente.ClienteDAO;
+import model.dao.cliente.ClienteDAOImpl;
 import model.dao.endereco.EnderecoDAO;
 import model.dao.endereco.EnderecoDAOImpl;
 import model.dao.localidade.LocalidadeDAO;
 import model.dao.localidade.LocalidadeDAOImpl;
+import model.entities.users.Cliente;
 import model.exception.users.information.CountryInvalidException;
 import model.exceptions.InvalidFieldException;
 
@@ -12,21 +15,73 @@ public class Principal {
 
 		System.out.println("Hello World");
 
-		/////////////////////////////CADASTRO ENDERECO LOCALIDADE//////////////////////////////////////
-		
+		///////////////////////////// CADASTRO ENDERECO
+		///////////////////////////// LOCALIDADE//////////////////////////////////////
+
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
 		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
-		
+
 		Localidade localidade1 = new Localidade("Brasil", "Santa Catarina", "Blumenau", "America do Sul");
+		Localidade localidade2 = new Localidade("Brasil", "São Paulo", "Santana de Parnaíba", "America do Sul");
+		localidade1.setId((long) 1);
 		localidadeDAO.inserirLocalidade(localidade1);
-		
-		Endereco endereco1 = new Endereco("Rua Fernandes Marques Brinhosa", "logradouro", (short) (12), "89032138", "Casa");
-		
+		localidadeDAO.inserirLocalidade(localidade2);
+
+		Endereco endereco1 = new Endereco("Rua sete de setembro", "Praça", (short) (242), "414412341", "Apartamento");
+		Endereco endereco2 = new Endereco("Rua xv de setembro", "ogradouro2", (short) (32), "23231211", "Apartamento");
+
 		endereco1.setLocalidade(localidade1);
-		
+		endereco2.setLocalidade(localidade1);
+
 		enderecoDAO.inserirEndereco(endereco1);
-		
-		
+		enderecoDAO.inserirEndereco(endereco2);
+
+		ClienteDAO clienteDAO = new ClienteDAOImpl();
+
+		Cliente cliente1 = new Cliente();
+
+		String nome = "Jonas";
+		String sobrenome = "Abelardo";
+		String login = "JoAbLog";
+		String senha = "senhasecreta";
+		String CPF = "121.234.377-32";
+
+		cliente1.setNome(nome);
+		cliente1.setCPF(CPF);
+		cliente1.setLogin(login);
+		cliente1.setSenha(senha);
+		cliente1.setSobrenome(sobrenome);
+		cliente1.getLocalidades().add(localidade1);
+		cliente1.getLocalidades().add(localidade2);
+//		cliente1.setId((long) 1);
+		clienteDAO.inserirCliente(cliente1);
+
+		Cliente cliente2 = new Cliente();
+
+		nome = "Gustavo";
+		sobrenome = "Junkes";
+		login = "JunksLog";
+		senha = "senhasecreta";
+		CPF = "152.346.539-51";
+
+		cliente2.setNome(nome);
+		cliente2.setCPF(CPF);
+		cliente2.setLogin(login);
+		cliente2.setSenha(senha);
+		cliente2.setSobrenome(sobrenome);
+		cliente2.getLocalidades().add(localidade1);
+		cliente2.getLocalidades().add(localidade2);
+//		cliente2.setId((long) 1);
+		clienteDAO.inserirCliente(cliente2);
+
+		localidade1.getUsuarios().add(cliente1);
+		localidade1.getUsuarios().add(cliente2);
+		localidade2.getUsuarios().add(cliente1);
+		localidade2.getUsuarios().add(cliente2);
+
+		localidadeDAO.atualizarLocalidade(localidade1);
+		localidadeDAO.atualizarLocalidade(localidade2);
+
 		////////////////////////////// CADASTRO PRODUTO
 		////////////////////////////// FORNRCEDOR////////////////////////////////
 

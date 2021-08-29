@@ -15,8 +15,6 @@ import javax.persistence.UniqueConstraint;
 import model.exceptions.InvalidFieldException;
 
 @Entity
-@Table(name = "endereco", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "logradouro_endereco", "numero_endereco" }) })
 public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;

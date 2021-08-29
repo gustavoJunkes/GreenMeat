@@ -31,9 +31,12 @@ public abstract class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-	
 
 	// um usuario possui diversas localidades, relação de N pra N
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
+	private List<Localidade> localidades = new ArrayList<Localidade>();
 
 //	@ManyToMany(fetch = FetchType.LAZY)
 //	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
@@ -45,16 +48,16 @@ public abstract class Usuario implements Serializable {
 	@Column(name = "senha_usuario")
 	private String senha;
 
-	// Dizendo que um usuario pode ter varios contatos e que um contato pode pertencer apenas a um usuario
+	// Dizendo que um usuario pode ter varios contatos e que um contato pode
+	// pertencer apenas a um usuario
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
-	
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 //	private List<Contato> contatos = new ArrayList<Contato>(); 
 //	
-	
+
 //	@Column(name = "datacastro_usuario")
 //	private LocalDate dataCadastro;
-	
 
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
@@ -63,7 +66,7 @@ public abstract class Usuario implements Serializable {
 
 	}
 
-	public Usuario(/*Localidade endereco,*/ String login, String senha /*Contato contato*/) {
+	public Usuario(/* Localidade endereco, */ String login, String senha /* Contato contato */) {
 //		setEndereco(endereco);
 		setLogin(login);
 		setSenha(senha);
@@ -79,6 +82,14 @@ public abstract class Usuario implements Serializable {
 //
 //		this.localidades = localidades;
 //	}
+
+	public List<Localidade> getLocalidades() {
+		return localidades;
+	}
+
+	public void setLocalidades(List<Localidade> localidades) {
+		this.localidades = localidades;
+	}
 
 	public String getLogin() {
 		return login;
@@ -97,8 +108,6 @@ public abstract class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-
 
 //	public LocalDate getDataCadastro() {
 //		return dataCadastro;
