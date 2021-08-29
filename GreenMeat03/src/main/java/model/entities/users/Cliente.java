@@ -43,6 +43,8 @@ public class Cliente extends PessoaFisica {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 //	Cliente (ainda?) não possui nenhum atributo
 //	criar uma função para validar cpf	
 // Falta validar cpf // cpf é um atributo repetido na classe Funcionario e Cliente

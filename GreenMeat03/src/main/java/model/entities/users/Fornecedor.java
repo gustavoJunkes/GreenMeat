@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import model.dao.produto.ProdutoDAO;
 import model.entities.products.Produto;
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
@@ -44,7 +45,6 @@ public class Fornecedor extends PessoaJuridica {
 	public Fornecedor() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, String login, String senha, String CNPJ) {
 		super(login, senha, CNPJ, razaoSocial, nomeFantasia);
@@ -70,6 +70,19 @@ public class Fornecedor extends PessoaJuridica {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+//	Método que adiciona um produto ao fornecedor, e adiciona este fornecedor ao
+// 	produto
+
+	public void adicionarProduto(Produto produto) {
+		this.produtos.add(produto);
+		produto.setFornecedor(this);
+	}
+	
+	public void removerProduto(Produto produto) {
+		this.produtos.remove(produto);
+		produto.setFornecedor(null);
 	}
 
 }
