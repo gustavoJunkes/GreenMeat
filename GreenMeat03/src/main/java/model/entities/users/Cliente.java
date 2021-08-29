@@ -43,6 +43,14 @@ public class Cliente extends PessoaFisica {
 		// TODO Auto-generated constructor stub
 	}
 
+	public List<Pedido> getPedidos() {
+		return Pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		Pedidos = pedidos;
+	}
+
 	
 
 //	Cliente (ainda?) não possui nenhum atributo

@@ -34,7 +34,7 @@ public class Pedido {
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Item> itens = new ArrayList<Item>();
-	
+
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
@@ -101,9 +101,14 @@ public class Pedido {
 
 	public void adicionarItem(Item item) {
 
-		setValorTotal(getValorTotal() + item.getValorTotal());
-
-		itens.add(item); // adicionando um "item" à lista de itens
+		if (itens.contains(item.getProduto()))
+			System.out.println("Produto já está neste pedido!");
+		else {
+			setValorTotal(getValorTotal() + item.getValorTotal());
+			itens.add(item); // adicionando um "item" à lista de itens
+		}
+		// ESTE MÉTODO SERÁ ALTERADO CASO A REÇÃO ENTRE PEDIDO E ITEM SE TORNAR
+		// BIDIRECIONAL
 	}
 
 //	Aqui ele remove um item da Lista  (Pedido, neste caso)

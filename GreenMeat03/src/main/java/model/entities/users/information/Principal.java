@@ -28,6 +28,8 @@ public class Principal {
 
 		System.out.println("Hello World");
 
+		// estou adicionando um cliente e cadastrando um pedido do cliente.
+
 		////////////////////////////// CADASTRO PRODUTO
 		////////////////////////////// FORNRCEDOR////////////////////////////////
 
@@ -70,17 +72,74 @@ public class Principal {
 //
 //		fornecedorDAO.atualizarFornecedor(fornecedor3);
 //		
-		
+		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		Cliente cliente1 = new Cliente();
+
+		PedidoDAO pedidoDAO = new PedidoDAOImpl();
+		Pedido pedido1 = new Pedido();
+
+		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+		Produto produto1 = new Produto();
+		Produto produto2 = new Produto();
 		
-		//estou adicionando um  cliente e cadastrando um pedido do cliente.
+		ItemDAO itemDAO = new ItemDAOImpl();
+		Item item1 = new Item();
+		Item item2 = new Item();
+		Item item3 = new Item();
+		
+		String nome = "Jonas";
+		String sobrenome = "Abelardo";
+		String login = "JoAbLog";
+		String senha = "senhasecreta";
+		String CPF = "121.234.377-32";
 		
 		
+		cliente1.setNome(nome);
+		cliente1.setCPF(CPF);
+		cliente1.setLogin(login);
+		cliente1.setSenha(senha);
+		cliente1.setSobrenome(sobrenome); //
+//		cliente1.setId((long) 1);
+		clienteDAO.inserirCliente(cliente1);
 		
+		produto1.setNome("Picanha");
+		produto1.setDescricao("descrição");
+		produto1.setPrecoVenda(17);
+
+		produto2.setNome("Alcatra");
+		produto2.setDescricao("descrição");
+		produto2.setPrecoVenda(34);
 		
+		produtoDAO.inserirProduto(produto1);
+		produtoDAO.inserirProduto(produto2);
 		
+		item1.setProduto(produto1);
+		item1.setQuantidade(10);
+		item1.setValorTotal(item1.calculaValorTotal());
 		
+		item2.setProduto(produto2);
+		item2.setQuantidade(10);
+		item2.setValorTotal(item2.calculaValorTotal());
+
+		item3.setProduto(produto2);
+		item3.setQuantidade(10);
+		item3.setValorTotal(item2.calculaValorTotal());
+
+		itemDAO.inserirItem(item1);
+		itemDAO.inserirItem(item2);
+		itemDAO.inserirItem(item3);
 		
+		pedido1.adicionarItem(item1);;
+		pedido1.adicionarItem(item2);
+		pedido1.adicionarItem(item3);
+		
+		pedido1.setCliente(cliente1);
+		
+		pedidoDAO.inserirPedido(pedido1);
+		
+		cliente1.getPedidos().add(pedido1);
+		cliente1.setId((long) 14);
+		clienteDAO.atualizarCliente(cliente1);
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
 		/*
