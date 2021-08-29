@@ -16,16 +16,7 @@ import model.entities.users.information.Localidade;
 @Entity
 @Table(name = "funcionario")
 public class Funcionario extends PessoaFisica {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "id_funcionario")
-//	private Long id;
 	
 	@Column(name = "funcao_funcionario")
 	private String funcao;

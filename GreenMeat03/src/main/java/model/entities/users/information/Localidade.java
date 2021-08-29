@@ -15,10 +15,6 @@ import model.entities.users.PessoaFisica;
 import model.exception.users.information.CountryInvalidException;
 
 public class Localidade extends PessoaFisica {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id

@@ -11,8 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.criteria.Join;
 
 import model.entities.products.Pedido;
 import model.entities.users.information.Contato;
@@ -23,20 +25,11 @@ import model.entities.users.information.Localidade;
 @Entity
 @Table(name = "cliente")
 public class Cliente extends PessoaFisica {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "id_cliente")
-//	private Long id;
-//	
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pedido> Pedidos = new ArrayList<Pedido>();
+
 	
     /* adicionar lista de pedidos */
 
@@ -49,6 +42,16 @@ public class Cliente extends PessoaFisica {
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public List<Pedido> getPedidos() {
+		return Pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		Pedidos = pedidos;
+	}
+
+	
 
 //	Cliente (ainda?) não possui nenhum atributo
 //	criar uma função para validar cpf	

@@ -31,6 +31,7 @@ public abstract class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
+	
 
 	// um usuario possui diversas localidades, relação de N pra N
 
