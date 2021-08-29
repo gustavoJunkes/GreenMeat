@@ -1,35 +1,32 @@
 package model.entities.users.information;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import model.dao.fornecedor.*;
-import model.dao.cliente.ClienteDAO;
-import model.dao.cliente.ClienteDAOImpl;
-import model.dao.fornecedor.FornecedorDAOImpl;
-import model.dao.funcionario.*;
-import model.dao.item.ItemDAO;
-import model.dao.item.ItemDAOImpl;
-import model.dao.pedido.PedidoDAO;
-import model.dao.pedido.PedidoDAOImpl;
-import model.dao.produto.ProdutoDAO;
-import model.dao.produto.ProdutoDAOImpl;
-import model.entities.products.Item;
-import model.entities.products.Pedido;
-import model.entities.products.Produto;
-import model.entities.products.Tipo;
-import model.entities.users.Cliente;
-import model.entities.users.Fornecedor;
-import model.entities.users.Funcionario;
+import model.dao.endereco.EnderecoDAO;
+import model.dao.endereco.EnderecoDAOImpl;
+import model.dao.localidade.LocalidadeDAO;
+import model.dao.localidade.LocalidadeDAOImpl;
+import model.exception.users.information.CountryInvalidException;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
-	public static void main(String[] args) throws InvalidFieldException {
+	public static void main(String[] args) throws InvalidFieldException, CountryInvalidException {
 
 		System.out.println("Hello World");
 
-		// estou adicionando um cliente e cadastrando um pedido do cliente.
-
+		/////////////////////////////CADASTRO ENDERECO LOCALIDADE//////////////////////////////////////
+		
+		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
+		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
+		
+		Localidade localidade1 = new Localidade("Brasil", "Santa Catarina", "Blumenau", "America do Sul");
+		localidadeDAO.inserirLocalidade(localidade1);
+		
+		Endereco endereco1 = new Endereco("Rua Fernandes Marques Brinhosa", "logradouro", (short) (12), "89032138", "Casa");
+		
+		endereco1.setLocalidade(localidade1);
+		
+		enderecoDAO.inserirEndereco(endereco1);
+		
+		
 		////////////////////////////// CADASTRO PRODUTO
 		////////////////////////////// FORNRCEDOR////////////////////////////////
 
@@ -71,75 +68,77 @@ public class Principal {
 //		fornecedor3.getProdutos().add(produto4);
 //
 //		fornecedorDAO.atualizarFornecedor(fornecedor3);
+
+		//////////////////// CADASTRO CLIENTE PEDIDO//////////////////////////
+
+//		ClienteDAO clienteDAO = new ClienteDAOImpl();
+//		Cliente cliente1 = new Cliente();
+//
+//		PedidoDAO pedidoDAO = new PedidoDAOImpl();
+//		Pedido pedido1 = new Pedido();
+//
+//		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+//		Produto produto1 = new Produto();
+//		Produto produto2 = new Produto();
 //		
-		ClienteDAO clienteDAO = new ClienteDAOImpl();
-		Cliente cliente1 = new Cliente();
-
-		PedidoDAO pedidoDAO = new PedidoDAOImpl();
-		Pedido pedido1 = new Pedido();
-
-		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-		Produto produto1 = new Produto();
-		Produto produto2 = new Produto();
-		
-		ItemDAO itemDAO = new ItemDAOImpl();
-		Item item1 = new Item();
-		Item item2 = new Item();
-		Item item3 = new Item();
-		
-		String nome = "Jonas";
-		String sobrenome = "Abelardo";
-		String login = "JoAbLog";
-		String senha = "senhasecreta";
-		String CPF = "121.234.377-32";
-		
-		
-		cliente1.setNome(nome);
-		cliente1.setCPF(CPF);
-		cliente1.setLogin(login);
-		cliente1.setSenha(senha);
-		cliente1.setSobrenome(sobrenome); //
-//		cliente1.setId((long) 1);
-		clienteDAO.inserirCliente(cliente1);
-		
-		produto1.setNome("Picanha");
-		produto1.setDescricao("descrição");
-		produto1.setPrecoVenda(17);
-
-		produto2.setNome("Alcatra");
-		produto2.setDescricao("descrição");
-		produto2.setPrecoVenda(34);
-		
-		produtoDAO.inserirProduto(produto1);
-		produtoDAO.inserirProduto(produto2);
-		
-		item1.setProduto(produto1);
-		item1.setQuantidade(10);
-		item1.setValorTotal(item1.calculaValorTotal());
-		
-		item2.setProduto(produto2);
-		item2.setQuantidade(10);
-		item2.setValorTotal(item2.calculaValorTotal());
-
-		item3.setProduto(produto2);
-		item3.setQuantidade(10);
-		item3.setValorTotal(item2.calculaValorTotal());
-
-		itemDAO.inserirItem(item1);
-		itemDAO.inserirItem(item2);
-		itemDAO.inserirItem(item3);
-		
-		pedido1.adicionarItem(item1);;
-		pedido1.adicionarItem(item2);
-		pedido1.adicionarItem(item3);
-		
-		pedido1.setCliente(cliente1);
-		
-		pedidoDAO.inserirPedido(pedido1);
-		
-		cliente1.getPedidos().add(pedido1);
-		cliente1.setId((long) 14);
-		clienteDAO.atualizarCliente(cliente1);
+//		ItemDAO itemDAO = new ItemDAOImpl();
+//		Item item1 = new Item();
+//		Item item2 = new Item();
+//		Item item3 = new Item();
+//		
+//		String nome = "Jonas";
+//		String sobrenome = "Abelardo";
+//		String login = "JoAbLog";
+//		String senha = "senhasecreta";
+//		String CPF = "121.234.377-32";
+//		
+//		
+//		cliente1.setNome(nome);
+//		cliente1.setCPF(CPF);
+//		cliente1.setLogin(login);
+//		cliente1.setSenha(senha);
+//		cliente1.setSobrenome(sobrenome); //
+////		cliente1.setId((long) 1);
+//		clienteDAO.inserirCliente(cliente1);
+//		
+//		produto1.setNome("Picanha");
+//		produto1.setDescricao("descrição");
+//		produto1.setPrecoVenda(17);
+//
+//		produto2.setNome("Alcatra");
+//		produto2.setDescricao("descrição");
+//		produto2.setPrecoVenda(34);
+//		
+//		produtoDAO.inserirProduto(produto1);
+//		produtoDAO.inserirProduto(produto2);
+//		
+//		item1.setProduto(produto1);
+//		item1.setQuantidade(10);
+//		item1.setValorTotal(item1.calculaValorTotal());
+//		
+//		item2.setProduto(produto2);
+//		item2.setQuantidade(10);
+//		item2.setValorTotal(item2.calculaValorTotal());
+//
+//		item3.setProduto(produto2);
+//		item3.setQuantidade(10);
+//		item3.setValorTotal(item2.calculaValorTotal());
+//
+//		itemDAO.inserirItem(item1);
+//		itemDAO.inserirItem(item2);
+//		itemDAO.inserirItem(item3);
+//		
+//		pedido1.adicionarItem(item1);;
+//		pedido1.adicionarItem(item2);
+//		pedido1.adicionarItem(item3);
+//		
+//		pedido1.setCliente(cliente1);
+//		
+//		pedidoDAO.inserirPedido(pedido1);
+//		
+//		cliente1.getPedidos().add(pedido1);
+////		cliente1.setId((long) 14);
+//		clienteDAO.atualizarCliente(cliente1);
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
 		/*
