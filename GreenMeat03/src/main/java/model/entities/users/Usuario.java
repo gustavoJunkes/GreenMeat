@@ -52,10 +52,14 @@ public abstract class Usuario implements Serializable {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 //	private List<Contato> contatos = new ArrayList<Contato>(); 
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
-	@JoinColumn(name = "id_usuario")
+//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
+//	@JoinColumn(name = "id_usuario")
+//	private List<Contato>contatos = new ArrayList<Contato>();
+
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Contato>contatos = new ArrayList<Contato>();
 
+	
 	@Column(name = "datacastro_usuario")
 	private LocalDate dataCadastro;
 
@@ -132,20 +136,10 @@ public abstract class Usuario implements Serializable {
 		this.id = id;
 	}
 
-//	public List<Localidade> getLocalidades() {
-//		return localidades;
-//	}
-//
-//	public void setLocalidades(List<Localidade> localidades) {
-//		this.localidades = localidades;
-//	}
 
-//	public List<Contato> getContatos() {
-//		return contatos;
-//	}
-//
-//	public void setContatos(List<Contato> contatos) {
-//		this.contatos = contatos;
-//	}
+	public void adicionarContato(Contato contato) {
+		getContatos().add(contato);
+		contato.setUsuario(this);
+	}
 
 }
