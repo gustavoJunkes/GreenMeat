@@ -2,16 +2,20 @@ package model.entities.users.information;
 
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
+import model.dao.contato.ContatoDAO;
+import model.dao.contato.ContatoDAOImpl;
 import model.dao.endereco.EnderecoDAO;
 import model.dao.endereco.EnderecoDAOImpl;
 import model.dao.localidade.LocalidadeDAO;
 import model.dao.localidade.LocalidadeDAOImpl;
 import model.entities.users.Cliente;
 import model.exception.users.information.CountryInvalidException;
+import model.exception.users.information.EmailInvalidException;
+import model.exception.users.information.PhoneNumberInvalidException;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
-	public static void main(String[] args) throws InvalidFieldException, CountryInvalidException {
+	public static void main(String[] args) throws InvalidFieldException, CountryInvalidException, EmailInvalidException, PhoneNumberInvalidException {
 
 		System.out.println("Hello World");
 
@@ -74,14 +78,26 @@ public class Principal {
 //		cliente2.setId((long) 1);
 		clienteDAO.inserirCliente(cliente2);
 
-		localidade1.getUsuarios().add(cliente1);
-		localidade1.getUsuarios().add(cliente2);
-		localidade2.getUsuarios().add(cliente1);
-		localidade2.getUsuarios().add(cliente2);
+//		localidade1.getUsuarios().add(cliente1);
+//		localidade1.getUsuarios().add(cliente2);
+//		localidade2.getUsuarios().add(cliente1);
+//		localidade2.getUsuarios().add(cliente2);
+//
+//		localidadeDAO.atualizarLocalidade(localidade1);
+//		localidadeDAO.atualizarLocalidade(localidade2);
 
-		localidadeDAO.atualizarLocalidade(localidade1);
-		localidadeDAO.atualizarLocalidade(localidade2);
-
+		
+		ContatoDAO contatoDAO = new ContatoDAOImpl();
+		Contato contato1= new Contato("Junkes@email.com", "1341-4234");
+		Contato contato2= new Contato("Secundario@email.com", "9934-9551");
+		
+		contatoDAO.inserirContato(contato1);
+		contatoDAO.inserirContato(contato2);
+		
+		cliente1.getContatos().add(contato1);
+		cliente1.getContatos().add(contato2);
+		
+		clienteDAO.atualizarCliente(cliente2);
 		////////////////////////////// CADASTRO PRODUTO
 		////////////////////////////// FORNRCEDOR////////////////////////////////
 

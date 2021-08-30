@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import model.entities.users.Usuario;
@@ -22,18 +21,17 @@ public class Contato implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_contato")
 	private Long id;
 
 	@Column(name = "email")
 	private String email;
-	
-	
+		
 	@Column(name = "telefone")
 	private String telefone;
 
-	
+
 	
 //	Há um erro aqui
 //	@Column(name = "usuario")
@@ -49,6 +47,10 @@ public class Contato implements Serializable {
 		setTelefone(telefone);
 	}
 	
+	public Contato() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getEmail() {
 		return email;
 	}
