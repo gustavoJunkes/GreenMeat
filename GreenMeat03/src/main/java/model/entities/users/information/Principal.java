@@ -31,7 +31,7 @@ public class Principal {
 		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-		
+		ContatoDAO contatoDAO = new ContatoDAOImpl();
 //		Cliente cliente1 = new Cliente();
 //		
 //				String nome = "Jonas";
@@ -72,81 +72,94 @@ public class Principal {
 		
 	
 		//
-		Localidade localidade1 = new Localidade("Brasil", "Santa Catarina", "Blumenau", "America do Sul");
-		Localidade localidade2 = new Localidade("Brasil", "São Paulo", "Santana de Parnaíba", "America do Sul");
-		localidade1.setId((long) 1);
-		localidadeDAO.inserirLocalidade(localidade1);
-		localidadeDAO.inserirLocalidade(localidade2);
-
-		Endereco endereco1 = new Endereco("Rua sete de setembro", "Praça", (short) (242), "414412341", "Apartamento");
-		Endereco endereco2 = new Endereco("Rua xv de setembro", "ogradouro2", (short) (32), "23231211", "Apartamento");
-
-		endereco1.setLocalidade(localidade1);
-		endereco2.setLocalidade(localidade1);
-
-		enderecoDAO.inserirEndereco(endereco1);
-		enderecoDAO.inserirEndereco(endereco2);
+//		Localidade localidade1 = new Localidade("Brasil", "Santa Catarina", "Blumenau", "America do Sul");
+//		Localidade localidade2 = new Localidade("Brasil", "São Paulo", "Santana de Parnaíba", "America do Sul");
+//		localidade1.setId((long) 1);
+//		localidadeDAO.inserirLocalidade(localidade1);
+//		localidadeDAO.inserirLocalidade(localidade2);
+//
+//		Endereco endereco1 = new Endereco("Rua sete de setembro", "Praça", (short) (242), "414412341", "Apartamento");
+//		Endereco endereco2 = new Endereco("Rua xv de setembro", "ogradouro2", (short) (32), "23231211", "Apartamento");
+//
+//		endereco1.setLocalidade(localidade1);
+//		endereco2.setLocalidade(localidade1);
+//
+//		enderecoDAO.inserirEndereco(endereco1);
+//		enderecoDAO.inserirEndereco(endereco2);
 
 //		ClienteDAO clienteDAO = new ClienteDAOImpl();
 
 		Cliente cliente1 = new Cliente();
 
-		String nome = "Ronaldo";
-		String sobrenome = "Silva";
-		String login = "JoAbLog";
-		String senha = "senhasecreta";
-		String CPF = "121.234.377-32";
-
-		cliente1.setNome(nome);
-		cliente1.setCPF(CPF);
-		cliente1.setLogin(login);
-		cliente1.setSenha(senha);
-		cliente1.setSobrenome(sobrenome);
-		cliente1.getLocalidades().add(localidade1);
-		cliente1.getLocalidades().add(localidade2);
-//		cliente1.setId((long) 1);
-		clienteDAO.inserirCliente(cliente1);
-
-		Cliente cliente2 = new Cliente();
-
-		nome = "Gustavo";
-		sobrenome = "Junkes";
-		login = "JunksLog";
-		senha = "senhasecreta";
-		CPF = "152.346.539-51";
-
-		cliente2.setNome(nome);
-		cliente2.setCPF(CPF);
-		cliente2.setLogin(login);
-		cliente2.setSenha(senha);
-		cliente2.setSobrenome(sobrenome);
-		cliente2.getLocalidades().add(localidade1);
-		cliente2.getLocalidades().add(localidade2);
-//		cliente2.setId((long) 1);
-		clienteDAO.inserirCliente(cliente2);
-
-		localidade1.getUsuarios().add(cliente1);
-		localidade1.getUsuarios().add(cliente2);
-		localidade2.getUsuarios().add(cliente1);
-		localidade2.getUsuarios().add(cliente2);
-
-		localidadeDAO.atualizarLocalidade(localidade1);
-		localidadeDAO.atualizarLocalidade(localidade2);
-
+		cliente1.setId((long)(1));
 		
-		List<Localidade>localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente1);
+		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(cliente1);
 		
-		for (Localidade localidade : localidades) {
-			
-			System.out.println(localidade.getPais());
-			System.out.println(localidade.getEstado());
-			System.out.println(localidade.getProvincia());
-			
-			
-			
-			
+//		usuarioDAO.recuperarUsuario;
+		
+		
+		System.out.println(cliente1.getNome());
+		for ( Contato contato : contatos) {
+			System.out.println(contato.getEmail());
+			System.out.println(contato.getTelefone());
 		}
 		
+//		String nome = "Ronaldo";
+//		String sobrenome = "Silva";
+//		String login = "JoAbLog";
+//		String senha = "senhasecreta";
+//		String CPF = "121.234.377-32";
+//
+//		cliente1.setNome(nome);
+//		cliente1.setCPF(CPF);
+//		cliente1.setLogin(login);
+//		cliente1.setSenha(senha);
+//		cliente1.setSobrenome(sobrenome);
+//		cliente1.getLocalidades().add(localidade1);
+//		cliente1.getLocalidades().add(localidade2);
+////		cliente1.setId((long) 1);
+//		clienteDAO.inserirCliente(cliente1);
+//
+//		Cliente cliente2 = new Cliente();
+//
+//		nome = "Gustavo";
+//		sobrenome = "Junkes";
+//		login = "JunksLog";
+//		senha = "senhasecreta";
+//		CPF = "152.346.539-51";
+//
+//		cliente2.setNome(nome);
+//		cliente2.setCPF(CPF);
+//		cliente2.setLogin(login);
+//		cliente2.setSenha(senha);
+//		cliente2.setSobrenome(sobrenome);
+//		cliente2.getLocalidades().add(localidade1);
+//		cliente2.getLocalidades().add(localidade2);
+////		cliente2.setId((long) 1);
+//		clienteDAO.inserirCliente(cliente2);
+//
+//		localidade1.getUsuarios().add(cliente1);
+//		localidade1.getUsuarios().add(cliente2);
+//		localidade2.getUsuarios().add(cliente1);
+//		localidade2.getUsuarios().add(cliente2);
+//
+//		localidadeDAO.atualizarLocalidade(localidade1);
+//		localidadeDAO.atualizarLocalidade(localidade2);
+//
+//		
+//		List<Localidade>localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente1);
+//		
+//		for (Localidade localidade : localidades) {
+//			
+//			System.out.println(localidade.getPais());
+//			System.out.println(localidade.getEstado());
+//			System.out.println(localidade.getProvincia());
+//			
+//			
+//			
+//			
+//		}
+//		
 //		ContatoDAO contatoDAO = new ContatoDAOImpl();
 //		Contato contato1= new Contato("Junkes@email.com", "1341-4234");
 //		Contato contato2= new Contato("Secundario@email.com", "9934-9551");
