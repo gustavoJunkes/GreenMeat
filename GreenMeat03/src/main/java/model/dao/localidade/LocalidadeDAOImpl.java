@@ -17,7 +17,7 @@ import org.hibernate.service.ServiceRegistry;
 import model.entities.users.Usuario;
 import model.entities.users.information.Localidade;
 
-public class LocalidadeDAOImpl implements LocalidadeDAO{
+public class LocalidadeDAOImpl implements LocalidadeDAO {
 
 	public void inserirLocalidade(Localidade localidade) {
 
@@ -147,8 +147,8 @@ public class LocalidadeDAOImpl implements LocalidadeDAO{
 		return localidades;
 	}
 
-public List<Localidade> recuperarLocalidadesUsuario(Usuario usuario) {
-		
+	public List<Localidade> recuperarLocalidadesUsuario(Usuario usuario) {
+
 		Session sessao = null;
 		List<Localidade> localidades = null;
 
@@ -161,9 +161,9 @@ public List<Localidade> recuperarLocalidadesUsuario(Usuario usuario) {
 
 			CriteriaQuery<Localidade> criteria = construtor.createQuery(Localidade.class);
 			Root<Localidade> raizLocalidade = criteria.from(Localidade.class);
-			
+
 			Join<Localidade, Usuario> juncaoUsuario = raizLocalidade.join("usuarios");
-			
+
 			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoUsuario.get("id"), idUsuario));
 
@@ -188,8 +188,7 @@ public List<Localidade> recuperarLocalidadesUsuario(Usuario usuario) {
 
 		return localidades;
 	}
-	
-	
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -218,6 +217,5 @@ public List<Localidade> recuperarLocalidadesUsuario(Usuario usuario) {
 		return fabricaSessao;
 
 	}
-	
-	
+
 }

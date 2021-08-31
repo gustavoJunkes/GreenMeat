@@ -3,6 +3,7 @@ package model.dao.pedido;
 import java.util.List;
 
 import model.entities.products.Pedido;
+import model.entities.users.Cliente;
 
 public interface PedidoDAO {
 
@@ -13,6 +14,8 @@ public interface PedidoDAO {
 	void atualizarPedido(Pedido pedido);
 	
 	List<Pedido> recuperarPedidos();
+	
+	List<Pedido> recuperarPedidosCliente(Cliente cliente);
 	
 	/*
 	 * List<Pedido> recuperarPedidoOrdenadosDataEntregaAscendente();
