@@ -16,8 +16,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import model.entities.products.Pedido;
 import model.entities.users.Cliente;
-import model.entities.users.Usuario;
-import model.entities.users.information.Localidade;
+
 
 public class PedidoDAOImpl implements PedidoDAO {
 
