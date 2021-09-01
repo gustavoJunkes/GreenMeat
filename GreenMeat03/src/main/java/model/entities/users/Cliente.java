@@ -30,9 +30,6 @@ public class Cliente extends PessoaFisica {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pedido> Pedidos = new ArrayList<Pedido>();
 
-	
-    /* adicionar lista de pedidos */
-
 	public Cliente(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
 		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);

@@ -2,6 +2,7 @@ package model.dao.localidade;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -19,6 +20,8 @@ import model.entities.users.information.Localidade;
 
 public class LocalidadeDAOImpl implements LocalidadeDAO {
 
+	
+	
 	public void inserirLocalidade(Localidade localidade) {
 
 		Session sessao = null;

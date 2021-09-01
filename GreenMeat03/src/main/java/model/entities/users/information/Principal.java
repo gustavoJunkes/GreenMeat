@@ -3,6 +3,8 @@ package model.entities.users.information;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.EntityManager;
+
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
 import model.dao.contato.ContatoDAO;
@@ -40,6 +42,9 @@ public class Principal {
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
 
+//		EntityManager em = new Enti
+		
+		
 		int resposta;
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
@@ -160,6 +165,12 @@ public class Principal {
 		default:
 			break;
 		}
+//		add metodo na interface
+		String clienteVolta = clienteDAO.recuperarPorId((long)(1)).getNome();
+		
+		System.out.println(clienteVolta);
+		
+		
 //		
 //		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", "loginBrasa",
 //				"Senhabemforte", "123.356.411-42");
@@ -359,76 +370,79 @@ public class Principal {
 //		produto1.setPrecoVenda(leitor.nextFloat());
 //
 //		produtoDAO.inserirProduto(produto1);
-//		
-		PedidoDAO pedidoDAO = new PedidoDAOImpl();
-		ItemDAO itemDAO = new ItemDAOImpl();
-		Item item1 = new Item();
-		Item item2 = new Item();
-		Item item3 = new Item();
-
-		Produto produto1 = new Produto();
-		Produto produto2 = new Produto();
-
-		Pedido pedido1 = new Pedido();
-
-		produto1.setNome("Maminha");
-		produto2.setNome("Costela");
-
-		produtoDAO.inserirProduto(produto1);
-		produtoDAO.inserirProduto(produto2);
+//		///////////////////////////////////
 		
-		String nome = "Jonas";
-		String sobrenome = "Abelardo";
-		String login = "JoAbLog";
-		String senha = "senhasecreta";
-		String CPF = "121.234.377-32";
-
-		cliente1.setNome(nome);
-		cliente1.setCPF(CPF);
-		cliente1.setLogin(login);
-		cliente1.setSenha(senha);
-		cliente1.setSobrenome(sobrenome); //
-//		cliente1.setId((long) 1);
-		clienteDAO.inserirCliente(cliente1);
-
-		item1.setProduto(produto1);
-		item1.setQuantidade(10);
-		item1.setValorTotal(item1.calculaValorTotal());
-
-		item2.setProduto(produto2);
-		item2.setQuantidade(10);
-		item2.setValorTotal(item2.calculaValorTotal());
-
-		item3.setProduto(produto2);
-		item3.setQuantidade(10);
-		item3.setValorTotal(item2.calculaValorTotal());
-
-		itemDAO.inserirItem(item1);
-		itemDAO.inserirItem(item2);
-		itemDAO.inserirItem(item3);
-
-		pedido1.adicionarItem(item1);
-		;
-		pedido1.adicionarItem(item2);
-		pedido1.adicionarItem(item3);
-
-		pedido1.setCliente(cliente1);
-
-		pedidoDAO.inserirPedido(pedido1);
-
-		cliente1.getPedidos().add(pedido1);
-//		cliente1.setId((long) 14);
-		clienteDAO.atualizarCliente(cliente1);
-
-		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente1);
-
-		for (Pedido pedido : pedidos) {
-			System.out.println(pedido.getId());
-			System.out.println(pedido.getValorTotal());
-//			System.out.println(pedido.getItens());
-			System.out.println(pedido.toString());
-
-		}
+		
+//		
+//		PedidoDAO pedidoDAO = new PedidoDAOImpl();
+//		ItemDAO itemDAO = new ItemDAOImpl();
+//		Item item1 = new Item();
+//		Item item2 = new Item();
+//		Item item3 = new Item();
+//
+//		Produto produto1 = new Produto();
+//		Produto produto2 = new Produto();
+//
+//		Pedido pedido1 = new Pedido();
+//
+//		produto1.setNome("Maminha");
+//		produto2.setNome("Costela");
+//
+//		produtoDAO.inserirProduto(produto1);
+//		produtoDAO.inserirProduto(produto2);
+//		
+//		String nome = "Jonas";
+//		String sobrenome = "Abelardo";
+//		String login = "JoAbLog";
+//		String senha = "senhasecreta";
+//		String CPF = "121.234.377-32";
+//
+//		cliente1.setNome(nome);
+//		cliente1.setCPF(CPF);
+//		cliente1.setLogin(login);
+//		cliente1.setSenha(senha);
+//		cliente1.setSobrenome(sobrenome); //
+////		cliente1.setId((long) 1);
+//		clienteDAO.inserirCliente(cliente1);
+//
+//		item1.setProduto(produto1);
+//		item1.setQuantidade(10);
+//		item1.setValorTotal(item1.calculaValorTotal());
+//
+//		item2.setProduto(produto2);
+//		item2.setQuantidade(10);
+//		item2.setValorTotal(item2.calculaValorTotal());
+//
+//		item3.setProduto(produto2);
+//		item3.setQuantidade(10);
+//		item3.setValorTotal(item2.calculaValorTotal());
+//
+//		itemDAO.inserirItem(item1);
+//		itemDAO.inserirItem(item2);
+//		itemDAO.inserirItem(item3);
+//
+//		pedido1.adicionarItem(item1);
+//		;
+//		pedido1.adicionarItem(item2);
+//		pedido1.adicionarItem(item3);
+//
+//		pedido1.setCliente(cliente1);
+//
+//		pedidoDAO.inserirPedido(pedido1);
+//
+//		cliente1.getPedidos().add(pedido1);
+////		cliente1.setId((long) 14);
+//		clienteDAO.atualizarCliente(cliente1);
+//
+//		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente1);
+//
+//		for (Pedido pedido : pedidos) {
+//			System.out.println(pedido.getId());
+//			System.out.println(pedido.getValorTotal());
+////			System.out.println(pedido.getItens());
+//			System.out.println(pedido.toString());
+//
+//		}
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
 		/*
