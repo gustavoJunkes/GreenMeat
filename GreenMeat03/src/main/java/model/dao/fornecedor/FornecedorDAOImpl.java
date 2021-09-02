@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -12,6 +14,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.products.Pedido;
+import model.entities.products.Produto;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
 
@@ -137,6 +141,49 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 		return fornecedor;
 		
 	}
+	
+	public Fornecedor recuperarFornecedorProduto(Produto produto) {
+
+		Session sessao = null;
+		Fornecedor fornecedor = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Fornecedor> criteria = construtor.createQuery(Fornecedor.class);
+			Root<Fornecedor> raizFornecedor= criteria.from(Fornecedor.class);
+
+			Join<Fornecedor, Produto> juncaoProduto = raizFornecedor.join("produtos");
+
+			ParameterExpression<Long> idProduto= construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoProduto.get("id"), idProduto));
+
+			fornecedor = sessao.createQuery(criteria).setParameter(idProduto, produto.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return fornecedor;
+	}
+
 	
 	public List<Fornecedor> recuperarFornecedores() {
 

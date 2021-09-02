@@ -47,6 +47,9 @@ public class Principal {
 
 //		EntityManager em = new Enti
 
+//		BUG - NÃO É POSSIVEL RECUPERAR UM FORNECEDOR A PARTIR DE UM PRODUTO
+		
+		
 		int resposta;
 
 		ItemDAO itemDAO = new ItemDAOImpl();
@@ -91,10 +94,11 @@ public class Principal {
 			String senha = leitor.next();
 
 			cliente1.setNome(nome);
+			cliente1.setSobrenome(sobrenome);
 			cliente1.setCPF(CPF);
 			cliente1.setLogin(login);
 			cliente1.setSenha(senha);
-			cliente1.setSobrenome(sobrenome);
+//			
 
 			clienteDAO.inserirCliente(cliente1);
 
@@ -102,13 +106,23 @@ public class Principal {
 		}
 		case 2: {
 			Fornecedor fornecedor1 = new Fornecedor();
-			System.out.println("Razão social:");
-			fornecedor1.setRazaoSocial(leitor.next());
-
+			
+			
+			
+			System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
+			String razaoSocial = leitor.next();
+			System.out.println("----------------");
+			
 			System.out.println("Nome fantasia:");
-			fornecedor1.setNomeFantasia(leitor.next());
+			String nomeFantasia = leitor.next();
+			
+			fornecedor1.setRazaoSocial(razaoSocial);
+			fornecedor1.setNomeFantasia(nomeFantasia);
+			
 			fornecedorDAO.inserirFornecedor(fornecedor1);
 		}
+
+			break;
 
 		case 3: {
 
@@ -118,11 +132,11 @@ public class Principal {
 			produto1.setNome(leitor.next());
 
 			System.out.println("Id do Fornecedor:");
-
-			Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(leitor.nextLong());
+			Long r = leitor.nextLong();
+			Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
 
 			produto1.setFornecedor(fornecedorRecuperado);
-			produtoDAO.atualizarProduto(produto1);
+			produtoDAO.inserirProduto(produto1);
 
 			fornecedorRecuperado.getProdutos().add(produto1);
 			fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
@@ -136,7 +150,17 @@ public class Principal {
 
 			produtoDAO.inserirProduto(produto1);
 
+			fornecedorRecuperado = fornecedorDAO.recuperarFornecedorProduto(produto1);
+			
+			System.out.println(fornecedorRecuperado.getNomeFantasia());
+
 		}
+		break;
+		
+		
+		
+		
+		
 
 		case 5: {
 
@@ -174,11 +198,8 @@ public class Principal {
 
 //				produtoDAO.recuperarProdutoItem(item); // apenas para testar método
 //				itemDAO.recuperarItensPedido(pedido1); // apenas para testar método 
-				
-				
+
 			} while (resposta == 1);
-			
-				
 
 			/* em teste */
 
