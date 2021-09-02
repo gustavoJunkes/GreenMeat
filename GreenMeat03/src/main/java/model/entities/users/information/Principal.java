@@ -173,6 +173,8 @@ public class Principal {
 				resposta = leitor.nextInt();
 
 //				produtoDAO.recuperarProdutoItem(item); // apenas para testar método
+//				itemDAO.recuperarItensPedido(pedido1); // apenas para testar método 
+				
 				
 			} while (resposta == 1);
 			
