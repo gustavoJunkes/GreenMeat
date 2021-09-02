@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.internal.build.AllowSysOut;
+
+import javassist.tools.framedump;
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
 import model.dao.contato.ContatoDAO;
@@ -43,9 +46,10 @@ public class Principal {
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
 
 //		EntityManager em = new Enti
-		
-		
+
 		int resposta;
+
+		ItemDAO itemDAO = new ItemDAOImpl();
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
 		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
@@ -62,7 +66,7 @@ public class Principal {
 		System.out.println("3- cadastrar novo produto");
 		System.out.println("4- cadastrar novo -----");
 		System.out.println("5- cadastrar novo pedido");
-		System.out.println("6- cadastrar novo endereço");
+		System.out.println("6- cadastrar novo -------");
 		System.out.println("7- recuperar cliente por ");
 
 		resposta = leitor.nextInt();
@@ -112,6 +116,17 @@ public class Principal {
 
 			System.out.println("Nome:");
 			produto1.setNome(leitor.next());
+
+			System.out.println("Id do Fornecedor:");
+
+			Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(leitor.nextLong());
+
+			produto1.setFornecedor(fornecedorRecuperado);
+			produtoDAO.atualizarProduto(produto1);
+
+			fornecedorRecuperado.getProdutos().add(produto1);
+			fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+
 //			
 			System.out.println("Preço compra:");
 			produto1.setPrecoCusto(leitor.nextFloat());
@@ -123,13 +138,45 @@ public class Principal {
 
 		}
 
-		case 4: {
+		case 5: {
 
 			PedidoDAO pedidoDAO = new PedidoDAOImpl();
 			Pedido pedido1 = new Pedido();
 
-			Produto produto1 = new Produto();
-			Produto produto2 = new Produto();
+			List<Produto> produtos = produtoDAO.recuperarProdutos();
+
+			for (Produto produto : produtos) {
+				System.out.println("------------------------------");
+				System.out.println(produto.getNome());
+				System.out.println(produto.getDescricao());
+				System.out.println(produto.getPrecoVenda());
+				System.out.println(produto.getId());
+				System.out.println("------------------------------");
+			}
+
+			do {
+				System.out.println("Id do produto:");
+				Produto produtoRecuperado = produtoDAO.recuperarPorId(leitor.nextLong());
+
+				Item item = new Item();
+				item.setProduto(produtoRecuperado);
+
+				System.out.println("Quantas unidades de " + produtoRecuperado.getNome() + ": ");
+				item.setQuantidade(leitor.nextFloat());
+
+				itemDAO.inserirItem(item);
+				pedido1.adicionarItem(item);
+
+				System.out.println("Pressione 1 para adicionar um item ao pedido");
+				System.out.println("Pressione 2 para continuar");
+
+				resposta = leitor.nextInt();
+
+//				produtoDAO.recuperarProdutoItem(item); // apenas para testar método
+				
+			} while (resposta == 1);
+			
+				
 
 			/* em teste */
 
@@ -166,11 +213,10 @@ public class Principal {
 			break;
 		}
 //		add metodo na interface
-		String clienteVolta = clienteDAO.recuperarPorId((long)(1)).getNome();
-		
+		String clienteVolta = clienteDAO.recuperarPorId((long) (1)).getNome();
+
 		System.out.println(clienteVolta);
-		
-		
+
 //		
 //		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", "loginBrasa",
 //				"Senhabemforte", "123.356.411-42");
@@ -371,8 +417,7 @@ public class Principal {
 //
 //		produtoDAO.inserirProduto(produto1);
 //		///////////////////////////////////
-		
-		
+
 //		
 //		PedidoDAO pedidoDAO = new PedidoDAOImpl();
 //		ItemDAO itemDAO = new ItemDAOImpl();

@@ -12,6 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
 
 public class FornecedorDAOImpl implements FornecedorDAO {
@@ -105,6 +106,38 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 		}
 	}
 
+	
+	public Fornecedor recuperarPorId(Long id) {
+		Session sessao = null;
+		Fornecedor fornecedor = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			fornecedor = sessao.find(Fornecedor.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return fornecedor;
+		
+	}
+	
 	public List<Fornecedor> recuperarFornecedores() {
 
 		Session sessao = null;

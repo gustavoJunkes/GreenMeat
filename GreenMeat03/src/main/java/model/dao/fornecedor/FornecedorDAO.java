@@ -12,6 +12,8 @@ public interface FornecedorDAO {
 
 	void atualizarFornecedor(Fornecedor fornecedor);
 	
+	Fornecedor recuperarPorId(Long id);
+	
 	List<Fornecedor>recuperarFornecedores();
 	
 }
