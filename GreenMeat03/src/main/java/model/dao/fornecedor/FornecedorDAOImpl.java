@@ -157,7 +157,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			CriteriaQuery<Fornecedor> criteria = construtor.createQuery(Fornecedor.class);
 			Root<Fornecedor> raizFornecedor= criteria.from(Fornecedor.class);
 
-			Join<Fornecedor, Produto> juncaoProduto = raizFornecedor.join("produtos");
+			Join<Fornecedor, Produto> juncaoProduto = raizFornecedor.join("id_fornecedor");
 
 			ParameterExpression<Long> idProduto= construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoProduto.get("id"), idProduto));

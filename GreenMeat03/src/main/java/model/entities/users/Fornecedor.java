@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.criteria.JoinType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import model.dao.produto.ProdutoDAO;
 import model.entities.products.Produto;
@@ -28,6 +32,7 @@ public class Fornecedor extends PessoaJuridica {
 	@Column(name = "id_fornecedor")
 	private Long id;
 
+	@Fetch(FetchMode.JOIN)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Produto> produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
 

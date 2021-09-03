@@ -48,8 +48,9 @@ public class Principal {
 //		EntityManager em = new Enti
 
 //		BUG - NÃO É POSSIVEL RECUPERAR UM FORNECEDOR A PARTIR DE UM PRODUTO
-		
-		
+//		RESOLVIDO
+
+		boolean entrar = false;
 		int resposta;
 
 		ItemDAO itemDAO = new ItemDAOImpl();
@@ -64,18 +65,34 @@ public class Principal {
 
 		Scanner leitor = new Scanner(System.in);
 
-		System.out.println("1- cadastrar novo cliente");
-		System.out.println("2- cadastrar novo fornecedor");
-		System.out.println("3- cadastrar novo produto");
-		System.out.println("4- cadastrar novo -----");
-		System.out.println("5- cadastrar novo pedido");
-		System.out.println("6- cadastrar novo -------");
-		System.out.println("7- recuperar cliente por ");
+		System.out.println("Pressione 1 para entrar");
+		System.out.println("Pressione 2 para se cadastrar");
+		int entrada = leitor.nextInt();
 
-		resposta = leitor.nextInt();
-
-		switch (resposta) {
+		switch (entrada) {
 		case 1: {
+
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Cliente clienteRecuperado = clienteDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(clienteRecuperado.getSenha())) {
+				entrar = true;
+				
+				
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+		}
+		case 2: {
+			
 			Cliente cliente1 = new Cliente();
 
 			System.out.println("Nome:");
@@ -92,154 +109,189 @@ public class Principal {
 
 			System.out.println("Nova senha:");
 			String senha = leitor.next();
+			
 
 			cliente1.setNome(nome);
 			cliente1.setSobrenome(sobrenome);
 			cliente1.setCPF(CPF);
 			cliente1.setLogin(login);
 			cliente1.setSenha(senha);
-//			
+		
 
 			clienteDAO.inserirCliente(cliente1);
 
-			break;
-		}
-		case 2: {
-			Fornecedor fornecedor1 = new Fornecedor();
-			
-			
-			
-			System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
-			String razaoSocial = leitor.next();
-			System.out.println("----------------");
-			
-			System.out.println("Nome fantasia:");
-			String nomeFantasia = leitor.next();
-			
-			fornecedor1.setRazaoSocial(razaoSocial);
-			fornecedor1.setNomeFantasia(nomeFantasia);
-			
-			fornecedorDAO.inserirFornecedor(fornecedor1);
-		}
+			System.out.println("Seu id de login é " + cliente1.getId());
+			System.out.println("-------------------------------------");
 
 			break;
+		}
+		default:
+			System.out.println("Valor invalido");
+			break;
+		}
 
-		case 3: {
 
-			Produto produto1 = new Produto();
+		while(entrar == true) {
 
-			System.out.println("Nome:");
-			produto1.setNome(leitor.next());
+			System.out.println("1- cadastrar novo cliente");
+			System.out.println("2- cadastrar novo fornecedor");
+			System.out.println("3- cadastrar novo produto");
+			System.out.println("4- cadastrar novo -----");
+			System.out.println("5- cadastrar novo pedido");
+			System.out.println("6- cadastrar novo -------");
+			System.out.println("7- recuperar cliente por ");
 
-			System.out.println("Id do Fornecedor:");
-			Long r = leitor.nextLong();
-			Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
+			resposta = leitor.nextInt();
 
-			produto1.setFornecedor(fornecedorRecuperado);
-			produtoDAO.inserirProduto(produto1);
+			switch (resposta) {
+			case 1: {
+				Cliente cliente1 = new Cliente();
 
-			fornecedorRecuperado.getProdutos().add(produto1);
-			fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+				System.out.println("Nome:");
+				String nome = leitor.next();
 
+				System.out.println("Sobrenome:");
+				String sobrenome = leitor.next();
+
+				System.out.println("CPF:");
+				String CPF = leitor.next();
+
+				System.out.println("Novo login:");
+				String login = leitor.next();
+
+				System.out.println("Nova senha:");
+				String senha = leitor.next();
+
+				cliente1.setNome(nome);
+				cliente1.setSobrenome(sobrenome);
+				cliente1.setCPF(CPF);
+				cliente1.setLogin(login);
+				cliente1.setSenha(senha);
 //			
-			System.out.println("Preço compra:");
-			produto1.setPrecoCusto(leitor.nextFloat());
 
-			System.out.println("Preço venda: ");
-			produto1.setPrecoVenda(leitor.nextFloat());
+				clienteDAO.inserirCliente(cliente1);
 
-			produtoDAO.inserirProduto(produto1);
+				break;
+			}
+			case 2: {
+				Fornecedor fornecedor1 = new Fornecedor();
 
-			fornecedorRecuperado = fornecedorDAO.recuperarFornecedorProduto(produto1);
-			
-			System.out.println(fornecedorRecuperado.getNomeFantasia());
+				System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
+				String razaoSocial = leitor.next();
+				System.out.println("----------------");
 
-		}
-		break;
-		
-		
-		
-		
-		
+				System.out.println("Nome fantasia:");
+				String nomeFantasia = leitor.next();
 
-		case 5: {
+				fornecedor1.setRazaoSocial(razaoSocial);
+				fornecedor1.setNomeFantasia(nomeFantasia);
 
-			PedidoDAO pedidoDAO = new PedidoDAOImpl();
-			Pedido pedido1 = new Pedido();
-
-			List<Produto> produtos = produtoDAO.recuperarProdutos();
-
-			for (Produto produto : produtos) {
-				System.out.println("------------------------------");
-				System.out.println(produto.getNome());
-				System.out.println(produto.getDescricao());
-				System.out.println(produto.getPrecoVenda());
-				System.out.println(produto.getId());
-				System.out.println("------------------------------");
+				fornecedorDAO.inserirFornecedor(fornecedor1);
 			}
 
-			do {
-				System.out.println("Id do produto:");
-				Produto produtoRecuperado = produtoDAO.recuperarPorId(leitor.nextLong());
+				break;
 
-				Item item = new Item();
-				item.setProduto(produtoRecuperado);
+			case 3: {
 
-				System.out.println("Quantas unidades de " + produtoRecuperado.getNome() + ": ");
-				item.setQuantidade(leitor.nextFloat());
+				Produto produto1 = new Produto();
 
-				itemDAO.inserirItem(item);
-				pedido1.adicionarItem(item);
+				System.out.println("Nome:");
+				produto1.setNome(leitor.next());
 
-				System.out.println("Pressione 1 para adicionar um item ao pedido");
-				System.out.println("Pressione 2 para continuar");
+				System.out.println("Id do Fornecedor:");
+				Long r = leitor.nextLong();
+				Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
 
-				resposta = leitor.nextInt();
+//			produto1.setFornecedor(fornecedorRecuperado);
+				produtoDAO.inserirProduto(produto1);
+
+				fornecedorRecuperado.adicionarProduto(produto1);
+
+				fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+
+//			fornecedorRecuperado.getProdutos().add(produto1);
+//			fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+
+//			
+				System.out.println("Preço compra:");
+				produto1.setPrecoCusto(leitor.nextFloat());
+
+				System.out.println("Preço venda: ");
+				produto1.setPrecoVenda(leitor.nextFloat());
+
+				produtoDAO.atualizarProduto(produto1);
+
+//			fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
+
+				System.out.println(fornecedorRecuperado.getNomeFantasia());
+
+			}
+				break;
+
+			case 5: {
+
+				PedidoDAO pedidoDAO = new PedidoDAOImpl();
+				Pedido pedido1 = new Pedido();
+
+				List<Produto> produtos = produtoDAO.recuperarProdutos();
+
+				for (Produto produto : produtos) {
+					System.out.println("------------------------------");
+					System.out.println(produto.getNome());
+					System.out.println(produto.getDescricao());
+					System.out.println(produto.getPrecoVenda());
+					System.out.println(produto.getId());
+					System.out.println("------------------------------");
+				}
+
+				do {
+					System.out.println("Id do produto:");
+					Produto produtoRecuperado = produtoDAO.recuperarPorId(leitor.nextLong());
+
+					Item item = new Item();
+					item.setProduto(produtoRecuperado);
+
+					System.out.println("Quantas unidades de " + produtoRecuperado.getNome() + ": ");
+					item.setQuantidade(leitor.nextFloat());
+
+					itemDAO.inserirItem(item);
+					pedido1.adicionarItem(item);
+
+					System.out.println("Pressione 1 para adicionar um item ao pedido");
+					System.out.println("Pressione 2 para continuar");
+
+					resposta = leitor.nextInt();
 
 //				produtoDAO.recuperarProdutoItem(item); // apenas para testar método
 //				itemDAO.recuperarItensPedido(pedido1); // apenas para testar método 
 
-			} while (resposta == 1);
+				} while (resposta == 1);
 
-			/* em teste */
+			}
+				
 
-//			item1.setProduto(produto1);
-//			item1.setQuantidade(10);
-//			item1.setValorTotal(item1.calculaValorTotal());
-//			
-//			item2.setProduto(produto2);
-//			item2.setQuantidade(10);
-//			item2.setValorTotal(item2.calculaValorTotal());
-//
-//			item3.setProduto(produto2);
-//			item3.setQuantidade(10);
-//			item3.setValorTotal(item2.calculaValorTotal());
-//
-//			itemDAO.inserirItem(item1);
-//			itemDAO.inserirItem(item2);
-//			itemDAO.inserirItem(item3);
-//			
-//			pedido1.adicionarItem(item1);;
-//			pedido1.adicionarItem(item2);
-//			pedido1.adicionarItem(item3);
-//			
-//			pedido1.setCliente(cliente);
-//			
-//			pedidoDAO.inserirPedido(pedido1);
-//			
-//			cliente1.getPedidos().add(pedido1);
-////			cliente1.setId((long) 14);
-//			clienteDAO.atualizarCliente(cliente1);
-		}
+				/* em teste */
+			default:
+				System.out.println("Valor invalido");
+				break;
+			}
 
-		default:
-			break;
-		}
+			System.out.println("Pressione 1 para continuar");
+			System.out.println("Pressione 2 para finalizar o programa");
+			resposta = leitor.nextInt();
+			
+			if(resposta == 1) {
+				entrar = true;
+			}else {
+				entrar = false;
+			}
+			
+		} 
 //		add metodo na interface
-		String clienteVolta = clienteDAO.recuperarPorId((long) (1)).getNome();
-
-		System.out.println(clienteVolta);
-
+//		String clienteVolta = clienteDAO.recuperarPorId((long) (1)).getNome();
+//
+//		System.out.println(clienteVolta);
+//
 //		
 //		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", "loginBrasa",
 //				"Senhabemforte", "123.356.411-42");
@@ -426,7 +478,7 @@ public class Principal {
 		//////////////////// CADASTRO CLIENTE PEDIDO//////////////////////////
 
 //		ClienteDAO clienteDAO = new ClienteDAOImpl();
-		Cliente cliente1 = new Cliente();
+//		Cliente cliente1 = new Cliente();
 
 //		
 //		System.out.println("Nome:");
