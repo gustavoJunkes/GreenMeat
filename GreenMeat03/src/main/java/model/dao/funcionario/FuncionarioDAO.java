@@ -11,21 +11,11 @@ public interface FuncionarioDAO {
 	void inserirFuncionario(Funcionario funcionario);
 
 	void deletarFuncionario(Funcionario funcionario);
-//
-//	void inserirNomeFuncionario(String nome);
-//
-//	void inserirCpfFuncionario(String cpf);
-//
-//	void inserirDataDeNascimentoDoFuncionario(LocalDate dataDeNascimento);
-//
-//	void inserirContatoDoFuncionario(Contato contato);
-//
-//	void inserirFuncao(String funcao);
-//
-//	void inserirCarteiraDeTrabalho(String carteiraTrabalho);
 
 	void atualizarFuncionario(Funcionario funcionario);
 
+	Funcionario recuperarPorId(Long id);
+	
 	List<Funcionario> recuperarFuncionarios();
 
 }

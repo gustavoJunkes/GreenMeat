@@ -3,11 +3,6 @@ package model.entities.users.information;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.persistence.EntityManager;
-
-import org.hibernate.internal.build.AllowSysOut;
-
-import javassist.tools.framedump;
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
 import model.dao.contato.ContatoDAO;
@@ -16,6 +11,8 @@ import model.dao.endereco.EnderecoDAO;
 import model.dao.endereco.EnderecoDAOImpl;
 import model.dao.fornecedor.FornecedorDAO;
 import model.dao.fornecedor.FornecedorDAOImpl;
+import model.dao.funcionario.FuncionarioDAO;
+import model.dao.funcionario.FuncionarioDAOImpl;
 import model.dao.item.ItemDAO;
 import model.dao.item.ItemDAOImpl;
 import model.dao.localidade.LocalidadeDAO;
@@ -31,6 +28,8 @@ import model.entities.products.Pedido;
 import model.entities.products.Produto;
 import model.entities.users.Cliente;
 import model.entities.users.Fornecedor;
+import model.entities.users.PessoaFisica;
+import model.entities.users.Usuario;
 import model.exception.users.information.CountryInvalidException;
 import model.exception.users.information.EmailInvalidException;
 import model.exception.users.information.PhoneNumberInvalidException;
@@ -42,6 +41,8 @@ public class Principal {
 
 		System.out.println("Hello World");
 
+		
+		
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
 
@@ -53,6 +54,7 @@ public class Principal {
 		boolean entrar = false;
 		int resposta;
 
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
 		ItemDAO itemDAO = new ItemDAOImpl();
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
@@ -65,17 +67,22 @@ public class Principal {
 
 		Scanner leitor = new Scanner(System.in);
 
-		System.out.println("Pressione 1 para entrar");
-		System.out.println("Pressione 2 para se cadastrar");
+		System.out.println("Pressione 1 para entrar(cliente)");
+		System.out.println("Pressione 2 para se cadastrar(cliente)");
+		System.out.println("Pressione 3 para entrar(fornecedor)");
+		System.out.println("Pressione 4 para se cadastrar(fornecedor)");
+		System.out.println("Pressione 5 para entrar(adm)");
+
 		int entrada = leitor.nextInt();
 
+		
 		switch (entrada) {
 		case 1: {
 
 			System.out.println("Seu id:(No lugar de login/por enquanto)");
 			Long login = leitor.nextLong();
 
-			Cliente clienteRecuperado = clienteDAO.recuperarPorId(login);
+			Usuario clienteRecuperado = clienteDAO.recuperarPorId(login);
 
 			System.out.println("Senha:");
 			String senha = leitor.next();
@@ -94,7 +101,7 @@ public class Principal {
 		case 2: {
 			
 			Cliente cliente1 = new Cliente();
-
+			
 			System.out.println("Nome:");
 			String nome = leitor.next();
 
@@ -122,9 +129,69 @@ public class Principal {
 
 			System.out.println("Seu id de login é " + cliente1.getId());
 			System.out.println("-------------------------------------");
+			
+		
 
 			break;
 		}
+		
+		case 3:{
+			Fornecedor fornecedor1 = new Fornecedor();
+
+			System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
+			String razaoSocial = leitor.next();
+			System.out.println("----------------");
+
+			System.out.println("Nome fantasia:");
+			String nomeFantasia = leitor.next();
+
+			fornecedor1.setRazaoSocial(razaoSocial);
+			fornecedor1.setNomeFantasia(nomeFantasia);
+
+			fornecedorDAO.inserirFornecedor(fornecedor1);
+		
+			break;
+		}
+		case 4:{
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Usuario fornecedorRecuperado = fornecedorDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(fornecedorRecuperado.getSenha())) {
+				entrar = true;
+								
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+		}
+		case 5:{
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Usuario funcionarioRecuperado = funcionarioDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(funcionarioRecuperado.getSenha())) {
+				entrar = true;
+								
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+			
+		}
+			
 		default:
 			System.out.println("Valor invalido");
 			break;
@@ -168,7 +235,9 @@ public class Principal {
 				cliente1.setLogin(login);
 				cliente1.setSenha(senha);
 //			
-
+				if( cliente1 instanceof PessoaFisica )
+					System.out.println("Deu certo... eu acho");
+				
 				clienteDAO.inserirCliente(cliente1);
 
 				break;
