@@ -12,6 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.users.Cliente;
 import model.entities.users.Funcionario;
 
 public class FuncionarioDAOImpl implements FuncionarioDAO {
@@ -105,6 +106,40 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 		}
 	}
 
+	
+	public Funcionario recuperarPorId(Long id) {
+		Session sessao = null;
+		Funcionario funcionario = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			funcionario = sessao.find(Funcionario.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return funcionario;
+		
+	}
+	
+	
+	
 	public List<Funcionario> recuperarFuncionarios() {
 
 		Session sessao = null;

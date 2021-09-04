@@ -2,6 +2,7 @@ package model.dao.contato;
 
 import java.util.List;
 
+import model.entities.users.Usuario;
 import model.entities.users.information.Contato;
 
 public interface ContatoDAO {
@@ -13,4 +14,6 @@ public interface ContatoDAO {
 	void atualizarContato(Contato contato);
 	
 	List <Contato> recuperarContatos();
+	
+	List<Contato> recuperarContatosUsuario(Usuario usuario);
 }

@@ -45,7 +45,7 @@ public class Produto implements Serializable {
 	private LocalDate dataValidade;
 
 	@ManyToOne
-	@JoinColumn(name = "id_fornecedor")
+	@JoinColumn(name = "id_fornecedor")			
 	private Fornecedor fornecedor;
 
 	@Enumerated(EnumType.STRING)

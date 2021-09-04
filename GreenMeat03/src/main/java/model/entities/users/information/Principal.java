@@ -1,6 +1,7 @@
 package model.entities.users.information;
 
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.cliente.ClienteDAO;
 import model.dao.cliente.ClienteDAOImpl;
@@ -8,10 +9,26 @@ import model.dao.contato.ContatoDAO;
 import model.dao.contato.ContatoDAOImpl;
 import model.dao.endereco.EnderecoDAO;
 import model.dao.endereco.EnderecoDAOImpl;
+import model.dao.fornecedor.FornecedorDAO;
+import model.dao.fornecedor.FornecedorDAOImpl;
+import model.dao.funcionario.FuncionarioDAO;
+import model.dao.funcionario.FuncionarioDAOImpl;
+import model.dao.item.ItemDAO;
+import model.dao.item.ItemDAOImpl;
 import model.dao.localidade.LocalidadeDAO;
 import model.dao.localidade.LocalidadeDAOImpl;
+import model.dao.pedido.PedidoDAO;
+import model.dao.pedido.PedidoDAOImpl;
+import model.dao.produto.ProdutoDAO;
+import model.dao.produto.ProdutoDAOImpl;
 import model.dao.usuario.UsuarioDAO;
 import model.dao.usuario.UsuarioDAOImpl;
+import model.entities.products.Item;
+import model.entities.products.Pedido;
+import model.entities.products.Produto;
+import model.entities.users.Cliente;
+import model.entities.users.Fornecedor;
+import model.entities.users.PessoaFisica;
 import model.entities.users.Usuario;
 import model.exception.users.information.CountryInvalidException;
 import model.exception.users.information.EmailInvalidException;
@@ -19,26 +36,359 @@ import model.exception.users.information.PhoneNumberInvalidException;
 import model.exceptions.InvalidFieldException;
 
 public class Principal {
-	public static void main(String[] args) throws InvalidFieldException, CountryInvalidException, EmailInvalidException, PhoneNumberInvalidException {
+	public static void main(String[] args)
+			throws InvalidFieldException, CountryInvalidException, EmailInvalidException, PhoneNumberInvalidException {
 
 		System.out.println("Hello World");
 
+		
+		
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
 
+//		EntityManager em = new Enti
+
+//		BUG - NÃO É POSSIVEL RECUPERAR UM FORNECEDOR A PARTIR DE UM PRODUTO
+//		RESOLVIDO
+
+		boolean entrar = false;
+		int resposta;
+
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
+		ItemDAO itemDAO = new ItemDAOImpl();
+		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
 		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
 		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+		ContatoDAO contatoDAO = new ContatoDAOImpl();
+		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
+//		Cliente cliente1 = new Cliente();
+
+		Scanner leitor = new Scanner(System.in);
+
+		System.out.println("Pressione 1 para entrar(cliente)");
+		System.out.println("Pressione 2 para se cadastrar(cliente)");
+		System.out.println("Pressione 3 para entrar(fornecedor)");
+		System.out.println("Pressione 4 para se cadastrar(fornecedor)");
+		System.out.println("Pressione 5 para entrar(adm)");
+
+		int entrada = leitor.nextInt();
+
 		
-		List<Usuario>usuarios = usuarioDAO.recuperarUsuarios();
-		localidadeDAO.recuperarLocalidades();
-		
-		for(Usuario usuario: usuarios) {
-		
-			System.out.println(usuario.getLogin());
-			System.out.println(usuario.getId());
+		switch (entrada) {
+		case 1: {
+
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Usuario clienteRecuperado = clienteDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(clienteRecuperado.getSenha())) {
+				entrar = true;
+				
+				
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+		}
+		case 2: {
 			
+			Cliente cliente1 = new Cliente();
+			
+			System.out.println("Nome:");
+			String nome = leitor.next();
+
+			System.out.println("Sobrenome:");
+			String sobrenome = leitor.next();
+
+			System.out.println("CPF:");
+			String CPF = leitor.next();
+
+			System.out.println("Novo login:");
+			String login = leitor.next();
+
+			System.out.println("Nova senha:");
+			String senha = leitor.next();
+			
+
+			cliente1.setNome(nome);
+			cliente1.setSobrenome(sobrenome);
+			cliente1.setCPF(CPF);
+			cliente1.setLogin(login);
+			cliente1.setSenha(senha);
+		
+
+			clienteDAO.inserirCliente(cliente1);
+
+			System.out.println("Seu id de login é " + cliente1.getId());
+			System.out.println("-------------------------------------");
+			
+		
+
+			break;
+		}
+		
+		case 3:{
+			Fornecedor fornecedor1 = new Fornecedor();
+
+			System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
+			String razaoSocial = leitor.next();
+			System.out.println("----------------");
+
+			System.out.println("Nome fantasia:");
+			String nomeFantasia = leitor.next();
+
+			fornecedor1.setRazaoSocial(razaoSocial);
+			fornecedor1.setNomeFantasia(nomeFantasia);
+
+			fornecedorDAO.inserirFornecedor(fornecedor1);
+		
+			break;
+		}
+		case 4:{
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Usuario fornecedorRecuperado = fornecedorDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(fornecedorRecuperado.getSenha())) {
+				entrar = true;
+								
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+		}
+		case 5:{
+			System.out.println("Seu id:(No lugar de login/por enquanto)");
+			Long login = leitor.nextLong();
+
+			Usuario funcionarioRecuperado = funcionarioDAO.recuperarPorId(login);
+
+			System.out.println("Senha:");
+			String senha = leitor.next();
+
+			if (senha.equals(funcionarioRecuperado.getSenha())) {
+				entrar = true;
+								
+			} else {
+				System.out.println("Senha inválida");
+				
+			}
+
+			break;
+			
+		}
+			
+		default:
+			System.out.println("Valor invalido");
+			break;
+		}
+
+
+		while(entrar == true) {
+
+			System.out.println("1- cadastrar novo cliente");
+			System.out.println("2- cadastrar novo fornecedor");
+			System.out.println("3- cadastrar novo produto");
+			System.out.println("4- cadastrar novo -----");
+			System.out.println("5- cadastrar novo pedido");
+			System.out.println("6- cadastrar novo -------");
+			System.out.println("7- recuperar cliente por ");
+
+			resposta = leitor.nextInt();
+
+			switch (resposta) {
+			case 1: {
+				Cliente cliente1 = new Cliente();
+
+				System.out.println("Nome:");
+				String nome = leitor.next();
+
+				System.out.println("Sobrenome:");
+				String sobrenome = leitor.next();
+
+				System.out.println("CPF:");
+				String CPF = leitor.next();
+
+				System.out.println("Novo login:");
+				String login = leitor.next();
+
+				System.out.println("Nova senha:");
+				String senha = leitor.next();
+
+				cliente1.setNome(nome);
+				cliente1.setSobrenome(sobrenome);
+				cliente1.setCPF(CPF);
+				cliente1.setLogin(login);
+				cliente1.setSenha(senha);
+//			
+				if( cliente1 instanceof PessoaFisica )
+					System.out.println("Deu certo... eu acho");
+				
+				clienteDAO.inserirCliente(cliente1);
+
+				break;
+			}
+			case 2: {
+				Fornecedor fornecedor1 = new Fornecedor();
+
+				System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
+				String razaoSocial = leitor.next();
+				System.out.println("----------------");
+
+				System.out.println("Nome fantasia:");
+				String nomeFantasia = leitor.next();
+
+				fornecedor1.setRazaoSocial(razaoSocial);
+				fornecedor1.setNomeFantasia(nomeFantasia);
+
+				fornecedorDAO.inserirFornecedor(fornecedor1);
+			}
+
+				break;
+
+			case 3: {
+
+				Produto produto1 = new Produto();
+
+				System.out.println("Nome:");
+				produto1.setNome(leitor.next());
+
+				System.out.println("Id do Fornecedor:");
+				Long r = leitor.nextLong();
+				Fornecedor fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
+
+//			produto1.setFornecedor(fornecedorRecuperado);
+				produtoDAO.inserirProduto(produto1);
+
+				fornecedorRecuperado.adicionarProduto(produto1);
+
+				fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+
+//			fornecedorRecuperado.getProdutos().add(produto1);
+//			fornecedorDAO.atualizarFornecedor(fornecedorRecuperado);
+
+//			
+				System.out.println("Preço compra:");
+				produto1.setPrecoCusto(leitor.nextFloat());
+
+				System.out.println("Preço venda: ");
+				produto1.setPrecoVenda(leitor.nextFloat());
+
+				produtoDAO.atualizarProduto(produto1);
+
+//			fornecedorRecuperado = fornecedorDAO.recuperarPorId(r);
+
+				System.out.println(fornecedorRecuperado.getNomeFantasia());
+
+			}
+				break;
+
+			case 5: {
+
+				PedidoDAO pedidoDAO = new PedidoDAOImpl();
+				Pedido pedido1 = new Pedido();
+
+				List<Produto> produtos = produtoDAO.recuperarProdutos();
+
+				for (Produto produto : produtos) {
+					System.out.println("------------------------------");
+					System.out.println(produto.getNome());
+					System.out.println(produto.getDescricao());
+					System.out.println(produto.getPrecoVenda());
+					System.out.println(produto.getId());
+					System.out.println("------------------------------");
+				}
+
+				do {
+					System.out.println("Id do produto:");
+					Produto produtoRecuperado = produtoDAO.recuperarPorId(leitor.nextLong());
+
+					Item item = new Item();
+					item.setProduto(produtoRecuperado);
+
+					System.out.println("Quantas unidades de " + produtoRecuperado.getNome() + ": ");
+					item.setQuantidade(leitor.nextFloat());
+
+					itemDAO.inserirItem(item);
+					pedido1.adicionarItem(item);
+
+					System.out.println("Pressione 1 para adicionar um item ao pedido");
+					System.out.println("Pressione 2 para continuar");
+
+					resposta = leitor.nextInt();
+
+//				produtoDAO.recuperarProdutoItem(item); // apenas para testar método
+//				itemDAO.recuperarItensPedido(pedido1); // apenas para testar método 
+
+				} while (resposta == 1);
+
+			}
+				
+
+				/* em teste */
+			default:
+				System.out.println("Valor invalido");
+				break;
+			}
+
+			System.out.println("Pressione 1 para continuar");
+			System.out.println("Pressione 2 para finalizar o programa");
+			resposta = leitor.nextInt();
+			
+			if(resposta == 1) {
+				entrar = true;
+			}else {
+				entrar = false;
+			}
+			
+		} 
+//		add metodo na interface
+//		String clienteVolta = clienteDAO.recuperarPorId((long) (1)).getNome();
+//
+//		System.out.println(clienteVolta);
+//
+//		
+//		Fornecedor fornecedor1 = new Fornecedor("Produzimos o melhor do melhor", "Top Meet do Brasil", "loginBrasa",
+//				"Senhabemforte", "123.356.411-42");
+
+//				String nome = "Jonas";
+//				String sobrenome = "Abelardo";
+//				String login = "JoAbLog";
+//				String senha = "senhasecreta";
+//				String CPF = "121.234.377-32";
+//		
+//				cliente1.setNome(nome);
+//				cliente1.setCPF(CPF);
+//				cliente1.setLogin(login);
+//				cliente1.setSenha(senha);
+//				cliente1.setSobrenome(sobrenome);
+////				cliente1.getLocalidades().add(localidade1);
+////				cliente1.getLocalidades().add(localidade2);
+////				cliente1.setId((long) 1);
+//				clienteDAO.inserirCliente(cliente1);
+//		
+//		List<Localidade>localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente1);
+//		localidadeDAO.recuperarLocalidades();
+//		
+//		for(Usuario usuario: usuarios) {
+//		
+//			System.out.println(usuario.getLogin());
+//			System.out.println(usuario.getId());
+
 //			List<Localidade>localidades = usuario.getLocalidades();
 //			
 //			for (Localidade localidade : localidades) {
@@ -47,11 +397,9 @@ public class Principal {
 //				System.out.println(localidade.getProvincia());
 //				
 //			}
-			
-		}
-	
-		
-	
+
+//		}
+
 		//
 //		Localidade localidade1 = new Localidade("Brasil", "Santa Catarina", "Blumenau", "America do Sul");
 //		Localidade localidade2 = new Localidade("Brasil", "São Paulo", "Santana de Parnaíba", "America do Sul");
@@ -67,26 +415,38 @@ public class Principal {
 //
 //		enderecoDAO.inserirEndereco(endereco1);
 //		enderecoDAO.inserirEndereco(endereco2);
-//
+
 //		ClienteDAO clienteDAO = new ClienteDAOImpl();
 //
-//		Cliente cliente1 = new Cliente();
+//		Cliente cliente4 = new Cliente();
 //
-//		String nome = "Jonas";
-//		String sobrenome = "Abelardo";
-//		String login = "JoAbLog";
-//		String senha = "senhasecreta";
-//		String CPF = "121.234.377-32";
+//		cliente1.setId((long)(1));
+//		
+//		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(cliente1);
+
+//		usuarioDAO.recuperarUsuario;
+
+//		System.out.println(cliente1.getNome());
+//		for ( Contato contato : contatos) {
+//			System.out.println(contato.getEmail());
+//			System.out.println(contato.getTelefone());
+//		}
+
+//		 nome = "Luana";
+//		sobrenome = "Silva";
+//		login = "JoAbLog";
+//		senha = "senhasecreta";
+//		CPF = "121.234.377-32";
 //
-//		cliente1.setNome(nome);
-//		cliente1.setCPF(CPF);
-//		cliente1.setLogin(login);
-//		cliente1.setSenha(senha);
-//		cliente1.setSobrenome(sobrenome);
-//		cliente1.getLocalidades().add(localidade1);
-//		cliente1.getLocalidades().add(localidade2);
+//		cliente4.setNome(nome);
+//		cliente4.setCPF(CPF);
+//		cliente4.setLogin(login);
+//		cliente4.setSenha(senha);
+//		cliente4.setSobrenome(sobrenome);
+//		cliente4.getLocalidades().add(localidade1);
+//		cliente4.getLocalidades().add(localidade2);
 ////		cliente1.setId((long) 1);
-//		clienteDAO.inserirCliente(cliente1);
+//		clienteDAO.inserirCliente(cliente4);
 //
 //		Cliente cliente2 = new Cliente();
 //
@@ -105,7 +465,7 @@ public class Principal {
 //		cliente2.getLocalidades().add(localidade2);
 ////		cliente2.setId((long) 1);
 //		clienteDAO.inserirCliente(cliente2);
-
+////
 //		localidade1.getUsuarios().add(cliente1);
 //		localidade1.getUsuarios().add(cliente2);
 //		localidade2.getUsuarios().add(cliente1);
@@ -113,8 +473,21 @@ public class Principal {
 //
 //		localidadeDAO.atualizarLocalidade(localidade1);
 //		localidadeDAO.atualizarLocalidade(localidade2);
-
-		
+//
+//		
+//		List<Localidade>localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente1);
+//		
+//		for (Localidade localidade : localidades) {
+//			
+//			System.out.println(localidade.getPais());
+//			System.out.println(localidade.getEstado());
+//			System.out.println(localidade.getProvincia());
+//			
+//			
+//			
+//			
+//		}
+//		
 //		ContatoDAO contatoDAO = new ContatoDAOImpl();
 //		Contato contato1= new Contato("Junkes@email.com", "1341-4234");
 //		Contato contato2= new Contato("Secundario@email.com", "9934-9551");
@@ -175,26 +548,44 @@ public class Principal {
 
 //		ClienteDAO clienteDAO = new ClienteDAOImpl();
 //		Cliente cliente1 = new Cliente();
-//
-//		PedidoDAO pedidoDAO = new PedidoDAOImpl();
-//		Pedido pedido1 = new Pedido();
-//
-//		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-//		Produto produto1 = new Produto();
-//		Produto produto2 = new Produto();
+
 //		
+//		System.out.println("Nome:");
+//		produto1.setNome(leitor.next());
+////		
+//		System.out.println("Preço compra:");
+//		produto1.setPrecoCusto(leitor.nextFloat());
+//		
+//		System.out.println("Preço venda: ");
+//		produto1.setPrecoVenda(leitor.nextFloat());
+//
+//		produtoDAO.inserirProduto(produto1);
+//		///////////////////////////////////
+
+//		
+//		PedidoDAO pedidoDAO = new PedidoDAOImpl();
 //		ItemDAO itemDAO = new ItemDAOImpl();
 //		Item item1 = new Item();
 //		Item item2 = new Item();
 //		Item item3 = new Item();
+//
+//		Produto produto1 = new Produto();
+//		Produto produto2 = new Produto();
+//
+//		Pedido pedido1 = new Pedido();
+//
+//		produto1.setNome("Maminha");
+//		produto2.setNome("Costela");
+//
+//		produtoDAO.inserirProduto(produto1);
+//		produtoDAO.inserirProduto(produto2);
 //		
 //		String nome = "Jonas";
 //		String sobrenome = "Abelardo";
 //		String login = "JoAbLog";
 //		String senha = "senhasecreta";
 //		String CPF = "121.234.377-32";
-//		
-//		
+//
 //		cliente1.setNome(nome);
 //		cliente1.setCPF(CPF);
 //		cliente1.setLogin(login);
@@ -202,22 +593,11 @@ public class Principal {
 //		cliente1.setSobrenome(sobrenome); //
 ////		cliente1.setId((long) 1);
 //		clienteDAO.inserirCliente(cliente1);
-//		
-//		produto1.setNome("Picanha");
-//		produto1.setDescricao("descrição");
-//		produto1.setPrecoVenda(17);
 //
-//		produto2.setNome("Alcatra");
-//		produto2.setDescricao("descrição");
-//		produto2.setPrecoVenda(34);
-//		
-//		produtoDAO.inserirProduto(produto1);
-//		produtoDAO.inserirProduto(produto2);
-//		
 //		item1.setProduto(produto1);
 //		item1.setQuantidade(10);
 //		item1.setValorTotal(item1.calculaValorTotal());
-//		
+//
 //		item2.setProduto(produto2);
 //		item2.setQuantidade(10);
 //		item2.setValorTotal(item2.calculaValorTotal());
@@ -229,18 +609,29 @@ public class Principal {
 //		itemDAO.inserirItem(item1);
 //		itemDAO.inserirItem(item2);
 //		itemDAO.inserirItem(item3);
-//		
-//		pedido1.adicionarItem(item1);;
+//
+//		pedido1.adicionarItem(item1);
+//		;
 //		pedido1.adicionarItem(item2);
 //		pedido1.adicionarItem(item3);
-//		
+//
 //		pedido1.setCliente(cliente1);
-//		
+//
 //		pedidoDAO.inserirPedido(pedido1);
-//		
+//
 //		cliente1.getPedidos().add(pedido1);
 ////		cliente1.setId((long) 14);
 //		clienteDAO.atualizarCliente(cliente1);
+//
+//		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente1);
+//
+//		for (Pedido pedido : pedidos) {
+//			System.out.println(pedido.getId());
+//			System.out.println(pedido.getValorTotal());
+////			System.out.println(pedido.getItens());
+//			System.out.println(pedido.toString());
+//
+//		}
 
 		//////////////////// CADASTRO CLIENTE///////////////////////////
 		/*

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -12,7 +14,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.products.Item;
+import model.entities.products.Pedido;
 import model.entities.products.Produto;
+import model.entities.users.Cliente;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
 
@@ -105,6 +110,81 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		}
 	}
 
+	
+	public Produto recuperarPorId(Long id) {
+		Session sessao = null;
+		Produto produto = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			produto = sessao.find(Produto.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return produto;
+		
+	}
+	
+	public Produto recuperarProdutoItem(Item item) {
+
+		Session sessao = null;
+		Produto produto = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
+			Root<Produto> raizProduto= criteria.from(Produto.class);
+
+			Join<Produto, Item> juncaoItem= raizProduto.join("produto");
+
+			ParameterExpression<Long> idItem = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoItem.get("id"), idItem));
+
+			produto = sessao.createQuery(criteria).setParameter(idItem, item.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return produto;
+	}
+
+	
 	public List<Produto> recuperarProdutos() {
 
 		Session sessao = null;

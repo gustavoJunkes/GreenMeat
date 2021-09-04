@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,6 +15,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import model.entities.products.Pedido;
+import model.entities.users.Cliente;
+
 
 public class PedidoDAOImpl implements PedidoDAO {
 
@@ -145,6 +149,48 @@ public class PedidoDAOImpl implements PedidoDAO {
 
 	}
 
+	public List<Pedido> recuperarPedidosCliente(Cliente cliente) {
+
+		Session sessao = null;
+		List<Pedido> pedidos = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pedido> criteria = construtor.createQuery(Pedido.class);
+			Root<Pedido> raizPedido = criteria.from(Pedido.class);
+
+			Join<Pedido, Cliente> juncaoCliente = raizPedido.join("cliente");
+
+			ParameterExpression<Long> idCliente = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoCliente.get("id"), idCliente));
+
+			pedidos = sessao.createQuery(criteria).setParameter(idCliente, cliente.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return pedidos;
+	}
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -173,6 +219,5 @@ public class PedidoDAOImpl implements PedidoDAO {
 		return fabricaSessao;
 
 	}
-	
-	
+
 }

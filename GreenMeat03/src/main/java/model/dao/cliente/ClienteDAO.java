@@ -12,7 +12,10 @@ public interface ClienteDAO {
 
 	void atualizarCliente(Cliente cliente);
 
+	Cliente recuperarPorId(Long id);
+	
 	List<Cliente> recuperarClientes();
 
+	
 //	List<Cliente> recuperarClientesOrdemDecrescente();
 }

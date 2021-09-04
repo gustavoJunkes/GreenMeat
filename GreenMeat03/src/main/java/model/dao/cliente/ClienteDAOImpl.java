@@ -105,6 +105,37 @@ public class ClienteDAOImpl implements ClienteDAO {
 		}
 	}
 
+	public Cliente recuperarPorId(Long id) {
+		Session sessao = null;
+		Cliente cliente = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			cliente = sessao.find(Cliente.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return cliente;
+		
+	}
+	
 	public List<Cliente> recuperarClientes() {
 
 		Session sessao = null;

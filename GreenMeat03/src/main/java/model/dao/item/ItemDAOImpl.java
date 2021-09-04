@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,7 +15,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import model.entities.products.Item;
-
+import model.entities.products.Pedido;
+import model.entities.users.Cliente;
 
 public class ItemDAOImpl implements ItemDAO {
 
@@ -104,6 +107,48 @@ public class ItemDAOImpl implements ItemDAO {
 				sessao.close();
 			}
 		}
+	}
+
+	public List<Item> recuperarItensPedido(Pedido pedido) {
+
+		Session sessao = null;
+		List<Item> itens = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Item> criteria = construtor.createQuery(Item.class);
+			Root<Item> raizItem= criteria.from(Item.class);
+
+			Join<Item, Pedido> juncaoPedido = raizItem.join("pedido");
+
+			ParameterExpression<Long> idPedido = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPedido.get("id"), idPedido));
+
+			itens = sessao.createQuery(criteria).setParameter(idPedido, pedido.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return itens;
 	}
 
 	public List<Item> recuperarItens() {
