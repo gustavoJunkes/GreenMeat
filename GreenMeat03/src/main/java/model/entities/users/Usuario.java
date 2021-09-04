@@ -1,44 +1,105 @@
 package model.entities.users;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
-import model.entities.users.information.NivelAcesso;
 
-public class Usuario {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private Localidade endereco;
-	private String login; // nao vai login
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
+
+	// um usuario possui diversas localidades, relação de N pra N
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@JoinTable(name = "usuario_localidade", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_localidade"))
+	private List<Localidade> localidades = new ArrayList<Localidade>();
+
+	@Column(name = "login_usuario")
+	private String login;
+
+	@Column(name = "senha_usuario")
 	private String senha;
-	private NivelAcesso nivelDeAcesso;
-	private Contato contato;     	// Contato aparece na classe Usuário e Funcionario          
-	private LocalDate dataCadastro;
-	private String sobrenome;
+
+	// Dizendo que um usuario pode ter varios contatos e que um contato pode
+	// pertencer apenas a um usuario
+	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
+
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+//	private List<Contato> contatos = new ArrayList<Contato>(); 
+
+//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
+//	@JoinColumn(name = "id_usuario")
+//	private List<Contato>contatos = new ArrayList<Contato>();
+
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Contato>contatos = new ArrayList<Contato>();
+
 	
+	@Column(name = "datacastro_usuario")
+	private LocalDate dataCadastro;
+
 	// Cada vez que um usuário for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
 
 	public Usuario() {
-		
+
 	}
 
-	public Usuario(Localidade endereco, String login, String senha, Contato contato) {
-		setEndereco(endereco);
+	public Usuario(/* Localidade endereco, */ String login, String senha /* Contato contato */) {
+//		setEndereco(endereco);
 		setLogin(login);
 		setSenha(senha);
-		setContato(contato);
+//		setContato(contato);
 		setDataCadastro(LocalDate.now());
 	}
 
-	public Localidade getEndereco() {
-		return endereco;
+	public List<Contato> getContatos() {
+		return contatos;
 	}
 
-	public void setEndereco(Localidade endereco) {
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
 
-		this.endereco = endereco;
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
 
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public List<Localidade> getLocalidades() {
+		return localidades;
+	}
+
+	public void setLocalidades(List<Localidade> localidades) {
+		this.localidades = localidades;
 	}
 
 	public String getLogin() {
@@ -59,29 +120,26 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public NivelAcesso getNivelDeAcesso() {
-		return nivelDeAcesso;
+//	public LocalDate getDataCadastro() {
+//		return dataCadastro;
+//	}
+
+//	public void setDataCadastro(LocalDate dataCadastro) {
+//		this.dataCadastro = dataCadastro;
+//	}
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setNivelDeAcesso(NivelAcesso nivelDeAcesso) {
-		this.nivelDeAcesso = nivelDeAcesso;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Contato getContato() {
-		return contato;
+
+	public void adicionarContato(Contato contato) {
+		getContatos().add(contato);
+		contato.setUsuario(this);
 	}
 
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-	
-	
 }

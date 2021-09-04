@@ -1,4 +1,4 @@
-package model.dao;
+package model.dao.estoque;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface EstoqueDAO {
 	
 	void deletarEstoque(Estoque estoque);
 	
-	void atualizarItens(List<Item>itens);
+	void atualizarEstoque(Estoque estoque);
 	
 	List<Estoque>recuperarEstoque();
 }

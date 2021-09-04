@@ -4,48 +4,64 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import model.entities.users.Cliente;
+import model.entities.users.Usuario;
 
+@Entity
+@Table(name = "pedido")
 public class Pedido {
+	private static final long serialVersionUID = 1L;
 
-	// valor do item = produto * quantidade
-	// valor do pedido = soma dos itens
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pedido")
+	private Long id;
 
-//	Precisa de um novo atributo em Status, como ENTREGUE, ou A_CAMINHO, por exemplo?
-//	Precisa de método para finalizar pedido
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Item> itens = new ArrayList<Item>();
 
-	private String idPedido;
+	@Enumerated(EnumType.STRING)
 	private Status status;
-	private Cliente cliente; // dono da lista de compras
-	private List<Item> itens; // Esta lista deveria ser instanciada aqui ou no construtor?
-	private int numeroPedido; // id pedido // codigo alfanumerico
-	private LocalDate dataEntrega;
-	private float valorTotal; // valor do pedido
 
-	//////////////////////////
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente; // dono da lista de compras
+
+	@Column(name = "data_entrega")
+	private LocalDate dataEntrega;
+
+	@Column(name = "valor_total_pedido")
+	private float valorTotal; // soma do valor total de todos os itens do pedido
 
 	public Pedido(Cliente cliente) {
-		setValorTotal(0);
-		setCliente(cliente); // um cliente pode ter mais de um pedido? (ao mesmo tempo)
-		setStatus(status.PEDIDO_EM_ABERTO);
-		itens = new ArrayList<Item>(); // Esta lista deveria ser instanciada aqui ou na propria área de váriaveis?
-
+		setValorTotal(calcularValorTotalPedido());
+		setCliente(cliente); // um cliente pode ter mais de um pedido aberto? (ao mesmo tempo)
+		setStatus(Status.PEDIDO_EM_ABERTO);
 	}
 
-	public String getIdPedido() {
-		return idPedido;
+	public Pedido(Cliente cliente, List<Item> itens) {
+		setCliente(cliente);
+		setItens(itens);
+		setValorTotal(calcularValorTotalPedido());
 	}
 
-	public void setIdPedido(String idPedido) {
-		this.idPedido = idPedido;
-	}
+	public Pedido() {
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	public Cliente getCliente() {
@@ -54,14 +70,6 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public int getNumeroPedido() {
-		return numeroPedido;
-	}
-
-	public void setNumeroPedido(int numeroPedido) {
-		this.numeroPedido = numeroPedido;
 	}
 
 	public LocalDate getDataEntrega() {
@@ -80,8 +88,6 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-	// este método retorna apenas um endereço de memoria
-
 	public List<Item> getItens() {
 		return itens;
 	}
@@ -95,9 +101,14 @@ public class Pedido {
 
 	public void adicionarItem(Item item) {
 
-		setValorTotal(getValorTotal() + item.getValorTotal());
-
-		itens.add(item); // adicionando um "item" à lista de itens
+		if (itens.contains(item.getProduto()))
+			System.out.println("Produto já está neste pedido!");
+		else {
+			setValorTotal(getValorTotal() + item.getValorTotal());
+			itens.add(item); // adicionando um "item" à lista de itens
+		}
+		// ESTE MÉTODO SERÁ ALTERADO CASO A REÇÃO ENTRE PEDIDO E ITEM SE TORNAR
+		// BIDIRECIONAL
 	}
 
 //	Aqui ele remove um item da Lista  (Pedido, neste caso)
@@ -109,12 +120,11 @@ public class Pedido {
 	}
 
 	public void finalizarPedido(String idPedido) {
-		setStatus(status.PEDIDO_FINALIZADO);
+		setStatus(Status.PEDIDO_FINALIZADO);
 	}
 
-	
 //	O método a seguir calcula o valor total de um pedido somando o valor total de cada item
-	
+
 	public float calcularValorTotalPedido() {
 		int soma = 0;
 		for (int i = 0; i < itens.size(); i++) {
@@ -122,4 +132,21 @@ public class Pedido {
 		}
 		return soma;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 }

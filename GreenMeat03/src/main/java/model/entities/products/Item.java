@@ -1,48 +1,79 @@
 package model.entities.products;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
+
 import model.entities.users.Fornecedor;
 
-public class Item {
+@Entity
+@Table(name = "item")
+public class Item implements Serializable {
 
-	// criar variavel para identificar o item
+	private static final long serialVersionUID = 1L;
 
-	private Produto produto;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_item")
+	private Long id;
+
+	@Column(name = "quantidade", nullable = false, unique = false)
 	private float quantidade; // em kg, por isso float.
-	private Fornecedor fornecedor;
+
+	@Column(name = "valorTotal", nullable = false, unique = false)
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que é calculado a
 								// partir do preço de um produto * quantidade
 
-	public Item(Produto produto, Fornecedor fornecedor, float quantidade) {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_produto")
+	private Produto produto;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_pedido")
+	Pedido pedido;
+	
+	
+	public Item() {
+	}
+
+	public Item(Produto produto, float quantidade) {
 		setProduto(produto);
-		setFornecedor(fornecedor);
 		setQuantidade(quantidade);
 		setValorTotal(calculaValorTotal());
 	}
 
-	public String getNomeProduto() { // alterar ao fazer alteção no atributo produto
-		return produto.getNome();
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 
-////////////////////////////
 	public float getQuantidade() {
 		return quantidade;
 	}
 
-/////////////////////////////
 	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public String getFornecedor() {
-		return fornecedor.getRazaoSocial();
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
 	}
 
 	public float getValorTotal() {
@@ -54,6 +85,6 @@ public class Item {
 	}
 
 	public float calculaValorTotal() {
-		return this.produto.getPrecoVenda();
+		return this.produto.getPrecoVenda() * quantidade;
 	}
 }

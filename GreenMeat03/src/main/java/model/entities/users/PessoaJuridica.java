@@ -5,35 +5,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import model.entities.users.information.Contato;
-import model.entities.users.information.Localidade;
-
 
 @Entity
 @Table(name = "pessoajuridica")
-public class PessoaJuridica extends Usuario {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class PessoaJuridica extends Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name = "CNPJ_pessoajuridica")
+	/**
+	 * @Column(name = "logradouro_endereco", )
+	 */
+	private static final long serialVersionUID = 1L;
+
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id_pessoa_juridica")
+//	private Long id;
+
+	@Column(name = "CNPJ")
 	private String CNPJ;
 
 	@Column(name = "razaosocial_pessoajuridica")
 	private String razaoSocial;
-	
+
 	@Column(name = "nomefantasia_pessoajuridica")
 	private String nomeFantasia;
 
-	
-	public PessoaJuridica() {}
-	
-	public PessoaJuridica(Localidade endereco, String login, String senha, Contato contato, String CNPJ,
+	public PessoaJuridica() {
+	}
+
+	public PessoaJuridica(/* Localidade endereco, */ String login, String senha, Contato contato, String CNPJ,
 			String razaoSocial, String nomeFantasia) {
-		super(endereco, login, senha, contato);
+		super(login, senha);
+		setCNPJ(CNPJ);
+		setRazaoSocial(razaoSocial);
+		setNomeFantasia(nomeFantasia);
+	}
+	
+	public PessoaJuridica(/* Localidade endereco, */ String login, String senha, String CNPJ,
+			String razaoSocial, String nomeFantasia) {
+		super(login, senha);
 		setCNPJ(CNPJ);
 		setRazaoSocial(razaoSocial);
 		setNomeFantasia(nomeFantasia);
@@ -44,7 +59,7 @@ public class PessoaJuridica extends Usuario {
 	}
 
 	public void setCNPJ(String CNPJ) {
-		CNPJ = CNPJ;
+		this.CNPJ = CNPJ;
 	}
 
 	public String getRazaoSocial() {
