@@ -130,7 +130,7 @@ public class Principal {
 			System.out.println("Seu id de login é " + cliente1.getId());
 			System.out.println("-------------------------------------");
 			
-		
+			entrar = true;
 
 			break;
 		}
