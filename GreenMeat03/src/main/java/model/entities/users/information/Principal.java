@@ -1,5 +1,6 @@
 package model.entities.users.information;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,8 +42,6 @@ public class Principal {
 
 		System.out.println("Hello World");
 
-		
-		
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
 
@@ -51,6 +50,7 @@ public class Principal {
 //		BUG - NÃO É POSSIVEL RECUPERAR UM FORNECEDOR A PARTIR DE UM PRODUTO
 //		RESOLVIDO
 
+		boolean resp = true;
 		boolean entrar = false;
 		int resposta;
 
@@ -75,7 +75,6 @@ public class Principal {
 
 		int entrada = leitor.nextInt();
 
-		
 		switch (entrada) {
 		case 1: {
 
@@ -89,18 +88,19 @@ public class Principal {
 
 			if (senha.equals(clienteRecuperado.getSenha())) {
 				entrar = true;
-				
-				
+
 			} else {
 				System.out.println("Senha inválida");
-				
+
 			}
 
 			break;
 		}
 		case 2: {
-			
+
 			Cliente cliente1 = new Cliente();
+
+
 			
 			System.out.println("Nome:");
 			String nome = leitor.next();
@@ -116,26 +116,70 @@ public class Principal {
 
 			System.out.println("Nova senha:");
 			String senha = leitor.next();
-			
 
 			cliente1.setNome(nome);
 			cliente1.setSobrenome(sobrenome);
 			cliente1.setCPF(CPF);
 			cliente1.setLogin(login);
 			cliente1.setSenha(senha);
-		
 
 			clienteDAO.inserirCliente(cliente1);
 
+			System.out.println("---------------");
+			System.out.println("CONTATO");
+
+			while (resp == true) {
+				Contato contato1 = new Contato();
+
+				System.out.println("");
+				System.out.println("Novo telefone:");
+				String telefone = leitor.next();
+
+				System.out.println("Novo email:");
+				String email = leitor.next();
+
+				contato1.setEmail(email);
+				contato1.setTelefone(telefone);
+//			contato1.setUsuario(cliente1);
+
+				contatoDAO.inserirContato(contato1);
+
+				cliente1.adicionarContato(contato1);
+				
+				cliente1.setNome(nome);
+				cliente1.setSobrenome(sobrenome);
+				cliente1.setCPF(CPF);
+				cliente1.setLogin(login);
+				cliente1.setSenha(senha);
+				cliente1.setDataCadastro(LocalDate.now());
+
+//			if( cliente1 instanceof PessoaFisica )
+//				System.out.println("Deu certo... eu acho");
+
+//				clienteDAO.inserirCliente(cliente1);
+
+				contatoDAO.atualizarContato(contato1);
+
+				System.out.println("Pressione 1 para adicionar um contato");
+				System.out.println("Pressione 2 para continuar");
+				resposta = leitor.nextInt();
+
+				if (resposta == 1)
+					resp = true;
+				else
+					resp = false;
+
+			}
+
 			System.out.println("Seu id de login é " + cliente1.getId());
 			System.out.println("-------------------------------------");
-			
+
 			entrar = true;
 
 			break;
 		}
-		
-		case 3:{
+
+		case 3: {
 			Fornecedor fornecedor1 = new Fornecedor();
 
 			System.out.println("Razão social:(O Scanner não permite mais de uma palavra)");
@@ -149,10 +193,10 @@ public class Principal {
 			fornecedor1.setNomeFantasia(nomeFantasia);
 
 			fornecedorDAO.inserirFornecedor(fornecedor1);
-		
+
 			break;
 		}
-		case 4:{
+		case 4: {
 			System.out.println("Seu id:(No lugar de login/por enquanto)");
 			Long login = leitor.nextLong();
 
@@ -163,15 +207,17 @@ public class Principal {
 
 			if (senha.equals(fornecedorRecuperado.getSenha())) {
 				entrar = true;
-								
+
 			} else {
 				System.out.println("Senha inválida");
-				
+
 			}
+
+			entrar = true;
 
 			break;
 		}
-		case 5:{
+		case 5: {
 			System.out.println("Seu id:(No lugar de login/por enquanto)");
 			Long login = leitor.nextLong();
 
@@ -182,23 +228,22 @@ public class Principal {
 
 			if (senha.equals(funcionarioRecuperado.getSenha())) {
 				entrar = true;
-								
+
 			} else {
 				System.out.println("Senha inválida");
-				
+
 			}
 
 			break;
-			
+
 		}
-			
+
 		default:
 			System.out.println("Valor invalido");
 			break;
 		}
 
-
-		while(entrar == true) {
+		while (entrar == true) {
 
 			System.out.println("1- cadastrar novo cliente");
 			System.out.println("2- cadastrar novo fornecedor");
@@ -229,16 +274,50 @@ public class Principal {
 				System.out.println("Nova senha:");
 				String senha = leitor.next();
 
-				cliente1.setNome(nome);
-				cliente1.setSobrenome(sobrenome);
-				cliente1.setCPF(CPF);
-				cliente1.setLogin(login);
-				cliente1.setSenha(senha);
-//			
-				if( cliente1 instanceof PessoaFisica )
-					System.out.println("Deu certo... eu acho");
-				
-				clienteDAO.inserirCliente(cliente1);
+				System.out.println("---------------");
+				System.out.println("CONTATO");
+
+				while (resp == true) {
+					Contato contato1 = new Contato();
+
+					System.out.println("");
+					System.out.println("Novo telefone:");
+					String telefone = leitor.next();
+
+					System.out.println("Novo email:");
+					String email = leitor.next();
+
+					contato1.setEmail(email);
+					contato1.setTelefone(telefone);
+//					contato1.setUsuario(cliente1);
+
+					contatoDAO.inserirContato(contato1);
+
+					cliente1.adicionarContato(contato1);
+					cliente1.setNome(nome);
+					cliente1.setSobrenome(sobrenome);
+					cliente1.setCPF(CPF);
+					cliente1.setLogin(login);
+					cliente1.setSenha(senha);
+					cliente1.setDataCadastro(LocalDate.now());
+
+//					if( cliente1 instanceof PessoaFisica )
+//						System.out.println("Deu certo... eu acho");
+
+					clienteDAO.inserirCliente(cliente1);
+
+					contatoDAO.atualizarContato(contato1);
+
+					System.out.println("Pressione 1 para adicionar um contato");
+					System.out.println("Pressione 2 para continuar");
+					resposta = leitor.nextInt();
+
+					if (resposta == 1)
+						resp = true;
+					else
+						resp = false;
+
+				}
 
 				break;
 			}
@@ -337,9 +416,8 @@ public class Principal {
 				} while (resposta == 1);
 
 			}
-				
 
-				/* em teste */
+			/* em teste */
 			default:
 				System.out.println("Valor invalido");
 				break;
@@ -348,14 +426,14 @@ public class Principal {
 			System.out.println("Pressione 1 para continuar");
 			System.out.println("Pressione 2 para finalizar o programa");
 			resposta = leitor.nextInt();
-			
-			if(resposta == 1) {
+
+			if (resposta == 1) {
 				entrar = true;
-			}else {
+			} else {
 				entrar = false;
 			}
-			
-		} 
+
+		}
 //		add metodo na interface
 //		String clienteVolta = clienteDAO.recuperarPorId((long) (1)).getNome();
 //

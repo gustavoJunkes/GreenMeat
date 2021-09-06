@@ -21,6 +21,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
+
 import model.entities.users.information.Contato;
 import model.entities.users.information.Localidade;
 
@@ -49,12 +51,6 @@ public abstract class Usuario implements Serializable {
 	// pertencer apenas a um usuario
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-//	private List<Contato> contatos = new ArrayList<Contato>(); 
-
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
-//	@JoinColumn(name = "id_usuario")
-//	private List<Contato>contatos = new ArrayList<Contato>();
 
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Contato>contatos = new ArrayList<Contato>();
