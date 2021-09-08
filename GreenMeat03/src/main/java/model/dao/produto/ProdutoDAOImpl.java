@@ -17,6 +17,7 @@ import org.hibernate.service.ServiceRegistry;
 import model.entities.products.Item;
 import model.entities.products.Pedido;
 import model.entities.products.Produto;
+import model.entities.products.Tipo;
 import model.entities.users.Cliente;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
@@ -110,7 +111,6 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		}
 	}
 
-	
 	public Produto recuperarPorId(Long id) {
 		Session sessao = null;
 		Produto produto = null;
@@ -119,7 +119,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			produto = sessao.find(Produto.class, id );
+			produto = sessao.find(Produto.class, id);
 
 			sessao.getTransaction().commit();
 
@@ -137,11 +137,11 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 				sessao.close();
 			}
 		}
-		
+
 		return produto;
-		
+
 	}
-	
+
 	public Produto recuperarProdutoItem(Item item) {
 
 		Session sessao = null;
@@ -155,9 +155,9 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
-			Root<Produto> raizProduto= criteria.from(Produto.class);
+			Root<Produto> raizProduto = criteria.from(Produto.class);
 
-			Join<Produto, Item> juncaoItem= raizProduto.join("produto");
+			Join<Produto, Item> juncaoItem = raizProduto.join("produto");
 
 			ParameterExpression<Long> idItem = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoItem.get("id"), idItem));
@@ -184,7 +184,6 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		return produto;
 	}
 
-	
 	public List<Produto> recuperarProdutos() {
 
 		Session sessao = null;
@@ -223,6 +222,48 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 		return produtos;
 
+	}
+
+	public List<Produto> recuperarPorCategoria(Produto produto) {
+
+		Session sessao = null;
+		List<Produto> produtos = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
+			Root<Produto> raizProduto = criteria.from(Produto.class);
+
+			criteria.select(raizProduto);
+
+			ParameterExpression<String> categoriaProduto = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizProduto.get("tipoCarne"), categoriaProduto));
+
+			produtos = sessao.createQuery(criteria).setParameter(categoriaProduto, produto.getTipoCarne())
+					.getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return produtos;
 	}
 
 	private SessionFactory conectarBanco() {
