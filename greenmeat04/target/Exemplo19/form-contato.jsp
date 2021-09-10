@@ -33,14 +33,10 @@
 					<input type="hidden" name="id"
 						value="<c:out value='${contato.id}' />" />
 				</c:if>
-				<fieldset>
 					<label>Telefone:</label> <input type="text"
 						value="<c:out value='${contato.telefone}' />" name="telefone">
-				</fieldset>
-				<fieldset>
 					<label>E-mail:</label> <input type="text"
 						value="<c:out value='${contato.email}'/>" name="email">
-				</fieldset>
 				<button type="submit">Salvar</button>
 				</form>
 			</div>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
 <head>
 <title>Listar Contato</title>
@@ -35,8 +34,7 @@
 						<tr>
 							<td><c:out value="${contato.telefone}" /></td>
 							<td><c:out value="${contato.email}" /></td>
-							<td><a href="editar?id=<c:out value='${contato.id}'/>">Editar</a>
-								<a href="deletar?id=<c:out value='${contato.id}'/>">Deletar</a></td>
+							<td><a href="editar?id=<c:out value='${contato.id}'/>">Editar</a>	<a href="deletar?id=<c:out value='${contato.id}'/>">Deletar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
