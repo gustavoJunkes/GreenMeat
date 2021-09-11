@@ -72,6 +72,10 @@ public class Produto implements Serializable {
 		setTipoCarne(tipoCarne);
 	}
 
+	public Produto(long id) {
+		setId(id);
+	}
+
 	public Long getId() {
 		return id;
 	}

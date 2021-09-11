@@ -141,6 +141,13 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		return produto;
 
 	}
+	
+	public Produto recuperarProduto(Produto produto1) {
+		
+
+		return produto1;
+	}
+
 
 	public Produto recuperarProdutoItem(Item item) {
 
