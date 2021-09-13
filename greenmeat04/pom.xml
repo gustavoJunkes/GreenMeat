@@ -46,7 +46,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>Exemplo19</finalName>
+		<finalName>Greenmeat</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

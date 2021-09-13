@@ -45,11 +45,11 @@ public class Servlet extends HttpServlet {
 				mostrarFormularioNovoProduto(request, response);
 				break;
 
-			case "/inserir-contato":
+			case "/inserir-produto":
 				inserirProduto(request, response);
 				break;
 
-			case "/deletar":
+			case "/deletar-produto":
 				deletarProduto(request, response);
 				break;
 

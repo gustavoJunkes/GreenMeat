@@ -1,5 +1,7 @@
 package modelo.entitidades.usuarios.information;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -42,7 +44,6 @@ public class Principal {
 			throws InvalidFieldException, CountryInvalidException, EmailInvalidException, PhoneNumberInvalidException {
 
 		System.out.println("Hello World");
-
 
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
