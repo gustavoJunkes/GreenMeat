@@ -32,7 +32,7 @@ public class Pedido {
 	@Column(name = "id_pedido")
 	private Long id;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "pedido" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Item> itens = new ArrayList<Item>();
 
 	@Enumerated(EnumType.STRING)
