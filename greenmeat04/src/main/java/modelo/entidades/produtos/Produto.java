@@ -56,8 +56,7 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda, 
-		Fornecedor fornecedor)
+	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda)
 			throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
@@ -71,6 +70,10 @@ public class Produto implements Serializable {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
+	}
+
+	public Produto(long id) {
+		setId(id);
 	}
 
 	public Long getId() {

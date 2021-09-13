@@ -15,6 +15,8 @@ public interface ProdutoDAO {
 	void atualizarProduto(Produto produto);
 
 	Produto recuperarPorId(Long id);
+	
+	Produto recuperarProduto(Produto produto);
 
 	Produto recuperarProdutoItem(Item item);
 

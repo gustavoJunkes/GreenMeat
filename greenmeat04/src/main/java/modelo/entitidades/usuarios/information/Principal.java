@@ -1,5 +1,7 @@
 package modelo.entitidades.usuarios.information;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -42,7 +44,6 @@ public class Principal {
 			throws InvalidFieldException, CountryInvalidException, EmailInvalidException, PhoneNumberInvalidException {
 
 		System.out.println("Hello World");
-
 
 		///////////////////////////// CADASTRO ENDERECO
 		///////////////////////////// LOCALIDADE//////////////////////////////////////
@@ -266,8 +267,9 @@ public class Principal {
 			System.out.println("3- cadastrar novo produto");
 			System.out.println("4- cadastrar novo -----");
 			System.out.println("5- cadastrar novo pedido");
-			System.out.println("6- cadastrar novo -------");
-			System.out.println("7- recuperar cliente por ");
+			System.out.println("6- recuperar todos os produtos");
+			System.out.println("7- recuperar todos os clientes");
+			System.out.println("8- recuperar todos os fornecedores");
 
 			resposta = leitor.nextInt();
 
@@ -432,7 +434,19 @@ public class Principal {
 				} while (resposta == 1);
 
 			}
+			case 6:{
+				
+			}
 
+			case 7:{
+				List <Cliente>clientesRecuperados = clienteDAO.recuperarClientes();
+				
+				for (Cliente cliente : clientesRecuperados) {
+
+					System.out.println(cliente.getNome());
+					System.out.println(cliente.getId());
+				}
+			}
 			/* em teste */
 			default:
 				System.out.println("Valor invalido");
