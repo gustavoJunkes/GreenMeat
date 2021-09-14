@@ -142,6 +142,48 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 		
 	}
 	
+	public Fornecedor recuperarFornecedor(Fornecedor fornecedor) {
+		Session sessao = null;
+		Fornecedor fornecedorRecuperado = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Fornecedor> criteria = construtor.createQuery(Fornecedor.class);
+			Root<Fornecedor> raizFornecedor= criteria.from(Fornecedor.class);
+
+			criteria.select(raizFornecedor);
+			
+			ParameterExpression<String> loginFornecedor= construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizFornecedor.get("login"), loginFornecedor));
+
+			fornecedorRecuperado = sessao.createQuery(criteria).setParameter(loginFornecedor, fornecedor.getLogin()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return fornecedorRecuperado;
+	}
+	
+	
 	public Fornecedor recuperarFornecedorProduto(Produto produto) {
 
 		Session sessao = null;

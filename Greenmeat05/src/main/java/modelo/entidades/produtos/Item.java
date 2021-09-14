@@ -42,6 +42,10 @@ public class Item implements Serializable {
 	@JoinColumn(name = "id_pedido")
 	Pedido pedido;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "estoque")
+	private Estoque estoque;
+	
 	
 	public Item() {
 	}

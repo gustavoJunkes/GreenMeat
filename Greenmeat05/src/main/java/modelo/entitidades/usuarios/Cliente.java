@@ -40,6 +40,20 @@ public class Cliente extends PessoaFisica {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Cliente(String login, String senha, String nome, String sobrenome,
+			String CPF) {
+		super(login, senha,nome, sobrenome, CPF );
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public Cliente(String nome, String sobrenome, String cPF){
+
+	
+		
+	}
+
 	public List<Pedido> getPedidos() {
 		return Pedidos;
 	}

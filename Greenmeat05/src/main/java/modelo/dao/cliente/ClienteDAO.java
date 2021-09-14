@@ -14,6 +14,8 @@ public interface ClienteDAO {
 
 	Cliente recuperarPorId(Long id);
 	
+	Cliente recuperarCliente(Cliente cliente);
+	
 	List<Cliente> recuperarClientes();
 
 	
