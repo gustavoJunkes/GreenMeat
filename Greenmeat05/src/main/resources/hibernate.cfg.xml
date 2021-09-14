@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC   "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/greenmeat05?useTimezone=true&amp;serverTimezone=UTC</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">p1s2t3q4q5</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<mapping class="modelo.entidade.contato.Contato" />
+		<mapping class="modelo.entitidades.usuarios.Cliente" />
+		<mapping
+			class="modelo.entitidades.usuarios.information.Contato" />
+		<mapping
+			class="modelo.entitidades.usuarios.information.Endereco" />
+		<mapping class="modelo.entitidades.usuarios.Usuario" />
+		<mapping class="modelo.entitidades.usuarios.PessoaFisica" />
+		<mapping class="modelo.entitidades.usuarios.Fornecedor" />
+		<mapping class="modelo.entitidades.usuarios.Funcionario" />
+		<mapping class="modelo.entitidades.usuarios.PessoaJuridica" />
+		<mapping
+			class="modelo.entitidades.usuarios.information.Localidade" />
+		<mapping class="modelo.entitidades.producos.Item" />
+		<mapping class="modelo.entitidades.produtos.Estoque" />
+		<mapping class="modelo.entitidades.produtos.Pedido" />
+		<mapping class="modelo.entitidades.produtos.Produto" />
+	</session-factory>
+</hibernate-configuration>
