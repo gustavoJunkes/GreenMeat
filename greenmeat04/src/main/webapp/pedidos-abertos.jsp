@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -9,23 +10,33 @@
 
 </head>
 <body>
-  <div class="txt"><h2>Seus Pedidos</h2></div>
+  <div class="txt">
+  <h2>Seus Pedidos</h2>
+  </div>
 
 <table>
   <tr>
-    <th>Nome do Produto</th>
+    <th>ID do seu produto</th>
+    <th>Nome</th>
+    <th>Quantidade</th>
     <th>Preço</th>
+    <th>Status</th>
+  
    
+   </tr>
+      <c:forEach var="item" items="${itens}">
    
-    <c:forEach var="produto" items="${produtos}">
-   
-  </tr>
+  
   <tr>
-    <td>value="<c:out value='${produto.nome}'/></td>
-    <td>value="<c:out value='${produto.proço}'/></td>
+  	<td>value="<c:out value='${item.produto.id}'/></td>
+    <td>value="<c:out value='${item.produto.nome}'/></td>
+    <td>value="<c:out value='${item.produto.preco}'/></td>
+    <td>value="<c:out value='${item.quantidade}'/></td>
+    <td>value="<c:out value='${item.status}'/></td>
+    
     
   </tr>
- 
+  </c:forEach>
 </table>
 
 

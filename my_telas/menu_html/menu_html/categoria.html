@@ -23,8 +23,20 @@
         <a target="_blank" href="">
           <img src="" alt="" width="600" height="400">
         </a>
-        <div class="desc1">Add a description <br>  <button type="button" onclick="alert('Item adicionado ao carrinho!')">Comprar</button>
-        </div>
+        <div class="desc1">Add a description <br> Preço: 
+         
+          <!--sobre a quantidade do produto a ser escolhido-->
+          <div class="input">
+            <form action="/action_page.php">
+              <input type="number" id="quantity" name="quantity" min="1" max="1000000">   
+           
+            </form> 
+          </div>
+          
+          <button type="button" onclick="alert('Item adicionado a lista de pedidos!')">Comprar</button>
+
+          
+      </div>
 </div>
 
       
