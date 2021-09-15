@@ -115,7 +115,7 @@
    
   
   input[type="submit"]:hover{
-    background: #4ab3c6;
+    background:#194f15;
   }
   
    
@@ -152,7 +152,7 @@
   }
    
   .link a:hover {
-    color: #39bfd7;
+    color:#194f15;
     background: #f7f7f7;
     border: 1px solid #194f15;;
   }
@@ -229,6 +229,46 @@
     animation-name: fadeOutLeft;
   }
   
+  #contato{
+    position: relative;
+    top: 200px;
+    width: 30%;   
+    padding: 18px 6% 60px 6%;
+    margin: 0 0 35px 0;
+    background: #f7f7f7;
+    border: 1px solid rgba(147, 184, 189,0.8);
+    left: 700px;
+     
+    border-radius: 5px;
+     
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+   
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
+  #endereco{
+    position: relative;
+    top: 50px;
+    width: 30%;   
+    padding: 18px 6% 60px 6%;
+    margin: 0 0 35px 0;
+    background: #f7f7f7;
+    border: 1px solid rgba(147, 184, 189,0.8);
+    left: 700px;
+     
+    border-radius: 5px;
+     
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+   
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
    
   
   /*fadeInLeft*/

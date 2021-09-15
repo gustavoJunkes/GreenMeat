@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Insert title here</title>
+<title>Cadastro Produto</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 		</p>
 
 		<p>
-			<label for=" precoCusto"> Preço compra </label> <input
+			<label for=" precoCusto"> Preço Custo </label> <input
 				id=" precoCusto" required="required" type="text"
 				value="<c:out value='${produto.precoCusto}' />" name="precoCusto">
 		</p>
