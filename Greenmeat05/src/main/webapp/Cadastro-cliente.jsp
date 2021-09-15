@@ -19,12 +19,12 @@
       
         <!--FORMULÁRIO DE CADASTRO-->
         <div id="cadastro">
-          <form method="post" action=""> 
+          <form method="post" action="inserir-cliente"> 
             
              <h1>Cadastre-se</h1>
               <p> 
-              <label for="nome_cad"> Nome </label>                                                           
-              <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome" value="<c:out value='${cliente.nome}'/>" />
+              <label for="nome"> Nome </label>                                                           
+              <input id="nome" name="nome" required="required" type="text" placeholder="None" value="<c:out value='${cliente.nome}'/>" />
             </p>
 
             <p> 
