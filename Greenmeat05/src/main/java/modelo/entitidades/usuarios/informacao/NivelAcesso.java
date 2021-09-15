@@ -1,4 +1,4 @@
-package modelo.entitidades.usuarios.information;
+package modelo.entitidades.usuarios.informacao;
 
 public enum NivelAcesso {
 

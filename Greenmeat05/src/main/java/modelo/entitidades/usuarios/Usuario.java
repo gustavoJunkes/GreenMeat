@@ -23,8 +23,8 @@ import javax.persistence.OneToMany;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
-import modelo.entitidades.usuarios.information.Contato;
-import modelo.entitidades.usuarios.information.Localidade;
+import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidades.usuarios.informacao.Localidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

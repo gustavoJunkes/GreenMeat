@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import modelo.entitidades.usuarios.Funcionario;
-import modelo.entitidades.usuarios.information.Contato;
+import modelo.entitidades.usuarios.informacao.Contato;
 
 public interface FuncionarioDAO {
 
