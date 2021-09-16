@@ -11,14 +11,14 @@
 
 		<h1>Cadastro de Produto</h1>
 		<p>
-			<label for="Nome do Produto"> Nome do Produto </label> <input
+			<label for="nome"> Nome do Produto </label> <input
 				id="nome" type="text"
 				value="<c:out value='${produto.nome}' />" name="nome" />
 
 		</p>
 
 		<p>
-			<label for=" Descrição"> Descrição </label> <input id=" descricao"
+			<label for=" descricao"> Descrição </label> <input id=" descricao"
 				required="required" type="text"
 				value="<c:out value='${produto.descricao}' />"
 				name="descricao">
