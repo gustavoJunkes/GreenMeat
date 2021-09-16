@@ -231,9 +231,9 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Fornecedor.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Funcionario.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.PessoaJuridica.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Contato.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Endereco.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Localidade.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Contato.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Endereco.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Localidade.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Estoque.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Item.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Pedido.class);

@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import modelo.entitidades.usuarios.information.Contato;
-import modelo.entitidades.usuarios.information.Localidade;
+import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidades.usuarios.informacao.Localidade;
 
 
 @Entity

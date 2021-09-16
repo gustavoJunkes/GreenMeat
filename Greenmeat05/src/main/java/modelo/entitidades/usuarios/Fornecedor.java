@@ -19,8 +19,8 @@ import org.hibernate.annotations.FetchMode;
 
 import modelo.dao.produto.ProdutoDAO;
 import modelo.entidades.produtos.Produto;
-import modelo.entitidades.usuarios.information.Contato;
-import modelo.entitidades.usuarios.information.Localidade;
+import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidades.usuarios.informacao.Localidade;
 
 @Entity
 @Table(name = "fornecedor")
