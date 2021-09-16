@@ -4,7 +4,7 @@
     
 <!DOCTYPE html>
 <html>
-<head>
+<head><style type="text/css"> @import url("../css/texto.css"); </style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -28,66 +28,25 @@
             </p>
 
             <p> 
-              <label for="nome_cad"> Sobrenome </label>                                                           
-              <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
+              <label for="sobrenome"> Sobrenome </label>                                                           
+              <input id="sobrenome" name="nome_cad" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
             </p>
 
             <p> 
-              <label for="cnpj_cad"> CPF/CNPJ</label>
-              &nbsp; &nbsp; &nbsp; &nbsp;<input id="cnpj_cad" name="CPF/CNPJ" required="required" type="text" placeholder="CPF/CNPJ"value="<c:out value='${cliente.CPF}'/>" /> 
+              <label for="CPF"> CPF</label>
+              &nbsp; &nbsp; &nbsp; &nbsp;<input id="CPF" name="CPF" required="required" type="text" placeholder="CPF"value="<c:out value='${cliente.CPF}'/>" /> 
             </p>
              
             <p> 
-              <label for="email_cad"> E-mail</label>
-              &nbsp; &nbsp; <input id="email_cad" name="email_cad" required="required" type="email" placeholder="contato@gmail.com"value="<c:out value='${cliente.email}'/>" /> 
+           
+            <p> 
+              <label for="login">Crie um Login</label>
+              <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value='${cliente.login}'/>"/>
             </p>
 
             <p> 
-              <label for="telefone_cad"> Contato</label>
-              &nbsp;<input id="telefone_cad" name="telefone_cad" required="required" type="text" placeholder="Contato" value="<c:out value='${cliente.telefone}'/>"/>
-            </p>
-
-            <p> 
-              <label for="endereço_cad"> Endereço</label>
-              <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Nome Da Rua" value="<c:out value='${cliente.nomeDaRua}'/>"/>
-              <br>
-                
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Tipo Da Via" value="<c:out value='${cliente.tipoDaVia}'/>" />  
-                <br>
-               
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Logradouro" value="<c:out value='${cliente.logradouro}'/>" /> 
-                <br>
-                 
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Número" value="<c:out value='${cliente.numero}'/>" /> 
-                 <br>
-                 
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Cep" value="<c:out value='${cliente.CEP}'/>"/> 
-              <br>
-              
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Complemento" value="<c:out value='${cliente.complemento}'/>" />  
-              <br>
-              
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="País" value="<c:out value='${cliente.pais}'/>"/>  
-              <br>
-             
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="estado" value="<c:out value='${cliente.estado}'/>" /> 
-              <br>
-               
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="provincia" value="<c:out value='${cliente.provincia}'/>"/> 
-               <br>
-                
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad" name="endereço_cad" required="required" type="text" placeholder="Continente" value="<c:out value='${cliente.continente}'/>"/>
-                <br>
-            </p>
-
-            <p> 
-              <label for="senha_cad">Crie um Login</label>
-              <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="login" value="<c:out value='${cliente.login}'/>"/>
-            </p>
-
-            <p> 
-              <label for="senha_cad">Crie uma senha</label>
-              <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
+              <label for="senha">Crie uma senha</label>
+              <input id="senha" name="senha_cad" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
             </p>
              
             <p> 
