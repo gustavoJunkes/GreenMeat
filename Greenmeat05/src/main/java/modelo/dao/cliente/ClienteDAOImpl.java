@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -11,7 +12,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
 import modelo.entitidades.usuarios.Cliente;
 
 public class ClienteDAOImpl implements ClienteDAO {
@@ -136,6 +136,47 @@ public class ClienteDAOImpl implements ClienteDAO {
 		
 	}
 	
+	public Cliente recuperarCliente(Cliente cliente) {
+		Session sessao = null;
+		Cliente clienteRecuperado = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Cliente> criteria = construtor.createQuery(Cliente.class);
+			Root<Cliente> raizCliente= criteria.from(Cliente.class);
+
+			criteria.select(raizCliente);
+			
+			ParameterExpression<String> loginCliente = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizCliente.get("login"), loginCliente));
+
+			clienteRecuperado = sessao.createQuery(criteria).setParameter(loginCliente, cliente.getLogin()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return clienteRecuperado;
+	}
+	
 	public List<Cliente> recuperarClientes() {
 
 		Session sessao = null;
@@ -186,9 +227,9 @@ public class ClienteDAOImpl implements ClienteDAO {
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Fornecedor.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Funcionario.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.PessoaJuridica.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Contato.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Endereco.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Localidade.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Contato.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Endereco.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Localidade.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Estoque.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Item.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Pedido.class);

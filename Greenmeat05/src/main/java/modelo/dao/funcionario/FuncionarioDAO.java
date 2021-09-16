@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import modelo.entitidades.usuarios.Funcionario;
-import modelo.entitidades.usuarios.information.Contato;
+import modelo.entitidades.usuarios.informacao.Contato;
 
 public interface FuncionarioDAO {
 
@@ -15,6 +15,8 @@ public interface FuncionarioDAO {
 	void atualizarFuncionario(Funcionario funcionario);
 
 	Funcionario recuperarPorId(Long id);
+	
+	Funcionario recuperarFuncionario(Funcionario funcionario);
 	
 	List<Funcionario> recuperarFuncionarios();
 

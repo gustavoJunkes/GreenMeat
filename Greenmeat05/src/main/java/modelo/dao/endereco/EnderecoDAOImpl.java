@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import modelo.entitidades.usuarios.information.Endereco;
+import modelo.entitidades.usuarios.informacao.Endereco;
 
 public class EnderecoDAOImpl implements EnderecoDAO {
 	
@@ -154,9 +154,9 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Fornecedor.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Funcionario.class);
 		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.PessoaJuridica.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Contato.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Endereco.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.information.Localidade.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Contato.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Endereco.class);
+		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Localidade.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Estoque.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Item.class);
 		configuracao.addAnnotatedClass(modelo.entidades.produtos.Pedido.class);

@@ -17,8 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.criteria.Join;
 
 import modelo.entidades.produtos.Pedido;
-import modelo.entitidades.usuarios.information.Contato;
-import modelo.entitidades.usuarios.information.Localidade;
+import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidades.usuarios.informacao.Localidade;
 
 
 
@@ -38,6 +38,20 @@ public class Cliente extends PessoaFisica {
 
 	public Cliente() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Cliente(String login, String senha, String nome, String sobrenome,
+			String CPF) {
+		super(login, senha,nome, sobrenome, CPF );
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public Cliente(String nome, String sobrenome, String cPF){
+
+	
+		
 	}
 
 	public List<Pedido> getPedidos() {

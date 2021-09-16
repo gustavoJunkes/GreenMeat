@@ -11,11 +11,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.dao.cliente.ClienteDAO;
+import modelo.dao.cliente.ClienteDAOImpl;
+import modelo.dao.fornecedor.FornecedorDAO;
+import modelo.dao.fornecedor.FornecedorDAOImpl;
+import modelo.dao.funcionario.FuncionarioDAO;
+import modelo.dao.funcionario.FuncionarioDAOImpl;
 import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.entidades.produtos.Produto;
-import modelo.entitidades.usuarios.information.Contato;
-import modelo.exception.produtos.ExpirationDateInvalidException;
+import modelo.entitidades.usuarios.Cliente;
+import modelo.entitidades.usuarios.Fornecedor;
+import modelo.entitidades.usuarios.Funcionario;
 import modelo.exceptions.InvalidFieldException;
 
 @WebServlet("/")
@@ -23,9 +30,15 @@ public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private ProdutoDAO produtoDAO;
-
+	private ClienteDAO clienteDAO;
+	private FuncionarioDAO funcionarioDAO;
+	private FornecedorDAO fornecedorDAO;
+	
 	public void init() {
 		produtoDAO = new ProdutoDAOImpl();
+		clienteDAO = new ClienteDAOImpl();
+		funcionarioDAO = new FuncionarioDAOImpl();
+		fornecedorDAO = new FornecedorDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,6 +75,76 @@ public class Servlet extends HttpServlet {
 				atualizarProduto(request, response);
 				break;
 
+/////////////////////////////////
+
+			case "/novo-cliente":
+				mostrarFormularioNovoCliente(request, response);
+				break;
+
+			case "/inserir-cliente":
+				inserirCliente(request, response);
+				break;
+
+			case "/deletar-cliente":
+				deletarCliente(request, response);
+				break;
+
+			case "/editar-cliente":
+				mostrarFormularioEditarCliente(request, response);
+				break;
+
+			case "/atualizar-cliente":
+				atualizarCliente(request, response);
+				break;
+
+//				////////////////////////
+
+			case "/novo-funcionario":
+				mostrarFormularioNovoFuncionario(request, response);
+				break;
+
+			case "/inserir-funcionario":
+				inserirFuncionario(request, response);
+				break;
+
+			case "/deletar-funcionario":
+				deletarFuncionario(request, response);
+				break;
+
+			case "/editar-funcionario":
+				mostrarFormularioEditarFuncionario(request, response);
+				break;
+
+			case "/atualizar-funcionario":
+				atualizarFuncionario(request, response);
+				break;
+
+			case "/listar-funcinarios":
+				listarFuncionarios(request, response);
+				break;
+				
+//				///////////////////////
+				
+			case "/novo-fornecedor":
+				mostrarFormularioNovoFornecedor(request, response);
+				break;
+
+			case "/inserir-fornecedor":
+				inserirFornecedor(request, response);
+				break;
+
+			case "/deletar-fornecedor":
+				deletarFornecedor(request, response);
+				break;
+
+			case "/editar-fornecedor":
+				mostrarFormularioEditarFornecedor(request, response);
+				break;
+
+			case "/atualizar-fornecedor":
+				atualizarFornecedor(request, response);
+				break;
+
 			default:
 //				listarProdutos(request, response);
 				break;
@@ -75,21 +158,22 @@ public class Servlet extends HttpServlet {
 		}
 	}
 
-//	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException, ServletException {
-//
-//		List<Produto> produtos = produtoDAO.recuperarProdutos();
-//		request.setAttribute("contatos", produtos);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produto.jsp");// pagina de listar produto
-//																							// virá aqui
-//		dispatcher.forward(request, response);
-//	}
+	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		List<Produto> produtos = produtoDAO.recuperarProdutos();
+		request.setAttribute("contatos", produtos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produto.jsp");// pagina de listar produto
+																							// virá aqui
+		dispatcher.forward(request, response);
+	}
 
 	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("form-produto.jsp"); // formulario do produto virá
-																							// aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-produto.jsp"); // formulario do produto
+																								// virá
+																								// aqui
 		dispatcher.forward(request, response);
 	}
 
@@ -105,7 +189,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirProduto(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException{
+			throws SQLException, IOException, InvalidFieldException {
 
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
@@ -136,4 +220,193 @@ public class Servlet extends HttpServlet {
 		produtoDAO.deletarProduto(produto);
 		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
 	}
+
+///////////////////////
+
+	private void mostrarFormularioNovoCliente(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
+	}
+
+// INCOMPLETO
+	private void mostrarFormularioEditarCliente(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Cliente cliente = clienteDAO.recuperarPorId(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
+//	request.setAttribute("contato", contato);
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirCliente(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String CPF = request.getParameter("CPF");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		// String dataNascimento = request.getParameter("dataNascimento");
+		clienteDAO.inserirCliente(new Cliente(nome, sobrenome, CPF, login, senha));
+		response.sendRedirect("listar");
+	}
+
+	private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String CPF = request.getParameter("CPF");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		// String dataNascimento = request.getParameter("dataNascimento");
+		clienteDAO.inserirCliente(new Cliente(nome, sobrenome, CPF, login, senha));
+		response.sendRedirect("listar");
+	}
+
+	private void deletarCliente(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Cliente cliente = clienteDAO.recuperarPorId(id);
+		clienteDAO.deletarCliente(cliente);
+		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
+	}
+	
+	private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		List<Funcionario> funcionarios = funcionarioDAO.recuperarFuncionarios();
+		request.setAttribute("funcionarios", funcionarios);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-funcionarios.jsp");// pagina de listar produto
+																							// virá aqui
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioNovoFuncionario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); // formulario do produto
+																								// virá
+																								// aqui
+		dispatcher.forward(request, response);
+	}
+
+	// INCOMPLETO
+	private void mostrarFormularioEditarFuncionario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Funcionario funcionario = funcionarioDAO.recuperarPorId(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp");
+		request.setAttribute("funcionario", funcionario);
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirFuncionario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String cargo = request.getParameter("cargo");
+		String funcao = request.getParameter("funcao");
+		String CPF = request.getParameter("CPF");
+		String dataNascimento = request.getParameter("dataNascimeto");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		funcionarioDAO.inserirFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
+		response.sendRedirect("listar");
+	}
+
+	private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String cargo = request.getParameter("cargo");
+		String funcao = request.getParameter("funcao");
+		String CPF = request.getParameter("CPF");
+		String dataNascimento = request.getParameter("dataNascimeto");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		funcionarioDAO.atualizarFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
+		response.sendRedirect("listar");	}
+
+	private void deletarFuncionario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Funcionario funcionario = funcionarioDAO.recuperarPorId(id);
+		funcionarioDAO.deletarFuncionario(funcionario);
+		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
+	}
+
+//	/////////////////////
+	
+	private void listarFornecedores(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		List<Fornecedor> fornecedores = fornecedorDAO.recuperarFornecedores();
+		request.setAttribute("fornecedores", fornecedores);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-fornecedores.jsp");// pagina de listar produto
+																							// virá aqui
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do produto
+																								// virá
+																								// aqui
+		dispatcher.forward(request, response);
+	}
+
+	// INCOMPLETO
+	private void mostrarFormularioEditarFornecedor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Fornecedor fornecedor= fornecedorDAO.recuperarPorId(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("form-fornecedor.jsp");
+		request.setAttribute("fornecedor", fornecedor);
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirFornecedor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nomeFantasia = request.getParameter("nomeFantasia");
+		String razaoSocial = request.getParameter("razaoSocial");
+		String CNPJ = request.getParameter("CNPJ");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		fornecedorDAO.inserirFornecedor(new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha));
+		response.sendRedirect("listar");
+	}
+
+	private void atualizarFornecedor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException {
+
+		String nomeFantasia = request.getParameter("nomeFantasia");
+		String razaoSocial = request.getParameter("razaoSocial");
+		String CNPJ = request.getParameter("CNPJ");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		fornecedorDAO.atualizarFornecedor(new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha));
+		response.sendRedirect("listar");
+	}
+
+	private void deletarFornecedor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
+		fornecedorDAO.deletarFornecedor(fornecedor);
+		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
+	}
+	
+	
 }

@@ -3,8 +3,8 @@ package modelo.dao.localidade;
 import java.util.List;
 
 import modelo.entitidades.usuarios.Usuario;
-import modelo.entitidades.usuarios.information.Endereco;
-import modelo.entitidades.usuarios.information.Localidade;
+import modelo.entitidades.usuarios.informacao.Endereco;
+import modelo.entitidades.usuarios.informacao.Localidade;
 
 public interface LocalidadeDAO {
 	

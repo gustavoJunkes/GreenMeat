@@ -1,4 +1,4 @@
-package modelo.entitidades.usuarios.information;
+package modelo.entitidades.usuarios.informacao;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
