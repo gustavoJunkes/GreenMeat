@@ -11,7 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import modelo.entitidades.usuarios.information.Contato;
+import modelo.entitidades.usuarios.informacao.Contato;
 
 @Entity
 @Table(name = "pessoafisica")
