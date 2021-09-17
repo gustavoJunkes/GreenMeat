@@ -249,7 +249,7 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		// String dataNascimento = request.getParameter("dataNascimento");
-		clienteDAO.inserirCliente(new Cliente(nome, sobrenome, CPF, login, senha));
+		clienteDAO.inserirCliente(new Cliente(login, senha, nome, sobrenome, CPF));
 		response.sendRedirect("listar");
 	}
 
