@@ -76,8 +76,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setEmail(String email) throws EmailInvalidException {
-		if (email.isEmpty())
-			throw new EmailInvalidException("Campo nulo");
+		
 		this.email = email;
 	}
 
@@ -86,8 +85,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setTelefone(String telefone) throws PhoneNumberInvalidException {
-		if (telefone.isEmpty())
-			throw new PhoneNumberInvalidException("Campo nulo");
+		
 		this.telefone = telefone;
 	}
 

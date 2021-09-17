@@ -53,6 +53,15 @@ public class Principal {
 //		BUG - N�O � POSSIVEL RECUPERAR UM FORNECEDOR A PARTIR DE UM PRODUTO
 //		RESOLVIDO
 
+		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+//		
+//		Usuario usuario = new Usuario();
+//		usuario.setLogin("gu");
+//		
+//		Usuario user = usuarioDAO.recuperarUsuario(usuario);
+//		
+//		System.out.println(user.getLogin());
+
 		boolean resp = true;
 		boolean entrar = false;
 		int resposta;
@@ -63,12 +72,38 @@ public class Principal {
 		LocalidadeDAO localidadeDAO = new LocalidadeDAOImpl();
 		EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
 		ClienteDAO clienteDAO = new ClienteDAOImpl();
-		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+//		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 		ContatoDAO contatoDAO = new ContatoDAOImpl();
 		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
 //		Cliente cliente1 = new Cliente();
 
 		
+		
+		
+		
+		Usuario usuarioRecuperado = new Usuario();
+		usuarioRecuperado.setLogin("gu");
+		Usuario usuario = usuarioDAO.recuperarUsuario(usuarioRecuperado);
+
+		Contato contato = new Contato("email", "telefone");
+//		contato.setUsuario(usuario);
+		contatoDAO.inserirContato(contato);
+
+		usuario.adicionarContato(contato);
+//		usuario.getContatos().add(contato);
+		usuarioDAO.atualizarUsuario(usuario);
+		contatoDAO.atualizarContato(contato);
+
+//		contato1.setEmail(email);
+//		contato1.setTelefone(telefone);
+//	contato1.setUsuario(cliente1);
+
+//		contatoDAO.inserirContato(contato1);
+
+//		cliente1.adicionarContato(contato1);
+
+//		contatoDAO.atualizarContato(contato1);
+
 //		Produto produto10 = new Produto();
 //		produto10.setTipoCarne("Bovino");
 //		
@@ -79,9 +114,7 @@ public class Principal {
 //			System.out.println(produto.getNome());
 //			System.out.println(produto.getId());
 //		}
-		
-		
-		
+
 		Scanner leitor = new Scanner(System.in);
 
 		System.out.println("Pressione 1 para entrar(cliente)");
@@ -117,8 +150,6 @@ public class Principal {
 
 			Cliente cliente1 = new Cliente();
 
-
-			
 			System.out.println("Nome:");
 			String nome = leitor.next();
 
@@ -162,18 +193,13 @@ public class Principal {
 				contatoDAO.inserirContato(contato1);
 
 				cliente1.adicionarContato(contato1);
-				
+
 				cliente1.setNome(nome);
 				cliente1.setSobrenome(sobrenome);
 				cliente1.setCPF(CPF);
 				cliente1.setLogin(login);
 				cliente1.setSenha(senha);
 				cliente1.setDataCadastro(LocalDate.now());
-
-//			if( cliente1 instanceof PessoaFisica )
-//				System.out.println("Deu certo... eu acho");
-
-//				clienteDAO.inserirCliente(cliente1);
 
 				contatoDAO.atualizarContato(contato1);
 
@@ -434,13 +460,13 @@ public class Principal {
 				} while (resposta == 1);
 
 			}
-			case 6:{
-				
+			case 6: {
+
 			}
 
-			case 7:{
-				List <Cliente>clientesRecuperados = clienteDAO.recuperarClientes();
-				
+			case 7: {
+				List<Cliente> clientesRecuperados = clienteDAO.recuperarClientes();
+
 				for (Cliente cliente : clientesRecuperados) {
 
 					System.out.println(cliente.getNome());
