@@ -76,23 +76,82 @@ public class Principal {
 		ContatoDAO contatoDAO = new ContatoDAOImpl();
 		FornecedorDAO fornecedorDAO = new FornecedorDAOImpl();
 //		Cliente cliente1 = new Cliente();
+		Scanner leitor = new Scanner(System.in);
 
+		///////////////
+//		
+//		Cliente cliente4 = new Cliente();
+//
+//		System.out.println("Nome:");
+//		String nom = leitor.next();
+//
+//		System.out.println("Sobrenome:");
+//		String sobrenom = leitor.next();
+//
+//		System.out.println("CPF:");
+//		String CP = leitor.next();
+//
+//		System.out.println("Novo login:");
+//		String logi = leitor.next();
+//
+//		System.out.println("Nova senha:");
+//		String senh = leitor.next();
+//
+//		cliente4.setNome(nom);
+//		cliente4.setSobrenome(sobrenom);
+//		cliente4.setCPF(CP);
+//		cliente4.setLogin(logi);
+//		cliente4.setSenha(senh);
+//
+//		clienteDAO.inserirCliente(cliente4);
+//
+//		System.out.println("---------------");
+//		System.out.println("CONTATO");
+//
+//		while (resp == true) {
+//			Contato contato1 = new Contato();
+//
+//			System.out.println("");
+//			System.out.println("Novo telefone:");
+//			String telefon = leitor.next();
+//
+//			System.out.println("Novo email:");
+//			String emai = leitor.next();
+//
+//			contato1.setEmail(emai);
+//			contato1.setTelefone(telefon);
+////		contato1.setUsuario(cliente1);
+//
+//			contatoDAO.inserirContato(contato1);
+//
+//			cliente1.adicionarContato(contato1);
+//
+//			cliente1.setNome(nome);
+//			cliente1.setSobrenome(sobrenome);
+//			cliente1.setCPF(CPF);
+//			cliente1.setLogin(login);
+//			cliente1.setSenha(senha);
+//			cliente1.setDataCadastro(LocalDate.now());
+//
+//			contatoDAO.atualizarContato(contato1);
+//
 		
 		
 		
-		
-		Usuario usuarioRecuperado = new Usuario();
-		usuarioRecuperado.setLogin("gu");
-		Usuario usuario = usuarioDAO.recuperarUsuario(usuarioRecuperado);
-
-		Contato contato = new Contato("email", "telefone");
-//		contato.setUsuario(usuario);
-		contatoDAO.inserirContato(contato);
-
-		usuario.adicionarContato(contato);
-//		usuario.getContatos().add(contato);
-		usuarioDAO.atualizarUsuario(usuario);
-		contatoDAO.atualizarContato(contato);
+//		Usuario usuarioRecuperado = new Usuario();
+//		usuarioRecuperado.setLogin("gu");
+//		Usuario usuario = usuarioDAO.recuperarUsuario(usuarioRecuperado);
+//
+//		Contato contato = new Contato();
+//		contato.setEmail("email");
+//		contato.setTelefone("2222-3333");
+////		contato.setUsuario(usuario);
+//		contatoDAO.inserirContato(contato);
+//
+//		usuario.adicionarContato(contato);
+//
+//
+//		contatoDAO.atualizarContato(contato);
 
 //		contato1.setEmail(email);
 //		contato1.setTelefone(telefone);
@@ -115,7 +174,6 @@ public class Principal {
 //			System.out.println(produto.getId());
 //		}
 
-		Scanner leitor = new Scanner(System.in);
 
 		System.out.println("Pressione 1 para entrar(cliente)");
 		System.out.println("Pressione 2 para se cadastrar(cliente)");

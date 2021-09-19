@@ -32,7 +32,7 @@ public class Contato implements Serializable {
 	@Column(name = "telefone")
 	private String telefone;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
