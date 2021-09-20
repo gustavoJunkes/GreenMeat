@@ -1,6 +1,14 @@
-ul {
+  
+div.categ{
+  margin-left: 1000px;
+margin-right: 100px;
+margin-top: 50px;
+
+}
+
+  ul {
     list-style-type: none;
-    margin: 0;
+    margin: 50px;
     margin-top:10px;
     padding: 0;
     overflow: hidden;
@@ -58,30 +66,5 @@ div.desc1 {
   text-align: center;
 }
 
-
-div.gallery2 {
-  margin-top:100px;
-  margin-left: 100px;
- 
-  
-    border: 2px solid rgb(0, 0, 0);
-    float: left;
-    width: 180px;
-  }
-
-  
-div.gallery2:hover {
-  border: 1px solid rgb(0, 0, 0);
-}
-
-div.gallery2 img {
-  width: 100%;
-  height: auto;
-}
-
-div.desc2 {
-  padding: 15px;
-  text-align: center;
-}
 
 
