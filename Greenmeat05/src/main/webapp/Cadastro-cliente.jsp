@@ -29,7 +29,7 @@
 
             <p> 
               <label for="sobrenome"> Sobrenome </label>                                                           
-              <input id="sobrenome" name="nome_cad" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
+              <input id="sobrenome" name="sobrenome" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
             </p>
 
             <p> 
@@ -46,7 +46,7 @@
 
             <p> 
               <label for="senha">Crie uma senha</label>
-              <input id="senha" name="senha_cad" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
+              <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
             </p>
              
             <p> 
@@ -55,15 +55,10 @@
              
             <p class="link">  
               Já tem conta?
-              <a href="#paralogin"> Ir para Login </a>
+              <a href="login.html"> Ir para Login </a>
             </p>
             
           </form>
         </div>
-      </div>
-    </div>  
-
-
-
-</body>
+        </body>
 </html>
