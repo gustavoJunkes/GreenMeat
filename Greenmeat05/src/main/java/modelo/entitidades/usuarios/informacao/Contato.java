@@ -31,8 +31,13 @@ public class Contato implements Serializable {
 		
 	@Column(name = "telefone")
 	private String telefone;
+<<<<<<< HEAD
 	
 	@ManyToOne
+=======
+
+	@ManyToOne()
+>>>>>>> c3a0274fb0b7dff590f77ede9fa3fbd1254c24a5
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
@@ -76,8 +81,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setEmail(String email) throws EmailInvalidException {
-		if (email.isEmpty())
-			throw new EmailInvalidException("Campo nulo");
+		
 		this.email = email;
 	}
 
@@ -86,8 +90,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setTelefone(String telefone) throws PhoneNumberInvalidException {
-		if (telefone.isEmpty())
-			throw new PhoneNumberInvalidException("Campo nulo");
+		
 		this.telefone = telefone;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import modelo.entitidades.usuarios.Usuario;
+import modelo.entitidades.usuarios.informacao.Contato;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
@@ -110,7 +112,47 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 	
-	
+	public Usuario recuperarUsuario(Usuario usuario) {
+
+		Session sessao = null;
+		Usuario usuarioRecuperado = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+			criteria.select(raizUsuario);
+			
+			ParameterExpression<String> loginUsuario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizUsuario.get("login"), loginUsuario));
+
+			usuarioRecuperado = sessao.createQuery(criteria).setParameter(loginUsuario, usuario.getLogin()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return usuarioRecuperado;
+	}
 
 	public List<Usuario> recuperarUsuarios() {
 

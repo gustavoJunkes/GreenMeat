@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro Fornecedor</title>
+<link type="text/css" rel="stylesheet" href="<c:url value="/mystyles.css" />" />
 </head>
 <body>
 
