@@ -17,36 +17,34 @@
       <a class="links" id="paralogin"></a>
       </div>
       
-        <!--FORMULÁRIO DE CADASTRO-->
+        <!--FORMULÃRIO DE CADASTRO-->
         <div id="cadastro">
           <form method="post" action="inserir-cliente"> 
             
              <h1>Cadastre-se</h1>
               <p> 
               <label for="nome"> Nome </label>                                                           
-              <input id="nome" name="nome" required="required" type="text" placeholder="None" value="<c:out value='${cliente.nome}'/>" />
+              <input id="nome" name="nome" required="nome" type="text" placeholder="nome" value="<c:out value=''/>" />
             </p>
 
             <p> 
               <label for="sobrenome"> Sobrenome </label>                                                           
+
               <input id="sobrenome_cad" name="sobrenome" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
+
             </p>
 
-            <p> 
-              <label for="CPF"> CPF</label>
-              &nbsp; &nbsp; &nbsp; &nbsp;<input id="CPF" name="CPF" required="required" type="text" placeholder="CPF"value="<c:out value='${cliente.CPF}'/>" /> 
-            </p>
-             
-            <p> 
            
-            <p> 
-              <label for="login">Crie um Login</label>
-              <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value='${cliente.login}'/>"/>
-            </p>
+             
+            
+           
+           
 
             <p> 
               <label for="senha">Crie uma senha</label>
+
               <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
+
             </p>
              
             <p> 
@@ -54,7 +52,7 @@
             </p>
              
             <p class="link">  
-              Já tem conta?
+              JÃ¡ tem conta?
               <a href="#paralogin"> Ir para Login </a>
             </p>
             
