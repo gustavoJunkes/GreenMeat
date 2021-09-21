@@ -32,8 +32,8 @@ public class Fornecedor extends PessoaJuridica {
 	@Column(name = "id_fornecedor")
 	private Long id;
 
-	@Fetch(FetchMode.JOIN)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Produto> produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
