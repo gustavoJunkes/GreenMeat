@@ -46,6 +46,7 @@ public class Servlet extends HttpServlet {
 	
 	
 	public void init() {
+		
 		produtoDAO = new ProdutoDAOImpl();
 		clienteDAO = new ClienteDAOImpl();
 		funcionarioDAO = new FuncionarioDAOImpl();
@@ -63,10 +64,14 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = request.getServletPath();
+		
+		System.out.println(action);
 
 		try {
 
 			switch (action) {
+			
+			
 
 			case "/novo-produto":
 				mostrarFormularioNovoProduto(request, response);
@@ -268,6 +273,7 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
+		dispatcher.forward(request, response);
 	}
 
 // INCOMPLETO
@@ -291,7 +297,7 @@ public class Servlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		// String dataNascimento = request.getParameter("dataNascimento");
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);		
-//		clienteDAO.inserirCliente(cliente);
+		clienteDAO.inserirCliente(cliente);
 		request.setAttribute("usuario",cliente);
 		response.sendRedirect("novo-contato");
 	}
@@ -497,15 +503,19 @@ public class Servlet extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 		String login = request.getParameter("login");
 		
-		Usuario usuario = (Usuario) request.getAttribute("usuario");
+		Usuario usuario = new Usuario();
+		
+//				(Usuario) request.getAttribute("usuario");
 		
 		
 		Contato contato = new Contato(email, telefone);
-		contato.setUsuario(usuario);
+//		contato.setUsuario(usuario);
 		contatoDAO.inserirContato(contato);
+		
 		usuario.getContatos().add(contato);
+		contato.setUsuario(usuario);
 		usuarioDAO.atualizarUsuario(usuario);
-//		usuario.adicionarContato(contato);
+		contatoDAO.atualizarContato(contato);
 		response.sendRedirect(""); // encaminhar para atualizar usuario?
 	}
 
