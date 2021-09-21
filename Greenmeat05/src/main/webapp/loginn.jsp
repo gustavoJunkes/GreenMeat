@@ -1,26 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <link rel="stylesheet" type="text/css" href="mystyles.css" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenMeat-Login</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 </head>
 <body>
-    <div class="content">      
-        <!--FORMUL√ÅRIO DE LOGIN-->
+ <div class="content">      
+        <!--FORMUL¡RIO DE LOGIN-->
         <div id="login">
           <form method="post" action=""> 
             <h1>Login</h1>
             <p> 
               <label for="nome_login">Login</label>
-              <input id="nome_login" name="nome_login" required="required" type="text" placeholder="login"/>
+              <input id="nome_login" name="nome_login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/>
             </p>
              
             <p> 
               <label for="email_login">Senha</label>
-              <input id="email_login" name="email_login" required="required" type="password" placeholder="ex. senha" /> 
+              <input id="email_login" name="email_login" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" /> 
             </p>
              
             <p> 
@@ -33,10 +32,11 @@
             </p>
              
             <p class="link">
-              Ainda n√£o tem conta?
+              Ainda n„o tem conta?
               <a href="cliente.html">Cadastre-se</a>
             </p>
           </form>
       </div>
+
 </body>
 </html>

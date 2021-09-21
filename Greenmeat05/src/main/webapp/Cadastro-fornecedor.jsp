@@ -36,7 +36,7 @@
             </p>
             <p> 
               <label for="login">Crie um Login</label>
-              <input id="login" name="login" required="required" type="password" placeholder="login" value="<c:out value='${fornecedor.login}' />"/>
+              <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value='${fornecedor.login}' />"/>
             </p>
       
             <p> 
@@ -50,7 +50,7 @@
              
             <p class="link">  
               Já tem conta?
-              <a href="#paralogin"> Ir para Login </a>
+              <a href="login.html"> Ir para Login </a>
             </p>
             
           </form>
