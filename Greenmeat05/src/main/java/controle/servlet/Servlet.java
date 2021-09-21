@@ -290,7 +290,9 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		// String dataNascimento = request.getParameter("dataNascimento");
-		clienteDAO.inserirCliente(new Cliente(login, senha, nome, sobrenome, CPF));
+		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);		
+//		clienteDAO.inserirCliente(cliente);
+		request.setAttribute("usuario",cliente);
 		response.sendRedirect("novo-contato");
 	}
 
@@ -495,9 +497,8 @@ public class Servlet extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 		String login = request.getParameter("login");
 		
-		Usuario usuarioRecuperado = new Usuario();
-		usuarioRecuperado.setLogin(login);
-		Usuario usuario = usuarioDAO.recuperarUsuario(usuarioRecuperado);
+		Usuario usuario = (Usuario) request.getAttribute("usuario");
+		
 		
 		Contato contato = new Contato(email, telefone);
 		contato.setUsuario(usuario);
