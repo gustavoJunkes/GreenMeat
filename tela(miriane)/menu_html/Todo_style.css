@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 *{
+ 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +10,7 @@
   }
   
   body{
-     background-color: #fff;
+    background-color: #e6ffe6;
   }
   
   .wrapper{
@@ -99,6 +100,88 @@
   .wrapper .main_content .info div{
     margin-bottom: 20px;
   }
+
+
+  .txt_tela_inicial {
+    position: relative;
+    top: 100px;
+    width: 30%;   
+    left: 400px;
+    border: 3px solid #73AD21;
+  }
+  
+  .imagem_tela_inicial{
+  position: relative;
+  top:100px ;
+  left:400px ;
+  }
+   
+   
+  div.categ{
+    margin-left: 250px;
+    margin-right: 100px;
+    margin-top: 50px;
+    
+    }
+      ul {
+        list-style-type: none;
+        margin: 225px;
+        margin-top:10px;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      
+      li {
+        float: left;
+        border-right:1px solid #bbb;
+        
+      }
+      
+      li:last-child {
+        border-right: none;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+      
+      .active {
+        background-color: #04AA6D;
+      } 
+    
+      
+  
+  div.gallery1 {
+    margin-top:100px;
+    margin-left: 400px;
+    
+      border: 2px solid rgb(0, 0, 0);
+      float: left;
+      width: 180px;
+    }
+    div.gallery1:hover {
+      border: 1px solid rgb(0, 0, 0);
+    }
+    
+    div.gallery1 img {
+      width: 100%;
+      height: auto;
+    }
+    
+    div.desc1 {
+      padding: 15px;
+      text-align: center;
+    }
   
 
 
@@ -110,6 +193,8 @@
     text-align:center;
     left: 500px;
     position: relative;
+    top: 100px;
+
 }
   
   td, th {
@@ -126,77 +211,14 @@
   div.txt{
     text-align:center;
   }
-  .txt_listar_pedidos_titulo{}
+  .txt_listar_pedidos_titulo{
+    position: relative;
+left: 500px;
+top: 50px;
+
+  }
   
 
-
-
-  
-  div.categ{
-  margin-left: 250px;
-  margin-right: 100px;
-  margin-top: 50px;
-  
-  }
-    ul {
-      list-style-type: none;
-      margin: 225px;
-      margin-top:10px;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-    }
-    
-    
-    li {
-      float: left;
-      border-right:1px solid #bbb;
-      
-    }
-    
-    li:last-child {
-      border-right: none;
-    }
-    
-    li a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-    
-    li a:hover:not(.active) {
-      background-color: #111;
-    }
-    
-    .active {
-      background-color: #04AA6D;
-    } 
-  
-  
-  
-  div.gallery1 {
-  margin-top:100px;
-  margin-left: 400px;
-  
-    border: 2px solid rgb(0, 0, 0);
-    float: left;
-    width: 180px;
-  }
-  div.gallery1:hover {
-    border: 1px solid rgb(0, 0, 0);
-  }
-  
-  div.gallery1 img {
-    width: 100%;
-    height: auto;
-  }
-  
-  div.desc1 {
-    padding: 15px;
-    text-align: center;
-  }
 
   .Listar_produtos_tabela {
     font-family: arial, sans-serif;
@@ -205,6 +227,7 @@
     text-align:center;
     left: 500px;
     position: relative;
+    top: 100px;
   }
   
   td, th {
@@ -224,11 +247,24 @@
 
   }
 .txt_Listar_produtos{
-
+  position: relative;
+left: 500px;
+top: 50px;
 
   
 }
-.txt_tela_inicial {
+
+
+
+
+
+.tabela_exibir_fornecedores{
+
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  text-align:center;
+  left: 500px;
   position: relative;
   top: 100px;
   width: 30%;   
@@ -236,9 +272,30 @@
   border: 3px solid #73AD21;
 }
 
-.imagem_tela_inicial{
-position: relative;
-top:100px ;
-left:400px ;
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  left: 500px;
 }
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+  left: 500px;
+}
+div.txt{
+  text-align:center;
+
+
+}
+.txt_lista_fornecedores{
+
+position: relative;
+left: 500px;
+top: 50px;
+
+
+}
+
+
 

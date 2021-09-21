@@ -25,17 +25,17 @@ public class Contato implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_contato")
 	private Long id;
-
+	
 	@Column(name = "email")
 	private String email;
 		
 	@Column(name = "telefone")
 	private String telefone;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-
+	
 	
 //	H� um erro aqui
 //	@Column(name = "usuario")
