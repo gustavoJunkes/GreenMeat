@@ -17,7 +17,7 @@
       <a class="links" id="paralogin"></a>
       </div>
       
-        <!--FORMULÁRIO DE CADASTRO-->
+        <!--FORMULÃRIO DE CADASTRO-->
         <div id="cadastro">
           <form method="post" action="inserir-cliente"> 
             
@@ -29,24 +29,22 @@
 
             <p> 
               <label for="sobrenome"> Sobrenome </label>                                                           
-              <input id="sobrenome" name="nome_cad" required="Sobrenome" type="text" placeholder="Sobrenome" value="<c:out value=''/>"/>
+
+              <input id="sobrenome_cad" name="sobrenome" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
+
             </p>
 
-            <p> 
-              <label for="CPF"> CPF</label>
-              &nbsp; &nbsp; &nbsp; &nbsp;<input id="CPF" name="CPF" required="required" type="text" placeholder="CPF"value="<c:out value=''/>" /> 
-            </p>
-             
-            <p> 
            
-            <p> 
-              <label for="login">Crie um Login</label>
-              <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value=''/>"/>
-            </p>
+             
+            
+           
+           
 
             <p> 
               <label for="senha">Crie uma senha</label>
-              <input id="senha" name="senha_cad" required="required" type="password" placeholder="ex. 1234" value="<c:out value=''/>"/>
+
+              <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
+
             </p>
              
             <p> 
@@ -54,7 +52,7 @@
             </p>
              
             <p class="link">  
-              Já tem conta?
+              JÃ¡ tem conta?
               <a href="#paralogin"> Ir para Login </a>
             </p>
             

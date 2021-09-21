@@ -21,6 +21,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
 import modelo.entitidades.usuarios.informacao.Contato;
@@ -28,7 +31,7 @@ import modelo.entitidades.usuarios.informacao.Localidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario implements Serializable {
+public  class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -52,7 +55,8 @@ public abstract class Usuario implements Serializable {
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private List<Contato>contatos = new ArrayList<Contato>();
 
 	

@@ -11,18 +11,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.exception.users.information.EmailInvalidException;
+import model.exception.users.information.PhoneNumberInvalidException;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
+import modelo.dao.contato.ContatoDAO;
+import modelo.dao.contato.ContatoDAOImpl;
 import modelo.dao.fornecedor.FornecedorDAO;
 import modelo.dao.fornecedor.FornecedorDAOImpl;
 import modelo.dao.funcionario.FuncionarioDAO;
 import modelo.dao.funcionario.FuncionarioDAOImpl;
 import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
+import modelo.dao.usuario.UsuarioDAO;
+import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidades.produtos.Produto;
 import modelo.entitidades.usuarios.Cliente;
 import modelo.entitidades.usuarios.Fornecedor;
 import modelo.entitidades.usuarios.Funcionario;
+import modelo.entitidades.usuarios.Usuario;
+import modelo.entitidades.usuarios.informacao.Contato;
 import modelo.exceptions.InvalidFieldException;
 
 @WebServlet("/")
@@ -33,12 +41,17 @@ public class Servlet extends HttpServlet {
 	private ClienteDAO clienteDAO;
 	private FuncionarioDAO funcionarioDAO;
 	private FornecedorDAO fornecedorDAO;
+	private ContatoDAO contatoDAO;
+	private UsuarioDAO usuarioDAO;
+	
 	
 	public void init() {
 		produtoDAO = new ProdutoDAOImpl();
 		clienteDAO = new ClienteDAOImpl();
 		funcionarioDAO = new FuncionarioDAOImpl();
 		fornecedorDAO = new FornecedorDAOImpl();
+		contatoDAO = new ContatoDAOImpl();
+		usuarioDAO = new UsuarioDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -119,12 +132,12 @@ public class Servlet extends HttpServlet {
 				atualizarFuncionario(request, response);
 				break;
 
-			case "/listar-funcinarios":
+			case "/listar-funcionarios":
 				listarFuncionarios(request, response);
 				break;
-				
+
 //				///////////////////////
-				
+
 			case "/novo-fornecedor":
 				mostrarFormularioNovoFornecedor(request, response);
 				break;
@@ -145,6 +158,28 @@ public class Servlet extends HttpServlet {
 				atualizarFornecedor(request, response);
 				break;
 
+//				//////////
+
+			case "/novo-contato":
+				mostrarFormularioNovoContato(request, response);
+				break;
+
+			case "/inserir-contato":
+				inserirContato(request, response);
+				break;
+
+			case "/deletar-contato":
+				deletarContato(request, response);
+				break;
+
+			case "/editar-contato":
+				mostrarFormularioEditarContato(request, response);
+				break;
+
+			case "/atualizar-contato":
+				atualizarContato(request, response);
+				break;
+
 			default:
 //				listarProdutos(request, response);
 				break;
@@ -153,6 +188,12 @@ public class Servlet extends HttpServlet {
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EmailInvalidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PhoneNumberInvalidException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -249,8 +290,10 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		// String dataNascimento = request.getParameter("dataNascimento");
-		clienteDAO.inserirCliente(new Cliente(nome, sobrenome, CPF, login, senha));
-		response.sendRedirect("listar");
+		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);		
+//		clienteDAO.inserirCliente(cliente);
+		request.setAttribute("usuario",cliente);
+		response.sendRedirect("novo-contato");
 	}
 
 	private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -274,23 +317,25 @@ public class Servlet extends HttpServlet {
 		clienteDAO.deletarCliente(cliente);
 		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
 	}
-	
+
 	private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		List<Funcionario> funcionarios = funcionarioDAO.recuperarFuncionarios();
 		request.setAttribute("funcionarios", funcionarios);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-funcionarios.jsp");// pagina de listar produto
-																							// virá aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-funcionarios.jsp");// pagina de listar
+																								// produto
+																								// virá aqui
 		dispatcher.forward(request, response);
 	}
 
 	private void mostrarFormularioNovoFuncionario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); // formulario do produto
-																								// virá
-																								// aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); // formulario do
+																									// produto
+																									// virá
+																									// aqui
 		dispatcher.forward(request, response);
 	}
 
@@ -332,7 +377,8 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		funcionarioDAO.atualizarFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
-		response.sendRedirect("listar");	}
+		response.sendRedirect("listar");
+	}
 
 	private void deletarFuncionario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -344,14 +390,15 @@ public class Servlet extends HttpServlet {
 	}
 
 //	/////////////////////
-	
+
 	private void listarFornecedores(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		List<Fornecedor> fornecedores = fornecedorDAO.recuperarFornecedores();
 		request.setAttribute("fornecedores", fornecedores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-fornecedores.jsp");// pagina de listar produto
-																							// virá aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-fornecedores.jsp");// pagina de listar
+																								// produto
+																								// virá aqui
 		dispatcher.forward(request, response);
 	}
 
@@ -369,7 +416,7 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		long id = Long.parseLong(request.getParameter("id"));
-		Fornecedor fornecedor= fornecedorDAO.recuperarPorId(id);
+		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("form-fornecedor.jsp");
 		request.setAttribute("fornecedor", fornecedor);
 		dispatcher.forward(request, response);
@@ -407,6 +454,77 @@ public class Servlet extends HttpServlet {
 		fornecedorDAO.deletarFornecedor(fornecedor);
 		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
 	}
-	
-	
+
+	/////////////////////////////
+
+	private void listarContatos(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		List<Contato> contatos = contatoDAO.recuperarContatos();
+		request.setAttribute("contatos", contatos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-contatos.jsp");// pagina de listar produto
+																							// virá aqui
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioNovoContato(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp"); // formulario do produto
+																								// virá
+																								// aqui
+		dispatcher.forward(request, response);
+	}
+
+	// INCOMPLETO
+	private void mostrarFormularioEditarContato(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Contato contato = contatoDAO.recuperarPorId(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
+		request.setAttribute("contato", contato);
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirContato(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException {
+
+		// Neste método é criado um objeto usuario a partir do login digitado pelo usuario,
+		// e este usuario recebe um novo contato, assim como o contato cadastrado recebe o usuario
+		
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		String login = request.getParameter("login");
+		
+		Usuario usuario = (Usuario) request.getAttribute("usuario");
+		
+		
+		Contato contato = new Contato(email, telefone);
+		contato.setUsuario(usuario);
+		contatoDAO.inserirContato(contato);
+		usuario.getContatos().add(contato);
+		usuarioDAO.atualizarUsuario(usuario);
+//		usuario.adicionarContato(contato);
+		response.sendRedirect(""); // encaminhar para atualizar usuario?
+	}
+
+	private void atualizarContato(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException {
+
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		contatoDAO.atualizarContato(new Contato(email, telefone));
+		response.sendRedirect("");
+	}
+
+	private void deletarContato(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		Contato contato = contatoDAO.recuperarPorId(id);
+		contatoDAO.deletarContato(contato);
+		response.sendRedirect(""); // aqui a pagina inicial ou de produtos
+	}
+
 }
