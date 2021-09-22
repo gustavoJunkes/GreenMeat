@@ -299,7 +299,8 @@ public class Servlet extends HttpServlet {
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);		
 		clienteDAO.inserirCliente(cliente);
 		request.setAttribute("usuario",cliente);
-		response.sendRedirect("novo-contato");
+		
+		response.sendRedirect("/novo-contato");
 	}
 
 	private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -503,9 +504,7 @@ public class Servlet extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 		String login = request.getParameter("login");
 		
-		Usuario usuario = new Usuario();
-		
-//				(Usuario) request.getAttribute("usuario");
+		Usuario usuario = (Usuario) request.getAttribute("usuario");
 		
 		
 		Contato contato = new Contato(email, telefone);
