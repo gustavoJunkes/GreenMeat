@@ -33,7 +33,7 @@ url("WEB-INF/mystyles.css")
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
 					name="sobrenome" required="required" type="text"
 					placeholder="Sobrenome"
-					value=<c:out value='cliente.sobrenome'/>/>
+					value= value='cliente.sobrenome'/>/>
 
 			</p>
 

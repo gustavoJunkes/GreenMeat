@@ -93,6 +93,9 @@ public class Servlet extends HttpServlet {
 				atualizarProduto(request, response);
 				break;
 
+			case "/listar-produtos":
+				listarProdutos(request, response);
+				break;
 /////////////////////////////////
 
 			case "/novo-cliente":
@@ -115,6 +118,9 @@ public class Servlet extends HttpServlet {
 				atualizarCliente(request, response);
 				break;
 
+//			case "/listar-clientes":
+//				listarClientes(request, response);
+//				break;
 //				////////////////////////
 
 			case "/novo-funcionario":
@@ -208,8 +214,8 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
-		request.setAttribute("contatos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produto.jsp");// pagina de listar produto
+		request.setAttribute("produtos", produtos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
 	}
