@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
     
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -44,9 +44,9 @@
               <td><c:out value="${produtos.id}" /></td>
               <td><c:out value="${produtos.nome}" /></td>
               <td><c:out value="${produtos.descricao}" /></td>
-              <th><c:out value="${produtos.tipo_de_carne }}" /></th>
-              <th><c:out value="${produtos.preco_custo}" /></th>
-              <th><c:out value="${produtos.custo_venda}" /></th>
+              <th><c:out value="${produtos.tipoCarne }" /></th>
+              <th><c:out value="${produtos.precoCusto}" /></th>
+              <th><c:out value="${produtos.custoVenda}" /></th>
               
             </tr>
             </c:forEach>
