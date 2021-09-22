@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
     font-family: Arial,sans-serif;
+    
+  }
+  body{
+    background-color: #e6ffe6;
   }
    
   a{
@@ -70,9 +74,6 @@
     color: #000000; 
     font-style: italic;
   }
-  
-   
-  
   
   input {
     outline: none;
@@ -161,14 +162,13 @@
   
   #cadastro{
     position: relative;
-    top: 40px;
+    top: 45px;
     width: 30%;   
     padding: 18px 6% 60px 6%;
     margin: 0 0 35px 0;
     background: #f7f7f7;
     border: 1px solid rgba(147, 184, 189,0.8);
     left: 1000px;
-     
     border-radius: 5px;
      
     -webkit-animation-duration: 0.5s;
@@ -232,7 +232,7 @@
   #contato{
     position: relative;
     top: 200px;
-    width: 30%;   
+    width: 20%;   
     padding: 18px 6% 60px 6%;
     margin: 0 0 35px 0;
     background: #f7f7f7;
@@ -252,7 +252,7 @@
   #endereco{
     position: relative;
     top: 50px;
-    width: 30%;   
+    width: 25%;   
     padding: 18px 6% 60px 6%;
     margin: 0 0 35px 0;
     background: #f7f7f7;
@@ -269,7 +269,51 @@
     animation-timing-function: ease;
     animation-fill-mode: both;
   }
-   
+  .imagemPerfil{
+    position: relative;
+    left: 500px;
+    top: 50px;
+    height: 10px;
+    width: 10px; 
+    max-width: 0px; 
+    max-height: 0px;
+  }
+
+  .tabela_exibir_perfilFuncionario{
+
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    text-align:center;
+    left: 500px;
+    position: relative;
+    top: 300px;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    left: 500px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+    left: 500px;
+  }
+  div.txt{
+    text-align:center;
+  
+  
+  }
+  .MeuPerfil{
+  
+  position: relative;
+  left: 500px;
+  top: 200px;
+  color:#04AA6D;
+  }
+  
   
   /*fadeInLeft*/
   @-webkit-keyframes fadeInLeft {
@@ -316,5 +360,6 @@
       transform: translateX(-20px);
     }
   }
-  
-   
+
+
+ 
