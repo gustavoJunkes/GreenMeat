@@ -7,6 +7,7 @@
 <head><style type="text/css"> @import url("../css/texto.css"); </style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/mystyle.css">
 </head>
 <body>
 
