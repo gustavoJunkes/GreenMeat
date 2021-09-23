@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,20 +9,24 @@
 </head>
 <body>
 
-  <div class="gallery1">
-        <a target="_blank" href="">
-          <img src="" alt="" width="600" height="400">
-        </a>
-        <c:forEach var="produto" items="${produtos}">
-        <div class="desc1"> <c:out value="${produto.nome}" /> -
-      <c:out value="${produto.preco}" /> <br>  <!--sobre a quantidade do produto a ser escolhido-->
-          <div class="input">
-            <form action="/action_page.php">
-              <input type="number" id="quantity" name="quantity" min="1" max="1000000">   
-           
-            </form> 
-          </div> <button type="button" onclick="alert('Item adicionado ao seu pedido!')">Comprar</button> </div>
-           </c:forEach>
-        </div>
+	<a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
+<form method="GET">
+	<table>
+		<thead>
+			<tr>
+				<th>Preço</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="produto" items="${produtos}">
+				<tr>
+					<td><c:out value="${produto.precoCusto}" /></td>
+
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</form>
+
 </body>
 </html>

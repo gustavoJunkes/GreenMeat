@@ -213,8 +213,8 @@ public class Servlet extends HttpServlet {
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		List<Produto> produtos = produtoDAO.recuperarProdutos();
-		request.setAttribute("produtos", produtos);
+ 		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
+		request.setAttribute("produtos", produtos1);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
