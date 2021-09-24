@@ -13,25 +13,24 @@
       
        <h1>Contato</h1>
        
-       <p> 
+       
         <label for="login"> Login</label>
-        &nbsp;<input id="login" name="login" required="required" type="text" placeholder="login" value='${contato.usuario.login}' />" />
-      </p>
+        ;<input id="login" name="login" required="required" type="text" placeholder="login" value='${contato.usuario.login}' />" />
+    
        
-      <p> 
+    
         <label for="email_cad"> E-mail</label>
-        &nbsp; &nbsp; <input id="email" name="email" required="required" type="text" placeholder="contato@email.com" value='${contato.email}' />"/> 
-      </p>
+         <input id="email" name="email" required="required" type="text" placeholder="contato@email.com" value='${contato.email}' />"/> 
+     
 
-      <p> 
-        <label for="telefone_cad"> Telefone</label>
-        &nbsp;<input id="telefone" name="telefone" required="required" type="text" placeholder="telefone" value='${contato.telefone}' />" />
-      </p>
        
-      <p> 
-        <input type="submit" value="Cadastrar"/> 
-      </p>
+        <label for="telefone_cad"> Telefone</label>
+        <input id="telefone" name="telefone" required="required" type="text" placeholder="telefone" value='${contato.telefone}' />" />
       
+       
+    
+        <input type="submit" value="Cadastrar"/> 
+     
     </form>
   </div>
 </body>
