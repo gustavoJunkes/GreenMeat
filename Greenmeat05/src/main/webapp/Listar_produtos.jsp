@@ -19,8 +19,7 @@
 			</ul>
 		</nav>
 	</header>
-	<br>
-
+	
 
 <div class="txt_Listar_produtos"> <h2>Lista de produtos cadastrados</h2> </div>
     

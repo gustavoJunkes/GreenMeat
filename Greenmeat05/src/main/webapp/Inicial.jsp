@@ -18,7 +18,7 @@
 <div class="txt_tela_inicial">   "O novo mercado é altamente competitivo, tecnológico e com a presença de empresas que exportam o produto para todo o mundo" <br><br>
 
     
-&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;A atividade pecuária no Brasil ganhou força nos últimos anos e os investimentos em tecnologia trouxeram 
+      A atividade pecuária no Brasil ganhou força nos últimos anos e os investimentos em tecnologia trouxeram 
     ganhos significativos para o setor, 
     Pensando nisso, nos do ... exportamos para países do mundo todo carnes de alta qualidade e
     estamos sempre pensando em transmitir a confiabilidade para seus clientes. 
