@@ -22,17 +22,17 @@
           <form method="post" action="inserir-cliente"> 
             
              <h1>Cadastre-se</h1>
-              <p> 
+              <br> 
               <label for="nome"> Nome </label>                                                           
-              <input id="nome" name="nome" required="nome" type="text" placeholder="nome" value="<c:out value=''/>" />
-            </p>
+              <input id="nome" name="nome" required="nome" type="text" placeholder="nome" value="<c:out value="nome"/>" />
+            <br>
 
-            <p> 
+            <br> 
               <label for="sobrenome"> Sobrenome </label>                                                           
 
               <input id="sobrenome_cad" name="sobrenome" required="required" type="text" placeholder="Sobrenome" value="<c:out value='${cliente.sobrenome}'/>"/>
 
-            </p>
+            <br>
 
            
              
@@ -40,16 +40,16 @@
            
            
 
-            <p> 
+            <br> 
               <label for="senha">Crie uma senha</label>
 
               <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>"/>
 
-            </p>
+            <br>
              
-            <p> 
+            <br> 
               <input type="submit" value="Cadastrar"/> 
-            </p>
+            <br>
              
             <p class="link">  
               Já tem conta?
