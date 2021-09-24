@@ -10,6 +10,7 @@
 	<form method="post" action="inserir-produto">
 
 		<h1>Cadastro de Produto</h1>
+
 	
 	label for="nome"> Nome do Produto </label> <input
 				id="nome" type="text"
@@ -18,10 +19,14 @@
 		
 
 		
+
+
+
 			<label for=" descricao"> Descrição </label> <input id=" descricao"
 				required="required" type="text"
 				value="<c:out value='${produto.descricao}' />"
 				name="descricao">
+
 		
 
 			<label for=" precoCusto"> Preço Custo </label> <input
@@ -44,7 +49,7 @@
 
 		<p class="link">
 			Já tem conta? <a href="#paralogin"> Ir para Login </a>
-		</p>
+		<br>
 
 	</form>
 </body>
