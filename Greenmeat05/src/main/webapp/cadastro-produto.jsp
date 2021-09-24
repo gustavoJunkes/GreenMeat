@@ -10,46 +10,46 @@
 	<form method="post" action="inserir-produto">
 
 		<h1>Cadastro de Produto</h1>
-		<p>
+		<br>
 			<label for="nome"> Nome do Produto </label> <input
 				id="nome" type="text"
 				value="<c:out value='${produto.nome}' />" name="nome" />
 
-		</p>
+		<br>
 
-		<p>
+		<br>
 			<label for=" descricao"> Descrição </label> <input id=" descricao"
 				required="required" type="text"
 				value="<c:out value='${produto.descricao}' />"
 				name="descricao">
-		</p>
+		<br>
 
-		<p>
+		<br>
 			<label for=" precoCusto"> Preço Custo </label> <input
 				id=" precoCusto" required="required" type="text"
 				value="<c:out value='${produto.precoCusto}' />" name="precoCusto">
-		</p>
+		<br>
 
-		<p>
+		<br>
 			<label for="precoVenda"> Preço Venda</label> <input id=" precoVenda"
 				required="required" type="text"
 				value="<c:out value='${produto.precoVenda}' />" name="precoVenda">
-		</p>
+		<br>
 
-		<p>
+		<br>
 			<label for="tipoCarne"> Tipo da carne</label> <input id="tipoCarne"
 				required="required" type="text"
 				value="<c:out value='${produto.tipoCarne}' />" name="tipoCarne">
-		</p>
+		<br>
 
 		<br>
-		<p>
+		<br>
 			<button type="submit">Salvar</button>
-		</p>
+		<br>
 
 		<p class="link">
 			Já tem conta? <a href="#paralogin"> Ir para Login </a>
-		</p>
+		<br>
 
 	</form>
 </body>
