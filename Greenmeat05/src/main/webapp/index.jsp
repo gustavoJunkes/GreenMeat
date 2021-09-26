@@ -1,24 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+<!DOCTYPE html>
 <html>
+<head>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+<meta charset="ISO-8859-1">
+<title>Inicial</title>
+</head>
 <body>
-<h2>Hello World!</h2>
 
- 
-	
+	<jsp:include page="Menu.jsp" />
+	<jsp:include page="cadastro-cliente.jsp" />
 
 
-	<p> <a href="<%=request.getContextPath()%>/novo-cliente" target="_self">Cadastro cliente</a></p>  
-	<p> <a href="<%=request.getContextPath()%>/listar-clientes" target="_self">Listar clientes</a></p>  
-	<p> <a href="<%=request.getContextPath()%>/novo-produto" target="_self">Cadastro produto</a></p>
-	<p> <a href="<%=request.getContextPath()%>/listar-produtos" target="_self">Listar produtos</a></p>    
-	
-	
-	
-	
-    <p> <a href="<%=request.getContextPath()%>/inserir-cliente" target="_self">Cadastro cliente</a></p>
-    <p> <a href="<%=request.getContextPath()%>/inserir-produto" target="_self">Cadastro produto</a></p>
-    <p> <a href="<%=request.getContextPath()%>/inserir-fornecedor" target="_self">Cadastro fornecedor</a></p>
-    <p> <a href="<%=request.getContextPath()%>/inserir-cliente" target="_self">exibir produtos</a></p>
-    <p> <a href="mystyles.css" target="_self">exibir produtos</a></p>
- 
+	<div class="imagem_tela_inicial">
+		<img src="img/aviao-exportacao.jfif" alt="foto da tela inicial ">
+	</div>
+
+	<div class="txt_tela_inicial">
+		"O novo mercado é altamente competitivo, tecnológico e com a presença
+		de empresas que exportam o produto para todo o mundo" <br>
+		<br> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;A atividade pecuária
+		no Brasil ganhou força nos últimos anos e os investimentos em
+		tecnologia trouxeram ganhos significativos para o setor, Pensando
+		nisso, nos do ... exportamos para países do mundo todo carnes de alta
+		qualidade e estamos sempre pensando em transmitir a confiabilidade
+		para seus clientes. Pois é nossa missão selecionar as melhores carnes
+		do mercado e fornecedores que respeitam todas as normas trabalhistas,
+		ambientais e sanitárias. Com os valores de preservar o meio ambiente,
+		temos como parceiros fornecedores com fazendas livres de
+		desmatamentos, (pois temos ciência que a mesma é a atividade mais
+		poluidora do país se considerarmos a emissão de gases da queima de
+		florestas que contribuem para o aquecimento global) e fornecedores que
+		cumprem com seu compromisso referente a saúde e bem estar animal até,
+		e durante o seu abate visando sempre buscar qualidade na mão de obra.
+	</div>
+
+
+
+
+
 </body>
 </html>

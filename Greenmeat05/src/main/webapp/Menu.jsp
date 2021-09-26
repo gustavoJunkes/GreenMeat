@@ -3,6 +3,12 @@
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
 
 <html>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/todos-styles.css"%></style>
+ <link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>

@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-
-<!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-@import
-url("WEB-INF/mystyles.css")
-</style>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro Cliente</title>
 </head>
 <body>
 	<div class="container">
@@ -32,8 +30,7 @@ url("WEB-INF/mystyles.css")
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
 					name="sobrenome" required="required" type="text"
-					placeholder="Sobrenome"
-					value= value='cliente.sobrenome'/>/>
+					placeholder="Sobrenome" value=value= 'cliente.sobrenome'/>/>
 
 			</p>
 
