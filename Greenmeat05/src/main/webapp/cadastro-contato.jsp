@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <link type="text/css" rel="stylesheet"
@@ -17,16 +16,20 @@
 
 			<h1>Contato</h1>
 			<p>
-				<label for="email_cad"> E-mail</label> &nbsp; &nbsp; <input
+				<label for="email"> E-mail</label> &nbsp; &nbsp; <input
 					id="email" name="email" required="required" type="text"
-					placeholder="contato@email.com" value='${contato.email}' />"/>
+					placeholder="contato@email.com" value="<c:out value='${contato.email}'/>"/>
 			</p>
 
 			<p>
-				<label for="telefone_cad"> Telefone</label> &nbsp;<input
+				<label for="telefone"> Telefone</label> &nbsp;<input
 					id="telefone" name="telefone" required="required" type="text"
-					placeholder="telefone" value='${contato.telefone}' />" />
+					placeholder="telefone" value="<c:out value='${contato.telefone}' />" />
 			</p>
+			
+				<label for="id"></label> <input id="id"
+					name="id"  type="hidden" value="<c:out value='${contato.id}' />" />
+			
 
 			<p>
 				<input type="submit" value="Cadastrar" />

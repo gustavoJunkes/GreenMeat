@@ -373,14 +373,17 @@ public class Servlet extends HttpServlet {
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("dispatcher");
-
+		
+		request.getSession().setAttribute("cliente", cliente);
+		
 		request.setAttribute("usuario", cliente);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
+
 //		response.sendRedirect("novo-contato");
 //		dispatcher.forward(request, response);
 //		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
-//		response.sendRedirect("novo-contato");
-		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
+		response.sendRedirect("novo-contato");
+//		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
 	}
 
 	private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -585,20 +588,26 @@ public class Servlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		String login = request.getParameter("login");
+//		Long id = Long.parseLong(request.getParameter("id"));
 
-		Usuario usuario = (Usuario) request.getAttribute("usuario");
+		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
+		
+//		Cliente cliente1 = new Cliente();
+//		cliente1.setId(id);
+//
+//		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
 
 //		Usuario usuario2 = (Usuario) request.
-		Contato contato = new Contato(email, telefone, usuario);
+		Contato contato = new Contato(email, telefone, cliente);
 //		contato.setUsuario(usuario);
 		contatoDAO.inserirContato(contato);
 
-		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(usuario);
+		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(cliente);
 		contatos.add(contato);
 
 		// erro de transiencia aqui?
-		usuario.setContatos(contatos);
-		usuarioDAO.atualizarUsuario(usuario);
+		cliente.setContatos(contatos);
+		clienteDAO.atualizarCliente(cliente);
 		contatoDAO.atualizarContato(contato);
 		response.sendRedirect("novo-endereco"); // encaminhar para atualizar usuario?
 	}
