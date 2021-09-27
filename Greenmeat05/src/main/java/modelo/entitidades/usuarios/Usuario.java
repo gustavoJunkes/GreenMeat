@@ -55,8 +55,7 @@ public  class Usuario implements Serializable {
 	// mappedBy deve ser usado em usuario, em contato deve ser usado o JoinColumn
 
 
-	@OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.JOIN)
+	@OneToMany(mappedBy = "usuario", fetch =  FetchType.LAZY,orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Contato>contatos = new ArrayList<Contato>();
 
 	

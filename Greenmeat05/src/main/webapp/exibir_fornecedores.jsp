@@ -6,8 +6,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Funcionarios</title>
+<style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
+
+
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
 
     <div class="txt_lista_fornecedores"><h3>Lista dos Fornecedores</h3></div>
 <div class="tabela_exibir_fornecedores"><table>
@@ -21,8 +28,9 @@
    <th>Pais</th>
    
   </tr>
-  <c:forEach var="produtos" items="${fornecedor}">
   <tr>
+  <c:forEach var="produtos" items="${fornecedor}">
+  
     <td><c:out value="${fornecedor.id_fornecedor}" /></td>
     <td><c:out value="${fornecedor.razaosocial}" /></td>
     <th><c:out value="${fornecedor.CNPJ}" /></th>

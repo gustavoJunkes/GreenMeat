@@ -31,15 +31,15 @@ public class Estoque implements Serializable {
 	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Item> itens = new ArrayList();
 
-	public void adicionarProdutoAoEstoque(Produto produto) {
-		
-		EstoqueDAO estoqueDAO = new EstoqueDAOImpl();
-		
-		Estoque estoque = estoqueDAO.recuperarEstoque();
-		if (getItens().contains(produto) == false) {
-			getItens().add(new Item(produto, 0));
-		}
-	}
+//	public void adicionarProdutoAoEstoque(Produto produto) {
+//		
+//		EstoqueDAO estoqueDAO = new EstoqueDAOImpl();
+//		
+//		Estoque estoque = estoqueDAO.recuperarEstoque();
+//		if (getItens().contains(produto) == false) {
+//			getItens().add(new Item(produto, 0));
+//		}
+//	}
 
 	public void adicionarAoEstoque(Item item) {
 

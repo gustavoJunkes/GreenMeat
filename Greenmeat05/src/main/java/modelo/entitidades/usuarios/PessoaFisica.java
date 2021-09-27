@@ -24,10 +24,10 @@ public abstract class PessoaFisica extends Usuario {
 //	@Column(name = "id_pessoa_fisica")
 //	private Long id;
 
-	@Column(name = "primeironome_pessoafisica", length = 15)
+	@Column(name = "primeironome_pessoafisica", length = 40)
 	private String nome;
 
-	@Column(name = "sobrenome_pessoafisica", length = 20)
+	@Column(name = "sobrenome_pessoafisica", length = 40)
 	private String sobrenome;
 
 	@Column(name = "CPF_pessoafisica")
