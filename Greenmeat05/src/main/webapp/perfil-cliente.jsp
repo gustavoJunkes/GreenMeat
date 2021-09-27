@@ -4,37 +4,29 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Perfil Funcionário</title>
+<title>Insert title here</title>
 </head>
 <body>
- <div class=imagemPerfil>
+<div class=imagemPerfil>
 <img src="perfil_img.jfif" alt=""></div>
-
-
-
-
     <div class="MeuPerfil"><h3>Meu Perfil</h3></div>
     <div class="tabela_exibir_perfil">
-     <c:forEach var="funcionario" items="${funcionarios}">
+     <c:forEach var="cliente" items="${clientes}">
     <table>
     <tr>
         <th>Nome</th>
         <th>Sobrenome </th>
         <th> CPF</th>
         <th> Data De Nascimento</th>
-        <th> Função</th>
-        <th> Cargo</th>
        <th>E-mail</th>
        <th>Telefone</th>
        
       </tr>
       <tr>
-        <td><c:out value="${funcionario.nome}" /></td>
-        <td><c:out value="${funcionario.sobrenome}" /></td>
-        <td><c:out value="${funcionario.CPF}" /></td>
-        <td><c:out value="${funcionario.dataDeNascimento}" /></td>
-        <td><c:out value="${funcionario.funcao}" /></td>
-        <td><c:out value="${funcionario.cargo}" /></td>
+        <td><c:out value="${cliente.nome}" /></td>
+        <td><c:out value="${cliente.sobrenome}" /></td>
+        <td><c:out value="${cliente.CPF}" /></td>
+        <td><c:out value="${cliente.dataDeNascimento}" /></td>
         <td><c:out value="${contato.email}" /></td>
         <td><c:out value="${contato.telefone}" /></td>
      

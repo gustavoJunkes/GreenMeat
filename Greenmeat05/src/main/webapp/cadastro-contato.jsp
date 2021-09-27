@@ -12,12 +12,6 @@
     <form method="post" action="inserir-contato"> 
       
        <h1>Contato</h1>
-       
-       <p> 
-        <label for="login"> Login</label>
-        &nbsp;<input id="login" name="login" required="required" type="text" placeholder="login" value='${contato.usuario.login}' />" />
-      </p>
-       
       <p> 
         <label for="email_cad"> E-mail</label>
         &nbsp; &nbsp; <input id="email" name="email" required="required" type="text" placeholder="contato@email.com" value='${contato.email}' />"/> 

@@ -27,10 +27,10 @@
 					for="endereço_cad"> Número</label> &nbsp; &nbsp; &nbsp; &nbsp;
 				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"
 					name="endereço_cad" required="required" type="text"
-					placeholder="Número" value="<c:out value='${fornecedor.numero}' />"/> <br> <label for="endereço_cad">
+					placeholder="Número" value="<c:out value='${endereco.numero}' />"/> <br> <label for="endereço_cad">
 					Cep</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input
 					id="endereço_cad" name="endereço_cad" required="required"
-					type="text" placeholder="Cep" value="<c:out value='${fornecedor.cep}' />" /> <br> <label
+					type="text" placeholder="Cep" value="<c:out value='${endereco.cep}' />" /> <br> <label
 					for="endereço_cad"> Complemento</label> &nbsp; &nbsp; &nbsp; &nbsp;
 				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"
 					name="endereço_cad" required="required" type="text"
