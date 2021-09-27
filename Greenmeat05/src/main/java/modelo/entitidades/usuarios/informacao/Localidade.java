@@ -44,7 +44,7 @@ public class Localidade implements Serializable {
 	@Column(name = "cotinente", length = 25, nullable = false, unique = false)
 	private String continente;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "endereco", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "localidade", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
 	public Localidade(String pais, String estado, String provincia, String continente, List<Endereco>enderecos)

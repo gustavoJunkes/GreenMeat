@@ -46,8 +46,8 @@ public class Endereco implements Serializable {
 	private Localidade localidade;
 
 //	Falta fazer referencia a enderecos em cliente
-	@ManyToOne        
-	private List<Cliente> clientes = new ArrayList<Cliente>();
+//	@ManyToOne        
+//	private List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public Endereco(String tipoDaVia, String nomeDaRua, String logradouro, short numero, String CEP, String complemento)
 			throws InvalidFieldException {

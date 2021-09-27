@@ -34,12 +34,6 @@
 
 			</p>
 
-
-
-
-
-
-
 			<p>
 				<label for="senha">Crie uma senha</label> <input id="senha"
 					name="senha" required="required" type="password"

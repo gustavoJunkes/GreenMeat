@@ -28,7 +28,7 @@ public class Contato implements Serializable {
 
 	@Column(name = "email")
 	private String email;
-		
+
 	@Column(name = "telefone")
 	private String telefone;
 
@@ -36,21 +36,26 @@ public class Contato implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	
 //	H� um erro aqui
 //	@Column(name = "usuario")
 //	@MapsId
 //	@JoinColumn(name = "id_usuario")
 //	private Usuario usuario;
-	
+
 //	private String 
-	
+
+	public Contato(String email, String telefone, Usuario usuario)
+			throws EmailInvalidException, PhoneNumberInvalidException {
+		setEmail(email);
+		setTelefone(telefone);
+		setUsuario(usuario);
+	}
 
 	public Contato(String email, String telefone) throws EmailInvalidException, PhoneNumberInvalidException {
 		setEmail(email);
 		setTelefone(telefone);
 	}
-	
+
 	public Contato() {
 		// TODO Auto-generated constructor stub
 	}
@@ -76,7 +81,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setEmail(String email) throws EmailInvalidException {
-		
+
 		this.email = email;
 	}
 
@@ -85,7 +90,7 @@ public class Contato implements Serializable {
 	}
 
 	public void setTelefone(String telefone) throws PhoneNumberInvalidException {
-		
+
 		this.telefone = telefone;
 	}
 
