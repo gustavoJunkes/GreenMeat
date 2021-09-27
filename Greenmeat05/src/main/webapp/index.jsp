@@ -1,19 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-<meta charset="ISO-8859-1">
 <title>Inicial</title>
 </head>
 <body>
 
-	<jsp:include page="Menu.jsp" />
-	<jsp:include page="cadastro-cliente.jsp" />
+	<jsp:include page="menu-lateral.jsp"/>
+	<jsp:include page="cadastro-cliente.jsp"/>
 
 
 	<div class="imagem_tela_inicial">
