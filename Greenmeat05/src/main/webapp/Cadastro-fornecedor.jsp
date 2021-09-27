@@ -20,38 +20,35 @@
           <form method="post" action=""> 
             
              <h1>Cadastre-se</h1>
-              <p> 
+             
               <label for="razaoSocial"> Razão Social</label>                                                           
               <input id="razaoSocial" name="razaoSocial" required="required" type="text" placeholder="razão social" value="<c:out value='${fornecedor.razaoSocial}' />" />
-            </p>
-
-            <p> 
+            
+           
               <label for="nomeFantasia"> Nome Fantasia </label>                                                           
               <input id="nomeFantasia" name="nomeFantasia" required="required" type="text" placeholder="nome fantasia" value="<c:out value='${fornecedor.nomeFantasia}' />"/>
-            </p>
+            
 
-            <p> 
+           
               <label for="CNPJ"> CNPJ</label>
-              &nbsp; &nbsp; &nbsp; &nbsp;<input id="CNPJ" name="CNPJ" required="required" type="text" placeholder="CNPJ" value="<c:out value='${fornecedor.CNPJ}' />"/>
-            </p>
-            <p> 
+             <input id="CNPJ" name="CNPJ" required="required" type="text" placeholder="CNPJ" value="<c:out value='${fornecedor.CNPJ}' />"/>
+            
               <label for="login">Crie um Login</label>
               <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value='${fornecedor.login}' />"/>
-            </p>
+            
       
-            <p> 
+           
               <label for="senha">Crie uma senha</label>
               <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" value="<c:out value='${fornecedor.senha}' />"/>
-            </p>
-
-            <p> 
+          
+           
               <input type="submit" value="Continuar Cadastro"/> 
-            </p>
+            
              
             <p class="link">  
               Já tem conta?
               <a href="login.html"> Ir para Login </a>
-            </p>
+            
             
           </form>
         </div>
