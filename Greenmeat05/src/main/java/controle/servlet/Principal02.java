@@ -3,8 +3,6 @@ package controle.servlet;
 import java.util.List;
 import java.util.Scanner;
 
-import model.exception.users.information.EmailInvalidException;
-import model.exception.users.information.PhoneNumberInvalidException;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
 import modelo.dao.contato.ContatoDAO;
@@ -23,8 +21,10 @@ import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entitidades.usuarios.Usuario;
-import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidade.usuario.Usuario;
+import modelo.entitidade.usuario.informacao.Contato;
+import modelo.excecao.user.information.EmailInvalidException;
+import modelo.excecao.user.information.PhoneNumberInvalidException;
 
 public class Principal02 {
 

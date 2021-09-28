@@ -2,8 +2,8 @@ package modelo.dao.estoque;
 
 import java.util.List;
 
-import modelo.entidades.produtos.Estoque;
-import modelo.entidades.produtos.Item;
+import modelo.entidade.produto.Estoque;
+import modelo.entidade.produto.Item;
 
 public interface EstoqueDAO {
 

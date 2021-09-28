@@ -2,8 +2,8 @@ package modelo.dao.item;
 
 import java.util.List;
 
-import modelo.entidades.produtos.Item;
-import modelo.entidades.produtos.Pedido;
+import modelo.entidade.produto.Item;
+import modelo.entidade.produto.Pedido;
 
 public interface ItemDAO {
 //	void soma(Item item); // Diz respeito ao valor total do item

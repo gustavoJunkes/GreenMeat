@@ -2,7 +2,7 @@ package modelo.dao.cliente;
 
 import java.util.List;
 
-import modelo.entitidades.usuarios.Cliente;
+import modelo.entitidade.usuario.Cliente;
 
 public interface ClienteDAO {
 
@@ -18,6 +18,4 @@ public interface ClienteDAO {
 	
 	List<Cliente> recuperarClientes();
 
-	
-//	List<Cliente> recuperarClientesOrdemDecrescente();
 }
