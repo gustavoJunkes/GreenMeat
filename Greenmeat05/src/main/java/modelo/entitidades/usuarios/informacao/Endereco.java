@@ -33,9 +33,9 @@ public class Endereco implements Serializable {
 	private String logradouro;
 
 	@Column(name = "numero_endereco", nullable = false)
-	private short numero;
+	private int	 numero;
 
-	@Column(name = "CEP", nullable = false)
+	@Column(name = "CEP", nullable = true)
 	private String CEP;
 
 	@Column(name = "complemento", length = 50, nullable = true)
@@ -49,7 +49,7 @@ public class Endereco implements Serializable {
 //	@ManyToOne        
 //	private List<Cliente> clientes = new ArrayList<Cliente>();
 
-	public Endereco(String tipoDaVia, String nomeDaRua, String logradouro, short numero, String CEP, String complemento)
+	public Endereco(String tipoDaVia, String nomeDaRua, String logradouro, Integer numero, String CEP, String complemento)
 			throws InvalidFieldException {
 		setTipoDaVia(tipoDaVia);
 		setNomeDaRua(nomeDaRua);
@@ -58,8 +58,18 @@ public class Endereco implements Serializable {
 		setCEP(CEP);
 		setComplemento(complemento);
 	}
+	public Endereco(String tipoDaVia, String nomeDaRua, String logradouro, Integer numero, String CEP, String complemento, Localidade localidade)
+			throws InvalidFieldException {
+		setTipoDaVia(tipoDaVia);
+		setNomeDaRua(nomeDaRua);
+		setLogradouro(logradouro);
+		setNumero(numero);
+		setCEP(CEP);
+		setComplemento(complemento);
+		setLocalidade(localidade);
+	}
 
-	public Endereco(String nomeDaRua, String logradouro, short numero, String CEP, String complemento)
+	public Endereco(String nomeDaRua, String logradouro, Integer numero, String CEP, String complemento)
 			throws InvalidFieldException {
 		setNomeDaRua(nomeDaRua);
 		setLogradouro(logradouro);
@@ -111,14 +121,14 @@ public class Endereco implements Serializable {
 		this.localidade = localidade;
 	}
 
+
+
 	public int getNumero() {
 		return numero;
 	}
-
-	public void setNumero(short numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-
 	public String getCEP() {
 		return CEP;
 	}

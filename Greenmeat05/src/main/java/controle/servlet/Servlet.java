@@ -82,8 +82,16 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
+			
+			case "/inicio":
+//				mostrarTelaInicio(request,response);
+			break;
+			
+			case "/login":
+//				mostrarTelaLogin(request,response);
+				break;
 //			========>Produto<========
-
+			
 			case "/novo-produto":
 				mostrarFormularioNovoProduto(request, response);
 				break;
@@ -374,10 +382,10 @@ public class Servlet extends HttpServlet {
 		clienteDAO.inserirCliente(cliente);
 
 		
-		request.getSession().setAttribute("cliente", cliente);
+		request.getSession().setAttribute("usuario", cliente);
 		
-		request.setAttribute("usuario", cliente);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
+//		request.setAttribute("usuario", cliente);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
 
 //		response.sendRedirect("novo-contato");
 //		dispatcher.forward(request, response);
@@ -590,7 +598,7 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 //		Long id = Long.parseLong(request.getParameter("id"));
 
-		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setId(id);
@@ -598,18 +606,18 @@ public class Servlet extends HttpServlet {
 //		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
 
 //		Usuario usuario2 = (Usuario) request.
-		Contato contato = new Contato(email, telefone, cliente);
+		Contato contato = new Contato(email, telefone, usuario);
 //		contato.setUsuario(usuario);
 		contatoDAO.inserirContato(contato);
 
-		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(cliente);
+		List<Contato> contatos = contatoDAO.recuperarContatosUsuario(usuario);
 		contatos.add(contato);
 
 		// erro de transiencia aqui?
-		cliente.setContatos(contatos);
-		clienteDAO.atualizarCliente(cliente);
+		usuario.setContatos(contatos);
+		usuarioDAO.atualizarUsuario(usuario);
 		contatoDAO.atualizarContato(contato);
-		response.sendRedirect("novo-endereco"); // encaminhar para atualizar usuario?
+		response.sendRedirect("nova-localidade"); // encaminhar para atualizar usuario?
 	}
 
 	private void atualizarContato(HttpServletRequest request, HttpServletResponse response) throws SQLException,
@@ -669,18 +677,24 @@ public class Servlet extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String provincia = request.getParameter("provincia");
 		String continente = request.getParameter("continente");
-		String nomeDaRua = request.getParameter("nomeDaRua");
-		String logradouro = request.getParameter("logradouro");
-		String tipoDaVia = request.getParameter("tipoDaVia");
-		Short numero = Short.parseShort(request.getParameter("numero"));
-		String CEP = request.getParameter("CEP");
-		String complemento = request.getParameter("complemento");
 
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento);
-		enderecoDAO.inserirEndereco(endereco);
-		List<Endereco> enderecos = new ArrayList();
-		enderecos.add(endereco);
-		localidadeDAO.inserirLocalidade(new Localidade(pais, estado, provincia, continente, enderecos));
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		
+		
+		// precisa ser dessa forma, em conjunto com o método que verifica
+		// se a localidade já existe em banco antes de cadastrar
+//		List<Usuario>usuarios = usuarioDAO.recuperarUsuariosLocalidade()
+	
+		List<Usuario> usuarios = new ArrayList();
+		usuarios.add(usuario);
+		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+		localidadeDAO.inserirLocalidade(localidade);
+
+		List<Localidade>localidades = localidadeDAO.recuperarLocalidadesUsuario(usuario);
+		localidades.add(localidade);
+		usuario.setLocalidades(localidades);
+		request.getSession().setAttribute("localidade", localidade);
+	
 		response.sendRedirect("novo-endereco");
 	}
 
@@ -691,18 +705,7 @@ public class Servlet extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String provincia = request.getParameter("provincia");
 		String continente = request.getParameter("continente");
-		String nomeDaRua = request.getParameter("nomeDaRua");
-		String logradouro = request.getParameter("logradouro");
-		String tipoDaVia = request.getParameter("tipoDaVia");
-		Short numero = Short.parseShort(request.getParameter("numero"));
-		String CEP = request.getParameter("CEP");
-		String complemento = request.getParameter("complemento");
-
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento);
-		enderecoDAO.inserirEndereco(endereco);
-		List<Endereco> enderecos = new ArrayList();
-		enderecos.add(endereco);
-		localidadeDAO.atualizarLocalidade(new Localidade(pais, estado, provincia, continente, enderecos));
+		localidadeDAO.atualizarLocalidade(new Localidade(pais, estado, provincia, continente));
 	}
 
 	private void deletarLocalidade(HttpServletRequest request, HttpServletResponse response)
@@ -753,12 +756,20 @@ public class Servlet extends HttpServlet {
 		String nomeDaRua = request.getParameter("nomeDaRua");
 		String logradouro = request.getParameter("logradouro");
 		String tipoDaVia = request.getParameter("tipoDaVia");
-		Short numero = Short.parseShort(request.getParameter("numero"));
+		Integer numero = Integer.parseInt(request.getParameter("numero"));
 		String CEP = request.getParameter("CEP");
 		String complemento = request.getParameter("complemento");
 
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento);
+		Localidade localidade = (Localidade) request.getSession().getAttribute("localidade");
+		
+		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
 		enderecoDAO.inserirEndereco(endereco);
+		
+		List<Endereco>enderecos = new ArrayList<Endereco>();
+		//Está incompleto, dessa forma exclui todos os outros endereços		
+		enderecos.add(endereco);
+		localidade.setEnderecos(enderecos);
+		localidadeDAO.atualizarLocalidade(localidade);
 		response.sendRedirect("inicio");
 	}
 
@@ -768,7 +779,7 @@ public class Servlet extends HttpServlet {
 		String nomeDaRua = request.getParameter("nomeDaRua");
 		String logradouro = request.getParameter("logradouro");
 		String tipoDaVia = request.getParameter("tipoDaVia");
-		Short numero = Short.parseShort(request.getParameter("numero"));
+		Integer numero = Integer.parseInt(request.getParameter("numero"));
 		String CEP = request.getParameter("CEP");
 		String complemento = request.getParameter("complemento");
 

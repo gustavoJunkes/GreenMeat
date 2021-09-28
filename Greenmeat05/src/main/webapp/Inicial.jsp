@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<jsp:include page="Menu.jsp" />
-<jsp:include page="Cadastro-cliente.jsp" />
+<jsp:include page="menu-lateral.jsp" />
+<jsp:include page="cadastro-cliente.jsp" />
 
        
 <div class="imagem_tela_inicial"><img src="img/aviao-exportacao.jfif" alt="foto da tela inicial "></div>
