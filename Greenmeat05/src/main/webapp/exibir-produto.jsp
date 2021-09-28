@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Exibição Produtos</title>
+<style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
+
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
+
 
   <div class="gallery1">
         <a target="_blank" href="">

@@ -7,6 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Lista de Produtos cadastrados</title>
+ <style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 
 <body>

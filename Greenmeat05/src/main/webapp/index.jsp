@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
+ <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style><%@include file="/resources/css/estilo.css"%></style>
 <title>Inicial</title>
 </head>
 <body>
 
+	<div>
 	<jsp:include page="menu-lateral.jsp"/>
-	<jsp:include page="cadastro-cliente.jsp"/>
-
-
-	<div class="imagem_tela_inicial">
-		<img src="img/aviao-exportacao.jfif" alt="foto da tela inicial ">
-	</div>
+	
+   </div>
 
 	<div class="txt_tela_inicial">
 		"O novo mercado é altamente competitivo, tecnológico e com a presença
@@ -34,9 +33,6 @@
 		cumprem com seu compromisso referente a saúde e bem estar animal até,
 		e durante o seu abate visando sempre buscar qualidade na mão de obra.
 	</div>
-
-
-
 
 
 </body>

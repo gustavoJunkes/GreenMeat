@@ -5,9 +5,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Exibição Produtos</title>
+ <style><%@include file="/resources/css/estilo.css"%></style>
+
 </head>
 
 <body>
+
+
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
+   
 	<a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
 	<form method="post" action="">
 		<table>

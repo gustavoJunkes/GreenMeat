@@ -6,17 +6,19 @@
 <meta charset="ISO-8859-1">
 <title>Cadastro Fornecedor</title>
 
-<link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
+ <style><%@include file="/resources/css/estilo.css"%></style>
  
 </head>
 <body>
 
-	<div class="container">
-		<a class="links" id="paracadastro"></a> <a class="links"
-			id="paralogin"></a>
-	</div>
+
+
+	<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
+
+
 
 	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="cadastro">
