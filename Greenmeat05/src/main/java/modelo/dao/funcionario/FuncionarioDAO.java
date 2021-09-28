@@ -3,8 +3,8 @@ package modelo.dao.funcionario;
 import java.time.LocalDate;
 import java.util.List;
 
-import modelo.entitidades.usuarios.Funcionario;
-import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidade.usuario.Funcionario;
+import modelo.entitidade.usuario.informacao.Contato;
 
 public interface FuncionarioDAO {
 

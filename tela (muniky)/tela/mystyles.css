@@ -323,9 +323,22 @@
      background: #f7f7f7;
      border: 1px solid rgba(147, 184, 189,0.8);
      left: 700px;
-      
- }
-  
+       }
+      #opcao{
+         position: relative;
+        right:250px;
+        top:15px;
+       }
+       #txt{
+        position: relative;
+        right:0px;
+        top:15px;
+       }
+       #licenca{
+         position:relative;
+         left:150px;
+        width: 50%;   
+       }
   /*fadeInLeft*/
   @-webkit-keyframes fadeInLeft {
     0% {

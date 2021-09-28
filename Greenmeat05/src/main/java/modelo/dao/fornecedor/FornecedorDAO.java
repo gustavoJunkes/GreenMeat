@@ -2,8 +2,8 @@ package modelo.dao.fornecedor;
 
 import java.util.List;
 
-import modelo.entidades.produtos.Produto;
-import modelo.entitidades.usuarios.Fornecedor;
+import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Fornecedor;
 
 public interface FornecedorDAO {
 
