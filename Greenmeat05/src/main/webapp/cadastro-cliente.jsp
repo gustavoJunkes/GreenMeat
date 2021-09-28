@@ -30,7 +30,9 @@
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
 					name="sobrenome" required="required" type="text"
-					placeholder="Sobrenome" value='cliente.sobrenome'/>
+
+					placeholder="Sobrenome" value='sobrenome'/>
+
 
 			</p>
 
