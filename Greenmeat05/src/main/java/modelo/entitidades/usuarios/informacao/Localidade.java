@@ -38,7 +38,7 @@ public class Localidade implements Serializable {
 	@Column(name = "estado", length = 25, nullable = false, unique = false)
 	private String estado;
 
-	@Column(name = "provincia", length = 25, nullable = false, unique = false)
+	@Column(name = "provincia", length = 50, nullable = true, unique = false)
 	private String provincia;
 
 	@Column(name = "cotinente", length = 25, nullable = false, unique = false)
@@ -56,6 +56,23 @@ public class Localidade implements Serializable {
 		setEnderecos(enderecos);
 	}
 
+	public Localidade(String pais, String estado, String provincia, String continente)
+			throws CountryInvalidException {
+		setPais(pais);
+		setEstado(estado);
+		setProvincia(provincia);
+		setContinente(continente);
+	}
+	
+	public Localidade(List<Usuario>usuarios, String pais, String estado, String provincia, String continente)
+			throws CountryInvalidException {
+		setPais(pais);
+		setEstado(estado);
+		setProvincia(provincia);
+		setContinente(continente);
+		setUsuarios(usuarios);
+	}
+	
 	public Localidade() {
 		// TODO Auto-generated constructor stub
 	}
