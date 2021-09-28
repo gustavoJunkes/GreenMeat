@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
+
 import model.exception.users.information.CountryInvalidException;
 import model.exception.users.information.EmailInvalidException;
 import model.exception.users.information.PhoneNumberInvalidException;
@@ -380,7 +382,6 @@ public class Servlet extends HttpServlet {
 		// String dataNascimento = request.getParameter("dataNascimento");
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
-
 		
 		request.getSession().setAttribute("usuario", cliente);
 		
@@ -528,8 +529,10 @@ public class Servlet extends HttpServlet {
 		String CNPJ = request.getParameter("CNPJ");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		fornecedorDAO.inserirFornecedor(new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha));
-		response.sendRedirect("listar");
+		Fornecedor fornecedor = new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha);
+		fornecedorDAO.inserirFornecedor(fornecedor);
+		request.getSession().setAttribute("usuario", fornecedor);
+		response.sendRedirect("novo-contato");
 	}
 
 	private void atualizarFornecedor(HttpServletRequest request, HttpServletResponse response)
@@ -599,6 +602,7 @@ public class Servlet extends HttpServlet {
 //		Long id = Long.parseLong(request.getParameter("id"));
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		
 		
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setId(id);
@@ -680,6 +684,7 @@ public class Servlet extends HttpServlet {
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
+		request.getSession().removeAttribute("usuario");
 		
 		// precisa ser dessa forma, em conjunto com o método que verifica
 		// se a localidade já existe em banco antes de cadastrar

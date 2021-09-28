@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -22,7 +22,7 @@
 
 	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="cadastro">
-		<form method="post" action="">
+		<form method="post" action="inserir-fornecedor">
 
 			<h1>Cadastre-se</h1>
 			<p>
@@ -42,7 +42,7 @@
 			<p>
 				<label for="CNPJ"> CNPJ</label> &nbsp; &nbsp; &nbsp; &nbsp;<input
 					id="CNPJ" name="CNPJ" required="required" type="text"
-					placeholder="CNPJ" value="<c:out value='${fornecedor.CNPJ}' />" />
+					placeholder="CNPJ" value="<c:out value='${fornecedor.cnpj}' />" />
 			</p>
 			<p>
 				<label for="login">Crie um Login</label> <input id="login"
