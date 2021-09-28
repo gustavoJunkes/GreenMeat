@@ -2,7 +2,7 @@ package modelo.dao.endereco;
 
 import java.util.List;
 
-import modelo.entitidades.usuarios.informacao.Endereco;
+import modelo.entitidade.usuario.informacao.Endereco;
 
 public interface EnderecoDAO {
 

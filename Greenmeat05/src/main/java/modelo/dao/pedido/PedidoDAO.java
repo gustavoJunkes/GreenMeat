@@ -2,8 +2,8 @@ package modelo.dao.pedido;
 
 import java.util.List;
 
-import modelo.entidades.produtos.Pedido;
-import modelo.entitidades.usuarios.Cliente;
+import modelo.entidade.produto.Pedido;
+import modelo.entitidade.usuario.Cliente;
 
 public interface PedidoDAO {
 

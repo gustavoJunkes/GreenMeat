@@ -2,8 +2,8 @@ package modelo.dao.contato;
 
 import java.util.List;
 
-import modelo.entitidades.usuarios.Usuario;
-import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidade.usuario.Usuario;
+import modelo.entitidade.usuario.informacao.Contato;
 
 public interface ContatoDAO {
 

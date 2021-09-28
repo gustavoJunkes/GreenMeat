@@ -14,11 +14,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import modelo.entidades.produtos.Item;
-import modelo.entidades.produtos.Pedido;
-import modelo.entidades.produtos.Produto;
-import modelo.entidades.produtos.Tipo;
-import modelo.entitidades.usuarios.Cliente;
+import modelo.entidade.produto.Item;
+import modelo.entidade.produto.Pedido;
+import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Cliente;
+import modelo.enumeracao.Tipo;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
 
@@ -277,19 +277,19 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 		Configuration configuracao = new Configuration();
 
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Cliente.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Usuario.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.PessoaFisica.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Fornecedor.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.Funcionario.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.PessoaJuridica.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Contato.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Endereco.class);
-		configuracao.addAnnotatedClass(modelo.entitidades.usuarios.informacao.Localidade.class);
-		configuracao.addAnnotatedClass(modelo.entidades.produtos.Estoque.class);
-		configuracao.addAnnotatedClass(modelo.entidades.produtos.Item.class);
-		configuracao.addAnnotatedClass(modelo.entidades.produtos.Pedido.class);
-		configuracao.addAnnotatedClass(modelo.entidades.produtos.Produto.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.Cliente.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.Usuario.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.PessoaFisica.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.Fornecedor.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.Funcionario.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.PessoaJuridica.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.informacao.Contato.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.informacao.Endereco.class);
+		configuracao.addAnnotatedClass(modelo.entitidade.usuario.informacao.Localidade.class);
+		configuracao.addAnnotatedClass(modelo.entidade.produto.Estoque.class);
+		configuracao.addAnnotatedClass(modelo.entidade.produto.Item.class);
+		configuracao.addAnnotatedClass(modelo.entidade.produto.Pedido.class);
+		configuracao.addAnnotatedClass(modelo.entidade.produto.Produto.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
