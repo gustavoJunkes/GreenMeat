@@ -287,18 +287,19 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
+			throws SQLException, IOException, ServletException, InvalidFieldException {
 
 		
 		Produto produto = new Produto();
 		produto.setNome("caarne");
+		produto.setPrecoCusto(16);
 		
 		request.setAttribute("nomeProduto", produto.getNome());
 		
 		
 		
-//		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
-//		request.setAttribute("produtos", produtos1);
+		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
+		request.setAttribute("produtos", produtos1);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);

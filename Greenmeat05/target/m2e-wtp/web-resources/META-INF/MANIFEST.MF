@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: gustavo.junkes
-=======
-Built-By: miriane.felicio
->>>>>>> trabalho
 Build-Jdk: 1.8.0_261
 Created-By: Maven Integration for Eclipse
 
