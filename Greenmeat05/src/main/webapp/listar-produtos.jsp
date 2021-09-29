@@ -11,14 +11,19 @@
 
 <body>
 
+<% out.print("welcome to jsp"); %>  
+
+<% String nome = request.getParameter("nomeProduto");
+out.print(nome);		
+%>  
 
 <div>
-	<jsp:include page="menu-lateral.jsp"/>
+	
 	
    </div>
    
 	<a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
-	<form method="post" action="">
+	<form method="post" action="listar-produtos">
 		<table>
 			<thead>
 				<tr>

@@ -1,12 +1,10 @@
-package modelo.entidades.produtos;
+package modelo.entidade.produto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,9 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import modelo.entitidades.usuarios.Fornecedor;
-import modelo.exception.produtos.ExpirationDateInvalidException;
-import modelo.exceptions.InvalidFieldException;
+import modelo.entitidade.usuario.Fornecedor;
+import modelo.excecao.InvalidFieldException;
+import modelo.excecao.produto.ExpirationDateInvalidException;
+
 
 @Entity
 @Table(name = "produto")
