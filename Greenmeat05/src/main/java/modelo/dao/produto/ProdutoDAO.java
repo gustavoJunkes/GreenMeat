@@ -3,9 +3,10 @@ package modelo.dao.produto;
 //import java.time.LocalDate;
 import java.util.List;
 
-import modelo.entidades.produtos.Item;
-import modelo.entidades.produtos.Produto;
-import modelo.entitidades.usuarios.Fornecedor;
+import modelo.entidade.produto.Item;
+import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Fornecedor;
+
 
 public interface ProdutoDAO {
 

@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
-
-import model.exception.users.information.CountryInvalidException;
-import model.exception.users.information.EmailInvalidException;
-import model.exception.users.information.PhoneNumberInvalidException;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
 import modelo.dao.contato.ContatoDAO;
@@ -33,15 +28,18 @@ import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entidades.produtos.Produto;
-import modelo.entitidades.usuarios.Cliente;
-import modelo.entitidades.usuarios.Fornecedor;
-import modelo.entitidades.usuarios.Funcionario;
-import modelo.entitidades.usuarios.Usuario;
-import modelo.entitidades.usuarios.informacao.Contato;
-import modelo.entitidades.usuarios.informacao.Endereco;
-import modelo.entitidades.usuarios.informacao.Localidade;
-import modelo.exceptions.InvalidFieldException;
+import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Cliente;
+import modelo.entitidade.usuario.Fornecedor;
+import modelo.entitidade.usuario.Funcionario;
+import modelo.entitidade.usuario.Usuario;
+import modelo.entitidade.usuario.informacao.Contato;
+import modelo.entitidade.usuario.informacao.Endereco;
+import modelo.entitidade.usuario.informacao.Localidade;
+import modelo.excecao.InvalidFieldException;
+import modelo.excecao.user.information.CountryInvalidException;
+import modelo.excecao.user.information.EmailInvalidException;
+import modelo.excecao.user.information.PhoneNumberInvalidException;
 
 @WebServlet("/")
 public class Servlet extends HttpServlet {
@@ -291,8 +289,16 @@ public class Servlet extends HttpServlet {
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
-		request.setAttribute("produtos", produtos1);
+		
+		Produto produto = new Produto();
+		produto.setNome("caarne");
+		
+		request.setAttribute("nomeProduto", produto.getNome());
+		
+		
+		
+//		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
+//		request.setAttribute("produtos", produtos1);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
@@ -354,7 +360,7 @@ public class Servlet extends HttpServlet {
 		float precoCusto = Float.parseFloat(request.getParameter("precoCusto"));
 		float precoVenda = Float.parseFloat(request.getParameter("precoVenda"));
 		String tipoCarne = request.getParameter("tipoCarne");
-		produtoDAO.atualizarProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
+//		produtoDAO.atualizarProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
 		response.sendRedirect("listar");
 	}
 
