@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.entidades.produtos.Item;
 import modelo.entidades.produtos.Produto;
+import modelo.entitidades.usuarios.Fornecedor;
 
 public interface ProdutoDAO {
 
@@ -21,6 +22,8 @@ public interface ProdutoDAO {
 	Produto recuperarProdutoItem(Item item);
 
 	List<Produto> recuperarPorCategoria(Produto produto);
+	
+	List<Produto> recuperarProdutosFornecedor(Fornecedor fornecedor);
 
 	List<Produto> recuperarProdutos();
 

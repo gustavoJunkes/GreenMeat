@@ -142,7 +142,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 		
 	}
 	
-	public Fornecedor recuperarFornecedor(Fornecedor fornecedor) {
+	public Fornecedor recuperarFornecedorPorLogin(Fornecedor fornecedor) {
 		Session sessao = null;
 		Fornecedor fornecedorRecuperado = null;
 

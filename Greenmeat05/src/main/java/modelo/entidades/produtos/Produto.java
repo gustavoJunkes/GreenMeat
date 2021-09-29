@@ -56,13 +56,14 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda)
+	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda, Fornecedor fornecedor)
 			throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
 		setPrecoCusto(precoCusto);
 		setPrecoVenda(precoVenda);
+		setFornecedor(fornecedor);
 	}
 
 	public Produto(String nome, String descricao, String tipoCarne)

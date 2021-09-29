@@ -326,8 +326,24 @@ public class Servlet extends HttpServlet {
 		Float precoCusto = Float.parseFloat(request.getParameter("precoCusto"));
 		Float precoVenda = Float.parseFloat(request.getParameter("precoVenda"));
 		String tipoCarne = request.getParameter("tipoCarne");
-		produtoDAO.inserirProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
-		response.sendRedirect("listar");
+		
+		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(Long.parseLong(request.getParameter("idFornecedor")));
+		
+		Produto produto = new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda, fornecedor);
+		produtoDAO.inserirProduto(produto);
+		
+		List<Produto>produtos = new ArrayList<Produto>(); 
+		produtoDAO.recuperarProdutosFornecedor(fornecedor);
+		produtos.add(produto);
+		
+		fornecedor.setProdutos(produtos);
+		fornecedorDAO.atualizarFornecedor(fornecedor);
+				
+//		List<Fornecedor>fornecedores = new ArrayList<Fornecedor>();
+//		fornecedores = fornecedorDAO.recuperarFornecedores();
+			
+		response.sendRedirect("inicio");	
+//		response.sendError(401, "O fornecedor mencionado não foi encontrado em nossa base de dados, cadastre o fornecedor ou escolha um cadastrado");
 	}
 
 	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
