@@ -2,10 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: Arial,sans-serif;
-    
-  }
-  body{
-    background-color: #e6ffe6;
   }
    
   a{
@@ -75,6 +71,9 @@
     font-style: italic;
   }
   
+   
+  
+  
   input {
     outline: none;
   }
@@ -116,7 +115,7 @@
    
   
   input[type="submit"]:hover{
-    background:#194f15;
+    background: #4ab3c6;
   }
   
    
@@ -153,7 +152,7 @@
   }
    
   .link a:hover {
-    color:#194f15;
+    color: #39bfd7;
     background: #f7f7f7;
     border: 1px solid #194f15;;
   }
@@ -162,13 +161,14 @@
   
   #cadastro{
     position: relative;
-    top: 45px;
+    top: 40px;
     width: 30%;   
     padding: 18px 6% 60px 6%;
     margin: 0 0 35px 0;
     background: #f7f7f7;
     border: 1px solid rgba(147, 184, 189,0.8);
     left: 1000px;
+     
     border-radius: 5px;
      
     -webkit-animation-duration: 0.5s;
@@ -229,116 +229,8 @@
     animation-name: fadeOutLeft;
   }
   
-  #contato{
-    position: relative;
-    top: 200px;
-    width: 20%;   
-    padding: 18px 6% 60px 6%;
-    margin: 0 0 35px 0;
-    background: #f7f7f7;
-    border: 1px solid rgba(147, 184, 189,0.8);
-    left: 700px;
-     
-    border-radius: 5px;
-     
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-fill-mode: both;
    
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: both;
-  }
-  #endereco{
-    position: relative;
-    top: 50px;
-    width: 25%;   
-    padding: 18px 6% 60px 6%;
-    margin: 0 0 35px 0;
-    background: #f7f7f7;
-    border: 1px solid rgba(147, 184, 189,0.8);
-    left: 700px;
-     
-    border-radius: 5px;
-     
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-fill-mode: both;
-   
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: both;
-  }
-  .imagemPerfil{
-    position: relative;
-    left: 500px;
-    top: 50px;
-    height: 10px;
-    width: 10px; 
-    max-width: 0px; 
-    max-height: 0px;
-  }
-
-  .tabela_exibir_perfil{
-
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-    text-align:center;
-    left: 500px;
-    position: relative;
-    top: 300px;
-  }
   
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    left: 500px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-    left: 500px;
-  }
-  div.txt{
-    text-align:center;
-  
-  
-  }
-  .MeuPerfil{
-  
-  position: relative;
-  left: 500px;
-  top: 200px;
-  color:#04AA6D;
-  }
-   #ambiental{
-     position:relative;
-     left:500px;
-     top: 50px;
-     width: 25%;   
-     padding: 18px 6% 60px 6%;
-     margin: 0 0 35px 0;
-     background: #f7f7f7;
-     border: 1px solid rgba(147, 184, 189,0.8);
-     left: 700px;
-       }
-      #opcao{
-         position: relative;
-        right:250px;
-        top:15px;
-       }
-       #txt{
-        position: relative;
-        right:0px;
-        top:15px;
-       }
-       #licenca{
-         position:relative;
-         left:150px;
-        width: 50%;   
-       }
   /*fadeInLeft*/
   @-webkit-keyframes fadeInLeft {
     0% {
@@ -384,6 +276,5 @@
       transform: translateX(-20px);
     }
   }
-
-
- 
+  
+   
