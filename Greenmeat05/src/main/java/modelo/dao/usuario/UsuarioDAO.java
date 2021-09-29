@@ -2,7 +2,7 @@ package modelo.dao.usuario;
 
 import java.util.List;
 
-import modelo.entitidades.usuarios.Usuario;
+import modelo.entitidade.usuario.Usuario;
 
 public interface UsuarioDAO {
 
