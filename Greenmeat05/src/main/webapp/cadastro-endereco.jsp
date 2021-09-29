@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Endereço</title>
  <style><%@include file="/resources/css/estilo.css"%></style>
+ <style><%@include file="/resources/css/menu.css"%></style>
 
 </head>
 

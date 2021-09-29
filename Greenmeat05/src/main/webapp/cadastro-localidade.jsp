@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+
+ <style><%@include file="/resources/css/estilo.css"%></style>
+ 
+ <style><%@include file="/resources/css/menu.css"%></style>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
