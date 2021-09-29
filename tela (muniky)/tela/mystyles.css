@@ -324,21 +324,32 @@
      border: 1px solid rgba(147, 184, 189,0.8);
      left: 700px;
        }
-      #opcao{
-         position: relative;
-        right:250px;
-        top:15px;
-       }
        #txt{
         position: relative;
         right:0px;
-        top:15px;
+        top:25px;
+        color:#04AA6D;
        }
        #licenca{
          position:relative;
+         padding: 8px 10px; 
          left:150px;
-        width: 50%;   
+        width: 35%;   
        }
+       #ibama{
+        position:relative;
+        top:5px;
+        padding: 5px 5px; 
+        left:170px;
+       width: 35%;   
+      }
+      #pastagem{
+        position:relative;
+        padding: 8px 10px; 
+        left:150px;
+       width: 35%;   
+      }
+    
   /*fadeInLeft*/
   @-webkit-keyframes fadeInLeft {
     0% {

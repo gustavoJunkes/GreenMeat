@@ -501,20 +501,6 @@ input[type="submit"]:hover {
 	animation-name: fadeOutLeft;
 }
 
-/*fadeInLeft*/
-@
--webkit-keyframes fadeInLeft { 0% {
-	opacity: 0;
-	-webkit-transform: translateX(-20px);
-}
-
-100
-
-
-%
-{
-opacity
-
 #contato{
     position: relative;
     top: 200px;
@@ -597,4 +583,41 @@ opacity
   top: 200px;
   color:#04AA6D;
   }
-  
+
+   #ambiental{
+     position:relative;
+     left:500px;
+     top: 50px;
+     width: 25%;   
+     padding: 18px 6% 60px 6%;
+     margin: 0 0 35px 0;
+     background: #f7f7f7;
+     border: 1px solid rgba(147, 184, 189,0.8);
+     left: 700px;
+       }
+       #txt{
+        position: relative;
+        right:0px;
+        top:25px;
+        color:#04AA6D;
+       }
+       #licenca{
+         position:relative;
+         padding: 8px 10px; 
+         left:150px;
+        width: 35%;   
+       }
+       #ibama{
+        position:relative;
+        top:5px;
+        padding: 5px 5px; 
+        left:170px;
+       width: 35%;   
+      }
+      #pastagem{
+        position:relative;
+        padding: 8px 10px; 
+        left:150px;
+       width: 35%;   
+      }
+
