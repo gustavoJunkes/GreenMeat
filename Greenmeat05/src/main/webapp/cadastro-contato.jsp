@@ -23,15 +23,15 @@
 
 			<h1>Contato</h1>
 			<p>
-				<label for="email_cad"> E-mail</label> &nbsp; &nbsp; <input
+				<label for="email_cad"> E-mail</label>  <input
 					id="email" name="email" required="required" type="text"
-					placeholder="contato@email.com" value='${contato.email}' />"/>
+					placeholder="contato@email.com" value='${contato.email}' />
 			</p>
 
 			<p>
-				<label for="telefone_cad"> Telefone</label> &nbsp;<input
+				<label for="telefone_cad"> Telefone</label><input
 					id="telefone" name="telefone" required="required" type="text"
-					placeholder="telefone" value='${contato.telefone}' />" />
+					placeholder="ex. 1234" value="<c:out value='${contato.telefone}'/>" />
 			</p>
 
 			<p>
