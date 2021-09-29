@@ -1,3 +1,5 @@
+@charset "ISO-8859-1";
+
 @import
 	url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap')
 	;
@@ -102,6 +104,23 @@ body {
 .wrapper .main_content .info div {
 	margin-bottom: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .txt_tela_inicial {
 	position: relative;
@@ -564,6 +583,7 @@ input[type="submit"]:hover {
   top: 200px;
   color:#04AA6D;
   }
+
    #ambiental{
      position:relative;
      left:500px;
@@ -600,3 +620,4 @@ input[type="submit"]:hover {
         left:150px;
        width: 35%;   
       }
+

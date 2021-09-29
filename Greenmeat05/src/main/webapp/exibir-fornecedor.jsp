@@ -39,7 +39,7 @@
     <th><c:out value="${fornecedor.estado}" /></th>
     <th><c:out value="${fornecedor.pais}" /></th>
  	
- 	</th>
+ 	
  
 </c:forEach>
 </table>
