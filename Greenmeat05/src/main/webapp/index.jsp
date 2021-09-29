@@ -8,6 +8,8 @@
 
  <style><%@include file="/resources/css/estilo.css"%></style>
  
+ <style><%@include file="/resources/css/menu.css"%></style>
+ 
 <title>Inicial</title>
 </head>
 <body>
