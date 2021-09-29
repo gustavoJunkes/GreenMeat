@@ -47,6 +47,11 @@ public class Fornecedor extends PessoaJuridica {
 //		setProdutos(produtos);
 //	}
 
+
+	public Fornecedor(Long id) {
+		setId(id);
+	}
+	
 	public Fornecedor() {
 		// TODO Auto-generated constructor stub
 	}

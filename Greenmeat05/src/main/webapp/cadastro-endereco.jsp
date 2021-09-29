@@ -38,7 +38,7 @@
 					type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
 					<br>
 					<label for="endereço_cad"> Número</label> &nbsp; &nbsp; &nbsp; &nbsp;
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"name="numero" required="required" type="text"
+				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"name="numero" required="required" type="number"
 					placeholder="Número" value="<c:out value='${endereco.numero}' />"/> 
 					<br> <label for="endereço_cad">
 					Cep</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input

@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
+
+import model.exception.users.information.CountryInvalidException;
+import model.exception.users.information.EmailInvalidException;
+import model.exception.users.information.PhoneNumberInvalidException;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
 import modelo.dao.contato.ContatoDAO;
@@ -28,18 +33,15 @@ import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entidade.produto.Produto;
-import modelo.entitidade.usuario.Cliente;
-import modelo.entitidade.usuario.Fornecedor;
-import modelo.entitidade.usuario.Funcionario;
-import modelo.entitidade.usuario.Usuario;
-import modelo.entitidade.usuario.informacao.Contato;
-import modelo.entitidade.usuario.informacao.Endereco;
-import modelo.entitidade.usuario.informacao.Localidade;
-import modelo.excecao.InvalidFieldException;
-import modelo.excecao.user.information.CountryInvalidException;
-import modelo.excecao.user.information.EmailInvalidException;
-import modelo.excecao.user.information.PhoneNumberInvalidException;
+import modelo.entidades.produtos.Produto;
+import modelo.entitidades.usuarios.Cliente;
+import modelo.entitidades.usuarios.Fornecedor;
+import modelo.entitidades.usuarios.Funcionario;
+import modelo.entitidades.usuarios.Usuario;
+import modelo.entitidades.usuarios.informacao.Contato;
+import modelo.entitidades.usuarios.informacao.Endereco;
+import modelo.entitidades.usuarios.informacao.Localidade;
+import modelo.exceptions.InvalidFieldException;
 
 @WebServlet("/")
 public class Servlet extends HttpServlet {
@@ -324,8 +326,24 @@ public class Servlet extends HttpServlet {
 		Float precoCusto = Float.parseFloat(request.getParameter("precoCusto"));
 		Float precoVenda = Float.parseFloat(request.getParameter("precoVenda"));
 		String tipoCarne = request.getParameter("tipoCarne");
-		produtoDAO.inserirProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
-		response.sendRedirect("listar");
+		
+		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(Long.parseLong(request.getParameter("idFornecedor")));
+		
+		Produto produto = new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda, fornecedor);
+		produtoDAO.inserirProduto(produto);
+		
+		List<Produto>produtos = new ArrayList<Produto>(); 
+		produtoDAO.recuperarProdutosFornecedor(fornecedor);
+		produtos.add(produto);
+		
+		fornecedor.setProdutos(produtos);
+		fornecedorDAO.atualizarFornecedor(fornecedor);
+				
+//		List<Fornecedor>fornecedores = new ArrayList<Fornecedor>();
+//		fornecedores = fornecedorDAO.recuperarFornecedores();
+			
+		response.sendRedirect("inicio");	
+//		response.sendError(401, "O fornecedor mencionado não foi encontrado em nossa base de dados, cadastre o fornecedor ou escolha um cadastrado");
 	}
 
 	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
@@ -380,7 +398,6 @@ public class Servlet extends HttpServlet {
 		// String dataNascimento = request.getParameter("dataNascimento");
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
-
 		
 		request.getSession().setAttribute("usuario", cliente);
 		
@@ -528,8 +545,10 @@ public class Servlet extends HttpServlet {
 		String CNPJ = request.getParameter("CNPJ");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		fornecedorDAO.inserirFornecedor(new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha));
-		response.sendRedirect("listar");
+		Fornecedor fornecedor = new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha);
+		fornecedorDAO.inserirFornecedor(fornecedor);
+		request.getSession().setAttribute("usuario", fornecedor);
+		response.sendRedirect("novo-contato");
 	}
 
 	private void atualizarFornecedor(HttpServletRequest request, HttpServletResponse response)
@@ -599,6 +618,7 @@ public class Servlet extends HttpServlet {
 //		Long id = Long.parseLong(request.getParameter("id"));
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		
 		
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setId(id);
@@ -680,6 +700,7 @@ public class Servlet extends HttpServlet {
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
+		request.getSession().removeAttribute("usuario");
 		
 		// precisa ser dessa forma, em conjunto com o método que verifica
 		// se a localidade já existe em banco antes de cadastrar
