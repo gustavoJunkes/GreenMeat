@@ -7,6 +7,7 @@
 <title>Cadastro Fornecedor</title>
 
  <style><%@include file="/resources/css/estilo.css"%></style>
+ <style><%@include file="/resources/css/menu.css"%></style>
  
 </head>
 <body>

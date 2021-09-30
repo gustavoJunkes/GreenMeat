@@ -8,6 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style><%@include file="/resources/css/estilo.css"%></style>
+<style><%@include file="/resources/css/menu.css"%></style>
 </head>
 <body>
 
