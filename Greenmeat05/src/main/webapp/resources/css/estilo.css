@@ -465,4 +465,16 @@ input[type="submit"]:hover {
   top: 200px;
   color:#04AA6D;
   }
-  
+   #ambiental{
+    position: relative;
+    top: 50px;
+    width: 25%;   
+    padding: 18px 6% 60px 6%;
+    margin: 0 0 35px 0;
+    background: #f7f7f7;
+    border: 1px solid rgba(147, 184, 189,0.8);
+    left: 700px;
+    color:#04AA6D;
+     
+    border-radius: 5px;
+  }
