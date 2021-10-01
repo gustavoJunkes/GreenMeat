@@ -7,33 +7,10 @@
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>" resources/css/mystyle.css />
 <style>
-<%@
-include
+
+
  
-file
-="/
-resources
-/
-css
-/
-mystyles
-.css
-"%
->
-</style>
-<style>
-<%@
-include
- 
-file
-="/
-resources
-/
-css
-/
-menu
-.css
-"%
+
 >
 </style>
 
@@ -59,8 +36,8 @@ menu
 
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
-					name="sobrenome" required="required" type="text"
-					placeholder="Sobrenome" value='sobrenome' />
+					name="sobrenome" required="required" type="sobrenome"
+					placeholder="Sobrenome" value='' />
 					
 					 <label for="login">Crie um Login</label> 
 					 <input id="loginInserir" name="login" required="required" type="text" placeholder="login"
@@ -70,6 +47,14 @@ menu
 
 			<p>
 				<label for="senha">Crie uma senha</label> <input id="senha"
+					name="senha" required="required" type="password"
+					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
+
+			</p>
+			
+			
+			<p>
+				<label for="senha">Confirme sua senha</label> <input id="senha"
 					name="senha" required="required" type="password"
 					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
 
