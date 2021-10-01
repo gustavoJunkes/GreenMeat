@@ -366,6 +366,10 @@ input[type="submit"]:hover {
 	animation-timing-function: ease;
 	animation-fill-mode: both;
 }
+ #loginInserir{
+    position:relative;
+    top:10px;
+  }
 
 #paracadastro:target ~ .content #cadastro, #paralogin:target ~ .content #login
 	{

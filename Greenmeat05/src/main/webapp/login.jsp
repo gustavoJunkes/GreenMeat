@@ -20,8 +20,8 @@
             <h1>Login</h1>
            
            
-              <label for="nome_login">Login</label>
-              <input id="nome_login" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/> 
+              <label for="login">Login</label>
+              <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/> 
          
          
               <label for="email_login">Senha</label>

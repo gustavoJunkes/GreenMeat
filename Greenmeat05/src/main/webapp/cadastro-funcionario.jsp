@@ -51,7 +51,7 @@
             <input id="cargo" name="cargo" required="required" type="text" placeholder="cargo" value="<c:out value='${funcionario.cargo}' />" />
          
             <label for="login">Crie um Login</label>
-            <input id="login" name="login" required="required" type="text" placeholder="login" value="<c:out value='${funcionario.login}' />"/>
+            <input id="loginInserir" name="login" required="required" type="text" placeholder="login" value="<c:out value='${funcionario.login}' />"/>
           
     
         
