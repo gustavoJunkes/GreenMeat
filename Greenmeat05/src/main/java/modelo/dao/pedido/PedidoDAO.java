@@ -13,9 +13,13 @@ public interface PedidoDAO {
 
 	void atualizarPedido(Pedido pedido);
 	
+	Pedido recuperarPedidoEmAbertoDoCliente(Cliente cliente);
+	
 	List<Pedido> recuperarPedidos();
 	
 	List<Pedido> recuperarPedidosCliente(Cliente cliente);
+	
+	
 	
 	/*
 	 * List<Pedido> recuperarPedidoOrdenadosDataEntregaAscendente();

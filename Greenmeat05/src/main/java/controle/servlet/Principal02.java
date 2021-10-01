@@ -1,6 +1,5 @@
 package controle.servlet;
 
-import java.util.List;
 import java.util.Scanner;
 
 import modelo.dao.cliente.ClienteDAO;
@@ -21,6 +20,7 @@ import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Usuario;
 import modelo.entitidade.usuario.informacao.Contato;
 import modelo.excecao.user.information.EmailInvalidException;
@@ -48,9 +48,12 @@ public class Principal02 {
 		Usuario user = new Usuario();
 		user.setLogin("gu");
 		
-		Usuario cliente1 = usuarioDAO.recuperarUsuario(user);
-
-
+		Cliente cliente = clienteDAO.recuperarPorId((long) 1);
+		
+		
+		
+		
+		System.out.println(cliente.getLogin());
 //		System.out.println("Novo login:");
 //		String login = leitor.next();
 //
@@ -62,35 +65,35 @@ public class Principal02 {
 
 //		usuarioDAO.inserirUsuario(cliente1);
 
-		System.out.println("---------------");
-		System.out.println("CONTATO");
-
-		while (resp == true) {
-			Contato contato1 = new Contato();
-
-			System.out.println("");
-			System.out.println("Novo telefone:");
-			String telefone = leitor.next();
-
-			System.out.println("Novo email:");
-			String email = leitor.next();
-
-			contato1.setEmail(email);
-			contato1.setTelefone(telefone);
-
-
-			contatoDAO.inserirContato(contato1);
-
-			cliente1.adicionarContato(contato1);
-
-//			cliente1.setNome(nome);
-//			cliente1.setSobrenome(sobrenome);
-//			cliente1.setCPF(CPF);
-//			cliente1.setLogin(login);
-//			cliente1.setSenha(senha);
-//			cliente1.setDataCadastro(LocalDate.now());
-
-			contatoDAO.atualizarContato(contato1);
+//		System.out.println("---------------");
+//		System.out.println("CONTATO");
+//
+//		while (resp == true) {
+//			Contato contato1 = new Contato();
+//
+//			System.out.println("");
+//			System.out.println("Novo telefone:");
+//			String telefone = leitor.next();
+//
+//			System.out.println("Novo email:");
+//			String email = leitor.next();
+//
+//			contato1.setEmail(email);
+//			contato1.setTelefone(telefone);
+//
+//
+//			contatoDAO.inserirContato(contato1);
+//
+//			cliente1.adicionarContato(contato1);
+//
+////			cliente1.setNome(nome);
+////			cliente1.setSobrenome(sobrenome);
+////			cliente1.setCPF(CPF);
+////			cliente1.setLogin(login);
+////			cliente1.setSenha(senha);
+////			cliente1.setDataCadastro(LocalDate.now());
+//
+//			contatoDAO.atualizarContato(contato1);
 			
 //			 
 //			 List<Contato>contatos1 = contatoDAO.recuperarContatosUsuario(cliente1);
@@ -98,5 +101,5 @@ public class Principal02 {
 //			cliente1.setContatos(contatos1);
 		}
 		
-	}
+	
 }
