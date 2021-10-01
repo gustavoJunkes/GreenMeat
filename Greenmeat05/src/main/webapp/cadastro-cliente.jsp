@@ -1,13 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
- <style><%@include file="/resources/css/menu.css"%></style>
+	href="<%=request.getContextPath()%>" resources/css/mystyle.css />
+<style>
+<%@
+include
+ 
+file
+="/
+resources
+/
+css
+/
+mystyles
+.css
+"%
+>
+</style>
+<style>
+<%@
+include
+ 
+file
+="/
+resources
+/
+css
+/
+menu
+.css
+"%
+>
+</style>
 
 <meta charset="ISO-8859-1">
 <title>Cadastro Cliente</title>
@@ -32,9 +60,11 @@
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
 					name="sobrenome" required="required" type="text"
-
-					placeholder="Sobrenome" value='sobrenome'/>
-
+					placeholder="Sobrenome" value='sobrenome' />
+					
+					 <label for="login">Crie um Login</label> 
+					 <input id="loginInserir" name="login" required="required" type="text" placeholder="login"
+					value="<c:out value='${cliente.login}' />" />
 
 			</p>
 
@@ -45,14 +75,14 @@
 
 			</p>
 
-				<label for="id"></label> <input id="id"
-					name="id"  type="hidden" value="<c:out value='${cliente.id}'/>" />
+			<label for="id"></label> <input id="id" name="id" type="hidden"
+				value="<c:out value='${cliente.id}'/>" />
 
 
 			<p>
 				<input type="submit" value="Cadastrar" />
 			</p>
-			
+
 			<p class="link">
 				Já tem conta? <a href="#paralogin"> Ir para Login </a>
 			</p>

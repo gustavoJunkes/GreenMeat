@@ -47,7 +47,7 @@
 					placeholder="CNPJ" value="<c:out value='${fornecedor.cnpj}' />" />
 			</p>
 			<p>
-				<label for="login">Crie um Login</label> <input id="login"
+				<label for="login">Crie um Login</label> <input id="loginInserir"
 					name="login" required="required" type="text" placeholder="login"
 					value="<c:out value='${fornecedor.login}' />" />
 			</p>
