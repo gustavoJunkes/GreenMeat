@@ -6,6 +6,7 @@
  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <style><%@include file="/resources/css/estilo.css"%></style>
+ <style><%@include file="/resources/css/menu.css"%></style>
 <title>cadastro-contato</title>
 </head>
 <body>

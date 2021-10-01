@@ -7,6 +7,7 @@
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+ <style><%@include file="/resources/css/menu.css"%></style>
 
 <meta charset="ISO-8859-1">
 <title>Cadastro Cliente</title>
