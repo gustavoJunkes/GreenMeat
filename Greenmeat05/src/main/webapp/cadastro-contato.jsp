@@ -25,13 +25,13 @@
 			<p>
 				<label for="email_cad"> E-mail</label> &nbsp; &nbsp; <input
 					id="email" name="email" required="required" type="text"
-					placeholder="contato@email.com" value='${contato.email}' />"/>
+					placeholder="contato@email.com" value='${contato.email}' />
 			</p>
 
 			<p>
 				<label for="telefone_cad"> Telefone</label> &nbsp;<input
 					id="telefone" name="telefone" required="required" type="text"
-					placeholder="telefone" value='${contato.telefone}' />" />
+					placeholder="telefone" value='${contato.telefone}' />
 			</p>
 
 			<p>
