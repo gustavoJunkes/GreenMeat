@@ -5,12 +5,12 @@
 <html>
 <head>
 
- <style><%@include file="/resources/css/estilo.css"%></style>
- 
- <style><%@include file="/resources/css/menu.css"%></style>
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
 
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>cadastro-localidade</title>
 </head>
 <body>
 
@@ -28,11 +28,7 @@
 			<label>Continente</label><br>
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
 	</div>
-
 			<button class="button" type="submit">Cadastrar</button>
 	</form>
-
-
-
 </body>
 </html>

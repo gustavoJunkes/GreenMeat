@@ -6,24 +6,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Endereço</title>
- <style><%@include file="/resources/css/estilo.css"%></style>
- <style><%@include file="/resources/css/menu.css"%></style>
+ 
+ <link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
 
 </head>
 
 <body>
-
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
-	
    </div>
-
+   
 	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="endereco">
 		<form method="post" action="inserir-endereco">
-
 			<h1>Endereço</h1>
-
 			<p>
 				<label for="endereço_cad"> Nome Da Rua</label>
 				 <input id="endereço_cad" name="nomeDaRua" required="required"
@@ -54,7 +52,6 @@
 			<p>
 				<input type="submit" value="Continuar Cadastro" />
 			</p>
-
 		</form>
 	</div>
 </body>

@@ -6,11 +6,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Funcionarios</title>
-<style><%@include file="/resources/css/estilo.css"%></style>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+
 </head>
 <body>
-
-
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
 	
