@@ -13,33 +13,27 @@
 <title>Login</title>
 </head>
 <body>
-  <div class="content">      
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+   </div>
+      
         <!--FORMULÁRIO DE LOGIN-->
         <div id="login">
           <form method="post" action="logar"> 
             <h1>Login</h1>
-           
-           
+                     
               <label for="login">Login</label>
-              <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/> 
-         
-         
+              <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/>                 
               <label for="email_login">Senha</label>
-              <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" /> 
-            
-           
+              <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" />                   
               <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
-              <label for="manterlogado">Manter-me logado</label>
-     
-              <input type="submit" value="Logar" /> 
-            
-             
+              <label for="manterlogado">Manter-me logado</label>     
+              <input type="submit" value="Logar" />                      
             <p class="link">
               Ainda não tem conta?
           <li><a href="<%=request.getContextPath()%>/novo-cliente.jsp" target="_self"> Cadastre-se</a></li>
             </p>
           </form>
       </div>
-
 </body>
 </html>

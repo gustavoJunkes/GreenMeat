@@ -1,3 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
+
+<html>
+<head>
+ <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>"resources/css/menu.css/>
+ <style><%@include file="/resources/css/menu.css"%></style>
+ 
+<title>Index</title>
+</head>
+<body>
+
 
  <div class="wrapper">
 <div class="sidebar">
@@ -16,4 +32,8 @@
     </ul>
 </div>
     </div>
+
+
+</body>
+</html>
  

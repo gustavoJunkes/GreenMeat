@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Exibição Produtos</title>
-<style><%@include file="/resources/css/estilo.css"%></style>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+ <title>Exibição Produtos</title>
 </head>
 <body>
 
