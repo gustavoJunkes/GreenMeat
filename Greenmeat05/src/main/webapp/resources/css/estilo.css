@@ -385,9 +385,7 @@ input[type="submit"]:hover {
 	-webkit-animation-name: fadeOutLeft;
 	animation-name: fadeOutLeft;
 }
-
-
-#contato{
+ #contato{
     position: relative;
     top: 200px;
     width: 50%;   
@@ -395,7 +393,9 @@ input[type="submit"]:hover {
     margin: 0 0 35px 0;
     background: #f7f7f7;
     border: 1px solid rgba(147, 184, 189,0.8);
-    left: 500px;
+
+    left: 750px;
+     
      
     border-radius: 5px;
      
@@ -469,6 +469,27 @@ input[type="submit"]:hover {
   top: 200px;
   color:#04AA6D;
   }
+
+   #contato{
+    position: relative;
+    top: 200px;
+    width: 50%;   
+    padding: 18px 6% 60px 6%;
+    margin: 0 0 35px 0;
+    background: #f7f7f7;
+    border: 1px solid rgba(147, 200, 189,0.8);
+    left: 500px;
+     
+    border-radius: 5px;
+     
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+   
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+
    #ambiental{
     position: relative;
     top: 50px;
