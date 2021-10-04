@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<title>Perfil Cliente</title>
 
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
@@ -20,9 +21,9 @@
 
 <div class=imagemPerfil>
 <img src="perfil_img.jfif" alt=""></div>
+
     <div class="MeuPerfil"><h3>Meu Perfil</h3></div>
-    <div class="tabela_exibir_perfil">
-     <c:forEach var="cliente" items="${clientes}">
+   <div id="tabela_exibir_perfil">
     <table>
     <tr>
         <th>Nome</th>
@@ -34,17 +35,21 @@
      
       </tr>
       <tr>
+       <c:forEach var="cliente" items="${clientes}">
         <td><c:out value="${cliente.nome}" /></td>
         <td><c:out value="${cliente.sobrenome}" /></td>
         <td><c:out value="${cliente.CPF}" /></td>
         <td><c:out value="${cliente.dataDeNascimento}" /></td>
         <td><c:out value="${contato.email}" /></td>
-        <td><c:out value="${contato.telefone}" /></td>     
+        <td><c:out value="${contato.telefone}" /></td>  
+         </c:forEach>   
     </table>
-     </c:forEach>
     </div> 
-    <div class="tabela_exibir_perfil">
-     <c:forEach var="endereco" items="${enderecos}">
+    
+    
+    <br>
+    
+    <div id="tabela_exibir_perfil">
     <table>
     <tr>
         <th>Nome Da Rua</th>
@@ -57,9 +62,9 @@
        <th>Estado</th>
        <th>Província</th>
        <th>Continente</th>
-       
-      </tr>
+       </tr>
       <tr>
+       <c:forEach var="endereco" items="${enderecos}">
         <td><c:out value="${endereco.nomeDaRua}" /></td>
          <td><c:out value="${endereco.tipoDaVia}" /></td>
         <td><c:out value="${endereco.logradouro}" /></td>
@@ -70,9 +75,8 @@
         <td><c:out value="${localidade.estado}" /></td>
         <td><c:out value="${localidade.provincia}" /></td>
         <td><c:out value="${localidade.continente}" /></td>
-     
+     </c:forEach> 
     </table>
-     </c:forEach>
     </div>
 </body>
 </html>

@@ -436,7 +436,7 @@ input[type="submit"]:hover {
     max-width: 0px; 
     max-height: 0px;
   }
-  .tabela_exibir_perfil{
+  #tabela_exibir_perfil{
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 50%;

@@ -51,9 +51,6 @@
 			<p>
 				<input type="submit" value="Continuar Cadastro" />
 			</p>
-			<p class="link">
-				Já tem conta? <a href="login.jsp"> Ir para Login </a>
-			</p>
 		</form>
 	</div>
 </body>

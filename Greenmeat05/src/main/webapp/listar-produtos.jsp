@@ -8,7 +8,7 @@
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-<title>Exibição Produtos</title>
+<title>Produtos Cadastrados</title>
 </head>
 
 <body>
@@ -26,12 +26,8 @@ out.print(nome);
 <c:out value="${produto.nome}"/>
 
 <div>
+   <a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
 	
-	
-   </div>
-   
-	<a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
-	<c:out value="${produto.precoCusto}"/>
 	<form method="post" action="listar-produtos">
 		<table>
 			<thead>
@@ -48,5 +44,6 @@ out.print(nome);
 			</tbody>
 		</table>
 	</form>
+	</div>
 </body>
 </html>

@@ -21,8 +21,8 @@
 
 
     <div class="MeuPerfil"><h3>Meu Perfil</h3></div>
-    <div class="tabela_exibir_perfil">
-     <c:forEach var="funcionario" items="${funcionarios}">
+    <div id="tabela_exibir_perfil">
+     
     <table>
     <tr>
         <th>Nome</th>
@@ -36,6 +36,7 @@
        
       </tr>
       <tr>
+       <c:forEach var="funcionario" items="${funcionarios}">
         <td><c:out value="${funcionario.nome}" /></td>
         <td><c:out value="${funcionario.sobrenome}" /></td>
         <td><c:out value="${funcionario.CPF}" /></td>
@@ -44,14 +45,14 @@
         <td><c:out value="${funcionario.cargo}" /></td>
         <td><c:out value="${contato.email}" /></td>
         <td><c:out value="${contato.telefone}" /></td>
-     
+      </c:forEach>
     </table>
-     </c:forEach>
     </div>
+    
+    <br>
 
   
-    <div class="tabela_exibir_perfil">
-     <c:forEach var="endereco" items="${enderecos}">
+    <div id="tabela_exibir_perfil">
     <table>
     <tr>
         <th>Nome Da Rua</th>
@@ -67,6 +68,7 @@
        
       </tr>
       <tr>
+       <c:forEach var="endereco" items="${enderecos}">
         <td><c:out value="${endereco.nomeDaRua}" /></td>
          <td><c:out value="${endereco.tipoDaVia}" /></td>
         <td><c:out value="${endereco.logradouro}" /></td>
@@ -77,9 +79,8 @@
         <td><c:out value="${localidade.estado}" /></td>
         <td><c:out value="${localidade.provincia}" /></td>
         <td><c:out value="${localidade.continente}" /></td>
-     
-    </table>
      </c:forEach>
+       </table>
     </div>
 </body>
 </html>

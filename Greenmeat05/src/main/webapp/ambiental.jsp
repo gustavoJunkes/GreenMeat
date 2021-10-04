@@ -1,38 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <style><%@include file="/resources/css/estilo.css"%></style>
-<title>Insert title here</title>
+<title>Ambiental</title>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+
 </head>
 <body>
-<div id="ambiental">
- <form>
-      <div id="txt"><p>Possui Licença Ambiental De Operação?Se sim,informe:</p></div>
-     <p> 
-       <div id="txt"> <label for="licenca"> Número da Licença:</label></div>                                                           
-        <input id="licenca" name="licenca" required="required" type="text" placeholder="" />
-      </p>
- 
-      <p> 
-        <div id="txt"> <label for="licenca"> Data de validade:</label></div>                                                           
-         <input id="licenca" name="licenca" required="required" type="text" placeholder="" />
-       </p>
- 
-       <div id="txt"> <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label></div>                                                           
-       <input id="ibama" name="ibama" required="required" type="text" placeholder="" />
- 
-      <div id="txt"><p>Para pastagem,foi necessário desmatamento?Se sim,informe: </p></div>
-       <p> 
-        <div id="txt"> <label for="licenca"> O número da ART:</label></div>                                                           
-         <input id="pastagem" name="pastagem" required="required" type="text" placeholder="" />
-       </p>
- 
-       <div id="txt"> <label for="ibama"> Se não,informe o n�mero da inscrição de<br> regularidade no Ibama:</label></div>                                                           
-       <input id="ibama" name="ibama" required="required" type="text" placeholder="" />
-    </form> 
-    </div>
+	<div>
+		<jsp:include page="menu-lateral.jsp" />
+	</div>
+
+	 <div id="cadastro">
+    <form>
+        <p>Possui Licença Ambiental De Operação?Se sim,informe:</p>
+        
+           <label for="licenca"> Número Da Licença:</label>                                                          
+           <input id="licenca" name="licenca" required="required" type="text" placeholder="" />
+       
+          <label for="licenca"> Data de validade:</label>                                                          
+            <input id="licenca" name="licenca" required="required" type="text" placeholder="" />
+         
+    
+          <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
+          <input id="ibama" name="ibama" required="required" type="text" placeholder="" />
+    
+       <p>Para pastagem,foi necessário desmatamento?Se sim,informe: </p>
+          
+          <label for="licenca"> O número da ART:</label>                                                          
+            <input id="pastagem" name="pastagem" required="required" type="text" placeholder="" />
+        
+     <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
+          <input id="ibama" name="ibama" required="required" type="text" placeholder="" />
+          
+          	<input type="submit" value="Salvar" />
+       </form> 
+       </div>
 </body>
 </html>

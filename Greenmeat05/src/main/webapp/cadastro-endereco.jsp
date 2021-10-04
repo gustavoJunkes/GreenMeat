@@ -21,10 +21,11 @@
 	<div id="cadastro">
 		<form method="post" action="inserir-endereco">
 			<h1>Endereço</h1>
-			<p>
+			
 				<label for="endereco"> Nome Da Rua</label>
 				 <input id="endereco" name="endereco" required="required"
 					type="text" placeholder="Nome Da Rua" value="<c:out value='${endereco.nomeDaRua}'/>" /> 
+					
 					<br>
 					 <label	for="endereço_cad"> Tipo Da Via</label> 
 					  <input id="endereco" name="endereco" required="required" type="text"

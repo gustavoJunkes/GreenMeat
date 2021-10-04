@@ -18,9 +18,7 @@
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
 
-
-	<!--FORMULÁRIO DE CADASTRO-->
-	<div id="contato">
+	<div id="cadastro">
 		<form method="post" action="inserir-contato">
 
 			<h1>Contato</h1>

@@ -20,7 +20,7 @@
         <img src="perfil_img.jfif" alt=""></div>
         
             <div class="MeuPerfil"><h3>Meu Perfil</h3></div>
-            <div class="tabela_exibir_perfil"><table>
+            <div id="tabela_exibir_perfil"><table>
             <tr>
                 <th>Razão Social</th>
                 <th>Nome Fantasia </th>
@@ -30,16 +30,19 @@
                
               </tr>
               <tr>
+               <c:forEach var="fornecedor" items="${fornecedores}">
         <td><c:out value="${fornecedor.razaoSocial}" /></td>
         <td><c:out value="${fornecedor.nomeFantasia}" /></td>
         <td><c:out value="${fornecedor.CNPJ}" /></td>
         <td><c:out value="${contato.email}" /></td>
         <td><c:out value="${contato.telefone}" /></td>
-             
+             </c:forEach> 
             </table>
             </div>
+            
+            <br>
         
-            <div class="tabela_exibir_perfil"><table>
+            <div id="tabela_exibir_perfil"><table>
             <tr>
                 <th>Nome Da Rua</th>
                 <th>Tipo Da Via</th>
@@ -54,6 +57,7 @@
                
               </tr>
               <tr>
+         <c:forEach var="endereco" items="${enderecos}">
          <td><c:out value="${endereco.nomeDaRua}" /></td>
          <td><c:out value="${endereco.tipoDaVia}" /></td>
         <td><c:out value="${endereco.logradouro}" /></td>
@@ -64,7 +68,7 @@
         <td><c:out value="${localidade.estado}" /></td>
         <td><c:out value="${localidade.provincia}" /></td>
         <td><c:out value="${localidade.continente}" /></td>
-             
+              </c:forEach> 
             </table>
             </div>
 </body>

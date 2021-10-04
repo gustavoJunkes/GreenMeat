@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro Funcionário</title>
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
@@ -19,7 +19,6 @@
 	
    </div>
 
- <!--FORMULÁRIO DE CADASTRO-->
     <div id="cadastro">
         <form method="post" action=""> 
           
@@ -49,9 +48,7 @@
                   
             <input type="submit" value="Continuar Cadastro"/> 
           
-                   <p class="link">  
-            Já tem conta?
-            <a href="login.html"> Ir para Login </a>
+                 
           </p>
         </form>
       </div>
