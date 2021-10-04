@@ -13,6 +13,9 @@
 <title>cadastro-localidade</title>
 </head>
 <body>
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+   </div>
 
 <div id="cadastro">
 <form action="inserir-localidade" method="post">
