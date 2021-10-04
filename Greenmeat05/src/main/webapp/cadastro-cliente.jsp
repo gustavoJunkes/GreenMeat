@@ -2,16 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<title>Cadastro Cliente</title>
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-
-<title>Cadastro-cliente</title>
 
 </head>
 <body>
@@ -19,18 +17,17 @@
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
   
-	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="cadastro">
 		<form method="post" action="inserir-cliente">
 			<h1>Cadastre-se</h1>
 			<p>
 				<label for="nome"> Nome </label> <input id="nome" name="nome"
-					required="nome" type="text" placeholder="nome"
+					required="required" type="text" placeholder="nome"
 					value="<c:out value=''/>" />
 			</p>
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
-					name="sobrenome" required="required" type="sobrenome"
+					name="sobrenome" required="required" type="text"
 					placeholder="Sobrenome" value='' />
 					 <label for="login">Crie um Login</label> 
 					 <input id="loginInserir" name="login" required="required" type="text" placeholder="login"
@@ -52,7 +49,7 @@
 				<input type="submit" value="Cadastrar" />
 			</p>
 			<p class="link">
-				Já tem conta? <a href="#paralogin"> Ir para Login </a>
+				J� tem conta? <a href="#paralogin"> Ir para Login </a>
 			</p>
 		</form>
 	</div>

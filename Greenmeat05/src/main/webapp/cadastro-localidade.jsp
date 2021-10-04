@@ -27,7 +27,7 @@
 
 			<label>Continente</label><br>
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
-	</div>
+			
 			<button class="button" type="submit">Cadastrar</button>
 	</form>
 </body>
