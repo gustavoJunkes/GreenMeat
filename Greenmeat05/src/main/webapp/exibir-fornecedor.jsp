@@ -2,10 +2,19 @@
     pageEncoding="ISO-8859-1"%>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Funcionarios</title>
+<<<<<<< Updated upstream
+=======
+
+<style><%@include file="/resources/css/estilo.css"%></style>
+
+</head>
+<body>
+>>>>>>> Stashed changes
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>

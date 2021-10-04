@@ -8,9 +8,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<<<<<<< Updated upstream
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+=======
+<style><%@include file="/resources/css/mystyles.css"%></style>
+
+>>>>>>> Stashed changes
 </head>
 
 <body>

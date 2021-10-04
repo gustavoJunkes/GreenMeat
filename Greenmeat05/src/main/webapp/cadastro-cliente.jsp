@@ -1,15 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
+
 <html>
 <head>
+<<<<<<< Updated upstream
 <meta charset="ISO-8859-1">
 <title>Cadastro Cliente</title>
+=======
+
+<meta charset="ISO-8859-1">
+<title>Cadastro-Cliente</title>
+>>>>>>> Stashed changes
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+<<<<<<< Updated upstream
 
 </head>
 <body>
@@ -17,12 +24,31 @@
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
   
+=======
+ 
+
+</head>
+<body>
+	
+	<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
+	
+	
+
+>>>>>>> Stashed changes
 	<div id="cadastro">
 		<form method="post" action="inserir-cliente">
 			<h1>Cadastre-se</h1>
 			<p>
 				<label for="nome"> Nome </label> <input id="nome" name="nome"
+<<<<<<< Updated upstream
 					required="required" type="text" placeholder="nome"
+=======
+					required=
+					 type="text" placeholder="nome"
+>>>>>>> Stashed changes
 					value="<c:out value=''/>" />
 			</p>
 			<p>
