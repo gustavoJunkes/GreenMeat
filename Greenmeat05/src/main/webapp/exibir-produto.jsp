@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Exibição Produtos</title>
-<style><%@include file="/resources/css/estilo.css"%></style>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+ <title>Exibição Produtos</title>
 </head>
 <body>
 
@@ -17,9 +20,7 @@
 
 
   <div class="gallery1">
-        <a target="_blank" href="">
-          <img src="" alt="" width="600" height="400">
-        </a>
+        
         <c:forEach var="produto" items="${produtos}">
         <div class="desc1"> <c:out value="${produto.nome}" /> -
       <c:out value="${produto.preco}" /> <br>  <!--sobre a quantidade do produto a ser escolhido-->

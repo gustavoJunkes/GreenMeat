@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-    
-
+     <%@ page isELIgnored="false" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Lista de Produtos cadastrados</title>
- <style><%@include file="/resources/css/estilo.css"%></style>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+
+
 </head>
 
 <body>
+<div>
+	<jsp:include page="menu-lateral.jsp"/>
+   </div>
 
 <header>
 		<nav>

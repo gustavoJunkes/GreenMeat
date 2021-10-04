@@ -16,6 +16,8 @@ import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Pedido;
 import modelo.entitidade.usuario.Cliente;
+import modelo.entitidade.usuario.Usuario;
+import modelo.entitidade.usuario.informacao.Localidade;
 
 
 public class PedidoDAOImpl implements PedidoDAO {
@@ -109,6 +111,51 @@ public class PedidoDAOImpl implements PedidoDAO {
 		}
 	}
 
+	public Pedido recuperarPedidoEmAbertoDoCliente(Cliente cliente) {
+		Session sessao = null;
+		Pedido pedido = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pedido> criteria = construtor.createQuery(Pedido.class);
+			Root<Pedido> raizPedido = criteria.from(Pedido.class);
+
+			Join<Pedido, Cliente> juncaoCliente= raizPedido.join("cliente");
+
+			ParameterExpression<Long> idCliente = construtor.parameter(Long.class);
+			ParameterExpression<String> statusPedido = construtor.parameter(String.class);
+
+			criteria.where(construtor.equal(juncaoCliente.get("id"), idCliente), construtor.equal(juncaoCliente.get("status"), statusPedido));
+//			criteria.where(construtor.equal(juncaoCliente.get("status"), statusPedido));
+
+			pedido = sessao.createQuery(criteria).setParameter(idCliente, cliente.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return pedido;
+	}
+	
+	
 	public List<Pedido> recuperarPedidos() {
 
 		Session sessao = null;

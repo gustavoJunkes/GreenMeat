@@ -5,8 +5,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 import modelo.entitidade.usuario.Fornecedor;
 import modelo.excecao.InvalidFieldException;
 import modelo.excecao.produto.ExpirationDateInvalidException;
+
 
 @Entity
 @Table(name = "produto")
@@ -35,13 +34,13 @@ public class Produto implements Serializable {
 	@Column(name = "descricao", length = 100)
 	private String descricao;
 
-	@Column(name = "preco_custo")
+	@Column(name = "precoCusto")
 	private float precoCusto;
 
-	@Column(name = "preco_venda")
+	@Column(name = "precoVenda")
 	private float precoVenda;
 
-	@Column(name = "data_validade")
+	@Column(name = "dataValidade")
 	private LocalDate dataValidade;
 
 	@ManyToOne
@@ -50,20 +49,24 @@ public class Produto implements Serializable {
 
 //	@Enumerated(EnumType.STRING)
 
-	@Column(name = "Tipo_carne")
+	@Column(name = "TipoCarne")
 	private String tipoCarne;
 
-	public Produto() {}
+	public Produto() {
+	}
 
-	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda)	throws InvalidFieldException {
+	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda, Fornecedor fornecedor)
+			throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
 		setPrecoCusto(precoCusto);
 		setPrecoVenda(precoVenda);
+		setFornecedor(fornecedor);
 	}
 
-	public Produto(String nome, String descricao, String tipoCarne)	throws InvalidFieldException {
+	public Produto(String nome, String descricao, String tipoCarne)
+			throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
@@ -149,4 +152,6 @@ public class Produto implements Serializable {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
+
+	
 }

@@ -1,28 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	
+	<%@ page isELIgnored="false" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Endereço</title>
- <style><%@include file="/resources/css/estilo.css"%></style>
+ 
+ <link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
 
 </head>
 
 <body>
-
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
-	
    </div>
-
+   
 	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="endereco">
 		<form method="post" action="inserir-endereco">
-
 			<h1>Endereço</h1>
-
 			<p>
 				<label for="endereço_cad"> Nome Da Rua</label>
 				 <input id="endereço_cad" name="nomeDaRua" required="required"
@@ -38,7 +37,7 @@
 					type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
 					<br>
 					<label for="endereço_cad"> Número</label> &nbsp; &nbsp; &nbsp; &nbsp;
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"name="numero" required="required" type="text"
+				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"name="numero" required="required" type="number"
 					placeholder="Número" value="<c:out value='${endereco.numero}' />"/> 
 					<br> <label for="endereço_cad">
 					Cep</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input
@@ -53,7 +52,6 @@
 			<p>
 				<input type="submit" value="Continuar Cadastro" />
 			</p>
-
 		</form>
 	</div>
 </body>

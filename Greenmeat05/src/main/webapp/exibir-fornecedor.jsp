@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
-
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Funcionarios</title>
-<style><%@include file="/resources/css/estilo.css"%></style>
+
+<link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+
 </head>
 <body>
-
-
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
 	
@@ -39,7 +41,7 @@
     <th><c:out value="${fornecedor.estado}" /></th>
     <th><c:out value="${fornecedor.pais}" /></th>
  	
- 	</th>
+ 	
  
 </c:forEach>
 </table>

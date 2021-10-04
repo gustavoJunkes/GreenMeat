@@ -15,7 +15,7 @@ public interface FornecedorDAO {
 	
 	Fornecedor recuperarPorId(Long id);
 	
-	Fornecedor recuperarFornecedor(Fornecedor fornecedor);
+	Fornecedor recuperarFornecedorPorLogin(Fornecedor fornecedor);
 	
 	Fornecedor recuperarFornecedorProduto(Produto produto);
 	

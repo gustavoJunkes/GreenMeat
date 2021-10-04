@@ -15,10 +15,10 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Item;
-import modelo.entidade.produto.Pedido;
 import modelo.entidade.produto.Produto;
-import modelo.entitidade.usuario.Cliente;
-import modelo.enumeracao.Tipo;
+import modelo.entitidade.usuario.Fornecedor;
+
+
 
 public class ProdutoDAOImpl implements ProdutoDAO {
 
@@ -273,6 +273,48 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		return produtos;
 	}
 
+	public List<Produto> recuperarProdutosFornecedor(Fornecedor fornecedor) {
+
+		Session sessao = null;
+		List<Produto> produtos= null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
+			Root<Produto> raizProduto = criteria.from(Produto.class);
+
+			Join<Produto, Fornecedor> juncaoFornecedor = raizProduto.join("fornecedor");
+
+			ParameterExpression<Long> idFornecedor = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoFornecedor.get("id"), idFornecedor));
+
+			produtos = sessao.createQuery(criteria).setParameter(idFornecedor, fornecedor.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return produtos;
+	}
+	
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
