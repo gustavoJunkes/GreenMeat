@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
+<<<<<<< Updated upstream
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -13,11 +14,33 @@
 
 <body>
 <div>
+=======
+
+
+<html>
+<head>
+
+ <style><%@include file="/resources/css/estilo.css"%></style>
+ 
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	
+	<div>
+>>>>>>> Stashed changes
 	<jsp:include page="menu-lateral.jsp"/>
 	
    </div>
 
+<<<<<<< Updated upstream
 <div id="cadastro">
+=======
+
+
+>>>>>>> Stashed changes
 <form method="post" action="inserir-produto">
 	<h1>Cadastro de Produto</h1>
 	
@@ -46,8 +69,25 @@
 	
 	<br>
 		<button type="submit">Salvar</button>
+<<<<<<< Updated upstream
 
 </form>
  </div>
 </body>
 </html>
+=======
+	</p>
+	<p class="link">
+		Já tem conta? <a href="#paralogin"> Ir para Login </a>
+	</p>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
+>>>>>>> Stashed changes
