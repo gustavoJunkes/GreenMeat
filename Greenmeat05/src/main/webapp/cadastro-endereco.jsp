@@ -18,7 +18,6 @@
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
    
-	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="endereco">
 		<form method="post" action="inserir-endereco">
 			<h1>Endereço</h1>

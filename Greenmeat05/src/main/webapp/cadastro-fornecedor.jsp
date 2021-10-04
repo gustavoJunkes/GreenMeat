@@ -17,7 +17,6 @@
 	<jsp:include page="menu-lateral.jsp"/>	
    </div>
 
-	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
 			<h1>Cadastre-se</h1>
@@ -53,7 +52,7 @@
 				<input type="submit" value="Continuar Cadastro" />
 			</p>
 			<p class="link">
-				Já tem conta? <a href="login.html"> Ir para Login </a>
+				Já tem conta? <a href="login.jsp"> Ir para Login </a>
 			</p>
 		</form>
 	</div>
