@@ -2,11 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
-
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro Produto</title>
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
@@ -18,13 +17,12 @@
 	
    </div>
 
-<div class="cadastro_produto">
+<div id="cadastro">
 <form method="post" action="inserir-produto">
 	<h1>Cadastro de Produto</h1>
-	<p>
+	
 		<label for="nome"> Nome: </label> <input id="nome" required="required"
 			type="text" value="" name="nome">
-	</p>
 	<br> 
 	<label for="descricao">Descrição: </label> <input id="nome"
 		required="required" type="text" value="" name="descricao"> <label
@@ -46,12 +44,9 @@
 
 	<br>
 	
-	<p>
+	<br>
 		<button type="submit">Salvar</button>
-	</p>
-	<p class="link">
-		Já tem conta? <a href="#paralogin"> Ir para Login </a>
-	</p>
+
 </form>
  </div>
 </body>
