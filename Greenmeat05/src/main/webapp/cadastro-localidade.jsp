@@ -14,8 +14,11 @@
 </head>
 <body>
 
+<div id="cadastro">
 <form action="inserir-localidade" method="post">
-	<div class="formulario"></div>
+
+<h1>Localidade</h1>
+
 			<label>País</label><br>
 			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
 						
@@ -27,8 +30,10 @@
 
 			<label>Continente</label><br>
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
+		
+				<input type="submit" value="Continuar Cadastro" />
 			
-			<button class="button" type="submit">Cadastrar</button>
 	</form>
+	</div>
 </body>
 </html>
