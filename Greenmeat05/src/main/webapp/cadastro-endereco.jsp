@@ -18,34 +18,31 @@
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
    
-	<div id="endereco">
+	<div id="cadastro">
 		<form method="post" action="inserir-endereco">
 			<h1>Endereço</h1>
 			<p>
-				<label for="endereço_cad"> Nome Da Rua</label>
-				 <input id="endereço_cad" name="nomeDaRua" required="required"
+				<label for="endereco"> Nome Da Rua</label>
+				 <input id="endereco" name="endereco" required="required"
 					type="text" placeholder="Nome Da Rua" value="<c:out value='${endereco.nomeDaRua}'/>" /> 
 					<br>
-					 <label	for="endereço_cad"> Tipo Da Via</label> &nbsp; &nbsp; &nbsp; &nbsp;
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"
-					name="tipoDaVia" required="required" type="text"
+					 <label	for="endereço_cad"> Tipo Da Via</label> 
+					  <input id="endereco" name="endereco" required="required" type="text"
 					placeholder="Tipo Da Via" value="<c:out value='${endereco.tipoDaVia}' />"/> 
 					<br> 
-					<label for="endereço_cad">Logradouro</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-				<input id="endereço_cad" name="logradouro" required="required"
+					<label for="endereço_cad">Logradouro</label>
+				<input id="endereco" name="endereco" required="required"
 					type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
 					<br>
-					<label for="endereço_cad"> Número</label> &nbsp; &nbsp; &nbsp; &nbsp;
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"name="numero" required="required" type="number"
+					<label for="endereço_cad"> Número</label> 
+					 <input id="endereco" name="endereco" required="required" type="number"
 					placeholder="Número" value="<c:out value='${endereco.numero}' />"/> 
-					<br> <label for="endereço_cad">
-					Cep</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input
-					id="endereço_cad" name="CEP" required="required"
+					<br> <label for="endereco">Cep</label> 
+					 <input id="endereco" name="endereco" required="required"
 					type="text" placeholder="Cep" value="<c:out value='${endereco.cep}' />" /> 
-					<br> <label
-					for="endereço_cad"> Complemento</label> &nbsp; &nbsp; &nbsp; &nbsp;
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="endereço_cad"
-					name="complemento" required="required" type="text"
+					<br> 
+					<label for="endereco"> Complemento</label> 
+					<input id="endereco" name="endereco" required="required" type="text"
 					placeholder="Complemento" value="<c:out value='${endereco.complemento}' />"/> 
 					<br> 
 			<p>
