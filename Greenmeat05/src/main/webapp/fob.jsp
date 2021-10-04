@@ -29,7 +29,7 @@
   
     <!--etapa 1-->
 
-<div class="text_fob"><h2>Todos os valores deverão ser em porcentagem</h2></div> <br>
+<div class="text_fob"><h2></h2></div> <br>
 
 <div class="calculo_fob">
 <form action="fob">
@@ -48,13 +48,13 @@
     <input type="text" id="Despesas_ocorridas_mercado_interno_venda_produto" name="Despesas_ocorridas_mercado_interno_venda_produto"><br><br>
     
     <label for="equestion">Despesas com intermediarios em serviços no mercado interno:</label>
-    <input type="text" id="Despesas_intermediarios_em servicos_mercado_interno" name="Despesas_intermediarios_em servicos_mercado_interno"><br><br>
+    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_interno" name="Despesas_intermediarios_em servicos_mercado_interno"><br><br>
 
 
 
     <!--etapa 3-->
     <label for="fquestion">Despesas com intermediarios em serviços no mercado externos:</label>
-    <input type="text" id="Despesas_intermediarios_em servicos_mercado_externos" name="Despesas_intermediarios_em servicos_mercado_externos"><br><br>
+    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_externos" name="Despesas_intermediarios_em servicos_mercado_externos"><br><br>
 
     <label for="gquestion">Despesas com despacho de exportação:</label>
     <input type="text" id="Despesas_com_despacho_exportacao" name="Despesas_com_despacho_exportacao"><br><br>
