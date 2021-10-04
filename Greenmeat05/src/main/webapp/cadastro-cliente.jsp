@@ -49,7 +49,7 @@
 				<input type="submit" value="Cadastrar" />
 			</p>
 			<p class="link">
-				Já tem conta? <a href="#paralogin"> Ir para Login </a>
+				Já tem conta? <a href="login.jsp"> Ir para Login </a>
 			</p>
 		</form>
 	</div>

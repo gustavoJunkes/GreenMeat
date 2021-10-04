@@ -16,8 +16,7 @@
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
-      
-        <!--FORMULÁRIO DE LOGIN-->
+
         <div id="login">
           <form method="post" action="logar"> 
             <h1>Login</h1>
@@ -29,10 +28,7 @@
               <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
               <label for="manterlogado">Manter-me logado</label>     
               <input type="submit" value="Logar" />                      
-            <p class="link">
-              Ainda não tem conta?
-          <li><a href="<%=request.getContextPath()%>/novo-cliente.jsp" target="_self"> Cadastre-se</a></li>
-            </p>
+          
           </form>
       </div>
 </body>
