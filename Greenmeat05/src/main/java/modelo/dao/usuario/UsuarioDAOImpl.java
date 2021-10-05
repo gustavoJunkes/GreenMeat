@@ -13,6 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Usuario;
 import modelo.entitidade.usuario.informacao.Contato;
 
@@ -192,6 +193,38 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		return usuarios;
 
+	}
+	
+	
+	public Usuario recuperarPorId(Long id) {
+		Session sessao = null;
+		Usuario usuario = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			usuario = sessao.find(Usuario.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return usuario;
+		
 	}
 	
 	private SessionFactory conectarBanco() {

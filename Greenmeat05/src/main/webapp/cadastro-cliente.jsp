@@ -32,8 +32,8 @@
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome_cad"
 					name="sobrenome" required="required" type="sobrenome"
 					placeholder="Sobrenome" value='' />
-					 <label for="login">Crie um Login</label> 
-					 <input id="loginInserir" name="login" required="required" type="text" placeholder="login"
+				<label for="login">Crie um Login</label> 
+				<input id="loginInserir" name="login" required="required" type="text" placeholder="login"
 					value="<c:out value='${cliente.login}' />" />
 			</p>
 			<p>
@@ -41,12 +41,8 @@
 					name="senha" required="required" type="password"
 					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
 			</p>
-			<p>
-				<label for="senha">Confirme sua senha</label> <input id="senha"
-					name="senha" required="required" type="password"
-					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
-			</p>
-			<label for="id"></label> <input id="id" name="id" type="hidden"
+			
+			<label for="id"></label> <input id="id" name="id" type="text"
 				value="<c:out value='${cliente.id}'/>" />
 			<p>
 				<input type="submit" value="Cadastrar" />

@@ -533,16 +533,24 @@ public class Servlet extends HttpServlet {
 		// String dataNascimento = request.getParameter("dataNascimento");
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
-
-		request.getSession().setAttribute("usuario", cliente);
-
+		request.setAttribute("usuario", cliente);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
+		dispatcher.forward(request, response);
+		////
+//		request.getSession().setAttribute("usuario", cliente);
+		////
 //		request.setAttribute("usuario", cliente);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
 
 //		response.sendRedirect("novo-contato");
 //		dispatcher.forward(request, response);
 //		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
-		response.sendRedirect("novo-contato");
+		
+		////
+//		response.sendRedirect("novo-contato");
+		////
+		
+		
 //		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
 	}
 
@@ -749,10 +757,12 @@ public class Servlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
-		String login = request.getParameter("login");
-//		Long id = Long.parseLong(request.getParameter("id"));
+//		String login = request.getParameter("login");
+		Long id = Long.parseLong(request.getParameter("id"));
 
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Usuario usuario = usuarioDAO.recuperarPorId(id);
+		
+//		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setId(id);

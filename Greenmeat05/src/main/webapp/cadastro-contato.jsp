@@ -14,11 +14,12 @@
 </head>
 <body>
 
+<%--
 	<div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
 
-
+--%>
 	<!--FORMULÁRIO DE CADASTRO-->
 	<div id="contato">
 		<form method="post" action="inserir-contato">
@@ -34,6 +35,10 @@
 					id="telefone" name="telefone" required="required" type="text"
 					placeholder="ex. 1234" value="<c:out value='${contato.telefone}'/>" />
 			</p>
+			
+			<label for="id"></label> <input id="id" name="id" type="number"
+				value="<c:out value='${usuario.id}'/>" />
+				
 			<p>
 				<input type="submit" value="Cadastrar" />
 			</p>

@@ -12,7 +12,9 @@ public interface UsuarioDAO {
 	
 	void atualizarUsuario(Usuario usuario);
 	
-	Usuario recuperarUsuario(Usuario usuario);	
+	Usuario recuperarUsuario(Usuario usuario);
+	
+	Usuario recuperarPorId(Long id);
 	
 	List<Usuario> recuperarUsuarios();	
 	
