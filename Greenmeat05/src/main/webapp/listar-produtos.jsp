@@ -5,57 +5,39 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<<<<<<< Updated upstream
-=======
-<title>Exibição Produtos</title>
-
- <style><%@include file="/resources/css/estilo.css"%></style>
->>>>>>> Stashed changes
-
-<link type="text/css" rel="stylesheet"
-    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
-<title>Produtos Cadastrados</title>
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ 	<style><%@include file="/resources/css/mystyles.css"%></style>
+	<title>Produtos Cadastrados</title>
 </head>
-
 <body>
-
-<<<<<<< Updated upstream
 <div>
-	<jsp:include page="menu-lateral.jsp"/>
-   </div>
-   
-=======
-
-	<div>
-	<jsp:include page="menu-lateral.jsp"/>
-	
-   </div>
-
-
->>>>>>> Stashed changes
-<% out.print("welcome to jsp"); %>  
-
-<% String nome = request.getParameter("nomeProduto");
-out.print(nome);		
-%>  
-
-<c:out value="${produto.nome}"/>
-
-<div>
-   <a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a>
-	
-	<form method="post" action="listar-produtos">
+  <c:forEach var="produto" items="${produtos}">
+	<div class="gallery1">
+        <div class="desc1">
+        	<p><c:out value="${produto.nome}"/> </p>
+			<p><c:out value="${produto.descricao}"/> </p>
+			<p><c:out value="${produto.preco}"/> </p>
+		  	<br> 
+        	<button type="button" onclick="alert('Item adicionado ao carrinho!')">Comprar</button>
+   		</div>	
+	</div>
+  </c:forEach>
+  	
+ 	<form method="post" action="listar-produtos">
 		<table>
 			<thead>
 				<tr>
+					<th>Nome</th>
+					<th>Descrição</th>
 					<th>Preço</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="produto" items="${produtos}">
 					<tr>
-						<td><c:out value="${produto.precoCusto}"/></td>
+						<td><c:out value="${produto.nome}"/></td>
+						<td><c:out value="${produto.descricao}"/></td>
+						<td><c:out value="${produto.preciVenda}"/></td>
 					</tr>
 				</c:forEach>
 			</tbody>

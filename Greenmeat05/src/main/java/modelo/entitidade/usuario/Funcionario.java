@@ -26,13 +26,14 @@ public class Funcionario extends PessoaFisica {
 
 //	Ao criar funcionario criar tambem seu login e senha
 
-	public Funcionario(){}
+	public Funcionario(){setNivelAcesso();}
 	
 	public Funcionario(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
 		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
 		setFuncao(funcao);
 		setCargo(cargo);
+		setNivelAcesso();
 	}
 
 	public Funcionario( String login, String senha, String nome, String sobrenome,
@@ -40,8 +41,17 @@ public class Funcionario extends PessoaFisica {
 		super(login, senha, nome, sobrenome, CPF);
 		setFuncao(funcao);
 		setCargo(cargo);
+		setNivelAcesso();
 	}
 
+	
+	public String getNivelAcesso() {
+		nivelAcesso = "adm";
+		return nivelAcesso;
+	}
+	public void setNivelAcesso() {
+		nivelAcesso = "adm";
+	}
 	
 	public String getFuncao() {
 		return funcao;
