@@ -1,47 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<<<<<<< Updated upstream
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page isELIgnored="false" %>
-
-=======
-    <%@ page isELIgnored="false" %>
-    
-    
->>>>>>> Stashed changes
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Perfil Cliente</title>
 
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-<title>Insert title here</title>
-
-<<<<<<< Updated upstream
 </head>
 <body>
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
-
-=======
- <style><%@include file="/resources/css/estilo.css"%></style>
-
-
-</head>
-<body>
-
-
-<div>
-	<jsp:include page="menu-lateral.jsp"/>
-	
-   </div>
-
-
-
->>>>>>> Stashed changes
 <div class=imagemPerfil>
 <img src="perfil_img.jfif" alt=""></div>
 
@@ -78,12 +51,12 @@
         <th>Nome Da Rua</th>
         <th>Tipo Da Via</th>
         <th> Logradouro</th>
-        <th> Número</th>
+        <th> NÃºmero</th>
         <th> Cep</th>
         <th> Complemento</th>
-       <th>País</th>
+       <th>PaÃ­s</th>
        <th>Estado</th>
-       <th>Província</th>
+       <th>ProvÃ­ncia</th>
        <th>Continente</th>
        </tr>
       <tr>
