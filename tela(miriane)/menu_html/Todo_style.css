@@ -107,7 +107,7 @@ body{
 
   .txt_tela_inicial {
     position: relative;
-    top: 100px;
+    top: 200px;
     width: 30%;   
     left: 400px;
     border: 3px solid #73AD21;
@@ -117,6 +117,8 @@ body{
   position: relative;
   top:100px ;
   left:400px ;
+  width: 500%;
+	height:500%;
   }
    
    
