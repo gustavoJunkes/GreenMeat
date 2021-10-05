@@ -34,6 +34,9 @@
 	
 	<br>
 	
+
+
+	<br>
 	<label for="TipoCarne">Tipo: </label> <input id="nome"
 		required="required" type="text" value="" name="tipoCarne">
 
