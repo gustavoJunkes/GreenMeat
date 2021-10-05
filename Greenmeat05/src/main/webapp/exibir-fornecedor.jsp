@@ -15,10 +15,19 @@
 	<jsp:include page="menu-lateral.jsp"/>
 	</div>
 
+<<<<<<< Updated upstream:Greenmeat05/src/main/webapp/exibir-fornecedor.jsp
     <div class="txt_lista_fornecedores"><h3>Lista dos Fornecedores</h3></div>
 <div class="tabela_exibir_fornecedores">
 <table>
 <tr>
+=======
+    <div class="txt_lista_fornecedores"><h3>Lista dos Fornecedores cadastrados</h3></div>
+<div class="tabela_exibir_fornecedores"><table>
+
+  <thead>
+            <tr>
+
+>>>>>>> Stashed changes:Greenmeat05/src/main/webapp/exibir_fornecedores.jsp
     <th>Id</th>
     <th>Razão Social </th>
     <th> CNPJ</th>
@@ -26,9 +35,21 @@
    <th>Telefone</th>
    <th>Estado</th>
    <th>Pais</th>
+<<<<<<< Updated upstream:Greenmeat05/src/main/webapp/exibir-fornecedor.jsp
    </tr>
   <tr>
   <c:forEach var="produtos" items="${fornecedor}">
+=======
+   
+          
+            </tr>
+            </thead>
+				<tbody>
+            <c:forEach var="produtos" items="${produtos}">
+						<tr>
+  
+  
+>>>>>>> Stashed changes:Greenmeat05/src/main/webapp/exibir_fornecedores.jsp
     <td><c:out value="${fornecedor.id_fornecedor}" /></td>
     <td><c:out value="${fornecedor.razaosocial}" /></td>
     <th><c:out value="${fornecedor.CNPJ}" /></th>
@@ -36,8 +57,19 @@
     <th><c:out value="${fornecedor.telefone}" /></th>
     <th><c:out value="${fornecedor.estado}" /></th>
     <th><c:out value="${fornecedor.pais}" /></th>
+<<<<<<< Updated upstream:Greenmeat05/src/main/webapp/exibir-fornecedor.jsp
 </c:forEach>
 </table>
 </div>
+=======
+ 	
+ </tr>
+            </c:forEach>
+            	</tbody>
+          </table>
+        </div>
+
+
+>>>>>>> Stashed changes:Greenmeat05/src/main/webapp/exibir_fornecedores.jsp
 </body>
 </html>
