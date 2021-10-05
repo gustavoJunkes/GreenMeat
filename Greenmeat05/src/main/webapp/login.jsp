@@ -5,17 +5,24 @@
 
 <html>
 <head>
+
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+    href="<%=request.getContextPath()%>"resources/css/mystyles.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+ 
 
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
 <body>
+<<<<<<< Updated upstream
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
+=======
+
+
+>>>>>>> Stashed changes
 
         <div id="login">
           <form method="post" action="logar"> 

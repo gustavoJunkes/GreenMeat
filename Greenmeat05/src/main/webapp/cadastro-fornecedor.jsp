@@ -1,20 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro Fornecedor</title>
 
+<<<<<<< Updated upstream
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+=======
+
+
+    <link type="text/css" rel="stylesheet"
+    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
+ <style><%@include file="/resources/css/mystyles.css"%></style>
+ 
+
+
+
+>>>>>>> Stashed changes
  
 </head>
 <body>
 	<div>
+<<<<<<< Updated upstream
 	<jsp:include page="menu-lateral.jsp"/>	
+=======
+	<jsp:include page="menu-lateral.jsp"/>
+>>>>>>> Stashed changes
    </div>
 
 	<div id="cadastro">

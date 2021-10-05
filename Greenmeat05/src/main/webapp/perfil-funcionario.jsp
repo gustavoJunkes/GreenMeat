@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<<<<<<< Updated upstream
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page isELIgnored="false" %>
+=======
+    <%@ page isELIgnored="false" %>
+
+
+
+
+>>>>>>> Stashed changes
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -9,11 +17,26 @@
 	href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
 <title>Perfil Funcionário</title>
+
+ <style><%@include file="/resources/css/estilo.css"%></style>
+
+
 </head>
 <body>
+<<<<<<< Updated upstream
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
+=======
+
+	<div>
+	<jsp:include page="menu-lateral.jsp"/>
+	
+   </div>
+
+
+
+>>>>>>> Stashed changes
  <div class=imagemPerfil>
 <img src="perfil_img.jfif" alt=""></div>
 
