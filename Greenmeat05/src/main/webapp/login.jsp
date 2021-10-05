@@ -15,14 +15,6 @@
 <title>Login</title>
 </head>
 <body>
-<<<<<<< Updated upstream
-<div>
-	<jsp:include page="menu-lateral.jsp"/>
-   </div>
-=======
-
-
->>>>>>> Stashed changes
 
         <div id="login">
           <form method="post" action="logar"> 

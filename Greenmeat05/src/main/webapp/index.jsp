@@ -17,11 +17,8 @@
 	
    </div>
 
-<<<<<<< Updated upstream
-<div>
-=======
+
 	<div>
->>>>>>> Stashed changes
 	<jsp:include page="login.jsp"/>
 	
    </div>

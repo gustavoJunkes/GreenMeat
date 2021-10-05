@@ -252,55 +252,55 @@ public class Servlet extends HttpServlet {
 
 //				========>Localidade<========
 
-			case "/nova-localidade":
-				mostrarFormularioNovaLocalidade(request, response);
-				break;
-
-			case "/inserir-localidade":
-				inserirLocalidade(request, response);
-				break;
-
-			case "/deletar-localidade":
-				deletarLocalidade(request, response);
-				break;
-
-			case "/editar-localidade":
-				mostrarFormularioEditarLocalidade(request, response);
-				break;
-
-			case "/atualizar-localidade":
-				atualizarLocalidade(request, response);
-				break;
-
-			case "/listar-localidades":
-				listarLocalidades(request, response);
-				break;
+//			case "/nova-localidade":
+//				mostrarFormularioNovaLocalidade(request, response);
+//				break;
+//
+//			case "/inserir-localidade":
+//				inserirLocalidade(request, response);
+//				break;
+//
+//			case "/deletar-localidade":
+//				deletarLocalidade(request, response);
+//				break;
+//
+//			case "/editar-localidade":
+//				mostrarFormularioEditarLocalidade(request, response);
+//				break;
+//
+//			case "/atualizar-localidade":
+//				atualizarLocalidade(request, response);
+//				break;
+//
+//			case "/listar-localidades":
+//				listarLocalidades(request, response);
+//				break;
 
 //				========>Endereço<========
 
-			case "/novo-endereco":
-				mostrarFormularioNovoEndereco(request, response);
-				break;
-
-			case "/inserir-endereco":
-				inserirEndereco(request, response);
-				break;
-
-			case "/deletar-endereco":
-				deletarEndereco(request, response);
-				break;
-
-			case "/editar-endereco":
-				mostrarFormularioEditarEndereco(request, response);
-				break;
-
-			case "/atualizar-endereco":
-				atualizarEndereco(request, response);
-				break;
-
-			case "/listar-endereco":
-				listarEnderecos(request, response);
-				break;
+//			case "/novo-endereco":
+//				mostrarFormularioNovoEndereco(request, response);
+//				break;
+//
+//			case "/inserir-endereco":
+//				inserirEndereco(request, response);
+//				break;
+//
+//			case "/deletar-endereco":
+//				deletarEndereco(request, response);
+//				break;
+//
+//			case "/editar-endereco":
+//				mostrarFormularioEditarEndereco(request, response);
+//				break;
+//
+//			case "/atualizar-endereco":
+//				atualizarEndereco(request, response);
+//				break;
+//
+//			case "/listar-endereco":
+//				listarEnderecos(request, response);
+//				break;
 
 			default:
 //				listarProdutos(request, response);
@@ -421,13 +421,9 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
 		Produto produto = new Produto();
-		produto.setNome("caarne");
-		produto.setPrecoCusto(16);
-
-		request.setAttribute("nomeProduto", produto.getNome());
-
-		List<Produto> produtos1 = produtoDAO.recuperarProdutos();
-		request.setAttribute("produtos", produtos1);
+		
+		List<Produto> produtos = produtoDAO.recuperarProdutos();
+		request.setAttribute("produtos", produtos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exibir-produto.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
@@ -523,19 +519,58 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirCliente(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException, ServletException {
+			throws SQLException, IOException, InvalidFieldException, ServletException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
 		String CPF = request.getParameter("CPF");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		// String dataNascimento = request.getParameter("dataNascimento");
+		String dataNascimento = request.getParameter("dataNascimento");
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		String pais = request.getParameter("pais");
+		String estado = request.getParameter("estado");
+		String provincia = request.getParameter("provincia");
+		String continente = request.getParameter("continente");
+		String nomeDaRua = request.getParameter("nomeDaRua");
+		String logradouro = request.getParameter("logradouro");
+		String tipoDaVia = request.getParameter("tipoDaVia");
+		Integer numero = Integer.parseInt(request.getParameter("numero"));
+		String CEP = request.getParameter("CEP");
+		String complemento = request.getParameter("complemento");
+		
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
-		request.setAttribute("usuario", cliente);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
-		dispatcher.forward(request, response);
+		
+		Contato contato = new Contato(email,telefone, cliente);
+		contatoDAO.inserirContato(contato);
+		
+		clienteDAO.atualizarCliente(cliente);
+		
+		List<Usuario> usuarios = new ArrayList();
+		usuarios.add(cliente);
+		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+		localidadeDAO.inserirLocalidade(localidade);
+
+		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente);
+		localidades.add(localidade);
+		cliente.setLocalidades(localidades);
+		
+		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+		enderecoDAO.inserirEndereco(endereco);
+
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		// Está incompleto, dessa forma exclui todos os outros endereços
+		enderecos.add(endereco);
+		localidade.setEnderecos(enderecos);
+		localidadeDAO.atualizarLocalidade(localidade);
+
+		clienteDAO.atualizarCliente(cliente);
+		
+//		request.setAttribute("usuario", cliente);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
+//		dispatcher.forward(request, response);
 		////
 //		request.getSession().setAttribute("usuario", cliente);
 		////
@@ -681,17 +716,54 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirFornecedor(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException {
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
 
 		String nomeFantasia = request.getParameter("nomeFantasia");
 		String razaoSocial = request.getParameter("razaoSocial");
 		String CNPJ = request.getParameter("CNPJ");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		String pais = request.getParameter("pais");
+		String estado = request.getParameter("estado");
+		String provincia = request.getParameter("provincia");
+		String continente = request.getParameter("continente");
+		String nomeDaRua = request.getParameter("nomeDaRua");
+		String logradouro = request.getParameter("logradouro");
+		String tipoDaVia = request.getParameter("tipoDaVia");
+		Integer numero = Integer.parseInt(request.getParameter("numero"));
+		String CEP = request.getParameter("CEP");
+		String complemento = request.getParameter("complemento");
+						
 		Fornecedor fornecedor = new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha);
 		fornecedorDAO.inserirFornecedor(fornecedor);
-		request.getSession().setAttribute("usuario", fornecedor);
-		response.sendRedirect("novo-contato");
+	
+		Contato contato = new Contato(email,telefone, fornecedor);
+		contatoDAO.inserirContato(contato);
+		
+		fornecedorDAO.atualizarFornecedor(fornecedor);
+		
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(fornecedor);
+		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+		localidadeDAO.inserirLocalidade(localidade);
+
+		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(fornecedor);
+		localidades.add(localidade);
+		fornecedor.setLocalidades(localidades);
+		
+		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+		enderecoDAO.inserirEndereco(endereco);
+
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		// Está incompleto, dessa forma exclui todos os outros endereços
+		enderecos.add(endereco);
+		localidade.setEnderecos(enderecos);
+		localidadeDAO.atualizarLocalidade(localidade);
+
+		fornecedorDAO.atualizarFornecedor(fornecedor);
+		response.sendRedirect("inicio");
 	}
 
 	private void atualizarFornecedor(HttpServletRequest request, HttpServletResponse response)
@@ -804,162 +876,183 @@ public class Servlet extends HttpServlet {
 
 //	=========>Localidade<=========
 
-	private void listarLocalidades(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-
-		List<Localidade> localidades = localidadeDAO.recuperarLocalidades();
-		request.setAttribute("localidades", localidades);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-enderecos.jsp");// pagina de listar produto
-																							// virá aqui
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarFormularioNovaLocalidade(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-localidade.jsp"); // formulario do produto
-		// virá
-		// aqui
-		dispatcher.forward(request, response);
-	}
-
-	// INCOMPLETO
-	private void mostrarFormularioEditarLocalidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		long id = Long.parseLong(request.getParameter("id"));
-//		Localidade localidade = localidadeDAO.recuperarPorId(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-localidade.jsp");
-//		request.setAttribute("contato", contato);
-		dispatcher.forward(request, response);
-	}
-
-	private void inserirLocalidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException, CountryInvalidException {
-
-		String pais = request.getParameter("pais");
-		String estado = request.getParameter("estado");
-		String provincia = request.getParameter("provincia");
-		String continente = request.getParameter("continente");
-
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-		request.getSession().removeAttribute("usuario");
-
-		// precisa ser dessa forma, em conjunto com o método que verifica
-		// se a localidade já existe em banco antes de cadastrar
-//		List<Usuario>usuarios = usuarioDAO.recuperarUsuariosLocalidade()
-
-		List<Usuario> usuarios = new ArrayList();
-		usuarios.add(usuario);
-		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
-		localidadeDAO.inserirLocalidade(localidade);
-
-		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(usuario);
-		localidades.add(localidade);
-		usuario.setLocalidades(localidades);
-		request.getSession().setAttribute("localidade", localidade);
-
-		response.sendRedirect("novo-endereco");
-	}
-
-	private void atualizarLocalidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException, CountryInvalidException {
-
-		String pais = request.getParameter("pais");
-		String estado = request.getParameter("estado");
-		String provincia = request.getParameter("provincia");
-		String continente = request.getParameter("continente");
-		localidadeDAO.atualizarLocalidade(new Localidade(pais, estado, provincia, continente));
-	}
-
-	private void deletarLocalidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-
-		long id = Long.parseLong(request.getParameter("id"));
-		// não foi criado pois este cadastro precisa ser repensado
-//		Localidade localidade = localidadeDAO.recuperarPorId(id);
-//		localidadeDAO.deletarLocalidade(localidade);
-		response.sendRedirect("mostrar-tela-inicial"); // aqui a pagina inicial ou de produtos
-	}
+//	private void listarLocalidades(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, ServletException {
+//
+//		List<Localidade> localidades = localidadeDAO.recuperarLocalidades();
+//		request.setAttribute("localidades", localidades);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-enderecos.jsp");// pagina de listar produto
+//																							// virá aqui
+//		dispatcher.forward(request, response);
+//	}
+//
+//	private void mostrarFormularioNovaLocalidade(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-localidade.jsp"); // formulario do produto
+//		// virá
+//		// aqui
+//		dispatcher.forward(request, response);
+//	}
+//
+//	// INCOMPLETO
+//	private void mostrarFormularioEditarLocalidade(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, ServletException, IOException {
+//
+//		long id = Long.parseLong(request.getParameter("id"));
+////		Localidade localidade = localidadeDAO.recuperarPorId(id);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-localidade.jsp");
+////		request.setAttribute("contato", contato);
+//		dispatcher.forward(request, response);
+//	}
+//
+//	private void inserirLocalidade(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, InvalidFieldException, CountryInvalidException {
+//
+//		String pais = request.getParameter("pais");
+//		String estado = request.getParameter("estado");
+//		String provincia = request.getParameter("provincia");
+//		String continente = request.getParameter("continente");
+//
+//		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+//		
+//		List<Usuario> usuarios = new ArrayList();
+//		usuarios.add(usuario);
+//		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+//		localidadeDAO.inserirLocalidade(localidade);
+//
+//		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(usuario);
+//		localidades.add(localidade);
+//		usuario.setLocalidades(localidades);
+//		
+//		request.getSession().removeAttribute("usuario");
+//
+//		// precisa ser dessa forma, em conjunto com o método que verifica
+//		// se a localidade já existe em banco antes de cadastrar
+////		List<Usuario>usuarios = usuarioDAO.recuperarUsuariosLocalidade()
+//
+//		List<Usuario> usuarios = new ArrayList();
+//		usuarios.add(usuario);
+//		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+//		localidadeDAO.inserirLocalidade(localidade);
+//
+//		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(usuario);
+//		localidades.add(localidade);
+//		usuario.setLocalidades(localidades);
+//		request.getSession().setAttribute("localidade", localidade);
+//
+//		response.sendRedirect("novo-endereco");
+//	}
+//
+//	private void atualizarLocalidade(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, InvalidFieldException, CountryInvalidException {
+//
+//		String pais = request.getParameter("pais");
+//		String estado = request.getParameter("estado");
+//		String provincia = request.getParameter("provincia");
+//		String continente = request.getParameter("continente");
+//		localidadeDAO.atualizarLocalidade(new Localidade(pais, estado, provincia, continente));
+//	}
+//
+//	private void deletarLocalidade(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException {
+//
+//		long id = Long.parseLong(request.getParameter("id"));
+//		// não foi criado pois este cadastro precisa ser repensado
+////		Localidade localidade = localidadeDAO.recuperarPorId(id);
+////		localidadeDAO.deletarLocalidade(localidade);
+//		response.sendRedirect("mostrar-tela-inicial"); // aqui a pagina inicial ou de produtos
+//	}
 
 //	=========>Endereço<=========
 
-	private void listarEnderecos(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-
-		List<Endereco> enderecos = enderecoDAO.recuperarEnderecos();
-		request.setAttribute("enderecos", enderecos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-enderecos.jsp");// pagina de listar produto
-																							// virá aqui
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarFormularioNovoEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-endereco.jsp"); // formulario do produto
-																								// virá
-																								// aqui
-		dispatcher.forward(request, response);
-	}
-
-	// INCOMPLETO
-	private void mostrarFormularioEditarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		long id = Long.parseLong(request.getParameter("id"));
-//		Endereco endereco = enderecoDAO.recuperarPorId(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("form-contato.jsp");
-//		request.setAttribute("endereco", endereco);
-		dispatcher.forward(request, response);
-	}
-
-	private void inserirEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException {
-
-		String nomeDaRua = request.getParameter("nomeDaRua");
-		String logradouro = request.getParameter("logradouro");
-		String tipoDaVia = request.getParameter("tipoDaVia");
-		Integer numero = Integer.parseInt(request.getParameter("numero"));
-		String CEP = request.getParameter("CEP");
-		String complemento = request.getParameter("complemento");
-
-		Localidade localidade = (Localidade) request.getSession().getAttribute("localidade");
-
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
-		enderecoDAO.inserirEndereco(endereco);
-
-		List<Endereco> enderecos = new ArrayList<Endereco>();
-		// Está incompleto, dessa forma exclui todos os outros endereços
-		enderecos.add(endereco);
-		localidade.setEnderecos(enderecos);
-		localidadeDAO.atualizarLocalidade(localidade);
-		response.sendRedirect("inicio");
-	}
-
-	private void atualizarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException {
-
-		String nomeDaRua = request.getParameter("nomeDaRua");
-		String logradouro = request.getParameter("logradouro");
-		String tipoDaVia = request.getParameter("tipoDaVia");
-		Integer numero = Integer.parseInt(request.getParameter("numero"));
-		String CEP = request.getParameter("CEP");
-		String complemento = request.getParameter("complemento");
-
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento);
-		enderecoDAO.atualizarEndereco(endereco);
-		response.sendRedirect("inicio");
-	}
-
-	private void deletarEndereco(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-
-		long id = Long.parseLong(request.getParameter("id"));
-//		Endereco endereco = enderecoDAO.recuperarPorId(id);
-//		enderecoDAO.deletarEndereco(endereco);
-		response.sendRedirect("inicio"); // aqui a pagina inicial ou de produtos
-	}
+//	private void listarEnderecos(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, ServletException {
+//
+//		List<Endereco> enderecos = enderecoDAO.recuperarEnderecos();
+//		request.setAttribute("enderecos", enderecos);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-enderecos.jsp");// pagina de listar produto
+//																							// virá aqui
+//		dispatcher.forward(request, response);
+//	}
+//
+//	private void mostrarFormularioNovoEndereco(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-endereco.jsp"); // formulario do produto
+//																								// virá
+//																								// aqui
+//		dispatcher.forward(request, response);
+//	}
+//
+//	// INCOMPLETO
+//	private void mostrarFormularioEditarEndereco(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, ServletException, IOException {
+//
+//		long id = Long.parseLong(request.getParameter("id"));
+////		Endereco endereco = enderecoDAO.recuperarPorId(id);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("form-contato.jsp");
+////		request.setAttribute("endereco", endereco);
+//		dispatcher.forward(request, response);
+//	}
+//
+//	private void inserirEndereco(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, InvalidFieldException {
+//
+//		String nomeDaRua = request.getParameter("nomeDaRua");
+//		String logradouro = request.getParameter("logradouro");
+//		String tipoDaVia = request.getParameter("tipoDaVia");
+//		Integer numero = Integer.parseInt(request.getParameter("numero"));
+//		String CEP = request.getParameter("CEP");
+//		String complemento = request.getParameter("complemento");
+//
+//		
+//		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+//		enderecoDAO.inserirEndereco(endereco);
+//
+//		List<Endereco> enderecos = new ArrayList<Endereco>();
+//		// Está incompleto, dessa forma exclui todos os outros endereços
+//		enderecos.add(endereco);
+//		localidade.setEnderecos(enderecos);
+//		localidadeDAO.atualizarLocalidade(localidade);
+//		
+//		
+//		
+//		Localidade localidade = (Localidade) request.getSession().getAttribute("localidade");
+//
+//		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+//		enderecoDAO.inserirEndereco(endereco);
+//
+//		List<Endereco> enderecos = new ArrayList<Endereco>();
+//		// Está incompleto, dessa forma exclui todos os outros endereços
+//		enderecos.add(endereco);
+//		localidade.setEnderecos(enderecos);
+//		localidadeDAO.atualizarLocalidade(localidade);
+//		response.sendRedirect("inicio");
+//	}
+//
+//	private void atualizarEndereco(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, InvalidFieldException {
+//
+//		String nomeDaRua = request.getParameter("nomeDaRua");
+//		String logradouro = request.getParameter("logradouro");
+//		String tipoDaVia = request.getParameter("tipoDaVia");
+//		Integer numero = Integer.parseInt(request.getParameter("numero"));
+//		String CEP = request.getParameter("CEP");
+//		String complemento = request.getParameter("complemento");
+//
+//		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento);
+//		enderecoDAO.atualizarEndereco(endereco);
+//		response.sendRedirect("inicio");
+//	}
+//
+//	private void deletarEndereco(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException {
+//
+//		long id = Long.parseLong(request.getParameter("id"));
+////		Endereco endereco = enderecoDAO.recuperarPorId(id);
+////		enderecoDAO.deletarEndereco(endereco);
+//		response.sendRedirect("inicio"); // aqui a pagina inicial ou de produtos
+//	}
 
 }
