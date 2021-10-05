@@ -34,13 +34,18 @@
 					 <label for="login">Crie um Login</label> 
 					 <input id="loginInserir" name="login" required="required" type="text" placeholder="login"
 					value="<c:out value='${cliente.login}' />" />
-					</p>
-			<p>
-				<label for="senha">Crie uma senha</label> <input id="senha"
+			</p>
+				<label for="senha"> Senha</label> <input id=" senha"
 					name="senha" required="required" type="password"
 					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
 			</p>
 		
+			</p>
+				<label for="senha">Confirme a sua  senha</label> <input id=" senha"
+					name="senha" required="required" type="password"
+					placeholder="ex. 1234" value="<c:out value='${cliente.senha}'/>" />
+			</p>
+			
 			<label for="id"></label> <input id="id" name="id" type="hidden"
 				value="<c:out value='${cliente.id}'/>" />
 			
