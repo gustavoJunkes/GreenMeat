@@ -1,45 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
 
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Cadastro Fornecedor</title>
 
-<<<<<<< Updated upstream
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-=======
-
-
-    <link type="text/css" rel="stylesheet"
-    href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
- 
-
-
-
->>>>>>> Stashed changes
  
 </head>
 <body>
 	<div>
-<<<<<<< Updated upstream
-	<jsp:include page="menu-lateral.jsp"/>	
-=======
 	<jsp:include page="menu-lateral.jsp"/>
->>>>>>> Stashed changes
    </div>
 
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
 			<h1>Cadastre-se</h1>
 			<p>
-				<label for="razaoSocial"> Razão Social</label> <input
+				<label for="razaoSocial"> RazÃ£o Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text"
-					placeholder="razão social"
+					placeholder="razÃ£o social"
 					value="<c:out value='${fornecedor.razaoSocial}' />" />
 			</p>
 			<p>
@@ -49,8 +33,8 @@
 					value="<c:out value='${fornecedor.nomeFantasia}' />" />
 			</p>
 			<p>
-				<label for="CNPJ"> CNPJ</label> &nbsp; &nbsp; &nbsp; &nbsp;<input
-					id="CNPJ" name="CNPJ" required="required" type="text"
+				<label for="CNPJ"> CNPJ</label>
+				<input id="CNPJ" name="CNPJ" required="required" type="text"
 					placeholder="CNPJ" value="<c:out value='${fornecedor.cnpj}' />" />
 			</p>
 			<p>
