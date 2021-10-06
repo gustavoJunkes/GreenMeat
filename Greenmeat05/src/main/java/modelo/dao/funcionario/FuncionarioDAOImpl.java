@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -140,6 +141,46 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 		
 	}
 	
+
+	public Funcionario recuperarFuncionarioPorLogin(String login) {
+		Session sessao = null;
+		Funcionario funcionarioRecuperado = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Funcionario> criteria = construtor.createQuery(Funcionario.class);
+			Root<Funcionario> raizFuncionario= criteria.from(Funcionario.class);
+
+			criteria.select(raizFuncionario);
+			
+			ParameterExpression<String> loginFuncionario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizFuncionario.get("login"), loginFuncionario));
+
+			funcionarioRecuperado = sessao.createQuery(criteria).setParameter(loginFuncionario, login).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (ObjectNotFoundException l) {
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return funcionarioRecuperado;
+	}
+	
 	public Funcionario recuperarFuncionario(Funcionario funcionario) {
 		Session sessao = null;
 		Funcionario funcionarioRecuperado = null;
@@ -163,9 +204,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
 			sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
+		} catch (ObjectNotFoundException l) {
 
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
