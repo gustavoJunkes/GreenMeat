@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
 import modelo.dao.contato.ContatoDAO;
@@ -29,8 +30,6 @@ import modelo.dao.localidade.LocalidadeDAO;
 import modelo.dao.localidade.LocalidadeDAOImpl;
 import modelo.dao.pedido.PedidoDAO;
 import modelo.dao.pedido.PedidoDAOImpl;
-import modelo.dao.produto.ProdutoDAO;
-import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.produto.Item;
@@ -68,7 +67,7 @@ public class Servlet extends HttpServlet {
 
 		itemDAO = new ItemDAOImpl();
 		pedidoDAO = new PedidoDAOImpl();
-		produtoDAO = new ProdutoDAOImpl();
+//		produtoDAO = new ProdutoDAOImpl();
 		clienteDAO = new ClienteDAOImpl();
 		funcionarioDAO = new FuncionarioDAOImpl();
 		fornecedorDAO = new FornecedorDAOImpl();
@@ -126,7 +125,7 @@ public class Servlet extends HttpServlet {
 //			========>Pedido<========
 
 			case "/novo-pedido":
-
+//				abrirNovoPedido(request, response);
 				break;
 
 			case "/adicionar-produto-pedido":
@@ -357,22 +356,28 @@ public class Servlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
-		Cliente cliente1 = new Cliente();
-		cliente1.setLogin(login);
-		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
-		if (cliente != null && cliente.getSenha() == senha && cliente.getLogin() == login )
-			sessao.setAttribute("usuario", cliente);
-		else {
-			Funcionario funcionario1 = new Funcionario();
-			funcionario1.setLogin(login);
-			Funcionario funcionario = funcionarioDAO.recuperarFuncionarioPorLogin(login);
-			if(funcionario != null && funcionario.getSenha() == senha && funcionario.getLogin() == login )
-				sessao.setAttribute("usuario", funcionario);
-			else {
-				Fornecedor fornecedor1 = new Fornecedor();
-				Fornecedor fornecedor = fornecedorDAO.recuperarFornecedorPorLogin(fornecedor1);
-				if(fornecedor != null && fornecedor.getSenha() == senha && fornecedor.getLogin() == login)
-					sessao.setAttribute("usuario", fornecedor);
+		Usuario usuario = usuarioDAO.recuperarUsuario(usuario);	// Recupera um obj ou pf ou pj	
+		
+		if(usuario instanceof Cliente)
+			///
+		else if (usuario instanceof Funcionario )
+		
+//		Cliente cliente1 = new Cliente();
+//		cliente1.setLogin(login);
+//		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
+//		if (cliente != null && cliente.getSenha() == senha && cliente.getLogin() == login )
+//			sessao.setAttribute("usuario", cliente);
+//		else {
+//			Funcionario funcionario1 = new Funcionario();
+//			funcionario1.setLogin(login);
+//			Funcionario funcionario = funcionarioDAO.recuperarFuncionarioPorLogin(login);
+//			if(funcionario != null && funcionario.getSenha() == senha && funcionario.getLogin() == login )
+//				sessao.setAttribute("usuario", funcionario);
+//			else {
+//				Fornecedor fornecedor1 = new Fornecedor();
+//				Fornecedor fornecedor = fornecedorDAO.recuperarFornecedorPorLogin(fornecedor1);
+//				if(fornecedor != null && fornecedor.getSenha() == senha && fornecedor.getLogin() == login)
+//					sessao.setAttribute("usuario", fornecedor);
 			
 //					response.sendError(404, "Nenhum usuário com login " + login + " foi encontrado em nossa base de dados tente se cadastrar");
 			}
