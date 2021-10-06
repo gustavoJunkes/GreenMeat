@@ -25,84 +25,100 @@
 			<p>
 				<label for="razaoSocial"> Razão Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text"
-					placeholder="razão social"
+					
 					value="<c:out value='${fornecedor.razaoSocial}' />" />
 			</p>
 			<p>
 				<label for="nomeFantasia"> Nome Fantasia </label> <input
 					id="nomeFantasia" name="nomeFantasia" required="required"
-					type="text" placeholder="nome fantasia"
+					type="text" 
 					value="<c:out value='${fornecedor.nomeFantasia}' />" />
 			</p>
 			<p>
 				<label for="CNPJ"> CNPJ</label>
 				<input id="CNPJ" name="CNPJ" required="required" type="text"
-					placeholder="CNPJ" value="<c:out value='${fornecedor.cnpj}' />" />
+					 value="<c:out value='${fornecedor.cnpj}' />" />
 			</p>
 			<p>
 				<label for="login">Crie um Login</label> <input id="loginInserir"
-					name="login" required="required" type="text" placeholder="login"
+					name="login" required="required" type="text" 
 					value="<c:out value='${fornecedor.login}' />" />
 			</p>
 			<p>
 				<label for="senha">Crie uma senha</label> <input id="senha"
 					name="senha" required="required" type="password"
-					placeholder="ex. 1234"
 					value="<c:out value='${fornecedor.senha}' />" />
 			</p>
+		<h2>Contato</h1>
 			
-			<h2>Contato</h1>
 			<p>
-				<label for="email_cad"> E-mail</label>  <input
+				<label for="email"> E-mail</label>  <input
 					id="email" name="email" required="required" type="text"
-					placeholder="contato@email.com" value='${contato.email}' />
+					 value='${contato.email}' />
 			</p>
 			<p>
-				<label for="telefone_cad"> Telefone</label><input
+				<label for="telefone"> Telefone</label><input
 					id="telefone" name="telefone" required="required" type="text"
-					placeholder="ex. 1234" value="<c:out value='${contato.telefone}'/>" />
-			</p>
-			
-			<h1>Localidade</h1>
+					 value="<c:out value='${contato.telefone}'/>" />
+		</p>
+			<h2>Localidade</h2>
 
-			<label>Pa�s</label><br>
+			<P>
+			<label>País</label><br>
 			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
-						
+						</p>
+						<p>
 			<label>Estado</label><br>
 			<input type="text" value="<c:out value='${localidade.estado}'/>" name="estado" >		
-
+</p>
+<p>
 			<label>Cidade</label><br>
 			<input type="text" value="<c:out value="${localidade.provincia}"/>" name="provincia" >		
-
+</p>
+<p>
 			<label>Continente</label><br>
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
-		
-		<h1>Endere�o</h1>
-			
-			<label for="endereco"> Nome Da Rua</label><input id="endereco" name="rua" required="required"
-			type="text" placeholder="Nome Da Rua" value="<c:out value='${endereco.nomeDaRua}'/>" /> 
-			<br>
-			
-			<label	for="endere�o_cad"> Tipo Da Via</label><input id="endereco" name="tipoDaVia" required="required" type="text"
-			placeholder="Tipo Da Via" value="<c:out value='${endereco.tipoDaVia}' />"/> 
+		</p>
+		<h2>Endereço</h2>
+		<p>
+				<label for="endereco"> Nome Da Rua</label>
+				 <input id="endereco" name="rua" required="required"
+					type="text"  value="<c:out value='${endereco.nomeDaRua}'/>" /> 
+					</p>
+					
+					<p>
+					 <label	for="endereço_cad"> Tipo Da Via</label> 
+					  <input id="endereco" name="tipoDaVia" required="required" type="text"
+					 value="<c:out value='${endereco.tipoDaVia}' />"/> 
+					 </p>
+					
+					<p>
+					<label for="endereco">Logradouro</label>
+				<input id="endereco" name="logradouro" required="required"
+					type="text"  value="<c:out value='${endereco.logradouro}' />"/> 
+					</p>
+				
+					<p>
+					<label for="endereço_cad"> Número</label> 
+					 <input id="endereco" name="numero" required="required" type="number"
+					 value="<c:out value='${endereco.numero}' />"/> 
+					 </p>
+					
+					<p>
+					 <label for="endereco">Cep</label> 
+					 <input id="endereco" name="endereco" required="required"
+					type="text"  value="<c:out value='${endereco.cep}' />" /> 
+					</p>
+				
+					<p>
+					<label for="endereco"> Complemento</label> 
+					<input id="endereco" name="complemento" required="required" type="text"
+					value="<c:out value='${endereco.complemento}' />"/> 
+					</p>
 					<br> 
 			
-			<label for="endere�o_cad">Logradouro</label><input id="endereco" name="logradouro" required="required"
-			type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
-			<br>
 			
-			<label for="endere�o_cad"> N�mero</label><input id="endereco" name="numero" required="required" type="number"
-			placeholder="N�mero" value="<c:out value='${endereco.numero}' />"/> 
-					<br>
-		    <label for="endereco">Cep</label><input id="endereco" name="endereco" required="required"
-			type="text" placeholder="Cep" value="<c:out value='${endereco.cep}' />" /> 
-					<br> 
-			<label for="endereco"> Complemento</label><input id="endereco" name="complemento" required="required" type="text"
-			placeholder="Complemento" value="<c:out value='${endereco.complemento}' />"/> 
-					<br>
-			<p>
-				<input type="submit" value="Cadastrar" />
-			</p>
+		<input type="submit" value="Cadastrar" />
 		</form>
 	</div>
 </body>
