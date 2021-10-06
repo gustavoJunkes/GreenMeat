@@ -317,6 +317,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 	
 	private SessionFactory conectarBanco() {
 
+		
 		Configuration configuracao = new Configuration();
 
 		configuracao.addAnnotatedClass(modelo.entitidade.usuario.Cliente.class);
