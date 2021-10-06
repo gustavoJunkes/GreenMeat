@@ -31,12 +31,24 @@ public class Cliente extends PessoaFisica {
 	public Cliente(Localidade endereco, String login, String senha, Contato contato, String nome, String sobrenome,
 			String CPF, LocalDate dataDeNascimento) {
 		super(login, senha, contato, nome, sobrenome, CPF, dataDeNascimento);
+		setNivelAcesso();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Cliente() {
+		setNivelAcesso();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getNivelAcesso() {
+		nivelAcesso = "cliente";
+		return nivelAcesso;
+	}
+	
+	public void setNivelAcesso() {
+		nivelAcesso = "cliente";
+	}
+	
 
 	public Cliente(String login, String senha, String nome, String sobrenome,
 			String CPF) {

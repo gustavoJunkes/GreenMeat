@@ -21,7 +21,7 @@
    </div>
 
         <div id="login">
-          <form method="post" action="logar"> 
+          <form method="post" action="entrar-cliente"> 
             <h1>Login</h1>
                      
               <label for="login">Login</label>
@@ -31,6 +31,7 @@
               <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
               <label for="manterlogado">Manter-me logado</label>     
               <input type="submit" value="Logar" />                      
+          
           
           </form>
       </div>

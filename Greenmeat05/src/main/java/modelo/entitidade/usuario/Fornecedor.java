@@ -39,8 +39,17 @@ public class Fornecedor extends PessoaJuridica {
 	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
 			Contato contato, String CNPJ) {
 		super(login, senha, contato, CNPJ, razaoSocial, nomeFantasia);
+		setNivelAcesso();
 	}
 
+	public String getNivelAcesso() {
+		nivelAcesso = "fornecedor";
+		return nivelAcesso;
+	}
+	
+	public void setNivelAcesso() {
+		nivelAcesso = "fornecedor";
+	}
 //	public Fornecedor(String razaoSocial, String nomeFantasia, Localidade endereco, String login, String senha,
 //			Contato contato, String CNPJ, List<Produto> produtos) {
 //		super(login, senha, contato, CNPJ, razaoSocial, nomeFantasia);
@@ -53,11 +62,13 @@ public class Fornecedor extends PessoaJuridica {
 	}
 	
 	public Fornecedor() {
+		setNivelAcesso();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Fornecedor(String razaoSocial, String nomeFantasia, String login, String senha, String CNPJ) {
 		super(login, senha, CNPJ, razaoSocial, nomeFantasia);
+		setNivelAcesso();
 	}
 
 //	public Fornecedor(String razaoSocial, String nomeFantasia, String login, String senha, String CNPJ,

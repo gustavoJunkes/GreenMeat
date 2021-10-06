@@ -18,25 +18,14 @@
 	<jsp:include page="menu-lateral.jsp"/>
 	</div>
 
- 	<c:forEach var="produto" items="${produtos}">
-  		<div class="gallery1">
+    <c:forEach var="produto" items="${produtos}">
+  <div class="gallery1">
         
         <div class="desc1"> <c:out value="${produto.nome}" /> -
-      <c:out value="${produto.precoVenda}" /></div>
-         </c:forEach>
-       
-         
-          <br> 
-           
-           
-           <!--sobre a quantidade do produto a ser escolhido-->
-          <div class="input">
-            <form action="/action_page.php">
-              <input type="number" id="quantity" name="quantity" min="1" max="1000000">   
-          </form>
-          </div>
-         
+      <c:out value="${produto.preco}" /></div>
+          
          <button type="button" onclick="alert('Item adicionado ao seu pedido!')">Comprar</button>
        </div>
+         </c:forEach>
 </body>
 </html>	
