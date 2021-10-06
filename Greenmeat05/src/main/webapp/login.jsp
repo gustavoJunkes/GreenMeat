@@ -15,9 +15,11 @@
 <title>Login</title>
 </head>
 <body>
+
 <div>
 	<jsp:include page="menu-lateral.jsp"/>
    </div>
+
         <div id="login">
           <form method="post" action="logar"> 
             <h1>Login</h1>

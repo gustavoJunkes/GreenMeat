@@ -16,7 +16,6 @@
 	<jsp:include page="menu-lateral.jsp"/>
 	
    </div>
-
 	<div>
 	<jsp:include page="login.jsp"/>
    </div>

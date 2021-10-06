@@ -1,4 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
 
@@ -19,7 +21,7 @@
 
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
-			<h1>Cadastre-se</h1>
+			<h1>Cadastro Fornecedor</h1>
 			<p>
 				<label for="razaoSocial"> Razão Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text"
@@ -48,8 +50,58 @@
 					placeholder="ex. 1234"
 					value="<c:out value='${fornecedor.senha}' />" />
 			</p>
+			
+			<h2>Contato</h1>
 			<p>
-				<input type="submit" value="Continuar Cadastro" />
+				<label for="email_cad"> E-mail</label>  <input
+					id="email" name="email" required="required" type="text"
+					placeholder="contato@email.com" value='${contato.email}' />
+			</p>
+			<p>
+				<label for="telefone_cad"> Telefone</label><input
+					id="telefone" name="telefone" required="required" type="text"
+					placeholder="ex. 1234" value="<c:out value='${contato.telefone}'/>" />
+			</p>
+			
+			<h1>Localidade</h1>
+
+			<label>Pa�s</label><br>
+			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
+						
+			<label>Estado</label><br>
+			<input type="text" value="<c:out value='${localidade.estado}'/>" name="estado" >		
+
+			<label>Cidade</label><br>
+			<input type="text" value="<c:out value="${localidade.provincia}"/>" name="provincia" >		
+
+			<label>Continente</label><br>
+			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
+		
+		<h1>Endere�o</h1>
+			
+			<label for="endereco"> Nome Da Rua</label><input id="endereco" name="rua" required="required"
+			type="text" placeholder="Nome Da Rua" value="<c:out value='${endereco.nomeDaRua}'/>" /> 
+			<br>
+			
+			<label	for="endere�o_cad"> Tipo Da Via</label><input id="endereco" name="tipoDaVia" required="required" type="text"
+			placeholder="Tipo Da Via" value="<c:out value='${endereco.tipoDaVia}' />"/> 
+					<br> 
+			
+			<label for="endere�o_cad">Logradouro</label><input id="endereco" name="logradouro" required="required"
+			type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
+			<br>
+			
+			<label for="endere�o_cad"> N�mero</label><input id="endereco" name="numero" required="required" type="number"
+			placeholder="N�mero" value="<c:out value='${endereco.numero}' />"/> 
+					<br>
+		    <label for="endereco">Cep</label><input id="endereco" name="endereco" required="required"
+			type="text" placeholder="Cep" value="<c:out value='${endereco.cep}' />" /> 
+					<br> 
+			<label for="endereco"> Complemento</label><input id="endereco" name="complemento" required="required" type="text"
+			placeholder="Complemento" value="<c:out value='${endereco.complemento}' />"/> 
+					<br>
+			<p>
+				<input type="submit" value="Cadastrar" />
 			</p>
 		</form>
 	</div>
