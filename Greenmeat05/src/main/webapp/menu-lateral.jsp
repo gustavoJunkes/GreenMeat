@@ -3,10 +3,11 @@
 <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>"resources/css/menu.css/>
   <style><%@include file="/resources/css/menu.css"%></style>
  
-	<div class="wrapper">
+<div class="wrapper">
    <div class="sidebar">
-   <h2>MENU</h2>
-		<ul>
+<h2>MENU</h2>
+<ul>
+
 		<li>HOME</li>
 		<li><a href="<%=request.getContextPath()%>/listar-produtos" target="_self"> CATEGORIAS</a></li>
 		<li><a href="<%=request.getContextPath()%>/novo-fornecedor" target="_self">SEJA UM FORNECEDOR</a></li>
