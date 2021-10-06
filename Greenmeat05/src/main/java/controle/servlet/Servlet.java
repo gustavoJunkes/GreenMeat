@@ -87,7 +87,7 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		HttpSession session = request.getSession();
+		HttpSession sessao = request.getSession();
 				
 		String action = request.getServletPath();
 		
@@ -111,11 +111,16 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/logar":
-				logar(request, response);
+				logar(request, response, sessao);
 				break;
 
 			case "/deslogar":
 				deslogar(request, response);
+				break;
+
+				
+			case "/perfil-cliente":
+//				mostrarPerfilCliente(request, response);
 				break;
 
 //			========>Pedido<========
@@ -326,6 +331,10 @@ public class Servlet extends HttpServlet {
 
 //	=============>Geral<==================
 
+	
+//	private void mostrarPerfilCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao )
+	
+	
 	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -343,7 +352,7 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void logar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void logar(HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws IOException {
 
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
@@ -352,18 +361,18 @@ public class Servlet extends HttpServlet {
 		cliente1.setLogin(login);
 		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
 		if (cliente != null && cliente.getSenha() == senha && cliente.getLogin() == login )
-			request.getSession().setAttribute("usuario", cliente);
+			sessao.setAttribute("usuario", cliente);
 		else {
 			Funcionario funcionario1 = new Funcionario();
 			funcionario1.setLogin(login);
-			Funcionario funcionario = funcionarioDAO.recuperarFuncionario(funcionario1);
+			Funcionario funcionario = funcionarioDAO.recuperarFuncionarioPorLogin(login);
 			if(funcionario != null && funcionario.getSenha() == senha && funcionario.getLogin() == login )
-				request.getSession().setAttribute("usuario", funcionario);
+				sessao.setAttribute("usuario", funcionario);
 			else {
 				Fornecedor fornecedor1 = new Fornecedor();
 				Fornecedor fornecedor = fornecedorDAO.recuperarFornecedorPorLogin(fornecedor1);
 				if(fornecedor != null && fornecedor.getSenha() == senha && fornecedor.getLogin() == login)
-					request.getSession().setAttribute("usuario", fornecedor);
+					sessao.setAttribute("usuario", fornecedor);
 			
 //					response.sendError(404, "Nenhum usuário com login " + login + " foi encontrado em nossa base de dados tente se cadastrar");
 			}
@@ -420,11 +429,10 @@ public class Servlet extends HttpServlet {
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
-		Produto produto = new Produto();
-		
+	
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("exibir-produto.jsp");// pagina de listar produto
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
 	}
@@ -473,7 +481,7 @@ public class Servlet extends HttpServlet {
 //		List<Fornecedor>fornecedores = new ArrayList<Fornecedor>();
 //		fornecedores = fornecedorDAO.recuperarFornecedores();
 
-		response.sendRedirect("inicio");
+		response.sendRedirect("novo-produto");
 //		response.sendError(401, "O fornecedor mencionado não foi encontrado em nossa base de dados, cadastre o fornecedor ou escolha um cadastrado");
 	}
 
@@ -582,7 +590,7 @@ public class Servlet extends HttpServlet {
 //		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
 		
 		////
-//		response.sendRedirect("novo-contato");
+		response.sendRedirect("inicio");
 		////
 		
 		

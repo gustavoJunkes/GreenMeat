@@ -18,13 +18,11 @@
 	<jsp:include page="menu-lateral.jsp"/>
 	</div>
 
-
-  <div class="gallery1">
-        
-        <c:forEach var="produto" items="${produtos}">
+ 	<c:forEach var="produto" items="${produtos}">
+  		<div class="gallery1">
         
         <div class="desc1"> <c:out value="${produto.nome}" /> -
-      <c:out value="${produto.preco}" /></div>
+      <c:out value="${produto.precoVenda}" /></div>
          </c:forEach>
        
          
@@ -37,10 +35,7 @@
               <input type="number" id="quantity" name="quantity" min="1" max="1000000">   
           </form>
           </div>
-          
-          
-          
-          
+         
          <button type="button" onclick="alert('Item adicionado ao seu pedido!')">Comprar</button>
        </div>
 </body>

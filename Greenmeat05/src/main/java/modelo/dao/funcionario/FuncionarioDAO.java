@@ -16,6 +16,8 @@ public interface FuncionarioDAO {
 
 	Funcionario recuperarPorId(Long id);
 	
+	Funcionario recuperarFuncionarioPorLogin(String login);
+	
 	Funcionario recuperarFuncionario(Funcionario funcionario);
 	
 	List<Funcionario> recuperarFuncionarios();
