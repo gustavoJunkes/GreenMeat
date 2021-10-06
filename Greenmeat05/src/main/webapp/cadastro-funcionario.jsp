@@ -55,7 +55,8 @@
             <label for="senha">Crie uma senha</label>
             <input id="senha" name="senha" required="required" type="password"  value="<c:out value='${funcionario.senha}' />"/>
             </p>
-            <h2>Contato</h1>
+            <h2>Contato</h2>
+            <br>
 			
 			<p>
 				<label for="email"> E-mail</label>  <input
@@ -68,6 +69,7 @@
 					 value="<c:out value='${contato.telefone}'/>" />
 		</p>
 			<h2>Localidade</h2>
+			<br>
 
 			<P>
 			<label>País</label><br>
@@ -86,14 +88,15 @@
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
 		</p>
 		<h2>Endereço</h2>
+		<br>
 		<p>
 				<label for="endereco"> Nome Da Rua</label>
-				 <input id="endereco" name="rua" required="required"
+				 <input id="endereco" name="nomeDaRua" required="required"
 					type="text"  value="<c:out value='${endereco.nomeDaRua}'/>" /> 
 					</p>
 					
 					<p>
-					 <label	for="endereço_cad"> Tipo Da Via</label> 
+					 <label	for="endereco"> Tipo Da Via</label> 
 					  <input id="endereco" name="tipoDaVia" required="required" type="text"
 					 value="<c:out value='${endereco.tipoDaVia}' />"/> 
 					 </p>
@@ -112,7 +115,7 @@
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="endereco" required="required"
+					 <input id="endereco" name="cep" required="required"
 					type="text"  value="<c:out value='${endereco.cep}' />" /> 
 					</p>
 				
