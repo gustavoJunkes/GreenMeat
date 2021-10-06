@@ -27,19 +27,18 @@
         <p>Possui Licença Ambiental De Operação?Se sim,informe:</p>
         
            <label for="licenca"> Número Da Licença:</label>                                                          
-           <input id="licenca" name="licenca" required="required" type="text" />
+           <input id="licenca" name="numeroLicenca" required="required" type="text" />
        
           <label for="licenca"> Data de validade:</label>                                                          
-            <input id="licenca" name="licenca" required="required" type="text"  />
+            <input id="licenca" name="dataValidadeLicenca" required="required" type="text"  />
          
-    
           <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
           <input id="ibama" name="ibama" required="required" type="text" />
     
        <p>Para pastagem,foi necessário desmatamento?Se sim,informe: </p>
           
           <label for="licenca"> O número da ART:</label>                                                          
-            <input id="pastagem" name="pastagem" required="required" type="text"  />
+            <input id="pastagem" name="ART" required="required" type="text"  />
         
      <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
           <input id="ibama" name="ibama" required="required" type="text"  />
@@ -72,7 +71,7 @@
 					value="<c:out value='${fornecedor.senha}' />" />
 			</p>
 		<h2>Contato</h2>
-			
+			<br>
 			<p>
 				<label for="email"> E-mail</label>  <input
 					id="email" name="email" required="required" type="text"
@@ -84,7 +83,7 @@
 					 value="<c:out value='${contato.telefone}'/>" />
 		</p>
 			<h2>Localidade</h2>
-
+<br>
 			<P>
 			<label>País</label><br>
 			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
@@ -102,9 +101,10 @@
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
 		</p>
 		<h2>Endereço</h2>
+		<br>
 		<p>
 				<label for="endereco"> Nome Da Rua</label>
-				 <input id="endereco" name="rua" required="required"
+				 <input id="endereco" name="NomeDaRua" required="required"
 					type="text"  value="<c:out value='${endereco.nomeDaRua}'/>" /> 
 					</p>
 					
@@ -128,7 +128,7 @@
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="endereco" required="required"
+					 <input id="endereco" name="cep" required="required"
 					type="text"  value="<c:out value='${endereco.cep}' />" /> 
 					</p>
 				

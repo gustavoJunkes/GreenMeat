@@ -50,8 +50,8 @@
 			<label for="id"></label> <input id="id" name="id" type="hidden"
 				value="<c:out value='${cliente.id}'/>" />
 			
-			<h2>Contato</h1>
-			
+			<h2>Contato</h2>
+			<br>
 			<p>
 				<label for="email"> E-mail</label>  <input
 					id="email" name="email" required="required" type="text"
@@ -63,7 +63,7 @@
 					 value="<c:out value='${contato.telefone}'/>" />
 		</p>
 			<h2>Localidade</h2>
-
+<br>
 			<P>
 			<label>País</label><br>
 			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
@@ -81,9 +81,10 @@
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
 		</p>
 		<h2>Endereço</h2>
+		<br>
 		<p>
 				<label for="endereco"> Nome Da Rua</label>
-				 <input id="endereco" name="rua" required="required"
+				 <input id="endereco" name="nomeDaRua" required="required"
 					type="text"  value="<c:out value='${endereco.nomeDaRua}'/>" /> 
 					</p>
 					
@@ -107,7 +108,7 @@
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="endereco" required="required"
+					 <input id="endereco" name="cep" required="required"
 					type="text"  value="<c:out value='${endereco.cep}' />" /> 
 					</p>
 				
