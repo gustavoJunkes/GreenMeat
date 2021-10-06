@@ -21,8 +21,30 @@
 
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
-			<h1>Cadastro Fornecedor</h1>
-			<p>
+		
+		<h1>Cadastro Fornecedor</h1>
+		
+        <p>Possui Licença Ambiental De Operação?Se sim,informe:</p>
+        
+           <label for="licenca"> Número Da Licença:</label>                                                          
+           <input id="licenca" name="licenca" required="required" type="text" />
+       
+          <label for="licenca"> Data de validade:</label>                                                          
+            <input id="licenca" name="licenca" required="required" type="text"  />
+         
+    
+          <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
+          <input id="ibama" name="ibama" required="required" type="text" />
+    
+       <p>Para pastagem,foi necessário desmatamento?Se sim,informe: </p>
+          
+          <label for="licenca"> O número da ART:</label>                                                          
+            <input id="pastagem" name="pastagem" required="required" type="text"  />
+        
+     <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
+          <input id="ibama" name="ibama" required="required" type="text"  />
+          
+          	<p>
 				<label for="razaoSocial"> Razão Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text"
 					
@@ -49,7 +71,7 @@
 					name="senha" required="required" type="password"
 					value="<c:out value='${fornecedor.senha}' />" />
 			</p>
-		<h2>Contato</h1>
+		<h2>Contato</h2>
 			
 			<p>
 				<label for="email"> E-mail</label>  <input
