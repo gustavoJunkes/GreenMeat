@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false" %>
 
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Cadastro Fornecedor</title>
-
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
@@ -16,16 +17,15 @@
 <body>
 	<div>
 	<jsp:include page="menu-lateral.jsp"/>
-
    </div>
 
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
 			<h1>Cadastro Fornecedor</h1>
 			<p>
-				<label for="razaoSocial"> Razão Social</label> <input
+				<label for="razaoSocial"> RazÃ£o Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text"
-					placeholder="razão social"
+					placeholder="razÃ£o social"
 					value="<c:out value='${fornecedor.razaoSocial}' />" />
 			</p>
 			<p>
@@ -35,8 +35,8 @@
 					value="<c:out value='${fornecedor.nomeFantasia}' />" />
 			</p>
 			<p>
-				<label for="CNPJ"> CNPJ</label> &nbsp; &nbsp; &nbsp; &nbsp;<input
-					id="CNPJ" name="CNPJ" required="required" type="text"
+				<label for="CNPJ"> CNPJ</label>
+				<input id="CNPJ" name="CNPJ" required="required" type="text"
 					placeholder="CNPJ" value="<c:out value='${fornecedor.cnpj}' />" />
 			</p>
 			<p>
@@ -65,7 +65,7 @@
 			
 			<h1>Localidade</h1>
 
-			<label>País</label><br>
+			<label>Paï¿½s</label><br>
 			<input type="text" value="<c:out value='${localidade.pais}'/>" name="pais" >
 						
 			<label>Estado</label><br>
@@ -77,22 +77,22 @@
 			<label>Continente</label><br>
 			<input type="text" value="<c:out value="${localidade.continente}"/>" name="continente">		
 		
-		<h1>Endereço</h1>
+		<h1>Endereï¿½o</h1>
 			
 			<label for="endereco"> Nome Da Rua</label><input id="endereco" name="rua" required="required"
 			type="text" placeholder="Nome Da Rua" value="<c:out value='${endereco.nomeDaRua}'/>" /> 
 			<br>
 			
-			<label	for="endereço_cad"> Tipo Da Via</label><input id="endereco" name="tipoDaVia" required="required" type="text"
+			<label	for="endereï¿½o_cad"> Tipo Da Via</label><input id="endereco" name="tipoDaVia" required="required" type="text"
 			placeholder="Tipo Da Via" value="<c:out value='${endereco.tipoDaVia}' />"/> 
 					<br> 
 			
-			<label for="endereço_cad">Logradouro</label><input id="endereco" name="logradouro" required="required"
+			<label for="endereï¿½o_cad">Logradouro</label><input id="endereco" name="logradouro" required="required"
 			type="text" placeholder="Logradouro" value="<c:out value='${endereco.logradouro}' />"/> 
 			<br>
 			
-			<label for="endereço_cad"> Número</label><input id="endereco" name="numero" required="required" type="number"
-			placeholder="Número" value="<c:out value='${endereco.numero}' />"/> 
+			<label for="endereï¿½o_cad"> Nï¿½mero</label><input id="endereco" name="numero" required="required" type="number"
+			placeholder="Nï¿½mero" value="<c:out value='${endereco.numero}' />"/> 
 					<br>
 		    <label for="endereco">Cep</label><input id="endereco" name="endereco" required="required"
 			type="text" placeholder="Cep" value="<c:out value='${endereco.cep}' />" /> 
