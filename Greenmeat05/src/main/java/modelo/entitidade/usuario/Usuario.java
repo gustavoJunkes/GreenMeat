@@ -62,6 +62,9 @@ public  class Usuario implements Serializable {
 	@Column(name = "data_cadastro_usuario")
 	private LocalDate dataCadastro;
 
+	protected String nivelAcesso;
+	
+	
 	// Cada vez que um usu�rio for criado seu tipo de acesso deve ser especificado
 	// de acordo com o usuario(cliente, funcionario, fornecedor).
 
@@ -139,6 +142,10 @@ public  class Usuario implements Serializable {
 	public void adicionarContato(Contato contato) {
 		getContatos().add(contato);
 		contato.setUsuario(this);
+	}
+
+	public String getNivelAcesso() {
+		return nivelAcesso;
 	}
 
 }
