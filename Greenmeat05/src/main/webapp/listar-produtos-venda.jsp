@@ -22,7 +22,7 @@
   <div class="gallery1">
         
         <div class="desc1"> <c:out value="${produto.nome}" /> -
-      <c:out value="${produto.preco}" /></div>
+      <c:out value="${produto.precoCusto}" /></div>
           
          <button type="button" onclick="alert('Item adicionado ao seu pedido!')">Comprar</button>
        </div>
