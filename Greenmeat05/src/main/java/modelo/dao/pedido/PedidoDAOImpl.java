@@ -215,7 +215,7 @@ public class PedidoDAOImpl implements PedidoDAO {
 
 			ParameterExpression<Long> idCliente = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoCliente.get("id"), idCliente));
-
+			criteria.
 			pedidos = sessao.createQuery(criteria).setParameter(idCliente, cliente.getId()).getResultList();
 
 			sessao.getTransaction().commit();

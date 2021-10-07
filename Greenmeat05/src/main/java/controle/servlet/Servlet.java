@@ -128,7 +128,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/adicionar-produto-pedido":
-				adicionarProdutoPedido(request, response);
+ 				adicionarProdutoPedido(request, response);
 				break;
 
 //			========>Produto<========
@@ -414,7 +414,8 @@ public class Servlet extends HttpServlet {
 		// O id e quantidade virão do form de adicionar produto ao pedido
 		// na tela de exibição de produto;
 		Long id = Long.parseLong(request.getParameter("idProduto"));
-		Float quantidade = Float.parseFloat(request.getParameter("quantidade"));
+		Float quantidade = (float) 10;  
+//				Float.parseFloat(request.getParameter("quantidade"));
 
 		Produto produto = produtoDAO.recuperarPorId(id);
 		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
@@ -450,7 +451,7 @@ public class Servlet extends HttpServlet {
 
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-venda.jsp");// pagina de listar produto
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-teste.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
 	}
@@ -459,7 +460,6 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
 
 		if((Usuario) sessao.getAttribute("usuario") == null || usuario instanceof Funcionario == false) {
 			System.out.println("Acesso negado a esta página.");
