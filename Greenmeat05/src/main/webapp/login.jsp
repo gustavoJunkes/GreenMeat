@@ -21,7 +21,7 @@
    </div>
 
         <div id="login">
-          <form method="post" action="entrar-cliente"> 
+          <form method="post" action="logar"> 
             <h1>Login</h1>
                      
               <label for="login">Login</label>

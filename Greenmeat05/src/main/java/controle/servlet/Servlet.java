@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.cliente.ClienteDAO;
 import modelo.dao.cliente.ClienteDAOImpl;
 import modelo.dao.contato.ContatoDAO;
@@ -30,6 +29,8 @@ import modelo.dao.localidade.LocalidadeDAO;
 import modelo.dao.localidade.LocalidadeDAOImpl;
 import modelo.dao.pedido.PedidoDAO;
 import modelo.dao.pedido.PedidoDAOImpl;
+import modelo.dao.produto.ProdutoDAO;
+import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.produto.Item;
@@ -38,6 +39,7 @@ import modelo.entidade.produto.Produto;
 import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Fornecedor;
 import modelo.entitidade.usuario.Funcionario;
+import modelo.entitidade.usuario.PessoaFisica;
 import modelo.entitidade.usuario.Usuario;
 import modelo.entitidade.usuario.informacao.Contato;
 import modelo.entitidade.usuario.informacao.Endereco;
@@ -67,7 +69,7 @@ public class Servlet extends HttpServlet {
 
 		itemDAO = new ItemDAOImpl();
 		pedidoDAO = new PedidoDAOImpl();
-//		produtoDAO = new ProdutoDAOImpl();
+		produtoDAO = new ProdutoDAOImpl();
 		clienteDAO = new ClienteDAOImpl();
 		funcionarioDAO = new FuncionarioDAOImpl();
 		fornecedorDAO = new FornecedorDAOImpl();
@@ -79,7 +81,7 @@ public class Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 
@@ -87,16 +89,14 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-				
+
 		String action = request.getServletPath();
-		
+
 		System.out.println(action);
 
-		
 //		if(request.getSession().getAttribute("usuario") == null)
 //			action = "/login";
-		
-		
+
 		try {
 
 			switch (action) {
@@ -106,7 +106,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/login":
-				mostrarTelaLogin(request, response);
+				mostrarTelaLogin(request, response, sessao);
 				break;
 
 			case "/logar":
@@ -117,7 +117,6 @@ public class Servlet extends HttpServlet {
 				deslogar(request, response);
 				break;
 
-				
 			case "/perfil-cliente":
 //				mostrarPerfilCliente(request, response);
 				break;
@@ -135,7 +134,7 @@ public class Servlet extends HttpServlet {
 //			========>Produto<========
 
 			case "/novo-produto":
-				mostrarFormularioNovoProduto(request, response);
+				mostrarFormularioNovoProduto(request, response, sessao);
 				break;
 
 			case "/inserir-produto":
@@ -165,7 +164,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/inserir-cliente":
-				inserirCliente(request, response);
+				inserirCliente(request, response, sessao);
 				break;
 
 			case "/deletar-cliente":
@@ -217,7 +216,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/inserir-fornecedor":
-				inserirFornecedor(request, response);
+				inserirFornecedor(request, response, sessao);
 				break;
 
 			case "/deletar-fornecedor":
@@ -330,10 +329,8 @@ public class Servlet extends HttpServlet {
 
 //	=============>Geral<==================
 
-	
 //	private void mostrarPerfilCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao )
-	
-	
+
 	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -343,25 +340,44 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
+		if(sessao.getAttribute("usuario") != null)
+			response.sendRedirect(request.getContextPath());
+		else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-
 		dispatcher.forward(request, response);
-
+		}
 	}
 
-	private void logar(HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws IOException {
+	private void logar(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws IOException {
 
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		Usuario user = new Usuario();
+		user.setLogin(login);
+		Usuario usuario = usuarioDAO.recuperarUsuario(user); // Recupera um obj ou pf ou pj
+
+		if (usuario instanceof Cliente && senha.equals(usuario.getSenha())) {
+			System.out.println("Nome 1: " + ((PessoaFisica) usuario).getNome());
+			System.out.println("É um cliente!");
+			sessao.setAttribute("usuario", usuario);
+		} else if (usuario instanceof Funcionario && senha.equals(usuario.getSenha())) {
+			System.out.println("É um Funcionario!");
+			sessao.setAttribute("usuario", usuario);
+		} else if (usuario instanceof Fornecedor && senha.equals(usuario.getSenha())) {
+			System.out.println("É um fornecedor!");
+			sessao.setAttribute("usuario", usuario);
+		}else
+			System.out.println("Senha incorreta :(");
 		
-		Usuario usuario = usuarioDAO.recuperarUsuario(usuario);	// Recupera um obj ou pf ou pj	
-		
-		if(usuario instanceof Cliente)
-			///
-		else if (usuario instanceof Funcionario )
-		
+		if((Usuario) sessao.getAttribute("usuario") == null)
+			response.sendRedirect("login");
+		else {
+			System.out.println(sessao.getAttribute("usuario"));
+			response.sendRedirect("inicio");	
+		}
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setLogin(login);
 //		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
@@ -378,55 +394,53 @@ public class Servlet extends HttpServlet {
 //				Fornecedor fornecedor = fornecedorDAO.recuperarFornecedorPorLogin(fornecedor1);
 //				if(fornecedor != null && fornecedor.getSenha() == senha && fornecedor.getLogin() == login)
 //					sessao.setAttribute("usuario", fornecedor);
-			
+
 //					response.sendError(404, "Nenhum usuário com login " + login + " foi encontrado em nossa base de dados tente se cadastrar");
+//			}
+//		}
+
 			}
-		}
-		
-		System.out.println(((Usuario) request.getSession().getAttribute("usuario")).getLogin());
-		response.sendRedirect("inicio");
-	}
 
 	private void deslogar(HttpServletRequest request, HttpServletResponse response) {
 
 		request.getSession().invalidate();
-		
+
 	}
 
 //	========>Pedido<========
 
 	private void adicionarProdutoPedido(HttpServletRequest request, HttpServletResponse response) {
 
-		//O id e quantidade virão do form de adicionar produto ao pedido
-		//na tela de exibição de produto;
+		// O id e quantidade virão do form de adicionar produto ao pedido
+		// na tela de exibição de produto;
 		Long id = Long.parseLong(request.getParameter("idProduto"));
 		Float quantidade = Float.parseFloat(request.getParameter("quantidade"));
-		
+
 		Produto produto = produtoDAO.recuperarPorId(id);
 		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
 		Item item = new Item(produto, quantidade);
 		itemDAO.inserirItem(item);
-		
+
 		Pedido pedido = pedidoDAO.recuperarPedidoEmAbertoDoCliente(cliente);
 
-		if(pedido == null) {
+		if (pedido == null) {
 			pedido = new Pedido();
 			pedidoDAO.inserirPedido(pedido);
 		}
-			
+
 		List<Item> itens = new ArrayList<Item>();
 		itens = itemDAO.recuperarItensPedido(pedido);
 		itens.add(item);
-		
+
 		pedido.setItens(itens);
 		pedidoDAO.atualizarPedido(pedido);
-		
-		List<Pedido>pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
+
+		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
 		pedidos.add(pedido);
-		
+
 		cliente.setPedidos(pedidos);
 		clienteDAO.atualizarCliente(cliente);
-		
+
 	}
 
 //	=============>Produto<================
@@ -434,21 +448,30 @@ public class Servlet extends HttpServlet {
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
-	
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos.jsp");// pagina de listar produto
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-venda.jsp");// pagina de listar produto
 																							// virá aqui
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+
+		if((Usuario) sessao.getAttribute("usuario") == null || usuario instanceof Funcionario == false) {
+			System.out.println("Acesso negado a esta página.");
+			response.sendRedirect("inicio");
+		}else {		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-produto.jsp"); // formulario do produto
-																								// virá
-																								// aqui
 		dispatcher.forward(request, response);
+		}
+//		if(usuario == null)
+//			System.out.println("Chegou null");
+//		else if(usuario != null)
+//			System.out.println("Chegou certinho!");
 	}
 
 	// INCOMPLETO
@@ -527,12 +550,13 @@ public class Servlet extends HttpServlet {
 		long id = Long.parseLong(request.getParameter("id"));
 		Cliente cliente = clienteDAO.recuperarPorId(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
-	request.setAttribute("cliente", cliente);
+		request.setAttribute("cliente", cliente);
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirCliente(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException, ServletException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
+	private void inserirCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, InvalidFieldException, ServletException, EmailInvalidException,
+			PhoneNumberInvalidException, CountryInvalidException {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -552,15 +576,15 @@ public class Servlet extends HttpServlet {
 		Integer numero = Integer.parseInt(request.getParameter("numero"));
 		String CEP = request.getParameter("CEP");
 		String complemento = request.getParameter("complemento");
-		
+
 		Cliente cliente = new Cliente(login, senha, nome, sobrenome, CPF);
 		clienteDAO.inserirCliente(cliente);
-		
-		Contato contato = new Contato(email,telefone, cliente);
+
+		Contato contato = new Contato(email, telefone, cliente);
 		contatoDAO.inserirContato(contato);
-		
+
 		clienteDAO.atualizarCliente(cliente);
-		
+
 		List<Usuario> usuarios = new ArrayList();
 		usuarios.add(cliente);
 		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
@@ -569,7 +593,7 @@ public class Servlet extends HttpServlet {
 		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente);
 		localidades.add(localidade);
 		cliente.setLocalidades(localidades);
-		
+
 		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
 		enderecoDAO.inserirEndereco(endereco);
 
@@ -578,8 +602,10 @@ public class Servlet extends HttpServlet {
 		enderecos.add(endereco);
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
-
 		clienteDAO.atualizarCliente(cliente);
+		
+		sessao.setAttribute("usuario", cliente);
+		response.sendRedirect("inicio");
 		
 //		request.setAttribute("usuario", cliente);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
@@ -593,12 +619,11 @@ public class Servlet extends HttpServlet {
 //		response.sendRedirect("novo-contato");
 //		dispatcher.forward(request, response);
 //		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
-		
-		////
-		response.sendRedirect("inicio");
+
 		////
 		
-		
+		////
+
 //		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
 	}
 
@@ -728,8 +753,9 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirFornecedor(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
+	private void inserirFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException,
+			CountryInvalidException {
 
 		String nomeFantasia = request.getParameter("nomeFantasia");
 		String razaoSocial = request.getParameter("razaoSocial");
@@ -748,15 +774,15 @@ public class Servlet extends HttpServlet {
 		Integer numero = Integer.parseInt(request.getParameter("numero"));
 		String CEP = request.getParameter("CEP");
 		String complemento = request.getParameter("complemento");
-						
+
 		Fornecedor fornecedor = new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha);
 		fornecedorDAO.inserirFornecedor(fornecedor);
-	
-		Contato contato = new Contato(email,telefone, fornecedor);
+
+		Contato contato = new Contato(email, telefone, fornecedor);
 		contatoDAO.inserirContato(contato);
-		
+
 		fornecedorDAO.atualizarFornecedor(fornecedor);
-		
+
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		usuarios.add(fornecedor);
 		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
@@ -765,7 +791,7 @@ public class Servlet extends HttpServlet {
 		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(fornecedor);
 		localidades.add(localidade);
 		fornecedor.setLocalidades(localidades);
-		
+
 		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
 		enderecoDAO.inserirEndereco(endereco);
 
@@ -776,6 +802,7 @@ public class Servlet extends HttpServlet {
 		localidadeDAO.atualizarLocalidade(localidade);
 
 		fornecedorDAO.atualizarFornecedor(fornecedor);
+		sessao.setAttribute("usuario", fornecedor);
 		response.sendRedirect("inicio");
 	}
 
@@ -846,7 +873,7 @@ public class Servlet extends HttpServlet {
 		Long id = Long.parseLong(request.getParameter("id"));
 
 		Usuario usuario = usuarioDAO.recuperarPorId(id);
-		
+
 //		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 //		Cliente cliente1 = new Cliente();
