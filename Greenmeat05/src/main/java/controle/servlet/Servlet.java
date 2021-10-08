@@ -714,7 +714,7 @@ public class Servlet extends HttpServlet {
 		enderecos.add(endereco);
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
-		funcionarioDAO.inserirFuncionario(funcionario);
+		funcionarioDAO.atualizarFuncionario(funcionario);
 
 		sessao.setAttribute("usuario", funcionario);
 		response.sendRedirect("inicio");
@@ -760,7 +760,7 @@ public class Servlet extends HttpServlet {
 	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
-		if(sessao.getAttribute("usuario") != null  || !(sessao.getAttribute("usuario") instanceof Funcionario) ) {
+		if(sessao.getAttribute("usuario") != null  && !(sessao.getAttribute("usuario") instanceof Funcionario) ) {
 			response.sendRedirect("inicio");
 		}else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do produto
