@@ -120,7 +120,7 @@ public class Servlet extends HttpServlet {
 			case "/perfil-cliente":
 //				mostrarPerfilCliente(request, response);
 				break;
-
+			
 //			========>Pedido<========
 
 			case "/novo-pedido":
@@ -128,9 +128,12 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/adicionar-produto-pedido":
- 				adicionarProdutoPedido(request, response);
+				adicionarProdutoPedido(request, response, sessao);
 				break;
-
+			
+			case "/listar-itens-pedido":
+				listarItensPedido(request, response, sessao);
+				break;
 //			========>Produto<========
 
 			case "/novo-produto":
@@ -231,6 +234,9 @@ public class Servlet extends HttpServlet {
 				atualizarFornecedor(request, response);
 				break;
 
+			case "/listar-fornecedores":
+				listarFornecedores(request, response);
+				break;
 //				========>Contato<========
 
 			case "/novo-contato":
@@ -253,6 +259,9 @@ public class Servlet extends HttpServlet {
 				atualizarContato(request, response);
 				break;
 
+			case "/listar-contatos":
+				listarContatos(request, response, sessao);
+				break;
 //				========>Localidade<========
 
 //			case "/nova-localidade":
@@ -342,11 +351,11 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
-		if(sessao.getAttribute("usuario") != null)
+		if (sessao.getAttribute("usuario") != null)
 			response.sendRedirect(request.getContextPath());
 		else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-		dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -369,14 +378,14 @@ public class Servlet extends HttpServlet {
 		} else if (usuario instanceof Fornecedor && senha.equals(usuario.getSenha())) {
 			System.out.println("É um fornecedor!");
 			sessao.setAttribute("usuario", usuario);
-		}else
+		} else
 			System.out.println("Senha incorreta :(");
-		
-		if((Usuario) sessao.getAttribute("usuario") == null)
+
+		if ((Usuario) sessao.getAttribute("usuario") == null)
 			response.sendRedirect("login");
 		else {
 			System.out.println(sessao.getAttribute("usuario"));
-			response.sendRedirect("inicio");	
+			response.sendRedirect("inicio");
 		}
 //		Cliente cliente1 = new Cliente();
 //		cliente1.setLogin(login);
@@ -399,7 +408,7 @@ public class Servlet extends HttpServlet {
 //			}
 //		}
 
-			}
+	}
 
 	private void deslogar(HttpServletRequest request, HttpServletResponse response) {
 
@@ -409,31 +418,34 @@ public class Servlet extends HttpServlet {
 
 //	========>Pedido<========
 
-	private void adicionarProdutoPedido(HttpServletRequest request, HttpServletResponse response) {
-
-		// O id e quantidade virão do form de adicionar produto ao pedido
-		// na tela de exibição de produto;
+	private void adicionarProdutoPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws IOException {
+		
 		Long id = Long.parseLong(request.getParameter("idProduto"));
-		Float quantidade = (float) 10;  
+		Float quantidade = (float) 10;
 //				Float.parseFloat(request.getParameter("quantidade"));
 
 		Produto produto = produtoDAO.recuperarPorId(id);
-		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
-		Item item = new Item(produto, quantidade);
-		itemDAO.inserirItem(item);
-
-		Pedido pedido = pedidoDAO.recuperarPedidoEmAbertoDoCliente(cliente);
+		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+		
+		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
 
 		if (pedido == null) {
 			pedido = new Pedido();
 			pedidoDAO.inserirPedido(pedido);
 		}
+		Item item = new Item(produto, quantidade);
+		item.setPedido(pedido);
+		itemDAO.inserirItem(item);
+//		pedidoDAO.inserirPedido(pedido);
+//				pedidoDAO.recuperarPedidosCliente(cliente);
 
-		List<Item> itens = new ArrayList<Item>();
-		itens = itemDAO.recuperarItensPedido(pedido);
-		itens.add(item);
+//		List<Item> itens = new ArrayList<Item>();
+//		itens = itemDAO.recuperarItensPedido(pedido);
+//		itens.add(item);
 
-		pedido.setItens(itens);
+		pedido.getItens().add(item);
+//		pedido.setItens(itens);
 		pedidoDAO.atualizarPedido(pedido);
 
 		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
@@ -442,31 +454,40 @@ public class Servlet extends HttpServlet {
 		cliente.setPedidos(pedidos);
 		clienteDAO.atualizarCliente(cliente);
 
+		sessao.setAttribute("pedido", pedido);
+		response.sendRedirect(request.getContextPath()+"/listar-produtos");
+	}
+
+	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+
+		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
+		List<Item> itens = itemDAO.recuperarItensPedido(pedido);
+		request.setAttribute("itens", itens);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
+		dispatcher.forward(request, response);
 	}
 
 //	=============>Produto<================
 
 	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
-
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-teste.jsp");// pagina de listar produto
-																							// virá aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-teste.jsp");// pagina de listar
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
-			throws ServletException, IOException {
+	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response,
+			HttpSession sessao) throws ServletException, IOException {
 
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-
-		if((Usuario) sessao.getAttribute("usuario") == null || usuario instanceof Funcionario == false) {
+		if ((Usuario) sessao.getAttribute("usuario") == null || usuario instanceof Funcionario == false) {
 			System.out.println("Acesso negado a esta página.");
 			response.sendRedirect("inicio");
-		}else {		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-produto.jsp"); // formulario do produto
-		dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-produto.jsp"); // formulario do
+			dispatcher.forward(request, response);
 		}
 //		if(usuario == null)
 //			System.out.println("Chegou null");
@@ -481,7 +502,7 @@ public class Servlet extends HttpServlet {
 		long id = Long.parseLong(request.getParameter("id"));
 		Produto produto = produtoDAO.recuperarPorId(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("form-contato.jsp");
-//		request.setAttribute("contato", contato);
+		request.setAttribute("produto", produto);
 		dispatcher.forward(request, response);
 	}
 
@@ -521,7 +542,7 @@ public class Servlet extends HttpServlet {
 		float precoCusto = Float.parseFloat(request.getParameter("precoCusto"));
 		float precoVenda = Float.parseFloat(request.getParameter("precoVenda"));
 		String tipoCarne = request.getParameter("tipoCarne");
-//		produtoDAO.atualizarProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
+		produtoDAO.atualizarProduto(new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda));
 		response.sendRedirect("listar");
 	}
 
@@ -563,7 +584,7 @@ public class Servlet extends HttpServlet {
 		String CPF = request.getParameter("CPF");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		String dataNascimento = request.getParameter("dataNascimento");
+//		String dataNascimento = request.getParameter("dataNascimento");
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		String pais = request.getParameter("pais");
@@ -585,7 +606,7 @@ public class Servlet extends HttpServlet {
 
 		clienteDAO.atualizarCliente(cliente);
 
-		List<Usuario> usuarios = new ArrayList();
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		usuarios.add(cliente);
 		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
 		localidadeDAO.inserirLocalidade(localidade);
@@ -603,10 +624,10 @@ public class Servlet extends HttpServlet {
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
 		clienteDAO.atualizarCliente(cliente);
-		
+
 		sessao.setAttribute("usuario", cliente);
 		response.sendRedirect("inicio");
-		
+
 //		request.setAttribute("usuario", cliente);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
 //		dispatcher.forward(request, response);
@@ -621,7 +642,7 @@ public class Servlet extends HttpServlet {
 //		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
 
 		////
-		
+
 		////
 
 //		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
@@ -689,7 +710,7 @@ public class Servlet extends HttpServlet {
 		String cargo = request.getParameter("cargo");
 		String funcao = request.getParameter("funcao");
 		String CPF = request.getParameter("CPF");
-		String dataNascimento = request.getParameter("dataNascimeto");
+//		String dataNascimento = request.getParameter("dataNascimeto");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		funcionarioDAO.inserirFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
@@ -704,7 +725,7 @@ public class Servlet extends HttpServlet {
 		String cargo = request.getParameter("cargo");
 		String funcao = request.getParameter("funcao");
 		String CPF = request.getParameter("CPF");
-		String dataNascimento = request.getParameter("dataNascimeto");
+//		String dataNascimento = request.getParameter("dataNascimeto");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		funcionarioDAO.atualizarFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
@@ -829,7 +850,7 @@ public class Servlet extends HttpServlet {
 
 	/////////////////////////////
 
-	private void listarContatos(HttpServletRequest request, HttpServletResponse response)
+	private void listarContatos(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException {
 
 		List<Contato> contatos = contatoDAO.recuperarContatos();
