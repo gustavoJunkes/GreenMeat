@@ -16,9 +16,9 @@
 </head>
 <body>
 
-<div>
-	<jsp:include page="menu-lateral.jsp"/>
-   </div>
+	<div>
+		<jsp:include page="menu-lateral.jsp"/>
+    </div>
 
         <div id="login">
           <form method="post" action="logar"> 

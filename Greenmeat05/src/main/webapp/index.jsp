@@ -16,8 +16,11 @@
 	<jsp:include page="menu-lateral.jsp"/>
 	
    </div>
+   
+  <c:if test="${usuario == null}">  
 	<div>
 	<jsp:include page="login.jsp"/>
-   </div>
+    </div>
+  </c:if>
 </body>
 </html>

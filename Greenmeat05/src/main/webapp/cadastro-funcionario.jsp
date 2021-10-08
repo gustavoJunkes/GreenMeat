@@ -20,7 +20,7 @@
    </div>
 
     <div id="cadastro">
-        <form method="post" action=""> 
+        <form method="post" action="inserir-funcionario"> 
           
            <h1>Cadastre-se</h1>
            <p>

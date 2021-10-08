@@ -19,7 +19,6 @@ import modelo.entitidade.usuario.Fornecedor;
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -86,6 +85,15 @@ public class Item implements Serializable {
 	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
 	}
+	
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
 
 	public float calculaValorTotal() {
 		return this.produto.getPrecoVenda() * quantidade;
