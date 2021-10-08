@@ -13,7 +13,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="menu-lateral.jsp"/>
+	<jsp:include page="../menu-lateral.jsp"/>
    </div>
 <div class=imagemPerfil>
 <img src="perfil_img.jfif" alt=""></div>
