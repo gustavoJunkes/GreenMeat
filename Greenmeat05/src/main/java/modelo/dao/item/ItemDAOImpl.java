@@ -16,7 +16,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Pedido;
-import modelo.entitidade.usuario.Cliente;
+
 
 public class ItemDAOImpl implements ItemDAO {
 

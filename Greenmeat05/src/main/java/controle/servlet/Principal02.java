@@ -1,4 +1,4 @@
-import modelo.entitidade.usuario.Usuario;
+//import modelo.entitidade.usuario.Usuario;
 //package controle.servlet;
 //
 //import java.util.Scanner;
