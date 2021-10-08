@@ -69,6 +69,7 @@
 				<label for="senha">Crie uma senha</label> <input id="senha"
 					name="senha" required="required" type="password"
 					value="<c:out value='${fornecedor.senha}' />" />
+					
 			</p>
 		<h2>Contato</h2>
 			<br>

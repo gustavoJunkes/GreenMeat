@@ -40,6 +40,7 @@
 					name="senha" required="required" type="password"
 					 value="<c:out value='${cliente.senha}'/>" />
 			</p>
+			
 							<script> 
 					function validarSenha(){ 
 					senha1 = document.f1.senha1.value 

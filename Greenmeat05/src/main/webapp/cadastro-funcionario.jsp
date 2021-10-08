@@ -65,6 +65,7 @@
 				else 
 				alert("SENHAS DIFERENTES") 
 				} 
+				
 				</script> 
             </p>
             <h2>Contato</h2>

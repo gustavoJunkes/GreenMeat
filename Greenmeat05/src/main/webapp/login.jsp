@@ -29,6 +29,7 @@
               <label for="email_login">Senha</label>
               <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" />                   
               <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+				              
 				              <script> 
 				function validarSenha(){ 
 				senha1 = document.f1.senha1.value 
