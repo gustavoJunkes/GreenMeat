@@ -190,7 +190,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/inserir-funcionario":
-				inserirFuncionario(request, response);
+				inserirFuncionario(request, response, sessao);
 				break;
 
 			case "/deletar-funcionario":
@@ -259,57 +259,7 @@ public class Servlet extends HttpServlet {
 			case "/listar-contatos":
 				listarContatos(request, response, sessao);
 				break;
-//				========>Localidade<========
 
-//			case "/nova-localidade":
-//				mostrarFormularioNovaLocalidade(request, response);
-//				break;
-//
-//			case "/inserir-localidade":
-//				inserirLocalidade(request, response);
-//				break;
-//
-//			case "/deletar-localidade":
-//				deletarLocalidade(request, response);
-//				break;
-//
-//			case "/editar-localidade":
-//				mostrarFormularioEditarLocalidade(request, response);
-//				break;
-//
-//			case "/atualizar-localidade":
-//				atualizarLocalidade(request, response);
-//				break;
-//
-//			case "/listar-localidades":
-//				listarLocalidades(request, response);
-//				break;
-
-//				========>Endereço<========
-
-//			case "/novo-endereco":
-//				mostrarFormularioNovoEndereco(request, response);
-//				break;
-//
-//			case "/inserir-endereco":
-//				inserirEndereco(request, response);
-//				break;
-//
-//			case "/deletar-endereco":
-//				deletarEndereco(request, response);
-//				break;
-//
-//			case "/editar-endereco":
-//				mostrarFormularioEditarEndereco(request, response);
-//				break;
-//
-//			case "/atualizar-endereco":
-//				atualizarEndereco(request, response);
-//				break;
-//
-//			case "/listar-endereco":
-//				listarEnderecos(request, response);
-//				break;
 
 			default:
 //				listarProdutos(request, response);
@@ -698,10 +648,7 @@ public class Servlet extends HttpServlet {
 	private void mostrarFormularioNovoFuncionario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); // formulario do
-																									// produto
-																									// virá
-																									// aqui
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); 
 		dispatcher.forward(request, response);
 	}
 
@@ -716,8 +663,8 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirFuncionario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, InvalidFieldException {
+	private void inserirFuncionario(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -727,8 +674,50 @@ public class Servlet extends HttpServlet {
 //		String dataNascimento = request.getParameter("dataNascimeto");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		funcionarioDAO.inserirFuncionario(new Funcionario(login, senha, nome, sobrenome, cargo, funcao, CPF));
-		response.sendRedirect("listar");
+		
+		String dataNascimento = request.getParameter("dataNascimento");
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		String pais = request.getParameter("pais");
+		String estado = request.getParameter("estado");
+		String provincia = request.getParameter("provincia");
+		String continente = request.getParameter("continente");
+		String nomeDaRua = request.getParameter("nomeDaRua");
+		String logradouro = request.getParameter("logradouro");
+		String tipoDaVia = request.getParameter("tipoDaVia");
+		Integer numero = Integer.parseInt(request.getParameter("numero"));
+		String CEP = request.getParameter("CEP");
+		String complemento = request.getParameter("complemento");
+
+		Funcionario funcionario = new Funcionario(login, senha, nome, sobrenome, CPF, cargo, funcao);
+		funcionarioDAO.inserirFuncionario(funcionario);
+
+		Contato contato = new Contato(email, telefone, funcionario);
+		contatoDAO.inserirContato(contato);
+
+		funcionarioDAO.inserirFuncionario(funcionario);
+
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(funcionario);
+		Localidade localidade = new Localidade(usuarios, pais, estado, provincia, continente);
+		localidadeDAO.inserirLocalidade(localidade);
+
+		List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(funcionario);
+		localidades.add(localidade);
+		funcionario.setLocalidades(localidades);
+
+		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+		enderecoDAO.inserirEndereco(endereco);
+
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		// Está incompleto, dessa forma exclui todos os outros endereços
+		enderecos.add(endereco);
+		localidade.setEnderecos(enderecos);
+		localidadeDAO.atualizarLocalidade(localidade);
+		funcionarioDAO.inserirFuncionario(funcionario);
+
+		sessao.setAttribute("usuario", funcionario);
+		response.sendRedirect("inicio");
 	}
 
 	private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response)
