@@ -94,15 +94,12 @@ public class Servlet extends HttpServlet {
 
 		System.out.println(action);
 
-//		if(request.getSession().getAttribute("usuario") == null)
-//			action = "/login";
-
 		try {
 
 			switch (action) {
 
 			case "/inicio":
-				mostrarTelaInicio(request, response);
+				mostrarTelaInicio(request, response, sessao);
 				break;
 
 			case "/login":
@@ -120,7 +117,7 @@ public class Servlet extends HttpServlet {
 			case "/perfil-cliente":
 //				mostrarPerfilCliente(request, response);
 				break;
-			
+
 //			========>Pedido<========
 
 			case "/novo-pedido":
@@ -130,7 +127,7 @@ public class Servlet extends HttpServlet {
 			case "/adicionar-produto-pedido":
 				adicionarProdutoPedido(request, response, sessao);
 				break;
-			
+
 			case "/listar-itens-pedido":
 				listarItensPedido(request, response, sessao);
 				break;
@@ -163,7 +160,7 @@ public class Servlet extends HttpServlet {
 //				========>Cliente<========
 
 			case "/novo-cliente":
-				mostrarFormularioNovoCliente(request, response);
+				mostrarFormularioNovoCliente(request, response, sessao);
 				break;
 
 			case "/inserir-cliente":
@@ -182,9 +179,9 @@ public class Servlet extends HttpServlet {
 				atualizarCliente(request, response);
 				break;
 
-//			case "/listar-clientes":
-//				listarClientes(request, response);
-//				break;
+			case "/listar-clientes":
+				listarClientes(request, response);
+				break;
 
 //				========>Funcionario<========
 
@@ -215,7 +212,7 @@ public class Servlet extends HttpServlet {
 //				========>Fornecedor<========
 
 			case "/novo-fornecedor":
-				mostrarFormularioNovoFornecedor(request, response);
+				mostrarFormularioNovoFornecedor(request, response, sessao);
 				break;
 
 			case "/inserir-fornecedor":
@@ -340,23 +337,26 @@ public class Servlet extends HttpServlet {
 
 //	private void mostrarPerfilCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao )
 
-	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
+		Usuario usuario = (Usuario)sessao.getAttribute("usuario");
+		request.setAttribute("usuario", usuario);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-
 		dispatcher.forward(request, response);
 
 	}
 
 	private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
-		if (sessao.getAttribute("usuario") != null)
-			response.sendRedirect(request.getContextPath());
-		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-			dispatcher.forward(request, response);
+
+		if (sessao.getAttribute("usuario") != null) {
+			response.sendRedirect(request.getRequestURI());
+		}else {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		dispatcher.forward(request, response);
 		}
+
 	}
 
 	private void logar(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
@@ -420,14 +420,14 @@ public class Servlet extends HttpServlet {
 
 	private void adicionarProdutoPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws IOException {
-		
+
 		Long id = Long.parseLong(request.getParameter("idProduto"));
 		Float quantidade = (float) 10;
 //				Float.parseFloat(request.getParameter("quantidade"));
 
 		Produto produto = produtoDAO.recuperarPorId(id);
 		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
-		
+
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
 
 		if (pedido == null) {
@@ -455,7 +455,7 @@ public class Servlet extends HttpServlet {
 		clienteDAO.atualizarCliente(cliente);
 
 		sessao.setAttribute("pedido", pedido);
-		response.sendRedirect(request.getContextPath()+"/listar-produtos");
+		response.sendRedirect(request.getContextPath() + "/listar-produtos");
 	}
 
 	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
@@ -557,11 +557,24 @@ public class Servlet extends HttpServlet {
 
 ///////////////////////
 
-	private void mostrarFormularioNovoCliente(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void listarClientes(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		List<Cliente> clientes = clienteDAO.recuperarClientes();
+		request.setAttribute("clientes", clientes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-clientes-teste.jsp");// pagina de listar
+		dispatcher.forward(request, response);
+	}
+	
+	
+	private void mostrarFormularioNovoCliente(HttpServletRequest request, HttpServletResponse response,
+			HttpSession sessao) throws ServletException, IOException {
 
+		if (sessao.getAttribute("usuario") != null) {
+			response.sendRedirect("inicio");
+		}else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
 		dispatcher.forward(request, response);
+		}
 	}
 
 // INCOMPLETO
@@ -670,6 +683,7 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("listar"); // aqui a pagina inicial ou de produtos
 	}
 
+//	===================
 	private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
@@ -754,13 +768,15 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
+		if(sessao.getAttribute("usuario") != null  || !(sessao.getAttribute("usuario") instanceof Funcionario) ) {
+			response.sendRedirect("inicio");
+		}else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do produto
-																								// virá
-																								// aqui
 		dispatcher.forward(request, response);
+		}
 	}
 
 	// INCOMPLETO

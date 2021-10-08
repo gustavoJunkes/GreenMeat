@@ -11,6 +11,11 @@
 </head>
 <body>
 
+	<div>
+		<jsp:include page="menu-lateral.jsp"/>
+    </div>
+
+
 	<c:forEach var="produto" items="${produtos}">
 	
 	<div class="gallery1">
