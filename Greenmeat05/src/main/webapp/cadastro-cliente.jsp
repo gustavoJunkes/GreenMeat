@@ -40,7 +40,20 @@
 					name="senha" required="required" type="password"
 					 value="<c:out value='${cliente.senha}'/>" />
 			</p>
-		
+			
+							<script> 
+					function validarSenha(){ 
+					senha1 = document.f1.senha1.value 
+					senha2 = document.f1.senha2.value 
+					
+					if (senha1 == senha2) 
+					alert("SENHAS IGUAIS") 
+					document.f1.submit(); // Adiciona isso que ele irá submeter o form!
+					else 
+					alert("SENHAS DIFERENTES") 
+					} 
+					</script> 
+							
 			<p>
 				<label for="senha">Confirme a sua  senha</label> <input id=" senha"
 					name="senha" required="required" type="password"
