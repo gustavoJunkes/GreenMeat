@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-	<jsp:include page="menu-lateral.jsp"/>
+	<jsp:include page="../menu-lateral.jsp"/>
    </div>
 
 <header>
