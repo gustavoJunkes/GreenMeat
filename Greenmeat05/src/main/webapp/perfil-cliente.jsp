@@ -12,40 +12,37 @@
  <style><%@include file="/resources/css/mystyles.css"%></style>
 </head>
 <body>
-<div>
-	<jsp:include page="../menu-lateral.jsp"/>
+	<div>
+		<jsp:include page="menu-lateral.jsp"/>
+    </div>
+   
+   <div class="MeuPerfil">
+   		<h3>Meu Perfil</h3>
    </div>
-<div class=imagemPerfil>
-<img src="perfil_img.jfif" alt=""></div>
-
-    <div class="MeuPerfil"><h3>Meu Perfil</h3></div>
    <div id="tabela_exibir_perfil">
     <table>
     <tr>
-        <th>Nome</th>
-        <th>Sobrenome </th>
-        <th> CPF</th>
-        <th> Data De Nascimento</th>
+       <th>Nome</th>
+       <th>Sobrenome </th>
+       <th>CPF</th>
+       <th>Data De Nascimento</th>
        <th>E-mail</th>
        <th>Telefone</th>
-     
-      </tr>
+    </tr>
       <tr>
-       <c:forEach var="cliente" items="${clientes}">
         <td><c:out value="${cliente.nome}" /></td>
         <td><c:out value="${cliente.sobrenome}" /></td>
         <td><c:out value="${cliente.CPF}" /></td>
         <td><c:out value="${cliente.dataDeNascimento}" /></td>
         <td><c:out value="${contato.email}" /></td>
         <td><c:out value="${contato.telefone}" /></td>  
-         </c:forEach>   
+     </tr> 
     </table>
     </div> 
-    
-    
     <br>
-    
     <div id="tabela_exibir_perfil">
+    
+    <c:forEach var="endereco" items="${enderecos}">
     <table>
     <tr>
         <th>Nome Da Rua</th>
@@ -54,25 +51,34 @@
         <th> Número</th>
         <th> Cep</th>
         <th> Complemento</th>
-       <th>País</th>
-       <th>Estado</th>
-       <th>Província</th>
-       <th>Continente</th>
        </tr>
       <tr>
-       <c:forEach var="endereco" items="${enderecos}">
         <td><c:out value="${endereco.nomeDaRua}" /></td>
-         <td><c:out value="${endereco.tipoDaVia}" /></td>
+        <td><c:out value="${endereco.tipoDaVia}" /></td>
         <td><c:out value="${endereco.logradouro}" /></td>
         <td><c:out value="${endereco.numero}" /></td>
-        <td><c:out value="${endereco.cep}" /></td>
+        <td><c:out value="${endereco.CEP}" /></td>
         <td><c:out value="${endereco.complemento}" /></td>
-        <td><c:out value="${localidade.pais}" /></td>
-        <td><c:out value="${localidade.estado}" /></td>
-        <td><c:out value="${localidade.provincia}" /></td>
-        <td><c:out value="${localidade.continente}" /></td>
-     </c:forEach> 
     </table>
+     </c:forEach> 
+     
+     <c:forEach var="localidade" items="${localidades}">
+     <table>
+     <tr>
+     <th>País</th>
+     <th>Estado</th>
+     <th>Província</th>
+     <th>Continente</th>
+     </tr>
+     <tr>
+     <td><c:out value="${localidade.pais}" /></td>
+     <td><c:out value="${localidade.estado}" /></td>
+  	 <td><c:out value="${localidade.provincia}" /></td>
+     <td><c:out value="${localidade.continente}" /></td>
+     </tr>
+     </table>
+     </c:forEach> 
+     
     </div>
 </body>
 </html>

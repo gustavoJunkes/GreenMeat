@@ -69,6 +69,8 @@ public class Endereco implements Serializable {
 		setLocalidade(localidade);
 	}
 
+	public Endereco() {}
+	
 	public Endereco(String nomeDaRua, String logradouro, Integer numero, String CEP, String complemento)
 			throws InvalidFieldException {
 		setNomeDaRua(nomeDaRua);

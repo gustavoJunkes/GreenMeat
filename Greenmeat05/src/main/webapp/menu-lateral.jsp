@@ -19,7 +19,7 @@
 		<li><a href="<%=request.getContextPath()%>/perfil-fornecedor" target="_self">PERFIL FORNECEDOR</a></li>
 		<li><a href="<%=request.getContextPath()%>/perfil-funcionario" target="_self">PERFIL DO FUNCIONARIO</a></li>
 		<li><a href="<%=request.getContextPath()%>/listar-produtos-funcionario" target="_self">Listar produtos do funcionario</a></li>
-			<li><a href="<%=request.getContextPath()%>/fob.jsp" target="_self">FOB</a></li>
+		<li><a href="<%=request.getContextPath()%>/fob.jsp" target="_self">FOB</a></li>
 		</ul>
 </div>
 </div>

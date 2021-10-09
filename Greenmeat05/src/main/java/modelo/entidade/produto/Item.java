@@ -33,7 +33,7 @@ public class Item implements Serializable {
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que � calculado a
 								// partir do pre�o de um produto * quantidade
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 
@@ -47,6 +47,10 @@ public class Item implements Serializable {
 	
 	
 	public Item() {}
+	
+	public Item(Long id) {
+		setId(id);
+	}
 
 	public Item(Produto produto, float quantidade) {
 		setProduto(produto);

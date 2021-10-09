@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div>
-	<jsp:include page="../menu-lateral.jsp"/>
+	<jsp:include page="menu-lateral.jsp"/>
    </div>
   
 	<div id="cadastro">
@@ -121,8 +121,8 @@
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="cep" required="required"
-					type="text"  value="<c:out value='${endereco.cep}' />" /> 
+					 <input id="endereco" name="CEP" required="required"
+					type="text"  value="<c:out value='${endereco.CEP}' />" /> 
 					</p>
 				
 					<p>
