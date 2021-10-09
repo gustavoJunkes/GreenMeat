@@ -121,7 +121,7 @@ public class Pedido {
 		setValorTotal(getValorTotal() - item.getValorTotal());
 	}
 
-	public void finalizarPedido(String idPedido) {
+	public void finalizarPedido() {
 		setStatus(Status.PEDIDO_FINALIZADO);
 	}
 

@@ -126,6 +126,10 @@ public class Servlet extends HttpServlet {
 			case "/listar-itens-pedido":
 				listarItensPedido(request, response, sessao);
 				break;
+
+			case "/finalizar-pedido":
+				finalizarPedido(request, response, sessao);
+				break;
 //			========>Produto<========
 
 			case "/novo-produto":
@@ -378,6 +382,8 @@ public class Servlet extends HttpServlet {
 			itemDAO.inserirItem(item);
 			pedido.getItens().add(item);
 			pedido.setCliente(cliente);
+			pedido.setValorTotal(pedido.calcularValorTotalPedido());
+
 			pedidoDAO.atualizarPedido(pedido);
 			List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
 
@@ -409,6 +415,17 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
 			dispatcher.forward(request, response);
 		}
+	}
+
+	private void finalizarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws IOException {
+	
+//		Long id = Long.parseLong(request.getParameter("idPedido"));
+		Pedido pedido =(Pedido) sessao.getAttribute("pedido");
+		pedido.finalizarPedido();
+		pedidoDAO.atualizarPedido(pedido);
+		sessao.removeAttribute("pedido");
+		response.sendRedirect("inicio");// pagina de confirmação de compra aqui
 	}
 
 //	=============>Produto<================
