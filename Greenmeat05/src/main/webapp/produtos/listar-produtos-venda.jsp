@@ -14,10 +14,17 @@
 </head>
 <body>
 
-<div>
-	<jsp:include page="../menu-lateral.jsp"/>
+	<div>
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<%}%>
 	</div>
-
     <c:forEach var="produto" items="${produtos}">
   <div class="gallery1">
         

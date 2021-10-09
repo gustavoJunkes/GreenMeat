@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="menu-lateral.jsp"/>
+		<jsp:include page="menu-lateral-cliente.jsp"/>
     </div>
    
    <div class="MeuPerfil">
