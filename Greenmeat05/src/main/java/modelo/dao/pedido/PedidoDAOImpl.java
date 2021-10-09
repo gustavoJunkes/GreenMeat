@@ -91,8 +91,8 @@ public class PedidoDAOImpl implements PedidoDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.merge(pedido);
-
+			sessao.update(pedido);
+			
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -111,6 +111,8 @@ public class PedidoDAOImpl implements PedidoDAO {
 		}
 	}
 
+	
+	
 	public Pedido recuperarPedidoEmAbertoDoCliente(Cliente cliente) {
 		Session sessao = null;
 		Pedido pedido = null;
