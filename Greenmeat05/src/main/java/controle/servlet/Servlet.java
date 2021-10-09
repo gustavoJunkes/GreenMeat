@@ -81,7 +81,6 @@ public class Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 
@@ -114,10 +113,6 @@ public class Servlet extends HttpServlet {
 				deslogar(request, response);
 				break;
 
-			case "/perfil-cliente":
-//				mostrarPerfilCliente(request, response);
-				break;
-
 //			========>Pedido<========
 
 			case "/novo-pedido":
@@ -130,6 +125,10 @@ public class Servlet extends HttpServlet {
 
 			case "/listar-itens-pedido":
 				listarItensPedido(request, response, sessao);
+				break;
+
+			case "/finalizar-pedido":
+				finalizarPedido(request, response, sessao);
 				break;
 //			========>Produto<========
 
@@ -183,6 +182,10 @@ public class Servlet extends HttpServlet {
 				listarClientes(request, response);
 				break;
 
+			case "/perfil-cliente":
+				mostrarPerfilCliente(request, response, sessao);
+				break;
+
 //				========>Funcionario<========
 
 			case "/novo-funcionario":
@@ -207,6 +210,10 @@ public class Servlet extends HttpServlet {
 
 			case "/listar-funcionarios":
 				listarFuncionarios(request, response);
+				break;
+
+			case "/perfil-fucionario":
+				mostrarPerfilFuncionario(request, response, sessao);
 				break;
 
 //				========>Fornecedor<========
@@ -234,6 +241,10 @@ public class Servlet extends HttpServlet {
 			case "/listar-fornecedores":
 				listarFornecedores(request, response);
 				break;
+
+			case "/perfil-fornecedor":
+				mostrarPerfilFornecedor(request, response, sessao);
+				break;
 //				========>Contato<========
 
 			case "/novo-contato":
@@ -259,7 +270,6 @@ public class Servlet extends HttpServlet {
 			case "/listar-contatos":
 				listarContatos(request, response, sessao);
 				break;
-
 
 			default:
 //				listarProdutos(request, response);
@@ -290,7 +300,7 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
-		Usuario usuario = (Usuario)sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 		request.setAttribute("usuario", usuario);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
@@ -302,9 +312,9 @@ public class Servlet extends HttpServlet {
 
 		if (sessao.getAttribute("usuario") != null) {
 			response.sendRedirect(request.getRequestURI());
-		}else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-		dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	}
@@ -337,26 +347,6 @@ public class Servlet extends HttpServlet {
 			System.out.println(sessao.getAttribute("usuario"));
 			response.sendRedirect("inicio");
 		}
-//		Cliente cliente1 = new Cliente();
-//		cliente1.setLogin(login);
-//		Cliente cliente = clienteDAO.recuperarCliente(cliente1);
-//		if (cliente != null && cliente.getSenha() == senha && cliente.getLogin() == login )
-//			sessao.setAttribute("usuario", cliente);
-//		else {
-//			Funcionario funcionario1 = new Funcionario();
-//			funcionario1.setLogin(login);
-//			Funcionario funcionario = funcionarioDAO.recuperarFuncionarioPorLogin(login);
-//			if(funcionario != null && funcionario.getSenha() == senha && funcionario.getLogin() == login )
-//				sessao.setAttribute("usuario", funcionario);
-//			else {
-//				Fornecedor fornecedor1 = new Fornecedor();
-//				Fornecedor fornecedor = fornecedorDAO.recuperarFornecedorPorLogin(fornecedor1);
-//				if(fornecedor != null && fornecedor.getSenha() == senha && fornecedor.getLogin() == login)
-//					sessao.setAttribute("usuario", fornecedor);
-
-//					response.sendError(404, "Nenhum usuário com login " + login + " foi encontrado em nossa base de dados tente se cadastrar");
-//			}
-//		}
 
 	}
 
@@ -371,51 +361,71 @@ public class Servlet extends HttpServlet {
 	private void adicionarProdutoPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws IOException {
 
-		Long id = Long.parseLong(request.getParameter("idProduto"));
-		Float quantidade = (float) 10;
+		if (sessao.getAttribute("usuario") == null) {
+			response.sendRedirect("inicio");
+		} else {
+			Long id = Long.parseLong(request.getParameter("idProduto"));
+			Float quantidade = (float) 10;
 //				Float.parseFloat(request.getParameter("quantidade"));
 
-		Produto produto = produtoDAO.recuperarPorId(id);
-		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+			Produto produto = produtoDAO.recuperarPorId(id);
+			Cliente cliente = (Cliente) sessao.getAttribute("usuario");
 
-		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
+			Pedido pedido = (Pedido) sessao.getAttribute("pedido");
 
-		if (pedido == null) {
-			pedido = new Pedido();
-			pedidoDAO.inserirPedido(pedido);
+			if (pedido == null) {
+				pedido = new Pedido();
+				pedidoDAO.inserirPedido(pedido);
+			}
+			Item item = new Item(produto, quantidade);
+			item.setPedido(pedido);
+			itemDAO.inserirItem(item);
+			pedido.getItens().add(item);
+			pedido.setCliente(cliente);
+			pedido.setValorTotal(pedido.calcularValorTotalPedido());
+
+			pedidoDAO.atualizarPedido(pedido);
+			List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
+
+			if (pedidos == null)
+				pedidos = new ArrayList<Pedido>();
+
+			pedidos.add(pedido);
+			cliente.setPedidos(pedidos);
+			clienteDAO.atualizarCliente(cliente);
+
+			sessao.setAttribute("pedido", pedido);
+			response.sendRedirect(request.getContextPath() + "/listar-produtos");
 		}
-		Item item = new Item(produto, quantidade);
-		item.setPedido(pedido);
-		itemDAO.inserirItem(item);
-//		pedidoDAO.inserirPedido(pedido);
-//				pedidoDAO.recuperarPedidosCliente(cliente);
-
-//		List<Item> itens = new ArrayList<Item>();
-//		itens = itemDAO.recuperarItensPedido(pedido);
-//		itens.add(item);
-
-		pedido.getItens().add(item);
-//		pedido.setItens(itens);
-		pedidoDAO.atualizarPedido(pedido);
-
-		List<Pedido> pedidos = pedidoDAO.recuperarPedidosCliente(cliente);
-		pedidos.add(pedido);
-
-		cliente.setPedidos(pedidos);
-		clienteDAO.atualizarCliente(cliente);
-
-		sessao.setAttribute("pedido", pedido);
-		response.sendRedirect(request.getContextPath() + "/listar-produtos");
 	}
 
 	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
-		List<Item> itens = itemDAO.recuperarItensPedido(pedido);
-		request.setAttribute("itens", itens);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
-		dispatcher.forward(request, response);
+		if (pedido == null) {
+			response.sendError(510, "Não há nenhum pedido na sessão!");
+		} else {
+			List<Item> itens = itemDAO.recuperarItensPedido(pedido);
+			request.setAttribute("itens", itens);
+//			for(Item item : itens) {
+//			  	Produto produto = produtoDAO.recuperarProdutoItem(item);
+//			  	request.setAttribute("idItem", item.getId());
+//			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
+	private void finalizarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws IOException {
+	
+//		Long id = Long.parseLong(request.getParameter("idPedido"));
+		Pedido pedido =(Pedido) sessao.getAttribute("pedido");
+		pedido.finalizarPedido();
+		pedidoDAO.atualizarPedido(pedido);
+		sessao.removeAttribute("pedido");
+		response.sendRedirect("inicio");// pagina de confirmação de compra aqui
 	}
 
 //	=============>Produto<================
@@ -514,16 +524,34 @@ public class Servlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-clientes-teste.jsp");// pagina de listar
 		dispatcher.forward(request, response);
 	}
-	
-	
+
+	private void mostrarPerfilCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException {
+
+		if (sessao.getAttribute("usuario") == null || !(sessao.getAttribute("usuario") instanceof Cliente)) {
+			response.sendRedirect("inicio");
+		} else {
+			Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+			List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente);
+			request.setAttribute("localidades", localidades);
+			for (Localidade localidade : localidades) {
+				List<Endereco> enderecos = enderecoDAO.recuperarEnderecosLocalidade(localidade);
+				request.setAttribute("enderecos", enderecos);
+			}
+			request.setAttribute("cliente", cliente);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-cliente.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
 	private void mostrarFormularioNovoCliente(HttpServletRequest request, HttpServletResponse response,
 			HttpSession sessao) throws ServletException, IOException {
 
 		if (sessao.getAttribute("usuario") != null) {
 			response.sendRedirect("inicio");
-		}else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
-		dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-cliente.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -645,10 +673,23 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void mostrarPerfilFuncionario(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException {
+
+		if (sessao.getAttribute("usuario") == null || !(sessao.getAttribute("usuario") instanceof Funcionario)) {
+			response.sendRedirect("inicio");
+		} else {
+			sessao.getAttribute("usuario");
+			Funcionario funcionario = (Funcionario) sessao.getAttribute("usuario");
+			request.setAttribute("funcionario", funcionario);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-funcionario.jsp");
+		}
+	}
+
 	private void mostrarFormularioNovoFuncionario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -664,7 +705,8 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirFuncionario(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
-			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException, CountryInvalidException {
+			throws SQLException, IOException, InvalidFieldException, EmailInvalidException, PhoneNumberInvalidException,
+			CountryInvalidException {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -674,7 +716,7 @@ public class Servlet extends HttpServlet {
 //		String dataNascimento = request.getParameter("dataNascimeto");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		
+
 		String dataNascimento = request.getParameter("dataNascimento");
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
@@ -714,7 +756,7 @@ public class Servlet extends HttpServlet {
 		enderecos.add(endereco);
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
-		funcionarioDAO.inserirFuncionario(funcionario);
+		funcionarioDAO.atualizarFuncionario(funcionario);
 
 		sessao.setAttribute("usuario", funcionario);
 		response.sendRedirect("inicio");
@@ -757,14 +799,28 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
-			throws ServletException, IOException {
+	private void mostrarPerfilFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException {
 
-		if(sessao.getAttribute("usuario") != null  || !(sessao.getAttribute("usuario") instanceof Funcionario) ) {
+		if (sessao.getAttribute("usuario") == null || (sessao.getAttribute("usuario") instanceof Fornecedor)) {
 			response.sendRedirect("inicio");
-		}else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do produto
-		dispatcher.forward(request, response);
+		} else {
+			sessao.getAttribute("usuario");
+			Fornecedor fornecedor = (Fornecedor) sessao.getAttribute("usuario");
+			request.setAttribute("fornecedor", fornecedor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-fornecedor.jsp");
+		}
+	}
+
+	private void mostrarFormularioNovoFornecedor(HttpServletRequest request, HttpServletResponse response,
+			HttpSession sessao) throws ServletException, IOException {
+
+		if (sessao.getAttribute("usuario") != null && !(sessao.getAttribute("usuario") instanceof Funcionario)) {
+			response.sendRedirect("inicio");
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do
+																									// produto
+			dispatcher.forward(request, response);
 		}
 	}
 

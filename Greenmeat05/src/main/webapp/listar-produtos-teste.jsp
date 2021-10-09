@@ -24,7 +24,7 @@
       	<p><c:out value="${produto.precoCusto}"/></p>
       </div>
       <form action="adicionar-produto-pedido" method="post">
-      	<input type="text" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
+      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
       	<input type="submit" value="Adicionar ao pedido">
       </form>
     </div>
