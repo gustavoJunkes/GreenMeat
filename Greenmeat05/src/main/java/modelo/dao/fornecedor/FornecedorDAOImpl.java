@@ -14,9 +14,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import modelo.entidade.produto.Pedido;
+import modelo.entidade.produto.Estoque;
 import modelo.entidade.produto.Produto;
-import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Fornecedor;
 
 public class FornecedorDAOImpl implements FornecedorDAO {
@@ -205,6 +204,48 @@ public class FornecedorDAOImpl implements FornecedorDAO {
 			criteria.where(construtor.equal(juncaoProduto.get("id"), idProduto));
 
 			fornecedor = sessao.createQuery(criteria).setParameter(idProduto, produto.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return fornecedor;
+	}
+
+	public Fornecedor recuperarFornecedorEstoque(Estoque estoque) {
+
+		Session sessao = null;
+		Fornecedor fornecedor = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Fornecedor> criteria = construtor.createQuery(Fornecedor.class);
+			Root<Fornecedor> raizFornecedor= criteria.from(Fornecedor.class);
+
+			Join<Fornecedor, Estoque> juncaoEstoque= raizFornecedor.join("id_fornecedor");
+
+			ParameterExpression<Long> idEstoque = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoEstoque.get("id"), idEstoque));
+
+			fornecedor = sessao.createQuery(criteria).setParameter(idEstoque, fornecedor.getId()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
