@@ -25,7 +25,7 @@ public class Estoque implements Serializable {
 	@Id
 	private Long id;
 
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "estoque", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Item> itens = new ArrayList();
 
 	@OneToOne
@@ -43,6 +43,12 @@ public class Estoque implements Serializable {
 //		}
 //	}
 
+	public Estoque() {}
+	
+	public Estoque(Fornecedor fornecedor) {
+		setFornecedor(fornecedor);
+	}
+	
 	public void adicionarAoEstoque(Item item) {
 
 	}

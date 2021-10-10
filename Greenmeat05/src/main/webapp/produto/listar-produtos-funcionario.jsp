@@ -52,7 +52,7 @@
               <td><c:out value="${produtos.tipoCarne }" /></th>
               <td><c:out value="${produtos.precoCusto}" /></th>
               <td><c:out value="${produtos.precoVenda}" /></th>
-              <td><a href="editar-produto?id=<c:out value='${produto.id}'/>">Editar</a>	<a href="deletar-produto?id=<c:out value='${produto.id}'/>">Deletar</a></td>
+              <td><a href="editar-produto?id=<c:out value='${produtos.id}'/>">Editar</a>	<a href="deletar-produto?id=<c:out value='${produto.id}'/>">Deletar</a></td>
               
             </tr>
             </c:forEach>

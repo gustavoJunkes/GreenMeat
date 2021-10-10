@@ -99,6 +99,14 @@ public class Item implements Serializable {
 	}
 
 
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}
+
 	public float calculaValorTotal() {
 		return this.produto.getPrecoVenda() * quantidade;
 	}

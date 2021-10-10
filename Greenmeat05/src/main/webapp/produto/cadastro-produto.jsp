@@ -55,7 +55,11 @@
 		required="required" type="text" value="<c:out value='${produto.tipoCarne}' />" name="tipoCarne">
 
 	<br>
+	<label for="quantidadeEmEstoque">Quantidade em estoque: </label> <input id="quantidadeEmEstoque"
+		required="required" type="number" value="<c:out value='${item.quantidade}' />" name="quantidadeEmEstoque">
 	
+	
+	<br>
 	<label for="id">Id do fornecedor: </label> <input id=""
 		required="required" type="text" value="<c:out value='${produto.fornecedor.id}' />" name="idFornecedor">
 

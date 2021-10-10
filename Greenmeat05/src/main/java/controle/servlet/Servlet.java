@@ -19,6 +19,8 @@ import modelo.dao.contato.ContatoDAO;
 import modelo.dao.contato.ContatoDAOImpl;
 import modelo.dao.endereco.EnderecoDAO;
 import modelo.dao.endereco.EnderecoDAOImpl;
+import modelo.dao.estoque.EstoqueDAO;
+import modelo.dao.estoque.EstoqueDAOImpl;
 import modelo.dao.fornecedor.FornecedorDAO;
 import modelo.dao.fornecedor.FornecedorDAOImpl;
 import modelo.dao.funcionario.FuncionarioDAO;
@@ -33,6 +35,7 @@ import modelo.dao.produto.ProdutoDAO;
 import modelo.dao.produto.ProdutoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entidade.produto.Estoque;
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Pedido;
 import modelo.entidade.produto.Produto;
@@ -54,6 +57,7 @@ public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	private EstoqueDAO estoqueDAO;
 	private ItemDAO itemDAO;
 	private PedidoDAO pedidoDAO;
 	private ProdutoDAO produtoDAO;
@@ -67,6 +71,7 @@ public class Servlet extends HttpServlet {
 
 	public void init() {
 
+		estoqueDAO = new EstoqueDAOImpl();
 		itemDAO = new ItemDAOImpl();
 		pedidoDAO = new PedidoDAOImpl();
 		produtoDAO = new ProdutoDAOImpl();
@@ -160,6 +165,9 @@ public class Servlet extends HttpServlet {
 				listarProdutosFuncionario(request, response, sessao);
 				break;
 
+			case "/listar-produtos-fornecedor":
+//				listarProdutosFornecedor(request, response, sessao);
+				break;
 //				========>Cliente<========
 
 			case "/novo-cliente":
@@ -437,7 +445,7 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-produtos-teste.jsp");// pagina de listar
+		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-teste.jsp");// pagina de listar
 		dispatcher.forward(request, response);
 	}
 
@@ -485,7 +493,7 @@ public class Servlet extends HttpServlet {
 		Float precoCusto = Float.parseFloat(request.getParameter("precoCusto"));
 		Float precoVenda = Float.parseFloat(request.getParameter("precoVenda"));
 		String tipoCarne = request.getParameter("tipoCarne");
-
+		Float quantidade = Float.parseFloat(request.getParameter("quantidadeEmEstoque"));
 		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(Long.parseLong(request.getParameter("idFornecedor")));
 
 		Produto produto = new Produto(nome, descricao, tipoCarne, precoCusto, precoVenda, fornecedor);
@@ -498,11 +506,16 @@ public class Servlet extends HttpServlet {
 		fornecedor.setProdutos(produtos);
 		fornecedorDAO.atualizarFornecedor(fornecedor);
 
-//		List<Fornecedor>fornecedores = new ArrayList<Fornecedor>();
-//		fornecedores = fornecedorDAO.recuperarFornecedores();
-
+		Item item = new Item(produto, quantidade);
+		item.setEstoque(fornecedor.getEstoque());
+		itemDAO.inserirItem(item);
+		// Pode ou deve ocorrer um erro na linha a seguir e isso se dá por razões óbvias
+		List<Item>itens = new ArrayList<Item>();
+		itens = itemDAO.recuperarItensEstoque(fornecedor.getEstoque());
+		itens.add(item);
+		fornecedor.getEstoque().setItens(itens);
+		
 		response.sendRedirect("novo-produto");
-//		response.sendError(401, "O fornecedor mencionado não foi encontrado em nossa base de dados, cadastre o fornecedor ou escolha um cadastrado");
 	}
 
 	private void atualizarProduto(HttpServletRequest request, HttpServletResponse response)
@@ -629,25 +642,6 @@ public class Servlet extends HttpServlet {
 
 		sessao.setAttribute("usuario", cliente);
 		response.sendRedirect("inicio");
-
-//		request.setAttribute("usuario", cliente);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
-//		dispatcher.forward(request, response);
-		////
-//		request.getSession().setAttribute("usuario", cliente);
-		////
-//		request.setAttribute("usuario", cliente);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-contato.jsp");
-
-//		response.sendRedirect("novo-contato");
-//		dispatcher.forward(request, response);
-//		System.out.println(((Usuario) request.getAttribute("usuario")).getId());
-
-		////
-
-		////
-
-//		response.sendRedirect(request.getContextPath() + "/novo-contato/" + cliente.getId());
 	}
 
 	private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -693,7 +687,8 @@ public class Servlet extends HttpServlet {
 			sessao.getAttribute("usuario");
 			Funcionario funcionario = (Funcionario) sessao.getAttribute("usuario");
 			request.setAttribute("funcionario", funcionario);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-funcionario.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("funcionario/perfil-funcionario.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -748,7 +743,7 @@ public class Servlet extends HttpServlet {
 		Contato contato = new Contato(email, telefone, funcionario);
 		contatoDAO.inserirContato(contato);
 
-		funcionarioDAO.inserirFuncionario(funcionario);
+		funcionarioDAO.atualizarFuncionario(funcionario);
 
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		usuarios.add(funcionario);
@@ -768,7 +763,7 @@ public class Servlet extends HttpServlet {
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
 		funcionarioDAO.atualizarFuncionario(funcionario);
-
+		
 		sessao.setAttribute("usuario", funcionario);
 		response.sendRedirect("inicio");
 	}
@@ -813,13 +808,14 @@ public class Servlet extends HttpServlet {
 	private void mostrarPerfilFornecedor(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException {
 
-		if (sessao.getAttribute("usuario") == null || (sessao.getAttribute("usuario") instanceof Fornecedor)) {
+		if (sessao.getAttribute("usuario") == null || !(sessao.getAttribute("usuario") instanceof Fornecedor)) {
 			response.sendRedirect("inicio");
 		} else {
 			sessao.getAttribute("usuario");
 			Fornecedor fornecedor = (Fornecedor) sessao.getAttribute("usuario");
 			request.setAttribute("fornecedor", fornecedor);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-fornecedor.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -869,6 +865,9 @@ public class Servlet extends HttpServlet {
 		String complemento = request.getParameter("complemento");
 
 		Fornecedor fornecedor = new Fornecedor(nomeFantasia, razaoSocial, CNPJ, login, senha);
+		Estoque estoque = new Estoque(fornecedor);
+		estoqueDAO.inserirEstoque(estoque);
+		fornecedor.setEstoque(estoque);
 		fornecedorDAO.inserirFornecedor(fornecedor);
 
 		Contato contato = new Contato(email, telefone, fornecedor);
@@ -893,8 +892,8 @@ public class Servlet extends HttpServlet {
 		enderecos.add(endereco);
 		localidade.setEnderecos(enderecos);
 		localidadeDAO.atualizarLocalidade(localidade);
-
 		fornecedorDAO.atualizarFornecedor(fornecedor);
+
 		sessao.setAttribute("usuario", fornecedor);
 		response.sendRedirect("inicio");
 	}
