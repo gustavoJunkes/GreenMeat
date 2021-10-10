@@ -13,16 +13,15 @@
 	<title>Insert title here</title>
 </head>
 <body>
-
 	<div>
 	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
-		<jsp:include page="menu-lateral-cliente.jsp"/>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
 	<%} %>
 	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
-		<jsp:include page="menu-lateral-funcionario.jsp"/>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
 	<%}%>
 	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
-	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
 	</div>
 

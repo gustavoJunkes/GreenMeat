@@ -1,3 +1,7 @@
+<%@page import="modelo.entitidade.usuario.Fornecedor"%>
+<%@page import="modelo.entitidade.usuario.Funcionario"%>
+<%@page import="modelo.entitidade.usuario.Cliente"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,13 +20,13 @@
 
 	<div>
 	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
-		<jsp:include page="menu-lateral-cliente.jsp"/>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
 	<%} %>
 	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
-		<jsp:include page="menu-lateral-funcionario.jsp"/>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
 	<%}%>
 	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
-	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
 	</div>
     <c:forEach var="produto" items="${produtos}">

@@ -1,10 +1,6 @@
-<%@page import="java.util.List"%>
-<%@page import="modelo.entidade.produto.Item"%>
-<%@page import="modelo.entidade.produto.Produto"%>
-<%@page import="modelo.dao.produto.ProdutoDAO"%>
-<%@page import="modelo.dao.produto.ProdutoDAOImpl"%>
-<%@page import="modelo.dao.item.ItemDAOImpl"%>
-<%@page import="modelo.dao.item.ItemDAO"%>
+<%@page import="modelo.entitidade.usuario.Fornecedor"%>
+<%@page import="modelo.entitidade.usuario.Funcionario"%>
+<%@page import="modelo.entitidade.usuario.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -21,7 +17,15 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="menu-lateral.jsp" />
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<%}%>
 	</div>
 
 	<div id="tabela_exibir_perfil">

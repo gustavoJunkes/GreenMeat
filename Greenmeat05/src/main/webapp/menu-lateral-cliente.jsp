@@ -12,7 +12,7 @@
 		<li><a href="<%=request.getContextPath()%>/listar-produtos" target="_self">LISTAR PRODUTOS</a></li>
 		<li><a href="<%=request.getContextPath()%>/listar-itens-pedido" target="_self">MEU PEDIDO</a></li>
 		<li><a href="<%=request.getContextPath()%>/perfil-cliente" target="_self">PERFIL CLIENTE</a></li>
-
+		<li><a href="<%=request.getContextPath()%>/deslogar" target="_self">LOGOUT</a></li>
 	</ul>
 </div>
 </div>

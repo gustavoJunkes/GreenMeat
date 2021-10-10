@@ -33,6 +33,7 @@ public class Fornecedor extends PessoaJuridica {
 	private Long id;
 
 	
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Produto> produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
 

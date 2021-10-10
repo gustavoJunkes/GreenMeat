@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-	<jsp:include page="../menu-lateral.jsp"/>
+	<jsp:include page="../menu-lateral-funcionario.jsp"/>
    </div>
 
 <header>
@@ -49,9 +49,10 @@
               <td><c:out value="${produtos.id}" /></td>
               <td><c:out value="${produtos.nome}" /></td>
               <td><c:out value="${produtos.descricao}" /></td>
-              <th><c:out value="${produtos.tipoCarne }" /></th>
-              <th><c:out value="${produtos.precoCusto}" /></th>
-              <th><c:out value="${produtos.custoVenda}" /></th>
+              <td><c:out value="${produtos.tipoCarne }" /></th>
+              <td><c:out value="${produtos.precoCusto}" /></th>
+              <td><c:out value="${produtos.precoVenda}" /></th>
+              <td><a href="editar-produto?id=<c:out value='${produto.id}'/>">Editar</a>	<a href="deletar-produto?id=<c:out value='${produto.id}'/>">Deletar</a></td>
               
             </tr>
             </c:forEach>

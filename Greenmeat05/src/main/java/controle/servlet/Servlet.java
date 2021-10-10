@@ -156,6 +156,10 @@ public class Servlet extends HttpServlet {
 				listarProdutos(request, response);
 				break;
 
+			case "/listar-produtos-funcionario":
+				listarProdutosFuncionario(request, response, sessao);
+				break;
+
 //				========>Cliente<========
 
 			case "/novo-cliente":
@@ -350,10 +354,9 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void deslogar(HttpServletRequest request, HttpServletResponse response) {
-
+	private void deslogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.getSession().invalidate();
-
+		response.sendRedirect("inicio");
 	}
 
 //	========>Pedido<========
@@ -419,9 +422,9 @@ public class Servlet extends HttpServlet {
 
 	private void finalizarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws IOException {
-	
+
 //		Long id = Long.parseLong(request.getParameter("idPedido"));
-		Pedido pedido =(Pedido) sessao.getAttribute("pedido");
+		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
 		sessao.removeAttribute("pedido");
@@ -438,6 +441,14 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void listarProdutosFuncionario(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		List<Produto> produtos = produtoDAO.recuperarProdutos();
+		request.setAttribute("produtos", produtos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-funcionario.jsp");// pagina de listar
+		dispatcher.forward(request, response);
+	}
+
 	private void mostrarFormularioNovoProduto(HttpServletRequest request, HttpServletResponse response,
 			HttpSession sessao) throws ServletException, IOException {
 
@@ -446,7 +457,7 @@ public class Servlet extends HttpServlet {
 			System.out.println("Acesso negado a esta página.");
 			response.sendRedirect("inicio");
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-produto.jsp"); // formulario do
+			RequestDispatcher dispatcher = request.getRequestDispatcher("produto/cadastro-produto.jsp"); // formulario do
 			dispatcher.forward(request, response);
 		}
 //		if(usuario == null)
@@ -461,7 +472,7 @@ public class Servlet extends HttpServlet {
 
 		long id = Long.parseLong(request.getParameter("id"));
 		Produto produto = produtoDAO.recuperarPorId(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("form-contato.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/cadastro-produto.jsp");
 		request.setAttribute("produto", produto);
 		dispatcher.forward(request, response);
 	}
@@ -689,7 +700,7 @@ public class Servlet extends HttpServlet {
 	private void mostrarFormularioNovoFuncionario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-funcionario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("funcionario/cadastro-funcionario.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -793,7 +804,7 @@ public class Servlet extends HttpServlet {
 
 		List<Fornecedor> fornecedores = fornecedorDAO.recuperarFornecedores();
 		request.setAttribute("fornecedores", fornecedores);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-fornecedores.jsp");// pagina de listar
+		RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/listar-fornecedores.jsp");// pagina de listar
 																								// produto
 																								// virá aqui
 		dispatcher.forward(request, response);
@@ -818,7 +829,7 @@ public class Servlet extends HttpServlet {
 		if (sessao.getAttribute("usuario") != null && !(sessao.getAttribute("usuario") instanceof Funcionario)) {
 			response.sendRedirect("inicio");
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-fornecedor.jsp"); // formulario do
+			RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/cadastro-fornecedor.jsp"); // formulario do
 																									// produto
 			dispatcher.forward(request, response);
 		}
@@ -830,7 +841,7 @@ public class Servlet extends HttpServlet {
 
 		long id = Long.parseLong(request.getParameter("id"));
 		Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("form-fornecedor.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/cadastro-fornecedor.jsp");
 		request.setAttribute("fornecedor", fornecedor);
 		dispatcher.forward(request, response);
 	}
