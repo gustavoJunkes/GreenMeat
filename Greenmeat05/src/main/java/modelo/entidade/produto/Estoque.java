@@ -10,27 +10,29 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import modelo.dao.estoque.EstoqueDAO;
-import modelo.dao.estoque.EstoqueDAOImpl;
+import modelo.entitidade.usuario.Fornecedor;
 
 @Entity
 @Table(name = "estoque")
 public class Estoque implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "estoque", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Item> itens = new ArrayList();
 
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "id")
+	private Fornecedor fornecedor;
+	
 //	public void adicionarProdutoAoEstoque(Produto produto) {
 //		
 //		EstoqueDAO estoqueDAO = new EstoqueDAOImpl();
@@ -41,6 +43,12 @@ public class Estoque implements Serializable {
 //		}
 //	}
 
+	public Estoque() {}
+	
+	public Estoque(Fornecedor fornecedor) {
+		setFornecedor(fornecedor);
+	}
+	
 	public void adicionarAoEstoque(Item item) {
 
 	}
@@ -59,6 +67,14 @@ public class Estoque implements Serializable {
 
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
 //	falta mencionar estoque na classe item

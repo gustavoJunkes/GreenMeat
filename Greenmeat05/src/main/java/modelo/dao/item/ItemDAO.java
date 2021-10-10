@@ -2,6 +2,7 @@ package modelo.dao.item;
 
 import java.util.List;
 
+import modelo.entidade.produto.Estoque;
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Pedido;
 
@@ -17,4 +18,6 @@ public interface ItemDAO {
 	List<Item> recuperarItensPedido(Pedido pedido);
 
 	List<Item> recuperarItens();
+	
+	List<Item> recuperarItensEstoque(Estoque estoque);
 }

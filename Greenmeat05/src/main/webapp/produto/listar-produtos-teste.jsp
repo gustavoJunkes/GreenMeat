@@ -1,3 +1,6 @@
+<%@page import="modelo.entitidade.usuario.Fornecedor"%>
+<%@page import="modelo.entitidade.usuario.Funcionario"%>
+<%@page import="modelo.entitidade.usuario.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,11 +13,17 @@
 	<title>Insert title here</title>
 </head>
 <body>
-
 	<div>
-		<jsp:include page="menu-lateral.jsp"/>
-    </div>
-
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
+	<%}%>
+	</div>
 
 	<c:forEach var="produto" items="${produtos}">
 	
