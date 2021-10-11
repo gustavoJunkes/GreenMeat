@@ -55,9 +55,7 @@
           
           	<p>
 				<label for="razaoSocial"> Razão Social</label> <input
-					id="razaoSocial" name="razaoSocial" required="required" type="text"
-					
-					value="<c:out value='${fornecedor.razaoSocial}' />" />
+					id="razaoSocial" name="razaoSocial" required="required" type="text" value="<c:out value='${fornecedor.razaoSocial}' />" />
 			</p>
 			<p>
 				<label for="nomeFantasia"> Nome Fantasia </label> <input

@@ -42,7 +42,7 @@
   <c:forEach var="fornecedor" items="${fornecedores}">
 	<tr>
     <td><c:out value="${fornecedor.id}" /></td>
-    <td><c:out value="${fornecedor.nomeFantasia}" /></td>
+    <td><a href="perfil-fornecedor?id=<c:out value='${fornecedor.id}'/>"><c:out value="${fornecedor.nomeFantasia}" /></a> </td>
     <td><c:out value="${fornecedor.razaoSocial}" /></td>
     <td><c:out value="${fornecedor.CNPJ}" /></th>
    

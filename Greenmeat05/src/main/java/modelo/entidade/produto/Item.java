@@ -2,6 +2,7 @@ package modelo.entidade.produto;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ public class Item implements Serializable {
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que � calculado a
 								// partir do pre�o de um produto * quantidade
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 

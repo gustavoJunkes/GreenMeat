@@ -32,10 +32,12 @@
       	<p><c:out value="${produto.nome}" /></p>
       	<p><c:out value="${produto.precoCusto}"/></p>
       </div>
+      <%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
       <form action="adicionar-produto-pedido" method="post">
       	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
       	<input type="submit" value="Adicionar ao pedido">
       </form>
+      <%} %>
     </div>
 	
 	</c:forEach>
