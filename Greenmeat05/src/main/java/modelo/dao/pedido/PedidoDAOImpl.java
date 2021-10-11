@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -16,8 +17,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Pedido;
 import modelo.entitidade.usuario.Cliente;
-import modelo.entitidade.usuario.Usuario;
-import modelo.entitidade.usuario.informacao.Localidade;
+import modelo.enumeracao.Status;
 
 
 public class PedidoDAOImpl implements PedidoDAO {
@@ -113,9 +113,9 @@ public class PedidoDAOImpl implements PedidoDAO {
 
 	
 	
-	public Pedido recuperarPedidoEmAbertoDoCliente(Cliente cliente) {
+	public List<Pedido> recuperarPedidosEmAbertoCliente(Cliente cliente) {
 		Session sessao = null;
-		Pedido pedido = null;
+		List<Pedido>pedidos = null;
 
 		try {
 
@@ -127,15 +127,15 @@ public class PedidoDAOImpl implements PedidoDAO {
 			CriteriaQuery<Pedido> criteria = construtor.createQuery(Pedido.class);
 			Root<Pedido> raizPedido = criteria.from(Pedido.class);
 
-			Join<Pedido, Cliente> juncaoCliente= raizPedido.join("cliente");
 
-			ParameterExpression<Long> idCliente = construtor.parameter(Long.class);
-			ParameterExpression<String> statusPedido = construtor.parameter(String.class);
-
-			criteria.where(construtor.equal(juncaoCliente.get("id"), idCliente), construtor.equal(juncaoCliente.get("status"), statusPedido));
-//			criteria.where(construtor.equal(juncaoCliente.get("status"), statusPedido));
-
-			pedido = sessao.createQuery(criteria).setParameter(idCliente, cliente.getId()).getSingleResult();
+			Predicate predicadoCliente = construtor.equal(raizPedido.get("cliente")	, cliente.getId());
+			
+			Predicate predicadoStatus = construtor.equal(raizPedido.get("status"), Status.PEDIDO_EM_ABERTO);
+			
+			Predicate predicadoFinal = construtor.and(predicadoCliente, predicadoStatus);
+			
+			criteria.where(predicadoFinal);
+			pedidos = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -154,7 +154,7 @@ public class PedidoDAOImpl implements PedidoDAO {
 			}
 		}
 
-		return pedido;
+		return pedidos;
 	}
 	
 	
