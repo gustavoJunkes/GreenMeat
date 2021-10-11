@@ -17,7 +17,7 @@
 <title>Pedido</title>
 </head>
 <body>
-<%--
+
 	<div>
 	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
 		<jsp:include page="menu-lateral-cliente.jsp"/>
@@ -29,14 +29,8 @@
 	<jsp:include page="menu-lateral-fornecedor.jsp"/>
 	<%}%>
 	</div>
-	 --%>
 	
-	<!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ExemploModalCentralizado">
-  Abrir modal de demonstração
-</button>
 	
-
 	<div id="tabela_exibir_perfil">
 		<table>
 			<thead>
@@ -52,7 +46,10 @@
 						<td><c:out value="${item.produto.nome}" /></td>
 						<td><c:out value="${item.quantidade}" /> </td>
 						<td><c:out value="${item.valorTotal}" /></td>
-						<td><a href="editar-item?id=<c:out value='${item.id}'/>quantidade=<c:out value='${item.quantidade}'/>">Editar</a><a href="deletar-item?id=<c:out value='${item.id}'/>">Deletar</a></td>
+						<td><button type="button" class="btn" data-toggle="modal" data-target="#ModalCentralizado">
+  							Editar
+						</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -66,7 +63,7 @@
 	</div>
 
 <!-- Modal -->
-<div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+<div class="modal fade" id="ModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,11 +73,14 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+      	<form action="editar-item" method="post">
+        <input type="number" name="quantidade" value="<c:out value="${item.quantidade}" />">
+		<input type="number" name="idItem" value="<c:out value="${item.id}" />">
+		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
       </div>
     </div>
   </div>
