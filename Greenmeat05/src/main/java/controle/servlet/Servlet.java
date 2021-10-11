@@ -47,6 +47,7 @@ import modelo.entitidade.usuario.Usuario;
 import modelo.entitidade.usuario.informacao.Contato;
 import modelo.entitidade.usuario.informacao.Endereco;
 import modelo.entitidade.usuario.informacao.Localidade;
+import modelo.enumeracao.Status;
 import modelo.excecao.InvalidFieldException;
 import modelo.excecao.user.information.CountryInvalidException;
 import modelo.excecao.user.information.EmailInvalidException;
@@ -139,6 +140,11 @@ public class Servlet extends HttpServlet {
 				editarItem(request, response);
 				break;
 
+			case "/listar-pedidos-cliente":
+				listarPedidosCliente(request, response, sessao);
+				break;
+				
+				
 //			========>Produto<========
 
 			case "/novo-produto":
@@ -390,6 +396,7 @@ public class Servlet extends HttpServlet {
 
 			if (pedido == null) {
 				pedido = new Pedido();
+				pedido.setStatus(Status.PEDIDO_EM_ABERTO);
 				pedidoDAO.inserirPedido(pedido);
 			}
 			Item item = new Item(produto, quantidade);
@@ -414,6 +421,30 @@ public class Servlet extends HttpServlet {
 		}
 	}
 
+	private void listarPedidosCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		
+		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
+		if(cliente == null || cliente.getClass() != Cliente.class) {
+			response.sendRedirect("inicio");
+		}else {
+		List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
+		request.setAttribute("pedidos", pedidos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); 																							// listar
+		dispatcher.forward(request, response);
+		}
+	}
+	
+	private void editarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		
+		Long id = Long.parseLong(request.getParameter("idPedido"));
+		//recupera pedido e começa a add ou remover produtos dele
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); 																							// listar
+		dispatcher.forward(request, response);
+	}
+	
+	
 	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
@@ -423,10 +454,7 @@ public class Servlet extends HttpServlet {
 		} else {
 			List<Item> itens = itemDAO.recuperarItensPedido(pedido);
 			request.setAttribute("itens", itens);
-//			for(Item item : itens) {
-//			  	Produto produto = produtoDAO.recuperarProdutoItem(item);
-//			  	request.setAttribute("idItem", item.getId());
-//			}
+		
 			RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -437,6 +465,17 @@ public class Servlet extends HttpServlet {
 
 //		Long id = Long.parseLong(request.getParameter("idPedido"));
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
+		List<Item>itens = pedido.getItens();
+		
+		for (Item item : itens) {
+			Fornecedor fornecedor = item.getProduto().getFornecedor();
+			Estoque estoque = estoqueDAO.recuperarEstoqueFornecedor(fornecedor);
+			List <Item> itens2 = itemDAO.recuperarItensEstoque(estoque);
+			for (Item item2 : itens2) {
+				
+			}
+		}
+		
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
 		sessao.removeAttribute("pedido");
