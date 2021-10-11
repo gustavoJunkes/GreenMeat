@@ -25,16 +25,22 @@
 	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
 	</div>
-	<div class=imagemPerfil>
-		<img src="perfil_img.jfif" alt="">
-	</div>
 
-	<div class="MeuPerfil">
-		<h3>Meu Perfil</h3>
-	</div>
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<h3>Detalhes do fornecedor</h3>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<h3>Detalhes do fornecedor</h3>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+		<h3>Meu perfil</h3>
+	<%}%>
+		
+	
 	<div id="tabela_exibir_perfil">
 		<table>
 			<tr>
+				<th>ID</th>
 				<th>Razão Social</th>
 				<th>Nome Fantasia</th>
 				<th>CNPJ</th>
@@ -42,6 +48,7 @@
 				<th>Telefone</th>
 			</tr>
 			<tr>
+				<td><c:out value="${fornecedor.id}" /></td>
 				<td><c:out value="${fornecedor.razaoSocial}" /></td>
 				<td><c:out value="${fornecedor.nomeFantasia}" /></td>
 				<td><c:out value="${fornecedor.CNPJ}" /></td>

@@ -1,6 +1,9 @@
+<%@page import="modelo.entitidade.usuario.Fornecedor"%>
+<%@page import="modelo.entitidade.usuario.Funcionario"%>
+<%@page import="modelo.entitidade.usuario.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -14,27 +17,34 @@
 
 <body>
 	<div>
-	<jsp:include page="../menu-lateral-funcionario.jsp"/>
-   </div>
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
+	<%}%>
+	</div>
 
 <header>
 		<nav>
 			<ul>
-				<li><a href="<%=request.getContextPath()%>/listar">Produtos</a>
-				</li>
+				<li><a href="<%=request.getContextPath()%>/listar-produtos">Produtos</a></li>
+				<li><a href="<%=request.getContextPath()%>/perfil-fornecedor?id=<c:out value='${fornecedor.id}'/>">Produtos de: <c:out value="${fornecedor.nomeFantasia}" /></a></li>
 			</ul>
 		</nav>
 	</header>
 	
 
-<div class="txt_Listar_produtos"> <h2>Lista de produtos cadastrados</h2> </div>
+<div class="txt_Listar_produtos"> <h2>Lista de produtos fornecedor <a href="<%=request.getContextPath()%>/perfil-fornecedor?id=<c:out value='${fornecedor.id}'/>"><c:out value="${fornecedor.nomeFantasia}" /></a> </h2> </div>
     
     <div class="Listar_produtos_tabela" >
         <table>
         <thead>
             <tr>
               <th>Id do produto</th>
-              <th>Fornecedor</th>
               <th>Nome do produto</th>
               <th>Descrição</th>
               <th>Tipo da Carne</th>
@@ -48,7 +58,6 @@
             <c:forEach var="produtos" items="${produtos}">
 						<tr>
               <td><c:out value="${produtos.id}" /></td>
-              <td><a href="perfil-fornecedor?id=<c:out value='${produtos.fornecedor.id}'/>"><c:out value="${produtos.fornecedor.nomeFantasia}" /></a> </td>
               <td><c:out value="${produtos.nome}" /></td>
               <td><c:out value="${produtos.descricao}" /></td>
               <td><c:out value="${produtos.tipoCarne }" /></th>

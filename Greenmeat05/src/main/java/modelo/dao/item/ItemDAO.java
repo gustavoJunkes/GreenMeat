@@ -15,6 +15,8 @@ public interface ItemDAO {
 
 	void atualizarItem(Item item);
 
+	Item recuperarItemPorId(Item item);
+	
 	List<Item> recuperarItensPedido(Pedido pedido);
 
 	List<Item> recuperarItens();
