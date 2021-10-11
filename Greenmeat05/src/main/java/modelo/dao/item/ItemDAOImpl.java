@@ -133,6 +133,7 @@ public class ItemDAOImpl implements ItemDAO {
 			itens = sessao.createQuery(criteria).setParameter(idPedido, pedido.getId()).getResultList();
 
 			sessao.getTransaction().commit();
+		
 
 		} catch (Exception sqlException) {
 

@@ -13,7 +13,7 @@ public interface PedidoDAO {
 
 	void atualizarPedido(Pedido pedido);
 	
-	Pedido recuperarPedidoEmAbertoDoCliente(Cliente cliente);
+	List<Pedido> recuperarPedidosEmAbertoCliente(Cliente cliente);
 	
 	List<Pedido> recuperarPedidos();
 	

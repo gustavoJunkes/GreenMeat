@@ -50,6 +50,8 @@
   							Editar
 						</button>
 						</td>
+											
+						<td><a href="" type="">Editar</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -74,7 +76,7 @@
       </div>
       <div class="modal-body">
       	<form action="editar-item" method="post">
-        <input type="number" name="quantidade" value="<c:out value="${item.quantidade}" />">
+        <input type="number" name="quantidade" value="<c:out value="${ite.quantidade}" />">
 		<input type="number" name="idItem" value="<c:out value="${item.id}" />">
 		</form>
       </div>
