@@ -143,8 +143,11 @@ public class Servlet extends HttpServlet {
 			case "/listar-pedidos-cliente":
 				listarPedidosCliente(request, response, sessao);
 				break;
-				
-				
+
+			case "/editar-pedido":
+				editarPedido(request, response, sessao);
+				break;
+
 //			========>Produto<========
 
 			case "/novo-produto":
@@ -423,28 +426,29 @@ public class Servlet extends HttpServlet {
 
 	private void listarPedidosCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
-		
+
 		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
-		if(cliente == null || cliente.getClass() != Cliente.class) {
+		if (cliente == null || cliente.getClass() != Cliente.class) {
 			response.sendRedirect("inicio");
-		}else {
-		List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
-		request.setAttribute("pedidos", pedidos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); 																							// listar
-		dispatcher.forward(request, response);
+		} else {
+			List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
+			request.setAttribute("pedidos", pedidos);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); // listar
+			dispatcher.forward(request, response);
 		}
 	}
-	
+
 	private void editarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 		
-		Long id = Long.parseLong(request.getParameter("idPedido"));
+		Long id = Long.parseLong(request.getParameter("id"));
 		//recupera pedido e começa a add ou remover produtos dele
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); 																							// listar
-		dispatcher.forward(request, response);
+		Pedido pedido = pedidoDAO.recuperarPorId(id);
+		sessao.setAttribute("pedido", pedido);
+		response.sendRedirect("listar-produtos");
+		
 	}
-	
-	
+
 	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
@@ -454,7 +458,7 @@ public class Servlet extends HttpServlet {
 		} else {
 			List<Item> itens = itemDAO.recuperarItensPedido(pedido);
 			request.setAttribute("itens", itens);
-		
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("listar-itens-pedido-teste.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -465,17 +469,17 @@ public class Servlet extends HttpServlet {
 
 //		Long id = Long.parseLong(request.getParameter("idPedido"));
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
-		List<Item>itens = pedido.getItens();
-		
+		List<Item> itens = pedido.getItens();
+
 		for (Item item : itens) {
 			Fornecedor fornecedor = item.getProduto().getFornecedor();
 			Estoque estoque = estoqueDAO.recuperarEstoqueFornecedor(fornecedor);
-			List <Item> itens2 = itemDAO.recuperarItensEstoque(estoque);
+			List<Item> itens2 = itemDAO.recuperarItensEstoque(estoque);
 			for (Item item2 : itens2) {
-				
+
 			}
 		}
-		
+
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
 		sessao.removeAttribute("pedido");
@@ -516,7 +520,7 @@ public class Servlet extends HttpServlet {
 			Fornecedor fornecedor = (Fornecedor) sessao.getAttribute("usuario");
 			List<Produto> produtos = produtoDAO.recuperarProdutosFornecedor(fornecedor);
 			request.setAttribute("produtos", produtos);
-			request.setAttribute("fornecedor",fornecedor);
+			request.setAttribute("fornecedor", fornecedor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-fornecedor.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -524,7 +528,7 @@ public class Servlet extends HttpServlet {
 			Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
 			List<Produto> produtos = produtoDAO.recuperarProdutosFornecedor(fornecedor);
 			request.setAttribute("produtos", produtos);
-			request.setAttribute("fornecedor",fornecedor);
+			request.setAttribute("fornecedor", fornecedor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-fornecedor.jsp");
 			dispatcher.forward(request, response);
 		} // listar
