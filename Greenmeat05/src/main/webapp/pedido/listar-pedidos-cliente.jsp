@@ -46,7 +46,7 @@
 						<td><c:out value="${pedido.status}"/></td>
 						<td><c:out value="${pedido.dataEntrega}"/></td>
 						<td><c:out value="${pedido.valorTotal}"/></td>
-						<td><a href="editar-pedido?id=<c:out value='${pedido.id}'/>">Editar</a>	<a href="deletar-pedido?id=<c:out value='${pedido.id}'/>">Deletar</a></td>
+						<td><a href="editar-pedido?id=<c:out value='${pedido.id}'/>">Editar</a>	<a href="cancelar-pedido?id=<c:out value='${pedido.id}'/>">Cancelar</a></td>
 						
 					</tr>
 				</c:forEach>

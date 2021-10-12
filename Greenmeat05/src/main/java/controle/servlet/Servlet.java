@@ -148,6 +148,14 @@ public class Servlet extends HttpServlet {
 				editarPedido(request, response, sessao);
 				break;
 
+			case "/deletar-pedido":
+				deletarPedido(request, response, sessao);
+				break;
+				
+			case "/cancelar-pedido":
+				cancelarPedido(request, response, sessao);
+				break;	
+				
 //			========>Produto<========
 
 			case "/novo-produto":
@@ -171,7 +179,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/listar-produtos":
-				listarProdutos(request, response);
+				listarProdutos(request, response, sessao);
 				break;
 
 			case "/listar-produtos-funcionario":
@@ -448,6 +456,29 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("listar-produtos");
 		
 	}
+	
+	private void deletarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		System.out.println("Chegou ");
+		Long id = Long.parseLong(request.getParameter("id"));
+		//recupera pedido e começa a add ou remover produtos dele
+		Pedido pedido = pedidoDAO.recuperarPorId(id);
+		pedidoDAO.deletarPedido(pedido);
+		response.sendRedirect("listar-pedidos-cliente");
+		
+	}
+	
+	
+	private void cancelarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws SQLException, IOException, ServletException, InvalidFieldException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		//recupera pedido e começa a add ou remover produtos dele
+		Pedido pedido = pedidoDAO.recuperarPorId(id);
+		pedido.setStatus(Status.PEDIDO_CANCELADO);
+		pedidoDAO.atualizarPedido(pedido);
+		response.sendRedirect("listar-pedidos-cliente");
+		
+	}
 
 	private void listarItensPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
@@ -497,12 +528,17 @@ public class Servlet extends HttpServlet {
 
 //	=============>Produto<================
 
-	private void listarProdutos(HttpServletRequest request, HttpServletResponse response)
+	private void listarProdutos(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws SQLException, IOException, ServletException, InvalidFieldException {
+		
+		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
+		if(pedido != null) {
+			List<Item>itens = itemDAO.recuperarItensPedido(pedido);
+			request.setAttribute("itens", itens);
+		}
 		List<Produto> produtos = produtoDAO.recuperarProdutos();
 		request.setAttribute("produtos", produtos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-teste.jsp");// pagina de
-																											// listar
 		dispatcher.forward(request, response);
 	}
 
