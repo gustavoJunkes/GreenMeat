@@ -21,6 +21,7 @@
   position: fixed;
   right: 2px;
   top: 10%;
+  width: 30%;
  }
  <%--select * from produto where nome like "%var%"--%>
  .navbar-super{
@@ -30,11 +31,7 @@
 	box-shadow: lightgrey 0em 0em 1em 0px;
 }
 
-.main{
-width: 70%;
-left: 30%;
-display: inline;
-}
+
 
 .produto{
 	margin-top: 70px;
@@ -111,7 +108,7 @@ display: inline;
           <c:forEach var="item" items="${itens}">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" /></h6>
+                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" /><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="<c:out value='${item.id}' />">Open modal for @mdo</button></h6>
                 <small class="text-muted"><c:out value="${item.produto.descricao}" /></small>
               </div>
               <span class="text-muted"><c:out value="${item.produto.precoVenda}" /></span>
@@ -136,5 +133,55 @@ display: inline;
         
     </div>
 </div>
+
+<%-- Modal editar item --%>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<%-- Javascript modal --%>
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+   var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
 </body>
 </html>
