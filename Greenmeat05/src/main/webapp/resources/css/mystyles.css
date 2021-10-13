@@ -1,4 +1,4 @@
-*, *:before, *:after { 
+ *, *:before, *:after { 
     margin: 0;
     padding: 0;
     font-family: Arial,sans-serif;
@@ -330,13 +330,13 @@ div.txt {
 
   #login{
     position: relative;
-    top: 100px;
-	width:50%;
+    top: 50px;
+	width:35%;
     padding: 18px 6% 60px 6%;
     margin: 35px ;
     background: #f7f7f7;
     border: 1px solid rgba(147, 184, 189,0.8);
-    left: 500px;
+    left: 700px;
      
     border-radius: 5px;
      
@@ -415,10 +415,9 @@ div.txt {
   }
   .text_tela_Index {
 	position: relative;
-	top: 100px;
+	top: -400px;
 	width: 30%;
-	left: 400px;
-	border: 3px solid #73AD21;
+	left:100px; 
 }
 
   .opcoes_vendas {
@@ -436,7 +435,7 @@ top:10px;
   position: relative;
 top:200px;
 left:400px;
+} 
+.telaInicial{
+	background:#f3faf0;
 }
-   
-   
-   
