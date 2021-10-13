@@ -22,41 +22,59 @@
   right: 2px;
   top: 10%;
  }
- 
+ <%--select * from produto where nome like "%var%"--%>
  .navbar-super{
-	left:20%;
-	width: 60%;
+ 	top:0px;
+	left:0%;
+	width: 100%;
+	box-shadow: lightgrey 0em 0em 1em 0px;
+}
+
+.main{
+width: 70%;
+left: 30%;
+display: inline;
+}
+
+.produto{
+	margin-top: 70px;
+    margin-left: 5%;
+    border: 0.1px solid rgb(0, 0, 0);
+    float: left;
+    width: 180px;
+    
+}
+.separacao{
+	left:150px;
+	margin-left:200px; 
 }
  </style>
 </head>
 <body>
 
 	<nav class="navbar navbar-super navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  		<a class="navbar-brand" href="#">Navbar</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+   			<span class="navbar-toggler-icon"></span>
+ 		</button>
 
-  <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
- 
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-    </form>
-  </div>
-</nav>
+  		<div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+    			<ul class="navbar-nav mr-auto">
+      				<li class="nav-item active">
+        				<a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
+      				</li>
+      				<li class="nav-item">
+       	 				<a class="nav-link" href="#">Link</a>
+      				</li>
+    	 		</ul>
+    			<form class="form-inline my-2 my-lg-0" action="pesquisar-produtos" method="post">
+	      		<input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="nome">
+      				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+    			</form>
+  		</div>
+	</nav>
 
-	
-	<div>
-	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
 		<jsp:include page="../menu-lateral-cliente.jsp"/>
 	<%} %>
 	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
@@ -65,17 +83,35 @@
 	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
 	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
-	</div>
 
 
-<div class="lista-compras"> 
-<div class="row">
-        <div>
+<div class="container separacao">
+    <div class="row">
+        <div class="col-md-8" >
+        <c:forEach var="produto" items="${produtos}">
+	
+	<div class="produto">
+      		<div class="desc1"> 
+      			<p><c:out value="${produto.nome}" /></p>
+      			<p><c:out value="${produto.precoVenda}"/></p>
+        </div>
+      	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
+      		<form action="adicionar-produto-pedido" method="post">
+		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
+		      	<input type="submit" value="Adicionar ao pedido">
+      		</form>
+      	<%}%>
+    	</div>
+	
+	</c:forEach>
+       	</div>
+        <div class="col-md-2">
+       <div class="lista-compras">
           <ul>
           <c:forEach var="item" items="${itens}">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0"><c:out value="${item.produto.nome}" /></h6>
+                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" /></h6>
                 <small class="text-muted"><c:out value="${item.produto.descricao}" /></small>
               </div>
               <span class="text-muted"><c:out value="${item.produto.precoVenda}" /></span>
@@ -96,29 +132,9 @@
             </div>
           </form>
         </div>
-	</div>
-</div>
-
-<main>
-
-
-<c:forEach var="produto" items="${produtos}">
-	
-	<div class="gallery1">
-      <div class="desc1"> 
-      	<p><c:out value="${produto.nome}" /></p>
-      	<p><c:out value="${produto.precoCusto}"/></p>
-      </div>
-      <%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
-      <form action="adicionar-produto-pedido" method="post">
-      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
-      	<input type="submit" value="Adicionar ao pedido">
-      </form>
-      <%} %>
+        </div>
+        
     </div>
-	
-	</c:forEach>
-
-</main>
+</div>
 </body>
 </html>
