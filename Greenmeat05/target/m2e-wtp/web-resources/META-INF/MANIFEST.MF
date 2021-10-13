@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: israel.sales
+=======
+Built-By: Usuario
+>>>>>>> a0df2620503a91a508de11a8d52cf779dd592e83
 Build-Jdk: 16.0.2
 Created-By: Maven Integration for Eclipse
 
