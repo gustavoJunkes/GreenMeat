@@ -49,6 +49,7 @@
 </head>
 <body>
 
+
 	<nav class="navbar navbar-super navbar-expand-lg navbar-light bg-light">
   		<a class="navbar-brand" href="#">Navbar</a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
@@ -108,7 +109,7 @@
           <c:forEach var="item" items="${itens}">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" /><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="<c:out value='${item.id}' />">Open modal for @mdo</button></h6>
+                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" />      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="dara"><span class="glyphicon glyphicon-search"></span></button></h6>
                 <small class="text-muted"><c:out value="${item.produto.descricao}" /></small>
               </div>
               <span class="text-muted"><c:out value="${item.produto.precoVenda}" /></span>
@@ -118,7 +119,7 @@
               <span>Total (BRL)</span>
               <strong>R$<c:out value="${pedido.valorTotal}" /></strong>
             </li>
-          </ul>
+          </ul>	
 
           <form class="card p-2">
             <div class="input-group">
@@ -134,37 +135,23 @@
     </div>
 </div>
 
-<%-- Modal editar item --%>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+								<!-- Inicio Modal -->
+								<div class="modal fade" id="myModal<?php echo $rows_cursos['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title text-center" id="myModalLabel"><?php echo $rows_cursos['nome']; ?></h4>
+											</div>
+											<div class="modal-body">
+												<p><?php echo $rows_cursos['id']; ?></p>
+												<p><?php echo $rows_cursos['nome']; ?></p>
+												<p><?php echo $rows_cursos['detalhes']; ?></p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Fim Modal -->
 
 
 

@@ -11,7 +11,19 @@
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
-<title>Produtos Cadastrados</title>
+<title>Produtos</title>
+
+<style type="text/css">
+.lista{
+left: 30%;
+display: inline-table;
+position:  relative;
+width: 70%;	
+}
+
+</style>
+
+
 </head>
 
 <body>
@@ -28,7 +40,7 @@
 	</div>
 
 
-  <div id="tabela_exibir_perfil">
+  <div class="lista">
   	<table>
 			<thead>
 				<tr>
