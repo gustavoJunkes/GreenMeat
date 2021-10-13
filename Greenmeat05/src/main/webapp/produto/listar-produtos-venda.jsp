@@ -30,13 +30,19 @@
 	<%}%>
 	</div>
     <c:forEach var="produto" items="${produtos}">
+    
+    
   <div class="gallery1">
         
         <div class="desc1"> <c:out value="${produto.nome}" /> -
       <c:out value="${produto.precoCusto}" /></div>
-          
-         <button type="button" onclick="alert('Item adicionado ao seu pedido!')">Comprar</button>
-       </div>
+        
+        <a href="opcoes-compra.html"> Opções de Compra</a>
+        
+          </div>
          </c:forEach>
+         
+         
 </body>
 </html>	
+
