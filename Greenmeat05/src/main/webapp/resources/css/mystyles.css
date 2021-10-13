@@ -330,12 +330,8 @@ div.txt {
 
   #login{
     position: relative;
-<<<<<<< Updated upstream
     top: 100px;
-=======
-    top: 200px;
->>>>>>> Stashed changes
-    width: 50%;   
+	width:50%;
     padding: 18px 6% 60px 6%;
     margin: 35px ;
     background: #f7f7f7;
@@ -425,5 +421,22 @@ div.txt {
 	border: 3px solid #73AD21;
 }
 
-  
+  .opcoes_vendas {
+
+position: relative;
+left: 600px;
+top: 100px;
+}
+
+.botao_comprar{
+position: relative;
+top:10px;
+}
+.descricao-produto{
+  position: relative;
+top:200px;
+left:400px;
+}
+   
+   
    
