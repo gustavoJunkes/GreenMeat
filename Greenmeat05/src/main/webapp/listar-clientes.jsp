@@ -41,6 +41,8 @@
     <td><a href="perfil-cliente?id=<c:out value='${cliente.id}'/>"><c:out value="${cliente.nome}" /></a> </td>
     <td><c:out value="${cliente.sobrenome}" /></td>
     <td><c:out value="${cliente.CPF}" /></td>
+     <td><c:out value="${cliente.email}" /></td>
+    <td><c:out value="${cliente.telefone}" /></td>
    
  </tr>
     </c:forEach>
