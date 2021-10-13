@@ -17,6 +17,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Pedido;
 import modelo.entitidade.usuario.Cliente;
+import modelo.entitidade.usuario.informacao.Contato;
 import modelo.enumeracao.Status;
 
 
@@ -111,7 +112,36 @@ public class PedidoDAOImpl implements PedidoDAO {
 		}
 	}
 
-	
+	public Pedido recuperarPorId(Long id) {
+		Session sessao = null;
+		Pedido pedido = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			pedido = sessao.find(Pedido.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return pedido;
+		
+	}
 	
 	public List<Pedido> recuperarPedidosEmAbertoCliente(Cliente cliente) {
 		Session sessao = null;

@@ -49,10 +49,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 	
-	
-	
-	
-
 	public void deletarUsuario(Usuario usuario) {
 
 		Session sessao = null;
@@ -112,6 +108,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 	}
+	
 	
 	public Usuario recuperarUsuario(Usuario usuario) {
 

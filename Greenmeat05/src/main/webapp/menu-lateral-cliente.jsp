@@ -2,7 +2,7 @@
 
 <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>"resources/css/menu.css/>
   <style><%@include file="/resources/css/menu.css"%></style>
- 
+
 <div class="wrapper">
    <div class="sidebar">
 <h2>MENU</h2>

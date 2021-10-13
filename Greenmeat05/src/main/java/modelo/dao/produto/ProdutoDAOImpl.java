@@ -17,6 +17,7 @@ import org.hibernate.service.ServiceRegistry;
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Produto;
 import modelo.entitidade.usuario.Fornecedor;
+import modelo.entitidade.usuario.Usuario;
 
 
 
@@ -191,6 +192,66 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 		return produto;
 	}
 
+	
+	public List<Produto> recuperarPorNome(Produto produto) {
+
+		Session sessao = null;
+		List<Produto> produtos = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Produto> criteria = construtor.createQuery(Produto.class);
+			Root<Produto> raizProduto = criteria.from(Produto.class);
+
+			criteria.select(raizProduto);
+			
+			ParameterExpression<String> nomeProduto = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizProduto.get("nome"), nomeProduto));
+
+			produtos = sessao.createQuery(criteria).setParameter(nomeProduto, produto.getNome()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return produtos;
+	}
+	
+	public List<Produto> recuperarProdutos1() {
+		List<Produto>produtos = null;
+		Session sessao = null;
+				
+		sessao = conectarBanco().openSession();
+		sessao.beginTransaction();
+		
+		
+		
+		sessao.close();
+				
+		
+		return produtos;
+	}
+
+	
+	
 	public List<Produto> recuperarProdutos() {
 
 		Session sessao = null;
