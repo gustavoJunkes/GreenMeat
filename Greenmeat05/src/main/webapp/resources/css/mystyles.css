@@ -418,4 +418,10 @@ div.txt {
     }
   }
   
-   
+   .text_tela_Index {
+	position: relative;
+	top: 100px;
+	width: 30%;
+	left: 400px;
+	border: 3px solid #73AD21;
+}
