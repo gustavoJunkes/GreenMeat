@@ -57,6 +57,14 @@ display: inline;
       				<li class="nav-item active">
        	 				<a class="nav-link" href="novo-fornecedor">Seja um Fornecedor <span class="sr-only">(página atual)</span></a>
       				</li>
+<SELECT>
+                  <option value="">MENU</option> 
+                   <option value="">Produtos</option>
+                  <option value="">Meu Perfil</option>
+                    <option value="">Meu Pedido</option>
+                  
+                  
+  </SELECT>
     	 		</ul>
   		</div>
 	</nav>
