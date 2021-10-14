@@ -26,12 +26,10 @@
  <%--select * from produto where nome like "%var%"--%>
  .navbar-super{
  	top:0px;
-	left:0%;
-	width: 100%;
+	left:14%;
+	width: 85%;
 	box-shadow: lightgrey 0em 0em 1em 0px;
 }
-
-
 
 .produto{
 	margin-top: 70px;
@@ -44,6 +42,10 @@
 .separacao{
 	left:150px;
 	margin-left:200px; 
+}
+
+.botao{
+width: 100%;
 }
  </style>
 </head>
@@ -83,50 +85,101 @@
 	<%}%>
 
 
-<div class="container separacao">
+  <div class="container separacao">
     <div class="row">
         <div class="col-md-8" >
         <c:forEach var="produto" items="${produtos}">
 	
-	<div class="produto">
+	 <div class="produto">
       		<div class="desc1"> 
       			<p><c:out value="${produto.nome}" /></p>
       			<p><c:out value="${produto.precoVenda}"/></p>
-        </div>
+        	</div>
       	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
-      		<form action="adicionar-produto-pedido" method="post">
-		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
-		      	<input type="submit" value="Adicionar ao pedido">
-      		</form>
+     
+      		<!-- Button trigger modal(adicionar ao pedido) -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  				Adicionar ao pedido
+			</button>
+      		
       	<%}%>
-    	</div>
+    </div>
+	
+	<!-- Modal adicionar ao pedido -->
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="adicionar-produto-pedido" method="post">
+		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
+		      	<input type="number" name="quantidade" value='<c:out value="${produto.id}"></c:out>'>
+		      	<input type="submit" value="Adicionar ao pedido">
+      	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fim do modal -->
 	
 	</c:forEach>
-       	</div>
+  </div>
         <div class="col-md-2">
        <div class="lista-compras">
           <ul>
           <c:forEach var="item" items="${itens}">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" />      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="dara"><span class="glyphicon glyphicon-search"></span></button></h6>
+                <h6 class="my-0"><c:out value="${item.produto.nome}-${item.quantidade} unidades" /></h6>
+				          
+            <!-- Modal editar item-->
+<div class="modal fade" id="modaleditaritem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
                 <small class="text-muted"><c:out value="${item.produto.descricao}" /></small>
               </div>
               <span class="text-muted"><c:out value="${item.produto.precoVenda}" /></span>
             </li>
-          </c:forEach>            
+        </c:forEach>            
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (BRL)</span>
               <strong>R$<c:out value="${pedido.valorTotal}" /></strong>
             </li>
           </ul>	
 
-          <form class="card p-2">
+          <form class="card p-2" action="finalizar-pedido" method="post">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Pesquisar item">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Pesquisar</button>
-              </div>
+                <button type="button" class="btn btn-primary botao" data-toggle="modal" data-target="#ExemploModalCentralizado">
+  					Finalizar pedido
+				</button>
+                
             </div>
           </form>
         </div>
@@ -135,23 +188,25 @@
     </div>
 </div>
 
-								<!-- Inicio Modal -->
-								<div class="modal fade" id="myModal<?php echo $rows_cursos['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title text-center" id="myModalLabel"><?php echo $rows_cursos['nome']; ?></h4>
-											</div>
-											<div class="modal-body">
-												<p><?php echo $rows_cursos['id']; ?></p>
-												<p><?php echo $rows_cursos['nome']; ?></p>
-												<p><?php echo $rows_cursos['detalhes']; ?></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Fim Modal -->
+<!-- Modal finalizar pedido -->
+<div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="TituloModalCentralizado">Finalizar pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+      	<form action="finalizar-pedido" method="post">
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Continuar comprando</button>
+        	<button type="submit" class="btn btn-primary" >Confirmar</button>
+        </form>	
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

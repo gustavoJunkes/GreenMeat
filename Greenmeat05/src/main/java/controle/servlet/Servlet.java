@@ -401,8 +401,7 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect("inicio");
 		} else {
 			Long id = Long.parseLong(request.getParameter("idProduto"));
-			Float quantidade = (float) 10;
-//				Float.parseFloat(request.getParameter("quantidade"));
+			Float quantidade = Float.parseFloat(request.getParameter("quantidade"));
 
 			Produto produto = produtoDAO.recuperarPorId(id);
 			Cliente cliente = (Cliente) sessao.getAttribute("usuario");
@@ -505,14 +504,14 @@ public class Servlet extends HttpServlet {
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
 		List<Item> itens = pedido.getItens();
 
-		for (Item item : itens) {
-			Fornecedor fornecedor = item.getProduto().getFornecedor();
-			Estoque estoque = estoqueDAO.recuperarEstoqueFornecedor(fornecedor);
-			List<Item> itens2 = itemDAO.recuperarItensEstoque(estoque);
-			for (Item item2 : itens2) {
-
-			}
-		}
+//		for (Item item : itens) {
+//			Fornecedor fornecedor = item.getProduto().getFornecedor();
+//			Estoque estoque = estoqueDAO.recuperarEstoqueFornecedor(fornecedor);
+//			List<Item> itens2 = itemDAO.recuperarItensEstoque(estoque);
+//			for (Item item2 : itens2) {
+//
+//			}
+//		}
 
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
