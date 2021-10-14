@@ -2,6 +2,7 @@ package modelo.entidade.produto;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,6 @@ import modelo.entitidade.usuario.Fornecedor;
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,7 +34,7 @@ public class Item implements Serializable {
 	private float valorTotal; // Esse atributo nos permite acessar o valor total de um item, que � calculado a
 								// partir do pre�o de um produto * quantidade
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 
@@ -48,6 +48,10 @@ public class Item implements Serializable {
 	
 	
 	public Item() {}
+	
+	public Item(Long id) {
+		setId(id);
+	}
 
 	public Item(Produto produto, float quantidade) {
 		setProduto(produto);
@@ -85,6 +89,23 @@ public class Item implements Serializable {
 
 	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+	
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
 	}
 
 	public float calculaValorTotal() {

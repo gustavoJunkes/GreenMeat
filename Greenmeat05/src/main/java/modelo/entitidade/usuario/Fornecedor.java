@@ -11,13 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.criteria.JoinType;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import modelo.dao.produto.ProdutoDAO;
+import modelo.entidade.produto.Estoque;
 import modelo.entidade.produto.Produto;
 import modelo.entitidade.usuario.informacao.Contato;
 import modelo.entitidade.usuario.informacao.Localidade;
@@ -32,6 +30,9 @@ public class Fornecedor extends PessoaJuridica {
 	@Column(name = "id_fornecedor")
 	private Long id;
 
+	@OneToOne(mappedBy = "fornecedor", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Estoque estoque;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Produto> produtos = new ArrayList<Produto>(); // Quais Produtos ele fornece
@@ -95,6 +96,14 @@ public class Fornecedor extends PessoaJuridica {
 
 //	M�todo que adiciona um produto ao fornecedor, e adiciona este fornecedor ao
 // 	produto
+
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}
 
 	public void adicionarProduto(Produto produto) {
 		this.produtos.add(produto);

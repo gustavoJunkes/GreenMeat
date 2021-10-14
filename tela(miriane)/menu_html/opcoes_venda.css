@@ -1,0 +1,16 @@
+.opcoes_vendas {
+
+position: relative;
+left: 600px;
+top: 100px;
+}
+
+.botao_comprar{
+position: relative;
+top:10px;
+}
+.descricao-produto{
+  position: relative;
+top:200px;
+left:400px;
+}

@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-	<jsp:include page="menu-lateral.jsp"/>
+	<jsp:include page="../menu-lateral-funcionario.jsp"/>
    </div>
 
 <header>
@@ -33,26 +33,31 @@
         <table>
         <thead>
             <tr>
-               <th>Id do produto</th>
+              <th>Id do produto</th>
+              <th>Fornecedor</th>
               <th>Nome do produto</th>
               <th>Descrição</th>
               <th>Tipo da Carne</th>
               <th>Preço Custo</th>
               <th>Preço venda</th>
-               
+             <%-- <th>Quantidade em estoque</th> --%>
+              <th>Ações</th>
             </tr>
             </thead>
 				<tbody>
             <c:forEach var="produtos" items="${produtos}">
 						<tr>
-            
               <td><c:out value="${produtos.id}" /></td>
+              <td><a href="perfil-fornecedor?id=<c:out value='${produtos.fornecedor.id}'/>"><c:out value="${produtos.fornecedor.nomeFantasia}" /></a> </td>
               <td><c:out value="${produtos.nome}" /></td>
               <td><c:out value="${produtos.descricao}" /></td>
-              <th><c:out value="${produtos.tipoCarne }" /></th>
-              <th><c:out value="${produtos.precoCusto}" /></th>
-              <th><c:out value="${produtos.custoVenda}" /></th>
-              
+              <td><c:out value="${produtos.tipoCarne }" /></th>
+              <td><c:out value="${produtos.precoCusto}" /></th>
+              <td><c:out value="${produtos.precoVenda}" /></th>
+             <%-- <td><c:out value="${produtos.fornecedor.estoque.item.quantidade}" /></th>
+              --%>  
+              <td><a href="editar-produto?id=<c:out value='${produtos.id}'/>">Editar</a><a href="deletar-produto?id=<c:out value='${produtos.id}'/>">Deletar</a></td>
+             
             </tr>
             </c:forEach>
             	</tbody>

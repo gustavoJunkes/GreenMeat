@@ -16,9 +16,9 @@
 </head>
 <body>
 
-<div>
-	<jsp:include page="menu-lateral.jsp"/>
-   </div>
+	<div>
+		<jsp:include page="menu-lateral-cliente.jsp"/>
+    </div>
 
         <div id="login">
           <form method="post" action="logar"> 
@@ -29,6 +29,19 @@
               <label for="email_login">Senha</label>
               <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" />                   
               <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+				              
+				              <script> 
+				function validarSenha(){ 
+				senha1 = document.f1.senha1.value 
+				senha2 = document.f1.senha2.value 
+				
+				if (senha1 == senha2) 
+				alert("SENHAS IGUAIS") 
+				document.f1.submit(); // Adiciona isso que ele irá submeter o form!
+				else 
+				alert("SENHAS DIFERENTES") 
+				} 
+</script> 
               <label for="manterlogado">Manter-me logado</label>     
               <input type="submit" value="Logar" />                      
           

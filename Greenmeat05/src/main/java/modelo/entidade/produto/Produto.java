@@ -16,7 +16,6 @@ import modelo.entitidade.usuario.Fornecedor;
 import modelo.excecao.InvalidFieldException;
 import modelo.excecao.produto.ExpirationDateInvalidException;
 
-
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {
@@ -44,7 +43,7 @@ public class Produto implements Serializable {
 	private LocalDate dataValidade;
 
 	@ManyToOne
-	@JoinColumn(name = "id_fornecedor")			
+	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;
 
 //	@Enumerated(EnumType.STRING)
@@ -55,8 +54,8 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda, Fornecedor fornecedor)
-			throws InvalidFieldException {
+	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda,
+			Fornecedor fornecedor) throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
@@ -65,8 +64,16 @@ public class Produto implements Serializable {
 		setFornecedor(fornecedor);
 	}
 
-	public Produto(String nome, String descricao, String tipoCarne)
+	public Produto(String nome, String descricao, String tipoCarne, float precoCusto, float precoVenda)
 			throws InvalidFieldException {
+		setNome(nome);
+		setDescricao(descricao);
+		setTipoCarne(tipoCarne);
+		setPrecoCusto(precoCusto);
+		setPrecoVenda(precoVenda);
+	}
+
+	public Produto(String nome, String descricao, String tipoCarne) throws InvalidFieldException {
 		setNome(nome);
 		setDescricao(descricao);
 		setTipoCarne(tipoCarne);
@@ -96,7 +103,7 @@ public class Produto implements Serializable {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao)  {
+	public void setDescricao(String descricao) {
 
 //		if (descricao.isEmpty())
 //			throw new InvalidFieldException("Campo nulo");
@@ -144,7 +151,6 @@ public class Produto implements Serializable {
 		this.tipoCarne = tipoCarne;
 	}
 
-
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
@@ -153,5 +159,4 @@ public class Produto implements Serializable {
 		this.fornecedor = fornecedor;
 	}
 
-	
 }

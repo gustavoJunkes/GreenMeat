@@ -3,7 +3,7 @@ package modelo.dao.estoque;
 import java.util.List;
 
 import modelo.entidade.produto.Estoque;
-import modelo.entidade.produto.Item;
+import modelo.entitidade.usuario.Fornecedor;
 
 public interface EstoqueDAO {
 
@@ -13,5 +13,7 @@ public interface EstoqueDAO {
 	
 	void atualizarEstoque(Estoque estoque);
 	
-	List<Estoque>recuperarEstoque();
+	List<Estoque>recuperarEstoques();
+	
+	Estoque recuperarEstoqueFornecedor(Fornecedor fornecedor);
 }

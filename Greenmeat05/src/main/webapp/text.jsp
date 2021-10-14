@@ -6,12 +6,14 @@
 <html>
 <head>
 
+<meta charset="UTF-8">
+
+
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyles.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+<title>Insert title here</title>
 
-<meta charset="UTF-8">
-<title>text</title>
 </head>
 <body>
 
@@ -27,5 +29,11 @@ Com os valores de preservar o meio ambiente, temos como parceiros fornecedores c
 que contribuem para o aquecimento global) e fornecedores que cumprem com seu compromisso referente a saúde e bem estar animal até,
 e durante o seu abate visando sempre buscar qualidade na mão de obra.
   </div>
+
   </body>
 </html>
+
+
+</body>
+</html>
+

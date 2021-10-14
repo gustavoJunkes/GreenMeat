@@ -1,4 +1,6 @@
-
+<%@page import="modelo.entitidade.usuario.Fornecedor"%>
+<%@page import="modelo.entitidade.usuario.Funcionario"%>
+<%@page import="modelo.entitidade.usuario.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,8 +18,16 @@
 </head>
 <body>
 	<div>
-	<jsp:include page="menu-lateral.jsp"/>
-   </div>
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
+	<%}%>
+	</div>
 
 	<div id="cadastro">
 		<form method="post" action="inserir-fornecedor">
@@ -45,9 +55,7 @@
           
           	<p>
 				<label for="razaoSocial"> Razão Social</label> <input
-					id="razaoSocial" name="razaoSocial" required="required" type="text"
-					
-					value="<c:out value='${fornecedor.razaoSocial}' />" />
+					id="razaoSocial" name="razaoSocial" required="required" type="text" value="<c:out value='${fornecedor.razaoSocial}' />" />
 			</p>
 			<p>
 				<label for="nomeFantasia"> Nome Fantasia </label> <input
@@ -69,6 +77,18 @@
 				<label for="senha">Crie uma senha</label> <input id="senha"
 					name="senha" required="required" type="password"
 					value="<c:out value='${fornecedor.senha}' />" />
+								<script> 
+					function validarSenha(){ 
+					senha1 = document.f1.senha1.value 
+					senha2 = document.f1.senha2.value 
+					
+					if (senha1 == senha2) 
+					alert("SENHAS IGUAIS") 
+					document.f1.submit(); // Adiciona isso que ele irá submeter o form!
+					else 
+					alert("SENHAS DIFERENTES") 
+					} 
+					</script> 
 			</p>
 		<h2>Contato</h2>
 			<br>

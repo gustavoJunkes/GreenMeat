@@ -22,10 +22,14 @@ public interface ProdutoDAO {
 
 	Produto recuperarProdutoItem(Item item);
 
+	List<Produto> recuperarPorNome(Produto produto);
+	
 	List<Produto> recuperarPorCategoria(Produto produto);
 	
 	List<Produto> recuperarProdutosFornecedor(Fornecedor fornecedor);
 
 	List<Produto> recuperarProdutos();
+	
+	
 
 }

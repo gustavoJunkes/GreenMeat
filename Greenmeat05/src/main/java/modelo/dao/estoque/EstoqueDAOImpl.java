@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,6 +15,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Estoque;
+import modelo.entidade.produto.Item;
+import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Fornecedor;
 
 public class EstoqueDAOImpl implements EstoqueDAO{
 
@@ -105,7 +110,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 		}
 	}
 
-	public List<Estoque> recuperarEstoque() {
+	public List<Estoque> recuperarEstoques() {
 
 		Session sessao = null;
 		List<Estoque> estoques = null;
@@ -142,9 +147,50 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 		}
 
 		return estoques;
-
 	}
 
+	public Estoque recuperarEstoqueFornecedor(Fornecedor fornecedor) {
+
+		Session sessao = null;
+		Estoque estoque = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Estoque> criteria = construtor.createQuery(Estoque.class);
+			Root<Estoque> raizEstoque = criteria.from(Estoque.class);
+
+			Join<Estoque, Fornecedor> juncaoFornecedor = raizEstoque.join("estoque");
+
+			ParameterExpression<Long> idFornecedor = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoFornecedor.get("id"), idFornecedor));
+
+			estoque = sessao.createQuery(criteria).setParameter(idFornecedor, fornecedor.getId()).getSingleResult();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return estoque;
+	}
+
+	
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();

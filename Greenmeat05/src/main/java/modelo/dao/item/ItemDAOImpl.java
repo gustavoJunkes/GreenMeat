@@ -14,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import modelo.entidade.produto.Estoque;
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Pedido;
 import modelo.entitidade.usuario.Cliente;
@@ -122,7 +123,7 @@ public class ItemDAOImpl implements ItemDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Item> criteria = construtor.createQuery(Item.class);
-			Root<Item> raizItem= criteria.from(Item.class);
+			Root<Item> raizItem = criteria.from(Item.class);
 
 			Join<Item, Pedido> juncaoPedido = raizItem.join("pedido");
 
@@ -132,6 +133,7 @@ public class ItemDAOImpl implements ItemDAO {
 			itens = sessao.createQuery(criteria).setParameter(idPedido, pedido.getId()).getResultList();
 
 			sessao.getTransaction().commit();
+		
 
 		} catch (Exception sqlException) {
 
@@ -151,6 +153,49 @@ public class ItemDAOImpl implements ItemDAO {
 		return itens;
 	}
 
+	public Item recuperarItemPorId(Item item) {
+		Session sessao = null;
+		Item itemRecuperado = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Item> criteria = construtor.createQuery(Item.class);
+			Root<Item> raizItem = criteria.from(Item.class);
+
+			criteria.select(raizItem);
+			
+			ParameterExpression<Long> idItem = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizItem.get("id"), idItem));
+
+			itemRecuperado = sessao.createQuery(criteria).setParameter(idItem, item.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return itemRecuperado;
+	}
+
+	
+	
 	public List<Item> recuperarItens() {
 
 		Session sessao = null;
@@ -189,6 +234,48 @@ public class ItemDAOImpl implements ItemDAO {
 
 		return itens;
 
+	}
+
+	public List<Item> recuperarItensEstoque(Estoque estoque) {
+
+		Session sessao = null;
+		List<Item> itens = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Item> criteria = construtor.createQuery(Item.class);
+			Root<Item> raizItem = criteria.from(Item.class);
+
+			Join<Item, Estoque> juncaoEstoque= raizItem.join("estoque");
+
+			ParameterExpression<Long> idEstoque = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoEstoque.get("id"), idEstoque));
+
+			itens = sessao.createQuery(criteria).setParameter(idEstoque, estoque.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return itens;
 	}
 
 	private SessionFactory conectarBanco() {
