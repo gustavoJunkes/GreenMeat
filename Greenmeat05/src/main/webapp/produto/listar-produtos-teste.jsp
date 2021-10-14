@@ -40,8 +40,9 @@
     
 }
 .separacao{
-	left:150px;
-	margin-left:200px; 
+	left:2%;
+	margin-left:15%; 
+	position: relative;
 }
 
 .botao{
@@ -111,7 +112,7 @@ width: 100%;
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"><c:out value="${produto.nome}" /></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -119,13 +120,13 @@ width: 100%;
       <div class="modal-body">
         <form action="adicionar-produto-pedido" method="post">
 		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
-		      	<input type="number" name="quantidade" value='<c:out value="${produto.id}"></c:out>'>
+		      	<input type="number" name="quantidade" min="1" max="100"	 value='1'>
 		      	<input type="submit" value="Adicionar ao pedido">
       	</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
       </div>
     </div>
   </div>
