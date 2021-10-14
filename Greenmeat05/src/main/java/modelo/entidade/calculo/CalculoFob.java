@@ -215,10 +215,15 @@ public class CalculoFob {
 		setDespesas_portuarias(Despesas_portuarias);
 				
 	}
+
+	public float calcularValorFob() {
+		int resultado= 0;
+		
+		
 	
-	
-	
-	
+		return resultado;
+		
+	}
 	
 }
 
