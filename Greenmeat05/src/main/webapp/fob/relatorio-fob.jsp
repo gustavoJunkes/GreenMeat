@@ -46,7 +46,7 @@
           
         </tr>
         <tr>
-            <td>Despesas Ocorridas No Mercado INTERNO cOM a VENDA </td>
+            <td>Despesas Ocorridas No Mercado Interno a Venda  </td>
             <td>22344545</td>
 
         </tr>
@@ -55,9 +55,6 @@
         </tr>
         
         </table>
-
-
-
 
 </body>
 </html>
