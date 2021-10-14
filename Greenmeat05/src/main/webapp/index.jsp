@@ -10,12 +10,12 @@
 </head>
 <body>
 <div class=telaInicial>
-    <c:if test="${usuario == null}">  
+
 	<div>
 
 	<jsp:include page="navbar.jsp"/>
     </div>
-  </c:if>
+
 
 	<div>
 	<jsp:include page="login.jsp"/>
@@ -24,7 +24,8 @@
    <div>
 	<jsp:include page="text.jsp"/>
    </div>
-
+</div>
 </body>
 </html>
 
+    <c:if test="${usuario == null}">  </c:if>
