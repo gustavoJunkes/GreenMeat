@@ -12,22 +12,44 @@
 <div class=telaInicial>
     <c:if test="${usuario == null}">  
 	<div>
+
 	<jsp:include page="navbar.jsp"/>
     </div>
   </c:if>
+
+	<div>
+	<jsp:include page="login.jsp"/>
+   </div>
    
-  <c:if test="${usuario == null}">  
+   <div>
+	<jsp:include page="text.jsp"/>
+   </div>
+   
+
+	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
+		<jsp:include page="menu-lateral-cliente.jsp"/>
+	<%} %>
+	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
+		<jsp:include page="menu-lateral-funcionario.jsp"/>
+	<%}%>
+	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
+	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<%}%>
+	</div>
+
+   
+
 	<div>
 	<jsp:include page="login.jsp"/>
     </div>
-  </c:if>
-  
-   <c:if test="${usuario == null}">  
+
+ 
 	<div>
 	<jsp:include page="text.jsp"/>
     </div>
-  </c:if>
+
   </div>
+
 </body>
 </html>
 
