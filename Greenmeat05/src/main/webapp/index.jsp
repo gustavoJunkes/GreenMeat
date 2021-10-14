@@ -10,11 +10,19 @@
  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- 
 <title>Index</title>
 </head>
 <body>
 	<div>
+	<div>
+	<jsp:include page="login.jsp"/>
+   </div>
+   
+   <div>
+	<jsp:include page="text.jsp"/>
+   </div>
+   
+
 	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
 		<jsp:include page="menu-lateral-cliente.jsp"/>
 	<%} %>
@@ -39,6 +47,7 @@
   </c:if>
   
   
+
 </body>
 </html>
 

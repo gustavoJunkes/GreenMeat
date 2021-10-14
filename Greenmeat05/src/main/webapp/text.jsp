@@ -5,13 +5,15 @@
 
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyles.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
- 
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -28,5 +30,10 @@ que contribuem para o aquecimento global) e fornecedores que cumprem com seu com
 e durante o seu abate visando sempre buscar qualidade na mão de obra.
   </div>
 
+  </body>
+</html>
+
+
 </body>
 </html>
+
