@@ -21,7 +21,7 @@
 	<div>
 	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
 		<jsp:include page="menu-lateral-cliente.jsp"/>
-	<%} %>
+	<%}%>
 	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
 		<jsp:include page="menu-lateral-funcionario.jsp"/>
 	<%}%>
