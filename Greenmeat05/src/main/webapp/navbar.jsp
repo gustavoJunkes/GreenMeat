@@ -9,14 +9,16 @@
 <title>Insert title here</title>
 
  	<link type="text/css" href="/resources/css/css/bootstrap.min.css" rel="stylesheet">
-	<style><%@include file="/resources/css/css/bootstrap.min.css"%>
+	<style><%@include file="/resources/css/css/bootstrap.min.css"%></style>
 	
+	
+ 	
+	<style type="text/css">	
 	.lista-compras{
   position: fixed;
   right: 2px;
   top: 10%;
  }
- <%--select * from produto where nome like "%var%"--%>
  .navbar-super{
  	top:0px;
 	left:0%;
@@ -59,14 +61,12 @@ display: inline;
       				<li class="nav-item active">
        	 				<a class="nav-link" href="novo-fornecedor">Seja um Fornecedor <span class="sr-only">(página atual)</span></a>
       				</li>
-<SELECT>
-                  <option value="">MENU</option> 
-                   <option value="">Produtos</option>
-                  <option value="">Meu Perfil</option>
-                    <option value="">Meu Pedido</option>
-                  
-                  
-  </SELECT>
+      				
+      				<li class="nav-item active">
+       	 				<a class="nav-link" href="listar-produtos">Produtos<span class="sr-only">(página atual)</span></a>
+      				</li>
+
+
     	 		</ul>
   		</div>
 	</nav>

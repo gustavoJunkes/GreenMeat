@@ -1,5 +1,11 @@
 package modelo.dao.produto;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,8 +22,8 @@ import org.hibernate.service.ServiceRegistry;
 
 import modelo.entidade.produto.Item;
 import modelo.entidade.produto.Produto;
+import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Fornecedor;
-import modelo.entitidade.usuario.Usuario;
 
 
 
@@ -375,6 +381,62 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 		return produtos;
 	}
+	
+//	public List<Produto> recuperarProdutosNome(String nome) {
+//
+//		Connection conexao = null;
+//		Statement consulta = null;
+//		ResultSet resultado = null;
+//
+//		List<Cliente> clientes = new ArrayList<Cliente>();
+//
+//		try {
+//
+//			conexao = conectarBancoEm();
+//			consulta = conexao.createStatement();
+//			resultado = consulta.executeQuery("SELECT * FROM produto where nome like '?'");
+//
+//			while (resultado.next()) {
+//
+////				int id = resultado.getInt("id_cliente");
+//				String nome = resultado.getString("nome_cliente");
+////				String cpf = resultado.getString("cpf_cliente");
+//				int idade = resultado.getInt("idade_cliente");
+//				double divida = resultado.getDouble("divida_cliente");
+//
+//				clientes.add(new Cliente(id, nome, cpf, idade, divida));
+//			}
+//
+//		} catch (SQLException erro) {
+//			erro.printStackTrace();
+//		}
+//
+//		finally {
+//
+//			try {
+//
+//				if (resultado != null)
+//					resultado.close();
+//
+//				if (consulta != null)
+//					consulta.close();
+//
+//				if (conexao != null)
+//					conexao.close();
+//
+//			} catch (SQLException erro) {
+//
+//				erro.printStackTrace();
+//			}
+//		}
+//
+//		return clientes;
+//	}
+//	
+//	
+//	private Connection conectarBancoEm() throws SQLException {
+//		return DriverManager.getConnection("jdbc:mysql://localhost/cadastro?" + "user=admin&password=password");
+//	}
 	
 	private SessionFactory conectarBanco() {
 

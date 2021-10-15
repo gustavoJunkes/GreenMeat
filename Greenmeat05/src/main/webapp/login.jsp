@@ -12,7 +12,7 @@
  
 
 <meta charset="UTF-8">
-<title>Login</title>
+	<title>Login</title>
 </head>
 <body>
 
@@ -24,7 +24,6 @@
               <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/>                 
               <label for="email_login">Senha</label>
               <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" />                   
-              <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
 				              
 				              <script> 
 				function validarSenha(){ 
@@ -38,7 +37,7 @@
 				alert("SENHAS DIFERENTES") 
 				} 
 </script> 
-              <label for="manterlogado">Manter-me logado</label>     
+				<br></br>
               <input type="submit" value="Logar" />                      
           
           
