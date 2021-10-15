@@ -35,13 +35,19 @@
 			<p>
 				<label for="nome"> Nome </label> <input id="nome" name="nome"
 					required="required" type="text" 
-					value="<c:out value=''/>" />
-			</p>
+	value="<c:out value='${cliente.nome}' />" />			</p>
 			<p>
 				<label for="sobrenome"> Sobrenome </label> <input id="sobrenome"
 					name="sobrenome" required="required" type="text"
-					 value='' />
-					</p>
+	value="<c:out value='${cliente.sobrenome}' />" />					</p>
+						<p>
+				<label for="sobrenome"> CPF </label> <input id="sobrenome"
+					name="sobrenome" required="required" type="text"
+	value="<c:out value='${cliente.CPF}' />" />					</p>
+						<p>
+				<label for="sobrenome"> Data De Nascimento </label> <input id="sobrenome"
+					name="sobrenome" required="required" type="text"
+	value="<c:out value='${cliente.dataDeNascimento}' />" />					</p>
 					<p>
 					 <label for="login">Crie um Login</label> 
 					 <input id="loginInserir" name="login" required="required" type="text" 
