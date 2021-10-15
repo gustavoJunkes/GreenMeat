@@ -451,7 +451,7 @@ left:400px;
     line-height: 1.5385;
     color: #333;
     text-align: left;
-    background-color: #2196F3
+    background-color: #e6ffe6;
 }
 
 .mt-50 {
@@ -517,6 +517,15 @@ left:400px;
 a {
     text-decoration: none !important
 } 
-   
+   .perfil_cliente{
+	position:relative;
+	left:500px
+}
+  .txt_perfil_cliene_a{
+  position:relative;
+	left:97px;
+   top:70px;
   
+  
+  }
 

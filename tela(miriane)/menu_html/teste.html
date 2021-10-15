@@ -1,41 +1,25 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ page isELIgnored="false" %>
-
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <head>
-        <title>Perfil-cliente</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<link type="text/css" rel="stylesheet"
-    href="<%=request.getContextPath()%>"resources/css/mystyles.css/>
- <style><%@include file="/resources/css/mystyles.css"%></style>
+<link rel="stylesheet" href="pedidos.css">
 
 </head>
 <body>
-
-<div>
-<jsp:include page="menu-lateral-cliente.jsp"/>
-</div>
-
-<div class="txt_perfil_cliene_a"><h1>Meu Perfil</div>
-
-<div class="perfil_cliente">
-    <div class="container bootstrap snippet">
     
-            
-              
+ <div class="perfil">
+    <div class="container bootstrap snippet">
+              <div class="col-sm-10"><h1>Perfil</h1></div>
                      <div class="col-sm-3"><!--left col-->        
   <div class="text-center">
           </div></hr><br>
@@ -157,9 +141,10 @@
         </div><!--/row-->
     </div>
     </div>
- 
 </body>
 </html>
+
+
 
 
 
