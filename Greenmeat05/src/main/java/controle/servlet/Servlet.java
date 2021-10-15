@@ -439,14 +439,12 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
 		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
-		if (cliente == null || cliente.getClass() != Cliente.class) {
-			response.sendRedirect("inicio");
-		} else {
+		
 			List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
 			request.setAttribute("pedidos", pedidos);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); // listar
 			dispatcher.forward(request, response);
-		}
+		
 	}
 
 	private void editarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
@@ -516,7 +514,7 @@ public class Servlet extends HttpServlet {
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
 		sessao.removeAttribute("pedido");
-		response.sendRedirect("inicio");// pagina de confirmação de compra aqui
+		response.sendRedirect("listar-produtos");// pagina de confirmação de compra aqui
 	}
 
 	public void editarItem(HttpServletRequest request, HttpServletResponse response) {
