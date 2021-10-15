@@ -618,7 +618,8 @@ pre code {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px;
+  margin-left: 15px;
+  width:70%;
    right: 2px;
   top: 10%;
 }
@@ -4462,6 +4463,7 @@ tbody.collapse.show {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  height: 100% ;
 }
 
 .card > hr {

@@ -26,14 +26,14 @@
 	.lista-compras{
   position: fixed;
   right: 2px;
-  top: 10%;
+  margin-top: 3.5%;
   width: 30%;
  }
- <%--select * from produto where nome like "%var%"--%>
+ 
 
 
- .altura-diferenciada{
- height: 550px;
+ .diferenciado{
+	margin-top:5px; 
  }
 
  .col-md-4 {
@@ -83,7 +83,8 @@ color:#194f15
     background-clip: border-box ;
     border: 0px solid rgba(0, 0, 0, .0);
     border-radius: .1500rem;
-    height: 50%;
+    height: 100%;
+ 
 }
 
 .card-img-actions {
@@ -96,11 +97,10 @@ color:#194f15
     padding: 1.rem;
     text-align: center;
        height: -40%;
-    
+           
 }
 
 .card-img {
-    width: 120px
 }
 
 .star {
@@ -132,14 +132,14 @@ a {
  
  .navbar-super{
  	top:0px;
-	left:14%;
+	left:15%;
 	width: 85%;
 	box-shadow: lightgrey 0em 0em 1em 0px;
 }
 
 .produto{
 	margin-top: 70px;
-    margin-left: 5%;
+    margin-left: 0%;
     border: 0.1px solid rgb(0, 0, 0);
     float: left;
     width: 180px;
@@ -160,7 +160,7 @@ width: 100%;
 
 
 	<nav class="navbar navbar-super navbar-expand-lg navbar-light bg-light">
-  		<a class="navbar-brand" href="#">Navbar</a>
+  		<a class="navbar-brand" href="#">Home</a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
    			<span class="navbar-toggler-icon"></span>
  		</button>
@@ -181,6 +181,8 @@ width: 100%;
   		</div>
 	</nav>
 
+<div>
+
 <%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
 		<jsp:include page="../menu-lateral-cliente.jsp"/>
 	<%} %>
@@ -190,25 +192,64 @@ width: 100%;
 	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
 	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
-
-<div class="col-md-4 mt-2">
+</div>
+<div class="col-md-4 mt-5">
   <div class="container separacao">
     <div class="row">
-        
+    
         <c:forEach var="produto" items="${produtos}">
-        
-        <div class="col-md-6 altura-diferenciada">
+
+        <div class="col-md-6 diferenciado">
                 
-        <div class="card">
+        <div class="card altura-diferenciada">
                 <div class="card-body">
                    
                 <div class="card-body bg-light text-center">
                     <div class="mb-2">
                         <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true"><c:out value="${produto.nome}" /></a> </h6> <h7 class="text-muted"><c:out value="${produto.tipoCarne}" /><h7>
                     </div>
-                    <h3 class="mb-0 font-weight-semibold">R$<c:out value="${produto.nome}" /></h3>
+                    <h3 class="mb-0 font-weight-semibold">R$<c:out value="${produto.precoVenda}" /></h3>
                     <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>
-                    <div class="text-muted mb-3">34 reviews</div> <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+                    <div class="text-muted mb-3">Fornecedor verificado</div> 
+                    <!-- Button trigger modal(adicionar ao pedido) -->
+			<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+  				Adicionar ao pedido
+			</button>
+			
+			
+				<!-- Modal adicionar ao pedido -->
+      		
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><c:out value="${produto.nome}" /></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      	
+    </div>
+      <form action="adicionar-produto-pedido" method="post">
+      <div class="modal-body">
+        		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
+		      	<input type="number" name="quantidade" min="1" max="100" value='1'>
+	
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+       <button type="submit" class="btn btn-primary">Adicionar ao pedido</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+<!-- fim do modal -->
+	
+			
+			
+			
+                    <button type="button" class="btn bg-cart" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
                 </div>
             </div>
         </div>
@@ -223,45 +264,15 @@ width: 100%;
         	</div>
       	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
      
-      		<!-- Button trigger modal(adicionar ao pedido) -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  				Adicionar ao pedido
-			</button>
+      		
       		
       	<%}%>
     </div>
 	
-	<!-- Modal adicionar ao pedido -->
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><c:out value="${produto.nome}" /></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="adicionar-produto-pedido" method="post">
-      <div class="modal-body">
-        		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
-		      	<input type="number" name="quantidade" min="1" max="100" value='1'>
-		      	
-      	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-       <button type="submit" class="btn btn-primary">Adicionar ao pedido</button>
-      </div>
-       </form>
-    </div>
-  </div>
-</div>
-<!-- fim do modal -->
 	
 	</c:forEach>
   </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
        <div class="lista-compras">
           <ul>
           <c:forEach var="item" items="${itens}">
