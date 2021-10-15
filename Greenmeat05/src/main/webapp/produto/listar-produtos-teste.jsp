@@ -212,18 +212,19 @@ width: 100%;
                     <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>
                     <div class="text-muted mb-3">Fornecedor verificado</div> 
                     <!-- Button trigger modal(adicionar ao pedido) -->
-			<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+			<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter<c:out value="${produto.id}" />">
   				Adicionar ao pedido
 			</button>
-			
-			
-				<!-- Modal adicionar ao pedido -->
+                </div>
+                
+                		<!-- Modal adicionar ao pedido -->
       		
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter<c:out value="${produto.id}" />" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><c:out value="${produto.nome}" /></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">        		 <p>Informe uma quantidade:</p>    	
+</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -232,7 +233,7 @@ width: 100%;
       <form action="adicionar-produto-pedido" method="post">
       <div class="modal-body">
         		      	<input type="hidden" name="idProduto" value='<c:out value="${produto.id}"></c:out>'>
-		      	<input type="number" name="quantidade" min="1" max="100" value='1'>
+		      	<input id="qtd" type="number" name="quantidade" min="1" max="100" value='1'>
 	
 	
       </div>
@@ -245,32 +246,11 @@ width: 100%;
   </div>
 </div>
 <!-- fim do modal -->
-	
-			
-			
-			
-                    <button type="button" class="btn bg-cart" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-                </div>
             </div>
         </div>
       </div>
       </c:forEach>
-        <c:forEach var="produto" items="${produtos}">
-	
-	 <div class="produto">
-      		<div class="desc1"> 
-      			<p><c:out value="${produto.nome}" /></p>
-      			<p><c:out value="${produto.precoVenda}"/></p>
-        	</div>
-      	<%if(request.getSession().getAttribute("usuario") instanceof Cliente){ %>
-     
-      		
-      		
-      	<%}%>
-    </div>
-	
-	
-	</c:forEach>
+    
   </div>
         <div class="col-md-1">
        <div class="lista-compras">
