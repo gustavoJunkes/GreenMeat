@@ -23,3 +23,7 @@ table {
 
 
   }
+  .perfil{
+    position: relative;
+    left: 600px;
+  }
