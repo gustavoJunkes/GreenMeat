@@ -43,10 +43,10 @@
 <div class="calculo_fob">
 <form action="fob">
     <label for="aquestion">Valor do produto no mercado interno:</label>
-    <input type="text" id="valor_produto_mercado_interno" name="prod_merc_inter"><br><br>
+    <input type="text" id="valor_produto_mercado_interno" name="valorProdutoMercadoInterno"><br><br>
 
     <label for="bquestion">Lucro pretendido no mercado interno:</label>
-    <input type="text" id="lucro_pretendido_mercado_interno" name="lucro_pretendido_mercado_interno"><br><br>
+    <input type="text" id="lucro_pretendido_mercado_interno" name="lucroPretendidoMercadoInterno"><br><br>
 
     <label for="cquestion">Moeda:</label>
     <input type="text" id="moeda" name="moeda"><br><br>
@@ -54,25 +54,25 @@
     <!--etapa 2-->
 
     <label for="dquestion">Despesas ocorridas no mercado interno com a venda do produto:</label>
-    <input type="text" id="Despesas_ocorridas_mercado_interno_venda_produto" name="Despesas_ocorridas_mercado_interno_venda_produto"><br><br>
+    <input type="text" id="Despesas_ocorridas_mercado_interno_venda_produto" name="despesasOcorridasMercadoInternoVendaProduto"><br><br>
     
     <label for="equestion">Despesas com intermediarios em serviços no mercado interno:</label>
-    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_interno" name="Despesas_intermediarios_em servicos_mercado_interno"><br><br>
+    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_interno" name="despesasIntermediariosEmServicosMercadoInterno"><br><br>
 
 
 
     <!--etapa 3-->
     <label for="fquestion">Despesas com intermediarios em serviços no mercado externos:</label>
-    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_externos" name="Despesas_intermediarios_em servicos_mercado_externos"><br><br>
+    <input type="text" id="Despesas_intermediarios_em_servicos_mercado_externos" name="despesasIntermediariosEmServicosMercadoExterno"><br><br>
 
     <label for="gquestion">Despesas com despacho de exportação:</label>
-    <input type="text" id="Despesas_com_despacho_exportacao" name="Despesas_com_despacho_exportacao"><br><br>
+    <input type="text" id="Despesas_com_despacho_exportacao" name="despesasDespachoExportacao"><br><br>
 
     <label for="hquestion">Despesas com transporte até o porto na origem::</label>
-    <input type="text" id="Despesas_com_transporte_ate_porto_origem" name="Despesas_com_transporte_ate_porto_origem"><br><br>
+    <input type="text" id="Despesas_com_transporte_ate_porto_origem" name="despesasTransporteAtePortoOrigem"><br><br>
 
     <label for="iquestion">Despesas portuarias:</label>
-    <input type="text" id="Despesas_portuarias" name="Despesas_portuarias"><br><br>
+    <input type="text" id="Despesas_portuarias" name="despesasPortuarias"><br><br>
 
 
     <input type="submit" value="Calcular">

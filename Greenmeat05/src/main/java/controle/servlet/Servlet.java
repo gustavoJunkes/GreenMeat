@@ -102,6 +102,11 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
+			
+			case "/fob":
+				calcularFob(request, response, sessao);
+				break;
+			
 			case "/inicio":
 				mostrarTelaInicio(request, response, sessao);
 				break;
@@ -334,6 +339,36 @@ public class Servlet extends HttpServlet {
 
 //	private void mostrarPerfilCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sessao )
 
+	private void calcularFob(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws ServletException, IOException {
+
+		Float valorProdutoMercadoInterno = Float.parseFloat(request.getParameter("valorProdutoMercadoInterno"));
+		Float lucroPretendidoMercadoInterno = Float.parseFloat(request.getParameter("lucroPretendidoMercadoInterno"));
+		String moeda = request.getParameter("moeda"); 
+		Float despesasOcorridasMercadoInternoVendaProduto = Float.parseFloat(request.getParameter("despesasOcorridasMercadoInternoVendaProduto"));
+		Float despesasIntermediariosEmServicosMercadoInterno = Float.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoInterno"));
+		Float despesasIntermediariosEmServicosMercadoExterno = Float.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoExterno"));
+		Float despesasDespachoExportacao = Float.parseFloat(request.getParameter("despesasDespachoExportacao"));
+		Float despesasTransporteAtePortoOrigem = Float.parseFloat(request.getParameter("despesasTransporteAtePortoOrigem"));
+		Float despesasPortuarias = Float.parseFloat(request.getParameter("despesasPortuarias"));
+		
+		
+//		Calculo fob
+		
+//		*Impostos
+		Float ipi = (float) 5;
+		Float icms = (float) 17;
+		Float pis = (float) 2.65;
+		Float cofins = (float) 9.60;
+		
+		Float ipiSobreProduto = valorProdutoMercadoInterno / 105;
+		Float valorProdutoSemIpi = valorProdutoMercadoInterno - ipiSobreProduto;
+		
+		
+
+	}
+	
+	
 	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
@@ -350,7 +385,7 @@ public class Servlet extends HttpServlet {
 		if (sessao.getAttribute("usuario") != null) {
 			response.sendRedirect(request.getRequestURI());
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		}
 
