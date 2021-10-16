@@ -26,7 +26,7 @@
 	.lista-compras{
   position: fixed;
   right: 2px;
-  margin-top: 3.5%;
+  margin-top: 8.5%;
   width: 30%;
  }
  
