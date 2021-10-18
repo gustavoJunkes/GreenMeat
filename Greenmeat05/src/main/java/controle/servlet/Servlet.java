@@ -2,6 +2,7 @@ package controle.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -535,7 +536,7 @@ public class Servlet extends HttpServlet {
 
 //		Long id = Long.parseLong(request.getParameter("idPedido"));
 		Pedido pedido = (Pedido) sessao.getAttribute("pedido");
-		List<Item> itens = pedido.getItens();
+//		List<Item> itens = pedido.getItens();
 
 //		for (Item item : itens) {
 //			Fornecedor fornecedor = item.getProduto().getFornecedor();
@@ -546,6 +547,7 @@ public class Servlet extends HttpServlet {
 //			}
 //		}
 
+		pedido.setDataEntrega(LocalDate.of(2021, 11, 02));
 		pedido.finalizarPedido();
 		pedidoDAO.atualizarPedido(pedido);
 		sessao.removeAttribute("pedido");
@@ -716,11 +718,17 @@ public class Servlet extends HttpServlet {
 		} else {
 			Cliente cliente = (Cliente) sessao.getAttribute("usuario");
 			List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(cliente);
-			request.setAttribute("localidades", localidades);
-			for (Localidade localidade : localidades) {
-				List<Endereco> enderecos = enderecoDAO.recuperarEnderecosLocalidade(localidade);
-				request.setAttribute("enderecos", enderecos);
-			}
+			Endereco endereco = enderecoDAO.recuperarPorId((long) 2);
+			request.setAttribute("endereco", endereco);
+			request.setAttribute("localidade", localidadeDAO.recuperarLocalidadeEndereco(endereco));
+//			for (Localidade localidade : localidades) {
+//				request.setAttribute("localidade", localidade);
+//				List<Endereco> enderecos = enderecoDAO.recuperarEnderecosLocalidade(localidade);
+//				for (Endereco endereco: enderecos) {
+//				request.setAttribute("endereco", endereco);
+//				}
+//			}
+			request.setAttribute("contato", contatoDAO.recuperarPorId((long) 2));
 			request.setAttribute("cliente", cliente);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("perfil-cliente.jsp");
 			dispatcher.forward(request, response);
@@ -973,14 +981,28 @@ public class Servlet extends HttpServlet {
 		} else {
 			if (sessao.getAttribute("usuario") instanceof Funcionario) {
 				Long id = Long.parseLong(request.getParameter("id"));
+			
 				Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
+				Endereco endereco = enderecoDAO.recuperarPorId((long) 1);
+				Localidade localidade = localidadeDAO.recuperarLocalidadeEndereco(endereco);
+				request.setAttribute("localidades", localidade);
+				request.setAttribute("endereco", endereco);
+				
 				request.setAttribute("fornecedor", fornecedor);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor-teste.jsp");
 				dispatcher.forward(request, response);
+				
 			} else {
 				Fornecedor fornecedor = (Fornecedor) sessao.getAttribute("usuario");
+				Endereco endereco = enderecoDAO.recuperarPorId((long) 1);
+				Localidade localidade = localidadeDAO.recuperarLocalidadeEndereco(endereco);
+				Contato contato = contatoDAO.recuperarPorId((long)2);
+				
+				request.setAttribute("localidades", localidade);
+				request.setAttribute("endereco", endereco);
+				request.setAttribute("contato", contato);
 				request.setAttribute("fornecedor", fornecedor);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor-teste.jsp");
 				dispatcher.forward(request, response);
 			}
 
@@ -1053,7 +1075,7 @@ public class Servlet extends HttpServlet {
 		localidades.add(localidade);
 		fornecedor.setLocalidades(localidades);
 
-		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
+		Endereco endereco = new Endereco(tipoDaVia, nomeDaRua, logradouro, numero, CEP, complemento, localidade);
 		enderecoDAO.inserirEndereco(endereco);
 
 		List<Endereco> enderecos = new ArrayList<Endereco>();

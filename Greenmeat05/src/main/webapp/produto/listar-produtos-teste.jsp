@@ -283,7 +283,7 @@ width: 100%;
     
                 <small class="text-muted"><c:out value="${item.produto.descricao}" /></small>
               </div>
-              <span class="text-muted"><c:out value="${item.produto.precoVenda}" /></span>
+              <span class="text-muted"><c:out value="${item.valorTotal}" /></span>
             </li>
         </c:forEach>            
             <li class="list-group-item d-flex justify-content-between">

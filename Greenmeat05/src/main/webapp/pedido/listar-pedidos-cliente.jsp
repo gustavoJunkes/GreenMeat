@@ -15,10 +15,16 @@
 
 <style type="text/css">
 .lista{
-left: 30%;
+left: 10%;
 display: inline-table;
 position:  relative;
 width: 70%;	
+}
+
+table{
+width: 80%;
+margin-left:10%;	
+margin-top: 10%;
 }
 
 </style>

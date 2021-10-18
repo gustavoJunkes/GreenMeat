@@ -14,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import modelo.entitidade.usuario.Cliente;
 import modelo.entitidade.usuario.Usuario;
 import modelo.entitidade.usuario.informacao.Contato;
 import modelo.entitidade.usuario.informacao.Endereco;
@@ -110,6 +111,38 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 		}
 	}
 
+	public Endereco recuperarPorId(Long id) {
+		Session sessao = null;
+		Endereco endereco = null;
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			endereco = sessao.find(Endereco.class, id );
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return endereco;
+		
+	}
+	
+	
 	public List<Endereco> recuperarEnderecos() {
 
 		Session sessao = null;

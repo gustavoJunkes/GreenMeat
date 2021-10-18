@@ -42,7 +42,7 @@
 	value="<c:out value='${cliente.sobrenome}' />" />					</p>
 						<p>
 				<label for="sobrenome"> CPF </label> <input id="sobrenome"
-					name="sobrenome" required="required" type="text"
+					name="CPF" required="required" type="text"
 	value="<c:out value='${cliente.CPF}' />" />					</p>
 						<p>
 				<label for="sobrenome"> Data De Nascimento </label> <input id="sobrenome"
