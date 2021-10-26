@@ -41,9 +41,401 @@
               <th>Preço Custo</th>
               <th>Preço venda</th>
              <%-- <th>Quantidade em estoque</th> --%>
-              <th>Ações</th>
+             
             </tr>
             </thead>
+             <tr>
+              <td class="text-left"></td>
+         
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+          <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+          <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+              <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+          <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+          <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+           <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+          </tr>
+        <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
+         <td class="text-left"></td>
 				<tbody>
             <c:forEach var="produtos" items="${produtos}">
 						<tr>

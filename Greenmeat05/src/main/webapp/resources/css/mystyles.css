@@ -256,7 +256,7 @@ div.gallery1 img {
 }
 
 div.desc1 {
-	padding: 15px;
+	padding: 25px;
 	text-align: center;
 }
 .Listar_produtos_tabela {
@@ -265,19 +265,20 @@ div.desc1 {
 	width: 66%;
 	text-align: center;
 	left: 26%;
+
 	position: relative;
 	top: 100px;
 }
 
 td, th {
-	border: 1px solid #dddddd;
+	border: 1px solid #04AA6D;
 	text-align: left;
 	padding: 8px;
 	left: 500px;
 }
 
 tr:nth-child(even) {
-	background-color: #dddddd;
+	background-color: #04AA6D;
 	left: 500px;
 }
 
@@ -287,7 +288,7 @@ div.txt {
 
 .txt_Listar_produtos {
 	position: relative;
-	left: 500px;
+	left: 930px;
 	top: 50px;
 	color:#04AA6D;
 }
@@ -451,9 +452,9 @@ left:400px;
     font-size: .8125rem;
     font-weight: 400;
     line-height: 1.5385;
-    color: #333;
     text-align: left;
-    background-color:white;
+     background-color: #e6ffe6;
+
 }
 
 .mt-50 {
@@ -519,6 +520,103 @@ left:400px;
 a {
     text-decoration: none !important
 } 
-   
-  
 
+   .perfil_cliente{
+	position:relative;
+	left:500px
+}
+  .txt_perfil_cliene_a{
+  position:relative;
+	left:97px;
+   top:70px;
+  
+  
+  }
+   
+  .produto{ background-color: white;
+    color: #fff;
+    padding-right: 29px
+}
+
+.produto{ background-color:white;
+    color: #fff;
+    padding-right: 29px
+}
+div.table-title {
+  display: block;
+ margin: auto;
+ max-width: 700px;
+ padding:5px;
+ width: 100%;
+ right: 260px;
+}
+
+.table-title h3 {
+  color: #fafafa;
+  font-size: 30px;
+  font-weight: 400;
+  font-style:normal;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  text-transform:uppercase;
+  right: 160px;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+ background: white;
+ border-radius:3px;
+ border-collapse: collapse;
+ height: 320px;
+ margin: auto;
+ max-width: 600px;
+ padding:5px;
+ width: 100%;
+ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+ animation: float 5s infinite;
+ right: 160px;
+}
+
+th {
+ color:white;;
+ background:#5fb181;
+ border-bottom:4px solid #5fb181;
+ border-right: 1px solid white;
+ font-size:23px;
+ font-weight: 100;
+ padding:24px;
+ text-align:left;
+ text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+ vertical-align:middle;
+}
+
+th:first-child {
+ border-top-left-radius:3px;
+}
+
+th:last-child {
+ border-top-right-radius:3px;
+ border-right:none;
+}
+ 
+tr {
+ border-top: 1px solid #C1C3D1;
+ border-bottom-: 1px solid #C1C3D1;
+ color:#666B85;
+ font-size:16px;
+ font-weight:normal;
+ text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+ background:#97D5b1;
+ color:#FFFFFF;
+ border-top: 1px solid #22262e;
+}
+
+
+tr:first-child {
+ border-top:none;
+}
