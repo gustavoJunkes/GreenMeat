@@ -103,11 +103,10 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
-			
 			case "/fob":
 				calcularFob(request, response, sessao);
 				break;
-			
+
 			case "/inicio":
 				mostrarTelaInicio(request, response, sessao);
 				break;
@@ -345,31 +344,31 @@ public class Servlet extends HttpServlet {
 
 		Float valorProdutoMercadoInterno = Float.parseFloat(request.getParameter("valorProdutoMercadoInterno"));
 		Float lucroPretendidoMercadoInterno = Float.parseFloat(request.getParameter("lucroPretendidoMercadoInterno"));
-		String moeda = request.getParameter("moeda"); 
-		Float despesasOcorridasMercadoInternoVendaProduto = Float.parseFloat(request.getParameter("despesasOcorridasMercadoInternoVendaProduto"));
-		Float despesasIntermediariosEmServicosMercadoInterno = Float.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoInterno"));
-		Float despesasIntermediariosEmServicosMercadoExterno = Float.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoExterno"));
+		String moeda = request.getParameter("moeda");
+		Float despesasOcorridasMercadoInternoVendaProduto = Float
+				.parseFloat(request.getParameter("despesasOcorridasMercadoInternoVendaProduto"));
+		Float despesasIntermediariosEmServicosMercadoInterno = Float
+				.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoInterno"));
+		Float despesasIntermediariosEmServicosMercadoExterno = Float
+				.parseFloat(request.getParameter("despesasIntermediariosEmServicosMercadoExterno"));
 		Float despesasDespachoExportacao = Float.parseFloat(request.getParameter("despesasDespachoExportacao"));
-		Float despesasTransporteAtePortoOrigem = Float.parseFloat(request.getParameter("despesasTransporteAtePortoOrigem"));
+		Float despesasTransporteAtePortoOrigem = Float
+				.parseFloat(request.getParameter("despesasTransporteAtePortoOrigem"));
 		Float despesasPortuarias = Float.parseFloat(request.getParameter("despesasPortuarias"));
-		
-		
+
 //		Calculo fob
-		
+
 //		*Impostos
 		Float ipi = (float) 5;
 		Float icms = (float) 17;
 		Float pis = (float) 2.65;
 		Float cofins = (float) 9.60;
-		
+
 		Float ipiSobreProduto = valorProdutoMercadoInterno / 105;
 		Float valorProdutoSemIpi = valorProdutoMercadoInterno - ipiSobreProduto;
-		
-		
 
 	}
-	
-	
+
 	private void mostrarTelaInicio(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
 			throws ServletException, IOException {
 
@@ -475,12 +474,12 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, InvalidFieldException {
 
 		Cliente cliente = (Cliente) sessao.getAttribute("usuario");
-		
-			List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
-			request.setAttribute("pedidos", pedidos);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); // listar
-			dispatcher.forward(request, response);
-		
+
+		List<Pedido> pedidos = pedidoDAO.recuperarPedidos();
+		request.setAttribute("pedidos", pedidos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pedido/listar-pedidos-cliente.jsp"); // listar
+		dispatcher.forward(request, response);
+
 	}
 
 	private void editarPedido(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
@@ -625,14 +624,14 @@ public class Servlet extends HttpServlet {
 //			System.out.println("Chegou certinho!");
 	}
 
-	private void pesquisarProdutos(HttpServletRequest request, HttpServletResponse response,
-			HttpSession sessao) throws ServletException, IOException {
+	private void pesquisarProdutos(HttpServletRequest request, HttpServletResponse response, HttpSession sessao)
+			throws ServletException, IOException {
 		String nome = request.getParameter("nome");
 		Produto produto = new Produto();
 		produto.setNome(nome);
-		List<Produto>produtos = produtoDAO.recuperarPorNome(produto);
+		List<Produto> produtos = produtoDAO.recuperarPorNome(produto);
 		request.setAttribute("produtos", produtos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-teste.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("produto/listar-produtos-teste.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -671,10 +670,10 @@ public class Servlet extends HttpServlet {
 		item.setEstoque(fornecedor.getEstoque());
 		itemDAO.inserirItem(item);
 		// Pode ou deve ocorrer um erro na linha a seguir e isso se dá por razões óbvias
-		List<Item> itens = new ArrayList<Item>();
-		itens = itemDAO.recuperarItensEstoque(fornecedor.getEstoque());
-		itens.add(item);
-		fornecedor.getEstoque().setItens(itens);
+//		List<Item> itens = new ArrayList<Item>();
+//		itens = itemDAO.recuperarItensEstoque(fornecedor.getEstoque());
+//		itens.add(item);
+//		fornecedor.getEstoque().setItens(itens);
 
 		response.sendRedirect("novo-produto");
 	}
@@ -981,22 +980,51 @@ public class Servlet extends HttpServlet {
 		} else {
 			if (sessao.getAttribute("usuario") instanceof Funcionario) {
 				Long id = Long.parseLong(request.getParameter("id"));
-			
+
 				Fornecedor fornecedor = fornecedorDAO.recuperarPorId(id);
-				Endereco endereco = enderecoDAO.recuperarPorId((long) 1);
-				Localidade localidade = localidadeDAO.recuperarLocalidadeEndereco(endereco);
-				request.setAttribute("localidades", localidade);
-				request.setAttribute("endereco", endereco);
-				
+
+				Localidade localidade = null;
+
+				List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(fornecedor);
+
+				for (Localidade localidade1 : localidades) {
+					localidade = localidade1;
+				}
+
+				List<Endereco> enderecos = enderecoDAO.recuperarEnderecosLocalidade(localidade);
+
+//				Endereco endereco = enderecoDAO.recuperarPorId((long) 1);
+//				Localidade localidade = localidadeDAO.recuperarLocalidadeEndereco(endereco);
+//				request.setAttribute("localidades", localidade);
+//				request.setAttribute("endereco", endereco);
+				request.setAttribute("localidade", localidade);
+				request.setAttribute("endereco", enderecos);
 				request.setAttribute("fornecedor", fornecedor);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("fornecedor/perfil-fornecedor-teste.jsp");
 				dispatcher.forward(request, response);
-				
+
 			} else {
 				Fornecedor fornecedor = (Fornecedor) sessao.getAttribute("usuario");
-				Endereco endereco = enderecoDAO.recuperarPorId((long) 1);
-				Localidade localidade = localidadeDAO.recuperarLocalidadeEndereco(endereco);
-				Contato contato = contatoDAO.recuperarPorId((long)2);
+				Contato contato = null;
+				Localidade localidade = null;
+				Endereco endereco = null;
+				
+				List<Contato> contatos = contatoDAO.recuperarContatosUsuario(fornecedor);
+				List<Localidade> localidades = localidadeDAO.recuperarLocalidadesUsuario(fornecedor);
+
+				for (Contato contato1 : contatos) {
+					contato = contato1;
+				}
+				
+				for (Localidade localidade1 : localidades) {
+					localidade = localidade1;
+				}
+
+				List<Endereco> enderecos = enderecoDAO.recuperarEnderecosLocalidade(localidade);
+
+				for(Endereco endereco1 : enderecos) {
+					endereco = endereco1;
+				}
 				
 				request.setAttribute("localidades", localidade);
 				request.setAttribute("endereco", endereco);
@@ -1056,9 +1084,7 @@ public class Servlet extends HttpServlet {
 		String complemento = request.getParameter("complemento");
 
 		Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeFantasia, login, senha, CNPJ);
-		Estoque estoque = new Estoque(fornecedor);
-		estoqueDAO.inserirEstoque(estoque);
-		fornecedor.setEstoque(estoque);
+
 		fornecedorDAO.inserirFornecedor(fornecedor);
 
 		Contato contato = new Contato(email, telefone, fornecedor);
@@ -1075,7 +1101,7 @@ public class Servlet extends HttpServlet {
 		localidades.add(localidade);
 		fornecedor.setLocalidades(localidades);
 
-		Endereco endereco = new Endereco(tipoDaVia, nomeDaRua, logradouro, numero, CEP, complemento, localidade);
+		Endereco endereco = new Endereco(nomeDaRua, logradouro, tipoDaVia, numero, CEP, complemento, localidade);
 		enderecoDAO.inserirEndereco(endereco);
 
 		List<Endereco> enderecos = new ArrayList<Endereco>();
@@ -1087,6 +1113,7 @@ public class Servlet extends HttpServlet {
 
 		sessao.setAttribute("usuario", fornecedor);
 		response.sendRedirect("inicio");
+
 	}
 
 	private void atualizarFornecedor(HttpServletRequest request, HttpServletResponse response)

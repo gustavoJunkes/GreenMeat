@@ -133,7 +133,7 @@
 					<p>
 					 <label	for="endereço_cad"> Tipo Da Via</label> 
 					  <input id="endereco" name="tipoDaVia" required="required" type="text"
-					 value="<c:out value='${endereco.tipoDaVia}' />"/> 
+					 value="<c:out value='${endereco.tipoDaVia}'/>"/> 
 					 </p>
 					
 					<p>
@@ -143,15 +143,15 @@
 					</p>
 				
 					<p>
-					<label for="endereço_cad"> Número</label> 
+					<label for="endereço_cad">Número</label> 
 					 <input id="endereco" name="numero" required="required" type="number"
 					 value="<c:out value='${endereco.numero}' />"/> 
 					 </p>
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="cep" required="required"
-					type="text"  value="<c:out value='${endereco.cep}' />" /> 
+					 <input id="endereco" name="CEP" required="required"
+					type="text"  value="<c:out value='${endereco.CEP}' />" /> 
 					</p>
 				
 					<p>

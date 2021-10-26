@@ -116,12 +116,12 @@ form{
    
      <div class="form-group2">
        <label for= "email">Nome da Rua</label> 
-       <input type="text" id="email" class="form-control" value="<c:out value="${endereco.tipoDaVia}" />" name="nomeDaRua">
+       <input type="text" id="email" class="form-control" value="<c:out value="${endereco.nomeDaRua}" />" name="nomeDaRua">
 	</div>
 	<br>
     <div class="form-group">
         <label for="login">Tipo da Via</label> 
-        <input type="text" id="login" class="form-control" value="Rua" name="tipoDaVia">
+        <input type="text" id="login" class="form-control" value="<c:out value="${endereco.tipoDaVia}" />" name="tipoDaVia">
     </div>
     <br>
     <div class="form-group">
@@ -131,7 +131,7 @@ form{
     <br>
     <div class="form-group">
         <label for="login">CEP</label> 
-        <input type="text" id="login" class="form-control" value="<c:out value="${endereco.CEP}" />" name="CNPJ">
+        <input type="text" id="login" class="form-control" value="<c:out value="${endereco.CEP}" />" name="CEP">
     </div>
     
  </div>
