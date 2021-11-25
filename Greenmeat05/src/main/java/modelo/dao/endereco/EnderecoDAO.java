@@ -12,6 +12,8 @@ void inserirEndereco(Endereco endereco);
 	
 	void atualizarEndereco(Endereco endereco);
 
+	Endereco recuperarPorId(Long id);
+	
 	List<Endereco> recuperarEnderecos();
 
 	List<Endereco> recuperarEnderecosLocalidade(Localidade localidade);

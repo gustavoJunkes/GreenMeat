@@ -1,4 +1,3 @@
-
 <%@page import="modelo.entitidade.usuario.Fornecedor"%>
 <%@page import="modelo.entitidade.usuario.Funcionario"%>
 <%@page import="modelo.entitidade.usuario.Cliente"%>
@@ -68,39 +67,40 @@ form{
     <div class="row">
 <div class="col-2">
     <%if(request.getSession().getAttribute("usuario") instanceof Cliente){%>
-		<jsp:include page="menu-lateral-cliente.jsp"/>
+		<jsp:include page="../menu-lateral-cliente.jsp"/>
 	<%} %>
 	<%if(request.getSession().getAttribute("usuario") instanceof Funcionario){%>
-		<jsp:include page="menu-lateral-funcionario.jsp"/>
+		<jsp:include page="../menu-lateral-funcionario.jsp"/>
 	<%}%>
 	<%if(request.getSession().getAttribute("usuario") instanceof Fornecedor){%>	
-	<jsp:include page="menu-lateral-fornecedor.jsp"/>
+	<jsp:include page="../menu-lateral-fornecedor.jsp"/>
 	<%}%>
      </div>
     
-         	   
-     <form class="form" action="editar-cliente" method="post">
+            
+     <form class="form" action="editar-fornecedor" method="post">
      <div class="row">
-                
+        
+        
         <div class="col">
          
          <div class="form-group">
            <label for="id">ID</label>
-           <input type="number" id="id" class="form-control" value="<c:out value="${cliente.id}" />" name="id" placeholder=""/>  
+           <input type="number" id="id" class="form-control" value="<c:out value="${fornecedor.id}" />" name="nomeFantasia" placeholder=""/>  
         </div>
          
         <div class="form-group">
-           <label for="nomeFantasia">Nome</label>
-           <input type="text" id="razaoSocial" class="form-control" value="<c:out value="${cliente.nome}" />" name="nome" placeholder=""/>  
+           <label for="nomeFantasia">Nome fantasia</label>
+           <input type="text" id="razaoSocial" class="form-control" value="<c:out value="${fornecedor.nomeFantasia}" />" name="nomeFantasia" placeholder=""/>  
         </div> 
          
         <div class="form-group">
-           <label for="cpf">Sobrenome</label>
-           <input type="text" id="sobrenome" class="form-control" value="<c:out value="${cliente.sobrenome}" />" name="sobrenome" placeholder=""/>  
+           <label for="cpf">Razão Social</label>
+           <input type="text" id="razaoSocial" class="form-control" value="<c:out value="${fornecedor.razaoSocial}" />" name="razaoSocial" placeholder=""/>  
         </div>
        <div class="form-group">
-           <label for="CPF">CPF</label> 
-           <input type="text" id="login" class="form-control" value="<c:out value="${cliente.CPF}" />" name="CPF" placeholder="">
+           <label for="CNPJ">CNPJ</label> 
+           <input type="text" id="login" class="form-control" value="<c:out value="${fornecedor.CNPJ}" />" name="CNPJ" placeholder="">
 	   </div>
        <div class="form-group">
            <label for="senha">E-MAIL</label> 
@@ -116,12 +116,12 @@ form{
    
      <div class="form-group2">
        <label for= "email">Nome da Rua</label> 
-       <input type="text" id="email" class="form-control" value="<c:out value="${endereco.tipoDaVia}" />" name="nomeDaRua">
+       <input type="text" id="email" class="form-control" value="<c:out value="${endereco.nomeDaRua}" />" name="nomeDaRua">
 	</div>
 	<br>
     <div class="form-group">
         <label for="login">Tipo da Via</label> 
-        <input type="text" id="login" class="form-control" value="<c:out value="${endereco.nomeDaRua}" />" name="tipoDaVia">
+        <input type="text" id="login" class="form-control" value="<c:out value="${endereco.tipoDaVia}" />" name="tipoDaVia">
     </div>
     <br>
     <div class="form-group">
@@ -143,4 +143,7 @@ form{
     </div>
 </div>
 </body>
-</html>
+
+
+
+

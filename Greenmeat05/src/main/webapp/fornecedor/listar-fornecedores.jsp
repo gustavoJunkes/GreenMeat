@@ -12,6 +12,8 @@
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyle.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
+ 
+ 
  </head>
 <body>
 <div>

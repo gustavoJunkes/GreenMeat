@@ -1,12 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false" %>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 
  	<link type="text/css" href="/resources/css/css/bootstrap.min.css" rel="stylesheet">
 	<style><%@include file="/resources/css/css/bootstrap.min.css"%></style>
@@ -43,32 +36,30 @@ display: inline;
 }
 	 
 </style>
-<body>
+
 <nav class="navbar navbar-super navbar-expand-lg navbar-light bg-light">
   		<a class="navbar-brand" href="#">Ecological Meat</a>
-  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navega��o">
    			<span class="navbar-toggler-icon"></span>
  		</button>
 
   		<div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
     			<ul class="navbar-nav mr-auto">
       				<li class="nav-item active">
-        				<a class="nav-link" href="index.jsp">Home <span class="sr-only">(página atual)</span></a>
+        				<a class="nav-link" href="index.jsp">Home <span class="sr-only">(p�gina atual)</span></a>
       				</li>
       				<li class="nav-item active">
-       	 				<a class="nav-link" href="novo-cliente">Cadastre-se <span class="sr-only">(página atual)</span></a>
+       	 				<a class="nav-link" href="novo-cliente">Cadastre-se <span class="sr-only">(p�gina atual)</span></a>
       				</li>
       				<li class="nav-item active">
-       	 				<a class="nav-link" href="novo-fornecedor">Seja um Fornecedor <span class="sr-only">(página atual)</span></a>
+       	 				<a class="nav-link" href="novo-fornecedor">Seja um Fornecedor <span class="sr-only">(p�gina atual)</span></a>
       				</li>
       				
       				<li class="nav-item active">
-       	 				<a class="nav-link" href="listar-produtos">Produtos<span class="sr-only">(página atual)</span></a>
+       	 				<a class="nav-link" href="listar-produtos">Produtos<span class="sr-only">(p�gina atual)</span></a>
       				</li>
 
 
     	 		</ul>
   		</div>
 	</nav>
-</body>
-</html>

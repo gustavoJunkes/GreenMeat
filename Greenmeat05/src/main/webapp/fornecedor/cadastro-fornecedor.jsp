@@ -34,25 +34,27 @@
 		
 		<h1>Cadastro Fornecedor</h1>
 		
-        <p>Possui Licença Ambiental De Operação?Se sim,informe:</p>
+        <p>Possui Licença Ambiental De Operação?Se sim, informe:</p>
         
            <label for="licenca"> Número Da Licença:</label>                                                          
-           <input id="licenca" name="numeroLicenca" required="required" type="text" />
-       
+           <input id="licenca" name="numeroLicenca" type="text" />
+       		<br>	
+       		<br>
           <label for="licenca"> Data de validade:</label>                                                          
-            <input id="licenca" name="dataValidadeLicenca" required="required" type="text"  />
-         
-          <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
-          <input id="ibama" name="ibama" required="required" type="text" />
-    
-       <p>Para pastagem,foi necessário desmatamento?Se sim,informe: </p>
+            <input id="licenca" name="dataValidadeLicenca" type="text"  />
+         <br>
+         <br>
+          <label for="ibama"> Se não, informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
+          <input id="ibama" name="ibama" type="text" />
+    <br>
+    <br>
+       <p>Para pastagem, foi necessário desmatamento? Se sim, informe: </p>
           
           <label for="licenca"> O número da ART:</label>                                                          
             <input id="pastagem" name="ART" required="required" type="text"  />
         
-     <label for="ibama"> Se não,informe o número da inscrição de<br> regularidade no Ibama:</label>                                                         
-          <input id="ibama" name="ibama" required="required" type="text"  />
-          
+   			<br>
+   			<br>
           	<p>
 				<label for="razaoSocial"> Razão Social</label> <input
 					id="razaoSocial" name="razaoSocial" required="required" type="text" value="<c:out value='${fornecedor.razaoSocial}' />" />
@@ -131,7 +133,7 @@
 					<p>
 					 <label	for="endereço_cad"> Tipo Da Via</label> 
 					  <input id="endereco" name="tipoDaVia" required="required" type="text"
-					 value="<c:out value='${endereco.tipoDaVia}' />"/> 
+					 value="<c:out value='${endereco.tipoDaVia}'/>"/> 
 					 </p>
 					
 					<p>
@@ -141,15 +143,15 @@
 					</p>
 				
 					<p>
-					<label for="endereço_cad"> Número</label> 
+					<label for="endereço_cad">Número</label> 
 					 <input id="endereco" name="numero" required="required" type="number"
 					 value="<c:out value='${endereco.numero}' />"/> 
 					 </p>
 					
 					<p>
 					 <label for="endereco">Cep</label> 
-					 <input id="endereco" name="cep" required="required"
-					type="text"  value="<c:out value='${endereco.cep}' />" /> 
+					 <input id="endereco" name="CEP" required="required"
+					type="text"  value="<c:out value='${endereco.CEP}' />" /> 
 					</p>
 				
 					<p>

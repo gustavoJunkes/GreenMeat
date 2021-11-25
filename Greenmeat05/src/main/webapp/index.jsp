@@ -5,8 +5,19 @@
 <html>
 <head>
  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Index</title>
+<title>Inicio</title>
+<style type="text/css">
+
+.texto{
+	<% if(request.getSession().getAttribute("usuario") == null){ %>
+	margin-top: -28%; 
+	<%}else{%>
+		margin-top: 8%; 
+	<%}%>
+	
+}
+
+</style>
 </head>
 <body>
 <div class=telaInicial>
@@ -16,16 +27,15 @@
 	<jsp:include page="navbar.jsp"/>
     </div>
 
-
+	<%if(request.getSession().getAttribute("usuario") == null){ %>
 	<div>
 	<jsp:include page="login.jsp"/>
-   </div>
+	</div>
+   	<%}%>
    
-   <div>
+   <div class="texto" >
 	<jsp:include page="text.jsp"/>
    </div>
 </div>
 </body>
 </html>
-
-    <c:if test="${usuario == null}">  </c:if>

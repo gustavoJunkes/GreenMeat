@@ -1,29 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ page isELIgnored="false" %>
 
-<html>
-<head>
 
 <link type="text/css" rel="stylesheet"
     href="<%=request.getContextPath()%>"resources/css/mystyles.css/>
  <style><%@include file="/resources/css/mystyles.css"%></style>
  
 
-<meta charset="UTF-8">
-	<title>Login</title>
-</head>
-<body>
 
         <div id="login">
           <form method="post" action="logar"> 
             <h1>Login</h1>
                      
               <label for="login">Login</label>
-              <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value="<c:out value='${usuario.login}' />"/>                 
+              <input id="loginInserir" name="login" required="required" type="text" placeholder="login"  value=""/>                 
               <label for="email_login">Senha</label>
-              <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="<c:out value='${usuario.senha}' />" />                   
+              <input id="email_login" name="senha" required="required" type="password" placeholder="ex. senha"  value="" />                   
 				              
 				              <script> 
 				function validarSenha(){ 
@@ -32,7 +22,7 @@
 				
 				if (senha1 == senha2) 
 				alert("SENHAS IGUAIS") 
-				document.f1.submit(); // Adiciona isso que ele ir√° submeter o form!
+				document.f1.submit(); // Adiciona isso que ele ir· submeter o form!
 				else 
 				alert("SENHAS DIFERENTES") 
 				} 
@@ -43,5 +33,3 @@
           
           </form>
       </div>
-</body>
-</html>

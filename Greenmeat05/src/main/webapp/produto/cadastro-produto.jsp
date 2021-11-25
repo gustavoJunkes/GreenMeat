@@ -42,30 +42,37 @@
 		<label for="nome"> Nome: </label> <input id="nome" required="required"
 			type="text" value="<c:out value='${produto.nome}' />" name="nome">
 	<br> 
+	<br> 
 	<label for="descricao">Descrição: </label> <input id="nome"
-		required="required" type="text" value="<c:out value='${produto.descricao}' />" name="descricao"> <label
-		for="precoCusto">Preço de custo: </label> <input id="nome"
+		required="required" type="text" value="<c:out value='${produto.descricao}' />" name="descricao"> 
+		
+		<br> <br> 
+		<label for="precoCusto">Preço de custo: </label> <input id="nome"
 		required="required" type="number" value="<c:out value='${produto.precoCusto}' />" name="precoCusto">
 <br>
+<br> 
 	<label for="precoVenda">Preço de venda: </label> <input id="nome"
 		required="required" type="number" value="<c:out value='${produto.precoVenda}' />" name="precoVenda">
 	
 	<br>
+	<br> 
 	<label for="TipoCarne">Tipo: </label> <input id="nome"
 		required="required" type="text" value="<c:out value='${produto.tipoCarne}' />" name="tipoCarne">
 
 	<br>
+	<br> 
 	<label for="quantidadeEmEstoque">Quantidade em estoque: </label> <input id="quantidadeEmEstoque"
 		required="required" type="number" value="<c:out value='${item.quantidade}' />" name="quantidadeEmEstoque">
 	
-	
 	<br>
+	<br> 
 	<label for="id">Id do fornecedor: </label> <input id=""
 		required="required" type="text" value="<c:out value='${produto.fornecedor.id}' />" name="idFornecedor">
 
 	<br>
+	<br> 
 	
-	<br>
+	
 		<input type="submit" value="Salvar" />
 
 </form>
