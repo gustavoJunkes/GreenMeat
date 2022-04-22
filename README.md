@@ -7,7 +7,7 @@ Primeiro projeto Java, desenvolvido como projeto final do curso de Java do progr
 O sistema conta com as seguintes funcionalidades: 
 - Cadastro e login de clientes 
 - Cadastro e login de fornecedores
-- Cadastro e login de funcionário
+- Cadastro e login de funcionários
 - Cadastro de produtos
 - Execução de pedidos
 
