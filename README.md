@@ -26,7 +26,7 @@ O sistema conta com as seguintes funcionalidades:
 
 Para rodar o projeto localmente, você precisará ter instalado em sua máquina:
 - JDK 11
-- Maven 3.*.*
+- Maven 3+
 - [Apache Tomcat](https://tomcat.apache.org/download-90.cgi)
 - MySQL
 
@@ -62,4 +62,4 @@ Uma nova aba deve abrir em seu navegador padrão e você poderá acessar o siste
 
 > Você também pode rodar o servidor diretamente através de um terminal, sem a necessidade de uma IDE. Veja mais [aqui](https://pt.stackoverflow.com/questions/124435/rodar-uma-aplica%C3%A7%C3%A3o-sem-eclipse-mas-utilizando-o-tomcat-como-fa%C3%A7o)
 
-> Este projeto foi desenvolvido de forma bastante antiquada por estudantes no inicio de seus estudos e em um curto prazo. Por esse motivo, você deve perceber que bugs e problemas durante a execução que deixaram de ser corrigido depois do projeto ser descontinuado.
+> Este projeto foi desenvolvido de forma bastante antiquada por estudantes no inicio de seus estudos e em um curto prazo. Por esse motivo, você deve perceber que bugs e problemas durante a execução que deixaram de ser corrigidos depois do projeto ser descontinuado.
